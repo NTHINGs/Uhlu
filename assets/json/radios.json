@@ -1,0 +1,86 @@
+[
+	{
+	    "col":6,
+	    "label":"Padece de pie plano",
+	    "name":"pieplano",
+	    "especificacion":null
+	},
+	{
+	    "col":6,
+	    "label":"Usa zapato ortopédico",
+	    "name":"zapato",
+	    "especificacion":null
+	},
+	{
+	    "col":6,
+	    "label":"Operación reciente",
+	    "name":"operacion",
+	    "especificacion":"espoperacion"
+	},
+	{
+	    "col":6,
+	    "label":"Tiene alguna limitación física",
+	    "name":"limitacion",
+	    "especificacion":"esplimitacion"
+	},
+	{
+	    "col":6,
+	    "label":"Se ha realizado alguna transfución sanguínea",
+	    "name":"transfusion",
+	    "especificacion":"esptransfusion"
+	},
+	{
+	    "col":6,
+	    "label":"Tiene alguna alergia o reacción a medicamentos o alimentos",
+	    "name":"alergia",
+	    "especificacion":"espalergia"
+	},
+	{
+	    "col":6,
+	    "label":"Padece alguna enfermedad como diabetes o hipertensión",
+	    "name":"enfermedad",
+	    "especificacion":"espenfermedad"
+	},
+	{
+	    "col":6,
+	    "label":"Actualmente esta bajo tratamiento médico",
+	    "name":"tratamiento",
+	    "especificacion":"esptratamiento"
+	},
+	{
+	    "col":6,
+	    "label":"Tiene problemas para oír o ver",
+	    "name":"veroir",
+	    "especificacion":"espveroir"
+	},
+	{
+	    "col":6,
+	    "label":"Utiliza algún aparato auditivo, dental o prótesis",
+	    "name":"aparato",
+	    "especificacion":"espaparato"
+	},
+	{
+	    "col":6,
+	    "label":"Cuenta con alguna dieta especial",
+	    "name":"dieta",
+	    "especificacion":"espdieta"
+	},
+	{
+	    "col":6,
+	    "label":"Fuma, toma o consume droga(s)",
+	    "name":"drogas",
+	    "especificacion":"espdrogas"
+	},
+	{
+	    "col":12,
+	    "label":"Cuenta con el Esquema nacional de vacunación completo",
+	    "name":"vacunas",
+	    "especificacion":null
+	},
+	{
+	    "col":12,
+	    "label":"En caso de ser mujer, ¿Se encuentra embarazada?",
+	    "name":"embarazo",
+	    "especificacion":null
+	}
+]

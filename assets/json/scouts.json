@@ -1,0 +1,40 @@
+[
+	{
+		"porcentaje": 25,
+		"foto": "assets/img/fpo_avatar.png",
+		"cum": "DGO123456", 
+		"nombre": "Perenganito",
+		"genero": "M",
+		"fechanacimiento": "2005-07-20",
+		"patrulla": 1,
+		"escuela": "Asentamientos Humanos",
+		"email": "perenganito@gmail.com",
+		"telefono": "6181234567",
+		"domicilio": "Calle 5 #23 Colonia Centro",
+		"fichamedica":{
+
+		},
+		"progresion":{
+
+		}
+	},
+	{
+		"porcentaje": 5,
+		"foto": "assets/img/fpo_avatar.png",
+		"cum": "DGO124344324", 
+		"nombre": "Fulanita",
+		"genero": "F",
+		"fechanacimiento": "2006-04-10",
+		"patrulla": 2,
+		"escuela": "ETI",
+		"email": "fulanita@gmail.com",
+		"telefono": "6189876543",
+		"domicilio": "Calle 2 #32 Colonia Centro",
+		"fichamedica":{
+
+		},
+		"progresion":{
+			
+		}
+	}
+]

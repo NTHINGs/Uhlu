@@ -1,0 +1,100 @@
+/*Fuentesonas*/
+@font-face {
+    font-family: OpenSans-Bold;
+    src: url(fonts/OpenSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: OpenSans-Light;
+    src: url(fonts/OpenSans-Light.ttf);
+}
+
+@font-face {
+    font-family: OpenSans-Semibold;
+    src: url(fonts/OpenSans-Semibold.ttf);
+}
+
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url(fonts/OpenSans-Regular.ttf);
+}
+/*------------------------------------------------*/
+/*Eschruchure*/
+
+
+.cajablanca{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 15px;
+  width: 100%;
+}
+/*------------------------------------------------*/
+/*Tamañines*/
+* body html{
+  height: 100%;
+  width: 100%;
+}
+
+.fullwidth{
+  width: 100%;
+  height: 100%;
+}
+.container{
+  width: 100%;
+}
+
+/*------------------------------------------------*/
+/*Fonts*/
+.regular{
+  font-family: OpenSans-Regular;
+  color: #FFF;
+}
+
+.normal{
+  font-family: OpenSans-Semibold;
+  color: #FFF;
+}
+
+.negrita{
+  font-family: OpenSans-Bold;
+  color: #00a8e1;
+}
+
+.light{
+  font-family: OpenSans-Light;
+}
+
+.lightwhite{
+  font-family: OpenSans-Light;
+  color: #FFF;
+}
+/*------------------------------------------------*/
+/*Clases mias de mi*/
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.alinearizq{
+    text-align: left;
+}
+
+/*Colores*/
+.morrarro{
+  color: #692b8d!important;
+}
+.link{
+  text-decoration: none;
+  color: #4DC1DF;
+}
+
+aside{
+  background-color: #263645;
+}
+
+
+.cajablanca{
+  background-color: #FFF;
+}

@@ -1,0 +1,20 @@
+[
+	{
+		"idpatrulla": 1,
+		"nombre": "Aguilas",
+		"foto": "assets/img/fpo_avatar_multi.png",
+		"scouters_idscouter": 1
+	},
+	{
+		"idpatrulla": 2,
+		"nombre": "Lobos",
+		"foto": "assets/img/fpo_avatar_multi.png",
+		"scouters_idscouter": 1
+	},
+	{
+		"idpatrulla": 3,
+		"nombre": "Toros",
+		"foto": "assets/img/fpo_avatar_multi.png",
+		"scouters_idscouter": 1
+	}
+]
