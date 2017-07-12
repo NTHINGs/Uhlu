@@ -1,0 +1,63 @@
+<style type="text/css">
+	.float{
+	  float: left;
+	  margin-left: 15px;
+	}
+	h1{
+	  font-family: OpenSans-Light;
+	  font-size: 18pt;
+	  color: #5A6570;
+	}
+	.negrita{
+	  font-family: OpenSans-Bold;
+	}
+	.infoficha{
+	  font-family: OpenSans-Regular;
+	  margin-top: 1%;
+
+	}
+
+</style>
+<div class="col-xs-12">
+	<span><h1>{{fichareme.nombreactividad}}</h1></span>
+</div>
+<div class="col-xs-12">
+	<p>Elaborada por: {{fichareme.autor}}</p>
+</div>
+<div class="float">
+	<button class="btn btn-default contacto" ng-click='imprimir($event)'><span class="mas glyphicon glyphicon-print iconbtn morrarro vcenter"></span><span class="textbtn vcenter  "> Imprimir</span></button>
+</div>
+<!-- Si el usuario es el dueño -->
+<div class="float">
+	<button class="btn btn-default contacto" ng-click='editar($event)'><span class="mas glyphicon glyphicon-edit iconbtn morrarro vcenter"></span><span class="textbtn vcenter  "> Editar</span></button>
+</div>
+<div class="float">
+	<button class="btn btn-default contacto" ng-click='eliminar($event)'><span class="mas glyphicon glyphicon-remove iconbtn morrarro vcenter"></span><span class="textbtn vcenter  "> Borrar</span></button>
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Sección:</div> {{fichareme.seccion}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">{{fichareme.objetivo}}:</div> {{fichareme.areadesarrollo}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Objetivo:</div> {{fichareme.objetivo}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Participantes:</div> {{fichareme.participantes}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Descripción:</div> {{fichareme.descripcion}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Recomendaciones:</div> {{fichareme.recomendaciones}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Materiales:</div> {{fichareme.materiales}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Tiempos:</div> {{fichareme.tiempos}}
+</div>
+<div class="col-xs-12 infoficha">
+	<div class="negrita">Fecha:</div> {{fichareme.fecha}}
+</div>

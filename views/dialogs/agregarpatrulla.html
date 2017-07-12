@@ -1,0 +1,54 @@
+<style type="text/css">
+    .modal {
+        display: block;
+    }
+
+    .modal-body:before,
+    .modal-body:after {
+        display: table;
+        content: " ";
+    }
+
+    .modal-header:before,
+    .modal-header:after {
+        display: table;
+        content: " ";
+    }
+    .modal {
+        overflow-y:auto;
+    }
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width:500px;
+        height:350px;
+    }
+</style>
+<div class="modal-dialog">
+<!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel()">&times;</button>
+            <h4 class="modal-title">Insertar {{$root.user.pequenogrupo}}</h4>
+        </div>
+        <div class="modal-body">
+            <label>Nombre</label>
+            <input class='form-control' type='text' ng-model="patrulla.nombre" value='' placeholder='Lobitos' required><br>
+            <label>Foto Banderín ó Foto Representativa (OPCIONAL)</label>
+            <!-- assets/img/fpo_avatar.png -->
+            <div>
+                Sube Una Foto: <input type="file" custom-on-change ng-model="patrulla.myImage"/>
+            </div>
+            <div class="cropArea">
+                <img-crop image="patrulla.myImage" result-image="patrulla.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
+            </div>
+            <div>Foto Que Usaremos:</div>
+            <div><img ng-src="{{patrulla.foto}}" width="150px" /></div>
+            <button class="btn btn-default" ng-click='defaultFoto($event)'>Borrar Foto</button>
+            <br>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default btn-block" ng-click='save()'>Agregar {{$root.user.pequenogrupo}}</button>
+        </div>
+    </div>
+</div>
