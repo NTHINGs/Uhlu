@@ -1,231 +1,248 @@
 <style type="text/css">
-.modal {
-display: block;
-}
-
-.modal-body:before,
-.modal-body:after {
-display: table;
-content: " ";
-}
-
-.modal-header:before,
-.modal-header:after {
-display: table;
-content: " ";
-}
-.modal {
-overflow-y:auto;
-}
 .cropArea {
     background: #E4E4E4;
     overflow: hidden;
     width:500px;
     height:350px;
 }
-
 </style>
-<div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" ng-click="cancel()">&times;</button>
-            <h4 class="modal-title">Insertar Scout</h4>
-        </div>
-        <div class="modal-body">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#informacion" data-toggle="tab">Información Personal</a></li>
-                <li><a href="#fichamedica" data-toggle="tab">Ficha Médica</a></li>
-                <li><a href="#progresionpersonal" data-toggle="tab">Progresión Personal</a></li>
-            </ul>
-            <form role="form" data-toggle="validator" method="post" enctype="multipart/form-data" id="scout" action="index.php">
-                <section class="tab-content">
-                    <article class="tab-pane active" id="informacion">
-                        <br>
-                        <label>Foto</label>
-                        <!-- img/fpo_avatar.png -->
-                        <div>
-                            Sube Una Foto: <input type="file" custom-on-change ng-model="scout.myImage"/>
-                        </div>
-                        <div class="cropArea">
-                            <img-crop image="scout.myImage" result-image="scout.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
-                        </div>
-                        <div>Foto Que Usaremos:</div>
-                        <div><img ng-src="{{scout.foto}}" width="150px" /></div>
-                        <button class="btn btn-default" ng-click='defaultFoto($event)'>Borrar Foto</button>
-                        <br>
-                        <div class="restoform">
-                            <label>CUM</label>
-                            <input class="form-control" type="text" ng-model="scout.cum" value="" placeholder="XXX1234567" required><br>
-                            <label>Nombre</label>
-                            <input class="form-control" type="text" ng-model="scout.nombre" value="" placeholder="JUANITO PEREZ" required><br>
-                            <div class="form-group">
-                                <label for="sel1">Género</label>
-                                <select class="form-control" id="sel1" ng-model="scout.genero" ng-init="scout.genero = 'F'" required>
-                                    <option value="F">Femenino</option>
-                                    <option value="M">Masculino</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Fecha de Nacimiento</label>
-                                <p class="input-group">
-                                   <input type="text" class="form-control" datepicker-popup="dd-MMMM-yy" ng-model="scout.fechanacimiento" is-open="openDatePickers[0]" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-                                   <span class="input-group-btn">
-                                      <button type="button" class="btn btn-default" ng-click="open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                   </span>
-                                </p>
-                            </div>
-                            <div class="form-group" ng-hide='$root.user.clan'>
-                                <label for='sel2'>{{$root.user.pequenogrupo}}</label>
-                                <select class='form-control' id='sel2' ng-model='scout.patrulla' ng-options="patrulla.idpatrulla as patrulla.nombre for patrulla in scout.patrullas" required></select>
-                            </div>
-                            <label>Escuela</label>
-                            <input class="form-control" type="text" ng-model="scout.escuela" value="" placeholder="SECUNDARIA ASENTAMIENTOS HUMANOS"><br>
-                            <label>E-mail</label>
-                            <input class="form-control" type="email" ng-model="scout.email" value="" placeholder="JUANITO@HOTMAIL.COM"><br>
-                            <label>Teléfono</label>
-                            <input class="form-control" type="tel" ng-model="scout.telefono" value="" placeholder="123-456-78-91"><br>
-                            <label>Domicilio</label>
-                            <input class="form-control" type="text" ng-model="scout.domicilio" value="" placeholder="CALLE SCOUT FRACC. ASMAC #123"><br>
-                        </div>
-                    </article>
+<md-dialog aria-label="Insertar Scout">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Insertar Scout</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    &times;
+                </md-button>
+            </div>
+        </md-toolbar>
 
-                    <article class="tab-pane" id="fichamedica">
-                        <h4>En caso de emergencia comunicarse con:</h4>
-                        <label>Persona de Contacto 1:</label>
-                        <input class="form-control" type="text" ng-model="scout.contacto1" value=""><br>
-                        <label>Parentesco:</label>
-                        <input class="form-control" type="text" ng-model="scout.parentezco1" value=""><br>
-                        <label>Persona de Contacto 2:</label>
-                        <input class="form-control" type="text" ng-model="scout.contacto2" value=""><br>
-                        <label>Parentezco:</label>
-                        <input class="form-control" type="text" ng-model="scout.parentezco2" value=""><br>
-                        <label>Teléfono de Contacto 1:</label>
-                        <input class="form-control" type="text" ng-model="scout.telefono1" value=""><br>
-                        <label>Teléfono de Contacto 2:</label>
-                        <input class="form-control" type="text" ng-model="scout.telefono2" value=""><br>
-                        <label>Email de Contacto:</label>
-                        <input class="form-control" type="text" ng-model="scout.emailcontacto" value=""><br>
-                        <h4>Datos Médicos Generales</h4>
-                        <div class="form-group">
-                            <label for="selsangre">Tipo de Sangre:</label>
-                            <select class="form-control" id="selsangre" ng-model="scout.tiposangre">
-                                <option value="SIN TIPO">SIN TIPO DE SANGRE</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                            </select>
-                        </div>
-                        <label>Peso:</label>
-                        <input class="form-control" type="text" ng-model="scout.peso" value=""><br>
-                        <label>Estatura:</label>
-                        <input class="form-control" type="text" ng-model="scout.estatura" value=""><br>
-                        <label>No. Afiliación:</label>
-                        <input class="form-control" type="text" ng-model="scout.noafiliacion" value=""><br>
-                        <div class="form-group">
-                        <label for="selseguro">Seguro:</label>
-                        <select class="form-control" id="selseguro" ng-model="scout.seguro">
-                            <option value="Ninguno">Ninguno</option>
-                            <option value="IMSS">IMSS</option>
-                            <option value="ISSSTE">ISSSTE</option>
-                            <option value="ISSEMyM">ISSEMyM</option>
-                            <option value="ISSFAM">ISSFAM</option>
-                            <option value="Particular">Particular</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                        </div>
-                        <label>Especifique (En caso de ser Particular u Otro):</label>
-                        <input class="form-control" type="text" ng-model="scout.especifique" value=""><br>
-
-                        <h4>Otros</h4>
-                        <div class="form-group row borde" ng-repeat='radio in radios'>
-                            <div class="col-xs-{{radio.col}}">
-                                <label>{{radio.label}}</label>
-                                <div class="radio">
-                                    <label class="radio-inline"><input type="radio" ng-model="scout[radio.name]" value='0' checked>NO</label>
-                                    <label class="radio-inline"><input type="radio" ng-model="scout[radio.name]" value='1'>SI</label>
+        <md-dialog-content>
+            <md-content>
+                <md-tabs md-dynamic-height md-border-bottom ng-show="show_tab">
+                    <md-tab label="Información Personal">
+                        <md-content class="md-padding" layout-padding>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Foto</label>
+                                <div>
+                                    Sube Una Foto: <input type="file" custom-on-change ng-model="scout.myImage"/>
                                 </div>
+                                <div class="cropArea">
+                                    <img-crop image="scout.myImage" result-image="scout.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
+                                </div>
+                                <div>Foto Que Usaremos:</div>
+                                <div><img ng-src="{{scout.foto}}" width="150px" /></div>
+                                <md-button class="md-raised md-primary" ng-click='defaultFoto($event)'>
+                                    Borrar Foto
+                                </md-button>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>CUM</label>
+                                <input ng-model="scout.cum" required>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Nombre</label>
+                                <input ng-model="scout.nombre" required>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Género</label>
+                                <md-select ng-model="scout.genero">
+                                  <md-option value="F">
+                                    Femenino
+                                  </md-option>
+                                  <md-option value="M">
+                                    Masculino
+                                  </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Fecha de Nacimiento</label>
+                                <md-datepicker ng-model="scout.fechanacimiento" md-current-view="year" md-open-on-focus></md-datepicker>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm ng-hide='$root.user.clan'>
+                                <label>{{$root.user.pequenogrupo}}</label>
+                                <md-select ng-model='scout.patrulla' required>
+                                  <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.idpatrulla}}">
+                                    {{patrulla.nombre}}
+                                  </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Escuela</label>
+                                <input ng-model="scout.escuela">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>E-mail</label>
+                                <input ng-model="scout.email">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Teléfono</label>
+                                <input ng-model="scout.telefono">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Domicilio</label>
+                                <input ng-model="scout.domicilio">
+                            </md-input-container>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Ficha Medica">
+                        <md-content class="md-padding" layout-padding>
+                            <h4>En caso de emergencia comunicarse con:</h4>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Persona de Contacto 1:</label>
+                                <input ng-model="scout.contacto1">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Parentesco:</label>
+                                <input ng-model="scout.parentezco1">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Persona de Contacto 2:</label>
+                                <input ng-model="scout.contacto2">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Parentesco:</label>
+                                <input ng-model="scout.parentezco2">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Teléfono de Contacto 1:</label>
+                                <input ng-model="scout.telefono1">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Teléfono de Contacto 2:</label>
+                                <input ng-model="scout.telefono2">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Email de Contacto:</label>
+                                <input ng-model="scout.emailcontacto">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Tipo de Sangre:</label>
+                                <md-select ng-model="scout.tiposangre">
+                                    <md-option value="SIN TIPO">SIN TIPO DE SANGRE</md-option>
+                                    <md-option value="O+">O+</md-option>
+                                    <md-option value="O-">O-</md-option>
+                                    <md-option value="A+">A+</md-option>
+                                    <md-option value="A-">A-</md-option>
+                                    <md-option value="B+">B+</md-option>
+                                    <md-option value="B-">B-</md-option>
+                                    <md-option value="AB+">AB+</md-option>
+                                    <md-option value="AB-">AB-</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Peso:</label>
+                                <input ng-model="scout.peso">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Estatura:</label>
+                                <input ng-model="scout.estatura">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>No. Afiliación:</label>
+                                <input ng-model="scout.noafiliacion">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Seguro:</label>
+                                <md-select ng-model="scout.seguro">
+                                    <md-option value="Ninguno">Ninguno</md-option>
+                                    <md-option value="IMSS">IMSS</md-option>
+                                    <md-option value="ISSSTE">ISSSTE</md-option>
+                                    <md-option value="ISSEMyM">ISSEMyM</md-option>
+                                    <md-option value="ISSFAM">ISSFAM</md-option>
+                                    <md-option value="Particular">Particular</md-option>
+                                    <md-option value="Otro">Otro</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Especifique (En caso de ser Particular u Otro):</label>
+                                <input ng-model="scout.especifique">
+                            </md-input-container>
+                            <div layout-gt-sm="row" ng-repeat='radio in $parent.radios'>
+                                <md-input-container class="md-block md-input-has-value" flex-gt-sm>
+                                    <label>{{radio.label}}</label>
+                                    <md-radio-group ng-model="scout[radio.name]">
+                                        <md-radio-button value="0" class="md-primary">NO</md-radio-button>
+                                        <md-radio-button value="1">SI</md-radio-button>
+                                    </md-radio-group>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm ng-show='radio.especificacion'>
+                                    <label>Especifíque</label>
+                                    <input type="text" ng-model="scout[radio.especificacion]">
+                                </md-input-container>
                             </div>
-                            <div id="{{radio.especificacion}}" class="col-xs-{{radio.col}}" ng-show='radio.especificacion'>
-                                <label>Especifíque</label><input class="form-control" type="text" ng-model="scout[radio.especificacion]" value=""></label>
-                            </div>
-                        </div>
-                    </article>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Progresión Personal">
+                        <md-content class="md-padding" layout-padding>
+                            <div class="row borde centrar" ng-repeat='insignia in $parent.insignias' ng-init="outerIndex = $index">
+                                <div class="col-md-6 vcenter" ng-init="scout.progresion[insignia.nombre] = 0">
+                                    <h4>{{insignia.nombre | capitalize}}</h4>
+                                    <input class="fileInput" value="0" type="text" ng-model="scout.progresion[insignia.nombre]" id="{{insignia.nombre}}"></br>
+                                    <img id="img{{insignia.nombre}}" ng-if='insignia.seccion != null' ng-src='img/insignias/{{insignia.seccion}}/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
+                                    <img id="img{{insignia.nombre}}" ng-if='insignia.seccion == null' ng-src='img/insignias/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <md-button class="md-raised" ng-click="borrar(insignia.nombre)">BORRAR {{insignia.nombre | uppercase}}</md-button>
+                                    <nav>
+                                        <ul class="pagination custom">
+                                            <li ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index+1}">
+                                                <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="scout.progresion[insignia.nombre] = $index+1">{{opcion}}</md-button>
+                                            </li>
 
-        </article>
-            <article class="tab-pane" id="progresionpersonal" >
-                        <!-- Promesa -->
-                        <div class="row borde centrar" ng-repeat='insignia in insignias' ng-init="outerIndex = $index">
-                            <div class="col-md-6 vcenter" ng-init="scout.progresion[insignia.nombre] = 0">
-                                <h4>{{insignia.nombre | capitalize}}</h4>
-                                <input class="fileInput" value="0" type="text" ng-model="scout.progresion[insignia.nombre]" id="{{insignia.nombre}}"></br>
-                                <img id="img{{insignia.nombre}}" ng-if='insignia.seccion != null' ng-src='img/insignias/{{insignia.seccion}}/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
-                                <img id="img{{insignia.nombre}}" ng-if='insignia.seccion == null' ng-src='img/insignias/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
-                            </div>
-                            <div class="col-md-6 ">
-                                <a href='' class='btn btn-default btn-block' ng-click="borrar(insignia.nombre)" target="_self">BORRAR {{insignia.nombre | uppercase}}</a>
-                                <nav>
-                                    <ul class="pagination custom">
-                                        <li ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index+1}"><a class="{{insignia.nombre}}" href="" id="{{insignia.nombre}}{{$index + 1}}" ng-click="scout.progresion[insignia.nombre] = $index+1" target="_self">{{opcion}}</a></li>
+                                            <li ng-if='insignia.especial' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index}">
+                                                <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="scout.progresion[insignia.nombre] = $index">{{opcion}}</md-button>
+                                            </li>
 
-                                        <li ng-if='insignia.especial' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index}"><a class="{{insignia.nombre}}" href="" id="{{insignia.nombre}}{{$index + 1}}" ng-click="scout.progresion[insignia.nombre] = $index" target="_self">{{opcion}}</a></li>
+                                            <li ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':desarrollo[$index].clicked}">
+                                                <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="desarrolloClick($index+1)">{{opcion}}</md-button>
+                                            </li>
+                                        </ul>
+                                    </nav>
 
-                                        <li ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':desarrollo[$index].clicked}"><a class="{{insignia.nombre}}" href="" id="{{insignia.nombre}}{{$index + 1}}" ng-click="desarrolloClick($index+1)" target="_self">{{opcion}}</a></li>
-                                    </ul>
-                                </nav>
+                                    <div ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" class="form-group fecha{{insignia.nombre}}{{$index + 1}}">
+                                        <div class="date" ng-show='scout.progresion[insignia.nombre] > $index'>
+                                            <md-input-container class="md-block md-input-has-value">
+                                                <label class="control-label">{{opcion}}</label>
+                                                <md-datepicker ng-model="scout.progresion.fechas[insignia.nombre][$index + 1]" md-open-on-focus></md-datepicker>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
 
-                                <div ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" class="form-group fecha{{insignia.nombre}}{{$index + 1}}">
-                                    <div class="date" ng-show='scout.progresion[insignia.nombre] > $index'>
-                                        <label class="control-label">Fecha de {{insignia.nombre | capitalize}} {{opcion}}</label>
-                                        <p class="input-group">
-                                           <input type="text" class="form-control" datepicker-popup="dd-MMMM-yy" ng-model="scout.progresion.fechas[insignia.nombre][$index + 1]" is-open="openDatePickers[outerIndex * 4 + $index]" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-                                           <span class="input-group-btn">
-                                              <button type="button" class="btn btn-default" ng-click="open($event, outerIndex * 4 + $index)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                           </span>
-                                        </p>
+                                    <div ng-if='insignia.especial' class="form-group fecha{{insignia.nombre}}">
+                                        <div class="date" ng-show='scout.progresion[insignia.nombre] > 0'>
+                                            <md-input-container class="md-block md-input-has-value">
+                                                <label class="control-label">{{insignia.nombre | capitalize}}</label>
+                                                <md-datepicker ng-model="scout.progresion.fechas[insignia.nombre]" md-open-on-focus></md-datepicker>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" class="form-group fecha{{insignia.nombre}}{{$index + 1}}">
+                                        <div class="date" ng-show='desarrollo[$index].clicked'>
+                                            <md-input-container class="md-block md-input-has-value">
+                                                <label class="control-label">{{opcion}}</label>
+                                                <md-datepicker ng-model="scout.progresion.fechas[insignia.nombre][$index + 1]" md-open-on-focus></md-datepicker>
+                                            </md-input-container>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div ng-if='insignia.especial' class="form-group fecha{{insignia.nombre}}">
-                                    <div class="date" ng-show='scout.progresion[insignia.nombre] > 0'>
-                                        <label class="control-label">Fecha de {{insignia.nombre | capitalize}}</label>
-                                        <p class="input-group">
-                                           <input type="text" class="form-control" datepicker-popup="dd-MMMM-yy" ng-model="scout.progresion.fechas[insignia.nombre]" is-open="openDatePickers[0]" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-                                           <span class="input-group-btn">
-                                              <button type="button" class="btn btn-default" ng-click="open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                           </span>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" class="form-group fecha{{insignia.nombre}}{{$index + 1}}">
-                                    <div class="date" ng-show='desarrollo[$index].clicked'>
-                                        <label class="control-label">Fecha de {{insignia.nombre | capitalize}} {{opcion}}</label>
-                                        <p class="input-group">
-                                           <input type="text" class="form-control" datepicker-popup="dd-MMMM-yy" ng-model="scout.progresion.fechas[insignia.nombre][$index + 1]" is-open="openDatePickers[outerIndex * 4 + $index]" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-                                           <span class="input-group-btn">
-                                              <button type="button" class="btn btn-default" ng-click="open($event, outerIndex * 4 + $index)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                           </span>
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                    </article>
-                </section>
-            </form>
-        </div>
-        <div class="modal-footer">
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
             <p class="advertencia">
             Al presionar el botón, se dará de alta al scout y se cerrará esta ventana, ¿no deseas dar de alta su ficha médica y su progresión de una vez? (Puedes ingresarlas después)
             </p>
-            <button class="btn btn-default btn-block" ng-click='save()'>AGREGAR SCOUT</button>
-        </div>
-    </div>
-</div>
-</div>
+            <span flex></span>
+            <md-button class="md-raised md-primary" ng-click="save()">
+                AGREGAR SCOUT
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

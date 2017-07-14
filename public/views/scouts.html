@@ -1,12 +1,58 @@
-<button type="button" class="btn btn-default btn-block contacto" ng-click="modal()">
-	<span class="mas glyphicon glyphicon-plus"></span>Agregar Nuevo Scout
-</button>
+<section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+	<md-button class="md-raised md-primary" aria-label="Agregar Nuevo Scout" ng-click="showAdvanced($event)">
+		<span class="glyphicon glyphicon-plus"></span>  Agregar Nuevo Scout
+	</md-button>
+</section>
 <h1 class='nada' ng-hide='scouts.length'>NO TIENES SCOUTS REGISTRADOS AÚN</h1>
-<div class='tarjeta col-xs-12 col-md-6 vertical-center' ng-repeat='scout in scouts'>
-	<div class='col-xs-4'>
+<md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="100" flex-gt-sm="50" layout="column" ng-repeat='scout in scouts'>
+		<md-card md-theme="default">
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">{{scout.nombre}}</span>
+					<span class="md-subhead" ng-hide='user.clan'>{{user.pequenogrupo}}: {{scout.patrulla}}</span>
+					<p >Progresión:</p>
+					<div class='progress'>
+						<div ng-show='scout.porcentaje > 0' class='progress-bar {{user.colorbarra}}' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:{{scout.porcentaje}}%'>
+							{{scout.porcentaje}}%
+						</div>
+						<div ng-show='scout.porcentaje == 0' class='progress-bar {{user.colorbarra}}' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:100%; background-color: gray!important'>
+							SIN PROGRESIÓN 0%
+						</div>
+					</div>
+				</md-card-title-text>
+				<md-card-title-media>
+					<div class="md-media-lg card-media"><img class='img-responsive' ng-src='{{scout.foto}}' width='150px' /></div>
+				</md-card-title-media>
+			</md-card-title>
+			<md-card-actions layout="row" layout-align="end center">
+				<a class="boton" href='#!scout/{{scout.cum}}/informacion'>
+					<md-button>
+						<span class='glyphicon glyphicon-user iconbtn'></span>
+						<div class='textbtn'>Información Personal</div>
+					</md-button>
+				</a>
+				<a class="boton" href='#!scout/{{scout.cum}}/fichamedica'>
+					<md-button>
+						<span class='glyphicon glyphicon-plus iconbtn'></span>
+						<div class='textbtn'>Ficha Médica</div>
+					</md-button>
+				</a>
+				<a class="boton" href='#!scout/{{scout.cum}}/progresionpersonal'>
+					<md-button>
+						<span class='glyphicon glyphicon-signal iconbtn'></span>
+						<div class='textbtn'>Progresión Personal</div>
+					</md-button>
+				</a>
+			</md-card-actions>
+		</md-card>
+	</div>
+</md-content>
+	<!-- <div class='col-xs-4'>
 		<img class='img-responsive' ng-src='{{scout.foto}}' width='150px' />
 	</div>
 	<div class='col-xs-8 altoalcien'>
+
 		<p>{{scout.nombre}}</p>
 		<p ng-hide='user.clan'>{{user.pequenogrupo}}: {{scout.patrulla}}</p>
 		<p class='peque'>Progresión:</p>
@@ -23,6 +69,6 @@
 			<a href='#!scout/{{scout.cum}}/fichamedica' class='btn btn-default boton vertical-center'><span class='glyphicon glyphicon-plus iconbtn'></span><div class='textbtn'>Ficha Médica</div></a>
 			<a href='#!scout/{{scout.cum}}/progresionpersonal' class='btn btn-default boton vertical-center'><span class='glyphicon glyphicon-signal iconbtn'></span><div class='textbtn'>Progresión Personal</div></a>
 		</div>
-	</div>
-</div>
+	</div> -->
+<!-- </div> -->
 <!-- /.tarjeta-->

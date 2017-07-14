@@ -144,14 +144,9 @@
 .botones{
   height: 30%;
 }
-.boton{
-  font-size: 0.6em!important;
-  width: 30%;
-  height: 20%;
-  display: table-cell;
-  vertical-align: middle;
-  white-space: normal!important;
-  text-align: left;
+.boton, .boton:hover, .boton:active, .boton:visited{
+  color:rgba(105, 43, 141, 1);
+  text-decoration: none;
 }
 .iconbtn{
   font-size: 1.5em!important;
@@ -246,342 +241,10 @@
 .centrar{
   text-align: center;
 }
-.pagination.custom > #lietapa1 > a:hover,
-.pagination.custom > #lietapa1 > a:focus,
-.pagination.custom > #lietapa1 > span:hover,
-.pagination.custom > #lietapa1 > span:focus,
-.pagination.custom > #lietapa1.active > a,
-.pagination.custom > #lietapa1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #lietapa2 > a:hover,
-.pagination.custom > #lietapa2 > a:focus,
-.pagination.custom > #lietapa2 > span:hover,
-.pagination.custom > #lietapa2 > span:focus,
-.pagination.custom > #lietapa2.active > a,
-.pagination.custom > #lietapa2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #lietapa3 > a:hover,
-.pagination.custom > #lietapa3 > a:focus,
-.pagination.custom > #lietapa3 > span:hover,
-.pagination.custom > #lietapa3 > span:focus,
-.pagination.custom > #lietapa3.active > a,
-.pagination.custom > #lietapa3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #lietapa4 > a:hover,
-.pagination.custom > #lietapa4 > a:focus,
-.pagination.custom > #lietapa4 > span:hover,
-.pagination.custom > #lietapa4 > span:focus,
-.pagination.custom > #lietapa4.active > a,
-.pagination.custom > #lietapa4.active > span {
-    background:#D9534F;
-    color: #FFF;
+.amarilla{
+
 }
 
-.pagination.custom > #lipromesa1 > a:hover,
-.pagination.custom > #lipromesa1 > a:focus,
-.pagination.custom > #lipromesa1 > span:hover,
-.pagination.custom > #lipromesa1 > span:focus,
-.pagination.custom > #lipromesa1.active > a,
-.pagination.custom > #lipromesa1.active > span {
-    background: gray;
-    color: #FFF;
-}
-.pagination.custom > #lipromesa2 > a:hover,
-.pagination.custom > #lipromesa2 > a:focus,
-.pagination.custom > #lipromesa2 > span:hover,
-.pagination.custom > #lipromesa2 > span:focus,
-.pagination.custom > #lipromesa2.active > a,
-.pagination.custom > #lipromesa2.active > span {
-    background: #692B8D;
-    color: #FFF;
-}
-
-.pagination.custom > #lideporte1 > a:hover,
-.pagination.custom > #lideporte1 > a:focus,
-.pagination.custom > #lideporte1 > span:hover,
-.pagination.custom > #lideporte1 > span:focus,
-.pagination.custom > #lideporte1.active > a,
-.pagination.custom > #lideporte1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #lideporte2 > a:hover,
-.pagination.custom > #lideporte2 > a:focus,
-.pagination.custom > #lideporte2 > span:hover,
-.pagination.custom > #lideporte2 > span:focus,
-.pagination.custom > #lideporte2.active > a,
-.pagination.custom > #lideporte2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #lideporte3 > a:hover,
-.pagination.custom > #lideporte3 > a:focus,
-.pagination.custom > #lideporte3 > span:hover,
-.pagination.custom > #lideporte3 > span:focus,
-.pagination.custom > #lideporte3.active > a,
-.pagination.custom > #lideporte3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #lideporte4 > a:hover,
-.pagination.custom > #lideporte4 > a:focus,
-.pagination.custom > #lideporte4 > span:hover,
-.pagination.custom > #lideporte4 > span:focus,
-.pagination.custom > #lideporte4.active > a,
-.pagination.custom > #lideporte4.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
-
-.pagination.custom > #liecologia1 > a:hover,
-.pagination.custom > #liecologia1 > a:focus,
-.pagination.custom > #liecologia1 > span:hover,
-.pagination.custom > #liecologia1 > span:focus,
-.pagination.custom > #liecologia1.active > a,
-.pagination.custom > #liecologia1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #liecologia2 > a:hover,
-.pagination.custom > #liecologia2 > a:focus,
-.pagination.custom > #liecologia2 > span:hover,
-.pagination.custom > #liecologia2 > span:focus,
-.pagination.custom > #liecologia2.active > a,
-.pagination.custom > #liecologia2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #liecologia3 > a:hover,
-.pagination.custom > #liecologia3 > a:focus,
-.pagination.custom > #liecologia3 > span:hover,
-.pagination.custom > #liecologia3 > span:focus,
-.pagination.custom > #liecologia3.active > a,
-.pagination.custom > #liecologia3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #liecologia4 > a:hover,
-.pagination.custom > #liecologia4 > a:focus,
-.pagination.custom > #liecologia4 > span:hover,
-.pagination.custom > #liecologia4 > span:focus,
-.pagination.custom > #liecologia4.active > a,
-.pagination.custom > #liecologia4.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
-
-.pagination.custom > #liexpresion1 > a:hover,
-.pagination.custom > #liexpresion1 > a:focus,
-.pagination.custom > #liexpresion1 > span:hover,
-.pagination.custom > #liexpresion1 > span:focus,
-.pagination.custom > #liexpresion1.active > a,
-.pagination.custom > #liexpresion1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #liexpresion2 > a:hover,
-.pagination.custom > #liexpresion2 > a:focus,
-.pagination.custom > #liexpresion2 > span:hover,
-.pagination.custom > #liexpresion2 > span:focus,
-.pagination.custom > #liexpresion2.active > a,
-.pagination.custom > #liexpresion2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #liexpresion3 > a:hover,
-.pagination.custom > #liexpresion3 > a:focus,
-.pagination.custom > #liexpresion3 > span:hover,
-.pagination.custom > #liexpresion3 > span:focus,
-.pagination.custom > #liexpresion3.active > a,
-.pagination.custom > #liexpresion3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #liexpresion4 > a:hover,
-.pagination.custom > #liexpresion4 > a:focus,
-.pagination.custom > #liexpresion4 > span:hover,
-.pagination.custom > #liexpresion4 > span:focus,
-.pagination.custom > #liexpresion4.active > a,
-.pagination.custom > #liexpresion4.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
-
-.pagination.custom > #lihumanidades1 > a:hover,
-.pagination.custom > #lihumanidades1 > a:focus,
-.pagination.custom > #lihumanidades1 > span:hover,
-.pagination.custom > #lihumanidades1 > span:focus,
-.pagination.custom > #lihumanidades1.active > a,
-.pagination.custom > #lihumanidades1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #lihumanidades2 > a:hover,
-.pagination.custom > #lihumanidades2 > a:focus,
-.pagination.custom > #lihumanidades2 > span:hover,
-.pagination.custom > #lihumanidades2 > span:focus,
-.pagination.custom > #lihumanidades2.active > a,
-.pagination.custom > #lihumanidades2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #lihumanidades3 > a:hover,
-.pagination.custom > #lihumanidades3 > a:focus,
-.pagination.custom > #lihumanidades3 > span:hover,
-.pagination.custom > #lihumanidades3 > span:focus,
-.pagination.custom > #lihumanidades3.active > a,
-.pagination.custom > #lihumanidades3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #lihumanidades4 > a:hover,
-.pagination.custom > #lihumanidades4 > a:focus,
-.pagination.custom > #lihumanidades4 > span:hover,
-.pagination.custom > #lihumanidades4 > span:focus,
-.pagination.custom > #lihumanidades4.active > a,
-.pagination.custom > #lihumanidades4.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
-
-.pagination.custom > #lirescate1 > a:hover,
-.pagination.custom > #lirescate1 > a:focus,
-.pagination.custom > #lirescate1 > span:hover,
-.pagination.custom > #lirescate1 > span:focus,
-.pagination.custom > #lirescate1.active > a,
-.pagination.custom > #lirescate1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #lirescate2 > a:hover,
-.pagination.custom > #lirescate2 > a:focus,
-.pagination.custom > #lirescate2 > span:hover,
-.pagination.custom > #lirescate2 > span:focus,
-.pagination.custom > #lirescate2.active > a,
-.pagination.custom > #lirescate2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #lirescate3 > a:hover,
-.pagination.custom > #lirescate3 > a:focus,
-.pagination.custom > #lirescate3 > span:hover,
-.pagination.custom > #lirescate3 > span:focus,
-.pagination.custom > #lirescate3.active > a,
-.pagination.custom > #lirescate3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #lirescate4 > a:hover,
-.pagination.custom > #lirescate4 > a:focus,
-.pagination.custom > #lirescate4 > span:hover,
-.pagination.custom > #lirescate4 > span:focus,
-.pagination.custom > #lirescate4.active > a,
-.pagination.custom > #lirescate4.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
-
-.pagination.custom > #liciencia1 > a:hover,
-.pagination.custom > #liciencia1 > a:focus,
-.pagination.custom > #liciencia1 > span:hover,
-.pagination.custom > #liciencia1 > span:focus,
-.pagination.custom > #liciencia1.active > a,
-.pagination.custom > #liciencia1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #liciencia2 > a:hover,
-.pagination.custom > #liciencia2 > a:focus,
-.pagination.custom > #liciencia2 > span:hover,
-.pagination.custom > #liciencia2 > span:focus,
-.pagination.custom > #liciencia2.active > a,
-.pagination.custom > #liciencia2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #liciencia3 > a:hover,
-.pagination.custom > #liciencia3 > a:focus,
-.pagination.custom > #liciencia3 > span:hover,
-.pagination.custom > #liciencia3 > span:focus,
-.pagination.custom > #liciencia3.active > a,
-.pagination.custom > #liciencia3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #liciencia4 > a:hover,
-.pagination.custom > #liciencia4 > a:focus,
-.pagination.custom > #liciencia4 > span:hover,
-.pagination.custom > #liciencia4 > span:focus,
-.pagination.custom > #liciencia4.active > a,
-.pagination.custom > #liciencia4.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
-
-.pagination.custom > #livida1 > a:hover,
-.pagination.custom > #livida1 > a:focus,
-.pagination.custom > #livida1 > span:hover,
-.pagination.custom > #livida1 > span:focus,
-.pagination.custom > #livida1.active > a,
-.pagination.custom > #livida1.active > span {
-    background:#F0AD4E;
-    color: #FFF;
-}
-.pagination.custom > #livida2 > a:hover,
-.pagination.custom > #livida2 > a:focus,
-.pagination.custom > #livida2 > span:hover,
-.pagination.custom > #livida2 > span:focus,
-.pagination.custom > #livida2.active > a,
-.pagination.custom > #livida2.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #livida3 > a:hover,
-.pagination.custom > #livida3 > a:focus,
-.pagination.custom > #livida3 > span:hover,
-.pagination.custom > #livida3 > span:focus,
-.pagination.custom > #livida3.active > a,
-.pagination.custom > #livida3.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #livida4 > a:hover,
-.pagination.custom > #livida4 > a:focus,
-.pagination.custom > #livida4 > span:hover,
-.pagination.custom > #livida4 > span:focus,
-.pagination.custom > #livida4.active > a,
-.pagination.custom > #livida4.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
-
-.pagination.custom > #lidesarrollo1 > a:hover,
-.pagination.custom > #lidesarrollo1 > span:hover,
-.pagination.custom > #lidesarrollo1.active > a,
-.pagination.custom > #lidesarrollo1.active > span {
-    background:#5CB85C;
-    color: #FFF;
-}
-.pagination.custom > #lidesarrollo2 > a:hover,
-.pagination.custom > #lidesarrollo2 > span:hover,
-.pagination.custom > #lidesarrollo2.active > a,
-.pagination.custom > #lidesarrollo2.active > span {
-    background:#5BC0DE;
-    color: #FFF;
-}
-.pagination.custom > #lidesarrollo3 > a:hover,
-.pagination.custom > #lidesarrollo3 > span:hover,
-.pagination.custom > #lidesarrollo3.active > a,
-.pagination.custom > #lidesarrollo3.active > span {
-    background:#D9534F;
-    color: #FFF;
-}
 .borde{
   border-bottom: 1px solid gray;
 }
@@ -592,4 +255,341 @@
   font-size: 8pt;
   font-family: OpenSans-Regular;
   color: red;
+}
+
+.pagination.custom > #lietapa1 > button:hover,
+.pagination.custom > #lietapa1 > button:focus,
+.pagination.custom > #lietapa1 > span:hover,
+.pagination.custom > #lietapa1 > span:focus,
+.pagination.custom > #lietapa1.active > button,
+.pagination.custom > #lietapa1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lietapa2 > button:hover,
+.pagination.custom > #lietapa2 > button:focus,
+.pagination.custom > #lietapa2 > span:hover,
+.pagination.custom > #lietapa2 > span:focus,
+.pagination.custom > #lietapa2.active > button,
+.pagination.custom > #lietapa2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lietapa3 > button:hover,
+.pagination.custom > #lietapa3 > button:focus,
+.pagination.custom > #lietapa3 > span:hover,
+.pagination.custom > #lietapa3 > span:focus,
+.pagination.custom > #lietapa3.active > button,
+.pagination.custom > #lietapa3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lietapa4 > button:hover,
+.pagination.custom > #lietapa4 > button:focus,
+.pagination.custom > #lietapa4 > span:hover,
+.pagination.custom > #lietapa4 > span:focus,
+.pagination.custom > #lietapa4.active > button,
+.pagination.custom > #lietapa4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #lipromesa1 > button:hover,
+.pagination.custom > #lipromesa1 > button:focus,
+.pagination.custom > #lipromesa1 > span:hover,
+.pagination.custom > #lipromesa1 > span:focus,
+.pagination.custom > #lipromesa1.active > button,
+.pagination.custom > #lipromesa1.active > span {
+    background: gray!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lipromesa2 > button:hover,
+.pagination.custom > #lipromesa2 > button:focus,
+.pagination.custom > #lipromesa2 > span:hover,
+.pagination.custom > #lipromesa2 > span:focus,
+.pagination.custom > #lipromesa2.active > button,
+.pagination.custom > #lipromesa2.active > span {
+    background: #692B8D!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #lideporte1 > button:hover,
+.pagination.custom > #lideporte1 > button:focus,
+.pagination.custom > #lideporte1 > span:hover,
+.pagination.custom > #lideporte1 > span:focus,
+.pagination.custom > #lideporte1.active > button,
+.pagination.custom > #lideporte1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lideporte2 > button:hover,
+.pagination.custom > #lideporte2 > button:focus,
+.pagination.custom > #lideporte2 > span:hover,
+.pagination.custom > #lideporte2 > span:focus,
+.pagination.custom > #lideporte2.active > button,
+.pagination.custom > #lideporte2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lideporte3 > button:hover,
+.pagination.custom > #lideporte3 > button:focus,
+.pagination.custom > #lideporte3 > span:hover,
+.pagination.custom > #lideporte3 > span:focus,
+.pagination.custom > #lideporte3.active > button,
+.pagination.custom > #lideporte3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lideporte4 > button:hover,
+.pagination.custom > #lideporte4 > button:focus,
+.pagination.custom > #lideporte4 > span:hover,
+.pagination.custom > #lideporte4 > span:focus,
+.pagination.custom > #lideporte4.active > button,
+.pagination.custom > #lideporte4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #liecologia1 > button:hover,
+.pagination.custom > #liecologia1 > button:focus,
+.pagination.custom > #liecologia1 > span:hover,
+.pagination.custom > #liecologia1 > span:focus,
+.pagination.custom > #liecologia1.active > button,
+.pagination.custom > #liecologia1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liecologia2 > button:hover,
+.pagination.custom > #liecologia2 > button:focus,
+.pagination.custom > #liecologia2 > span:hover,
+.pagination.custom > #liecologia2 > span:focus,
+.pagination.custom > #liecologia2.active > button,
+.pagination.custom > #liecologia2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liecologia3 > button:hover,
+.pagination.custom > #liecologia3 > button:focus,
+.pagination.custom > #liecologia3 > span:hover,
+.pagination.custom > #liecologia3 > span:focus,
+.pagination.custom > #liecologia3.active > button,
+.pagination.custom > #liecologia3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liecologia4 > button:hover,
+.pagination.custom > #liecologia4 > button:focus,
+.pagination.custom > #liecologia4 > span:hover,
+.pagination.custom > #liecologia4 > span:focus,
+.pagination.custom > #liecologia4.active > button,
+.pagination.custom > #liecologia4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #liexpresion1 > button:hover,
+.pagination.custom > #liexpresion1 > button:focus,
+.pagination.custom > #liexpresion1 > span:hover,
+.pagination.custom > #liexpresion1 > span:focus,
+.pagination.custom > #liexpresion1.active > button,
+.pagination.custom > #liexpresion1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liexpresion2 > button:hover,
+.pagination.custom > #liexpresion2 > button:focus,
+.pagination.custom > #liexpresion2 > span:hover,
+.pagination.custom > #liexpresion2 > span:focus,
+.pagination.custom > #liexpresion2.active > button,
+.pagination.custom > #liexpresion2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liexpresion3 > button:hover,
+.pagination.custom > #liexpresion3 > button:focus,
+.pagination.custom > #liexpresion3 > span:hover,
+.pagination.custom > #liexpresion3 > span:focus,
+.pagination.custom > #liexpresion3.active > button,
+.pagination.custom > #liexpresion3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liexpresion4 > button:hover,
+.pagination.custom > #liexpresion4 > button:focus,
+.pagination.custom > #liexpresion4 > span:hover,
+.pagination.custom > #liexpresion4 > span:focus,
+.pagination.custom > #liexpresion4.active > button,
+.pagination.custom > #liexpresion4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #lihumanidades1 > button:hover,
+.pagination.custom > #lihumanidades1 > button:focus,
+.pagination.custom > #lihumanidades1 > span:hover,
+.pagination.custom > #lihumanidades1 > span:focus,
+.pagination.custom > #lihumanidades1.active > button,
+.pagination.custom > #lihumanidades1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lihumanidades2 > button:hover,
+.pagination.custom > #lihumanidades2 > button:focus,
+.pagination.custom > #lihumanidades2 > span:hover,
+.pagination.custom > #lihumanidades2 > span:focus,
+.pagination.custom > #lihumanidades2.active > button,
+.pagination.custom > #lihumanidades2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lihumanidades3 > button:hover,
+.pagination.custom > #lihumanidades3 > button:focus,
+.pagination.custom > #lihumanidades3 > span:hover,
+.pagination.custom > #lihumanidades3 > span:focus,
+.pagination.custom > #lihumanidades3.active > button,
+.pagination.custom > #lihumanidades3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lihumanidades4 > button:hover,
+.pagination.custom > #lihumanidades4 > button:focus,
+.pagination.custom > #lihumanidades4 > span:hover,
+.pagination.custom > #lihumanidades4 > span:focus,
+.pagination.custom > #lihumanidades4.active > button,
+.pagination.custom > #lihumanidades4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #lirescate1 > button:hover,
+.pagination.custom > #lirescate1 > button:focus,
+.pagination.custom > #lirescate1 > span:hover,
+.pagination.custom > #lirescate1 > span:focus,
+.pagination.custom > #lirescate1.active > button,
+.pagination.custom > #lirescate1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lirescate2 > button:hover,
+.pagination.custom > #lirescate2 > button:focus,
+.pagination.custom > #lirescate2 > span:hover,
+.pagination.custom > #lirescate2 > span:focus,
+.pagination.custom > #lirescate2.active > button,
+.pagination.custom > #lirescate2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lirescate3 > button:hover,
+.pagination.custom > #lirescate3 > button:focus,
+.pagination.custom > #lirescate3 > span:hover,
+.pagination.custom > #lirescate3 > span:focus,
+.pagination.custom > #lirescate3.active > button,
+.pagination.custom > #lirescate3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lirescate4 > button:hover,
+.pagination.custom > #lirescate4 > button:focus,
+.pagination.custom > #lirescate4 > span:hover,
+.pagination.custom > #lirescate4 > span:focus,
+.pagination.custom > #lirescate4.active > button,
+.pagination.custom > #lirescate4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #liciencia1 > button:hover,
+.pagination.custom > #liciencia1 > button:focus,
+.pagination.custom > #liciencia1 > span:hover,
+.pagination.custom > #liciencia1 > span:focus,
+.pagination.custom > #liciencia1.active > button,
+.pagination.custom > #liciencia1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liciencia2 > button:hover,
+.pagination.custom > #liciencia2 > button:focus,
+.pagination.custom > #liciencia2 > span:hover,
+.pagination.custom > #liciencia2 > span:focus,
+.pagination.custom > #liciencia2.active > button,
+.pagination.custom > #liciencia2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liciencia3 > button:hover,
+.pagination.custom > #liciencia3 > button:focus,
+.pagination.custom > #liciencia3 > span:hover,
+.pagination.custom > #liciencia3 > span:focus,
+.pagination.custom > #liciencia3.active > button,
+.pagination.custom > #liciencia3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #liciencia4 > button:hover,
+.pagination.custom > #liciencia4 > button:focus,
+.pagination.custom > #liciencia4 > span:hover,
+.pagination.custom > #liciencia4 > span:focus,
+.pagination.custom > #liciencia4.active > button,
+.pagination.custom > #liciencia4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #livida1 > button:hover,
+.pagination.custom > #livida1 > button:focus,
+.pagination.custom > #livida1 > span:hover,
+.pagination.custom > #livida1 > span:focus,
+.pagination.custom > #livida1.active > button,
+.pagination.custom > #livida1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > #livida2 > button:hover,
+.pagination.custom > #livida2 > button:focus,
+.pagination.custom > #livida2 > span:hover,
+.pagination.custom > #livida2 > span:focus,
+.pagination.custom > #livida2.active > button,
+.pagination.custom > #livida2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #livida3 > button:hover,
+.pagination.custom > #livida3 > button:focus,
+.pagination.custom > #livida3 > span:hover,
+.pagination.custom > #livida3 > span:focus,
+.pagination.custom > #livida3.active > button,
+.pagination.custom > #livida3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #livida4 > button:hover,
+.pagination.custom > #livida4 > button:focus,
+.pagination.custom > #livida4 > span:hover,
+.pagination.custom > #livida4 > span:focus,
+.pagination.custom > #livida4.active > button,
+.pagination.custom > #livida4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > #lidesarrollo1 > button:hover,
+.pagination.custom > #lidesarrollo1 > span:hover,
+.pagination.custom > #lidesarrollo1.active > button,
+.pagination.custom > #lidesarrollo1.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lidesarrollo2 > button:hover,
+.pagination.custom > #lidesarrollo2 > span:hover,
+.pagination.custom > #lidesarrollo2.active > button,
+.pagination.custom > #lidesarrollo2.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > #lidesarrollo3 > button:hover,
+.pagination.custom > #lidesarrollo3 > span:hover,
+.pagination.custom > #lidesarrollo3.active > button,
+.pagination.custom > #lidesarrollo3.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
 }

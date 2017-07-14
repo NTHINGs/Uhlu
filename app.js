@@ -5,36 +5,28 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var MemoryStore = require('session-memory-store')(session);
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('Uhlu', 'uhlu', 's13mpr3l1st0s', {
-  host: 'localhost',
-  dialect: 'sqlite',
+// const Sequelize = require('sequelize');
+// const sequelize = new Sequelize({
+//   dialect: 'sqlite',
+//   // SQLite only
+//   storage: 'Uhlu.sqlite'
+// });
 
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  },
+// const User = sequelize.define('user', {
+//   username: Sequelize.STRING,
+//   birthday: Sequelize.DATE
+// });
 
-  // SQLite only
-  storage: 'Uhlu.sqlite'
-});
-
-const User = sequelize.define('user', {
-  username: Sequelize.STRING,
-  birthday: Sequelize.DATE
-});
-
-sequelize.sync()
-  .then(() => User.create({
-    username: 'janedoe',
-    birthday: new Date(1980, 6, 20)
-  }))
-  .then(jane => {
-    console.log(jane.get({
-      plain: true
-    }));
-  });
+// sequelize.sync()
+//   .then(() => User.create({
+//     username: 'janedoe',
+//     birthday: new Date(1980, 6, 20)
+//   }))
+//   .then(jane => {
+//     console.log(jane.get({
+//       plain: true
+//     }));
+//   });
 
 var app      = express();
 var port     = process.env.PORT || 8090;
@@ -42,9 +34,6 @@ var port     = process.env.PORT || 8090;
 var passport = require('passport');
 var flash    = require('connect-flash');
 
-var app = express();
-// app.use(favicon(__dirname + '/assets/uhlu.ico'));
-// require('./config/passport')(passport);
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
