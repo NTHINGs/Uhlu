@@ -7,36 +7,36 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var favicon = require('serve-favicon');
 var MemoryStore = require('session-memory-store')(session);
-// const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('Uhlu', 'uhlu', 's13mpr3l1st0s', {
-//   host: 'localhost',
-//   dialect: 'sqlite',
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('Uhlu', 'uhlu', 's13mpr3l1st0s', {
+  host: 'localhost',
+  dialect: 'sqlite',
 
-//   pool: {
-//     max: 5,
-//     min: 0,
-//     idle: 10000
-//   },
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  },
 
-//   // SQLite only
-//   storage: 'Uhlu.sqlite'
-// });
+  // SQLite only
+  storage: 'Uhlu.sqlite'
+});
 
-// const User = sequelize.define('user', {
-//   username: Sequelize.STRING,
-//   birthday: Sequelize.DATE
-// });
+const User = sequelize.define('user', {
+  username: Sequelize.STRING,
+  birthday: Sequelize.DATE
+});
 
-// sequelize.sync()
-//   .then(() => User.create({
-//     username: 'janedoe',
-//     birthday: new Date(1980, 6, 20)
-//   }))
-//   .then(jane => {
-//     console.log(jane.get({
-//       plain: true
-//     }));
-//   });
+sequelize.sync()
+  .then(() => User.create({
+    username: 'janedoe',
+    birthday: new Date(1980, 6, 20)
+  }))
+  .then(jane => {
+    console.log(jane.get({
+      plain: true
+    }));
+  });
 
 var app      = express();
 var port     = process.env.PORT || 8080;
