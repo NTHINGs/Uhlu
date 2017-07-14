@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 var express  = require('express');
-var redirect = require("express-redirect");
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var favicon = require('serve-favicon');
 var MemoryStore = require('session-memory-store')(session);
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('Uhlu', 'uhlu', 's13mpr3l1st0s', {
@@ -22,21 +20,21 @@ const sequelize = new Sequelize('Uhlu', 'uhlu', 's13mpr3l1st0s', {
   storage: 'Uhlu.sqlite'
 });
 
-const User = sequelize.define('user', {
-  username: Sequelize.STRING,
-  birthday: Sequelize.DATE
-});
+// const User = sequelize.define('user', {
+//   username: Sequelize.STRING,
+//   birthday: Sequelize.DATE
+// });
 
-sequelize.sync()
-  .then(() => User.create({
-    username: 'janedoe',
-    birthday: new Date(1980, 6, 20)
-  }))
-  .then(jane => {
-    console.log(jane.get({
-      plain: true
-    }));
-  });
+// sequelize.sync()
+//   .then(() => User.create({
+//     username: 'janedoe',
+//     birthday: new Date(1980, 6, 20)
+//   }))
+//   .then(jane => {
+//     console.log(jane.get({
+//       plain: true
+//     }));
+//   });
 
 var app      = express();
 var port     = process.env.PORT || 8080;
@@ -46,7 +44,6 @@ var flash    = require('connect-flash');
 
 var app = express();
 // app.use(favicon(__dirname + '/assets/uhlu.ico'));
-redirect(app);
 // require('./config/passport')(passport);
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
