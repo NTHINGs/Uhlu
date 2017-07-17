@@ -20,13 +20,13 @@
 
         <md-dialog-content>
             <md-content>
-                <md-tabs md-dynamic-height md-border-bottom ng-show="show_tab">
+                <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
                     <md-tab label="Información Personal">
                         <md-content class="md-padding" layout-padding>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Foto</label>
                                 <div>
-                                    Sube Una Foto: <input type="file" custom-on-change ng-model="scout.myImage"/>
+                                    Sube Una Foto: <input type="file" aria-label="Sube una foto" custom-on-change ng-model="scout.myImage"/>
                                 </div>
                                 <div class="cropArea">
                                     <img-crop image="scout.myImage" result-image="scout.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
@@ -179,30 +179,30 @@
                             <div class="row borde centrar" ng-repeat='insignia in $parent.insignias' ng-init="outerIndex = $index">
                                 <div class="col-md-6 vcenter" ng-init="scout.progresion[insignia.nombre] = 0">
                                     <h4>{{insignia.nombre | capitalize}}</h4>
-                                    <input class="fileInput" value="0" type="text" ng-model="scout.progresion[insignia.nombre]" id="{{insignia.nombre}}"></br>
-                                    <img id="img{{insignia.nombre}}" ng-if='insignia.seccion != null' ng-src='img/insignias/{{insignia.seccion}}/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
-                                    <img id="img{{insignia.nombre}}" ng-if='insignia.seccion == null' ng-src='img/insignias/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
+                                    <input type="hidden" ng-model="scout.progresion[insignia.nombre]" id="{{insignia.nombre}}"></br>
+                                    <img ng-if='insignia.seccion != null' ng-src='img/insignias/{{insignia.seccion}}/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
+                                    <img ng-if='insignia.seccion == null' ng-src='img/insignias/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
                                 </div>
-                                <div class="col-md-6 ">
+                                <div class="col-md-6">
                                     <md-button class="md-raised" ng-click="borrar(insignia.nombre)">BORRAR {{insignia.nombre | uppercase}}</md-button>
                                     <nav>
                                         <ul class="pagination custom">
-                                            <li ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index+1}">
+                                            <li ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" class="insignia{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index+1}">
                                                 <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="scout.progresion[insignia.nombre] = $index+1">{{opcion}}</md-button>
                                             </li>
 
-                                            <li ng-if='insignia.especial' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index}">
+                                            <li ng-if='insignia.especial' ng-repeat="opcion in insignia.opciones" class="insigniaespecial{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index}">
                                                 <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="scout.progresion[insignia.nombre] = $index">{{opcion}}</md-button>
                                             </li>
 
-                                            <li ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" id="li{{insignia.nombre}}{{$index + 1}}" ng-class="{'active':desarrollo[$index].clicked}">
+                                            <li ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" class="insigniadesarrollo{{$index + 1}}" ng-class="{'active':desarrollo[$index].clicked}">
                                                 <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="desarrolloClick($index+1)">{{opcion}}</md-button>
                                             </li>
                                         </ul>
                                     </nav>
 
-                                    <div ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" class="form-group fecha{{insignia.nombre}}{{$index + 1}}">
-                                        <div class="date" ng-show='scout.progresion[insignia.nombre] > $index'>
+                                    <div ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones">
+                                        <div ng-show='scout.progresion[insignia.nombre] > $index'>
                                             <md-input-container class="md-block md-input-has-value">
                                                 <label class="control-label">{{opcion}}</label>
                                                 <md-datepicker ng-model="scout.progresion.fechas[insignia.nombre][$index + 1]" md-open-on-focus></md-datepicker>
@@ -210,7 +210,7 @@
                                         </div>
                                     </div>
 
-                                    <div ng-if='insignia.especial' class="form-group fecha{{insignia.nombre}}">
+                                    <div ng-if='insignia.especial'>
                                         <div class="date" ng-show='scout.progresion[insignia.nombre] > 0'>
                                             <md-input-container class="md-block md-input-has-value">
                                                 <label class="control-label">{{insignia.nombre | capitalize}}</label>
@@ -219,7 +219,7 @@
                                         </div>
                                     </div>
 
-                                    <div ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" class="form-group fecha{{insignia.nombre}}{{$index + 1}}">
+                                    <div ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones">
                                         <div class="date" ng-show='desarrollo[$index].clicked'>
                                             <md-input-container class="md-block md-input-has-value">
                                                 <label class="control-label">{{opcion}}</label>

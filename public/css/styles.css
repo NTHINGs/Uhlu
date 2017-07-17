@@ -1,172 +1,234 @@
-/*Responsive captcha*/
-@media screen and (max-height: 575px){
-#rc-imageselect, .g-recaptcha {
-  transform:scale(0.60);
-  -webkit-transform:scale(0.60);
-  transform-origin:0 0;
-  -webkit-transform-origin:0 0;
+#imgdesarrollo{
+  width: 250px;
 }
-}
-/*Fuentesonas*/
-@font-face {
-    font-family: OpenSans-Bold;
-    src: url(fonts/OpenSans-Bold.ttf);
+/* Sidebar Styles */
+.alinearizq{
+    text-align: left;
 }
 
-@font-face {
-    font-family: OpenSans-Light;
-    src: url(fonts/OpenSans-Light.ttf);
+/*Colores*/
+.morrarro{
+  color: #692b8d!important;
+
 }
 
-@font-face {
-    font-family: OpenSans-Semibold;
-    src: url(fonts/OpenSans-Semibold.ttf);
+.mas{
+  color:#59ff00;
+  padding-left: 1%;
 }
 
-@font-face {
-    font-family: OpenSans-Regular;
-    src: url(fonts/OpenSans-Regular.ttf);
-}
-/*------------------------------------------------*/
-/*Eschruchure*/
-section{
-  width: 100%;
-  height: 100vh;
-}
 
-.cajablanca{
-  margin-top: 2%;
-  margin-bottom: 2%;
-  padding: 15px;
-  width: 100%;
-}
-
-input[type=text]{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  height: 40px;
-}
-input[type=password]{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  height: 40px;
-}
-
-input[type=submit]{
-  width: 100%;
-  height: 50px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.facebook{
-  width: 100%;
-  height: 50px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.nada{
   text-align: center;
+  font-family: OpenSans-Light;
+  color: #AAAAAA;
 }
-
-
-.margen{
-  margin-top: 10%;
-}
-/*------------------------------------------------*/
-/*Tamañines*/
-* body html{
-  width: 100%;
-  height: 100%;
-}
-
-#logo{
-  width: 200px;
-}
-
-.fullwidth{
-  width: 100%;
-  height: 100%;
-}
-.container{
-  width: 100%;
-}
-
-/*------------------------------------------------*/
-/*Fonts*/
-.regular{
-  font-family: OpenSans-Regular;
+.contacto{
+  background-color:#5A6570;
+  height: 40px;
   color: #FFF;
-}
-
-.normal{
-  font-family: OpenSans-Semibold;
-  color: #FFF;
-}
-
-.negrita{
   font-family: OpenSans-Bold;
-  color: #00a8e1;
+  font-size: 1em;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  text-align: center;
+  margin: 0 auto;
+
 }
 
-.light{
-  font-family: OpenSans-Light;
-}
-
-.lightwhite{
-  font-family: OpenSans-Light;
+.contacto a{
+  padding-right: 10%;
+  text-decoration: none;
   color: #FFF;
 }
-/*------------------------------------------------*/
-/*Clases mias de mi*/
+.contacto a:hover{
+  text-decoration: none;
+  color: #FFF;
+}
+
+.logout a{
+  text-decoration: none;
+  color: #FFF;
+}
 .vertical-center {
   min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
   display: flex;
   align-items: center;
-  text-align: center;
 }
-.vcenter{
-  display: inline-block;
+.vcenter {
+    display: inline-block;
     vertical-align: middle;
     float: none;
 }
-
-/*Colores*/
-.background{
-  /*background-color: #4A005C;*/
-  background-image: url("img/bg-1.png");
-  background-size: cover;
-  background-position: center;
+.top{
+  background-color: #E6E6E6;
+  padding-top: 2.5vh;
+  padding-bottom:2.5vh;
+}
+.other{
+  width: 100%;
+  height: 20vh;
 }
 
-.link{
+.other h1{
+  font-family: OpenSans-Light;
+  font-size: 18pt;
+  color: #5A6570;
+}
+
+.other a{
+  font-family: OpenSans-Light;
+  font-size: 14pt;
+  color: #4DC1DF;
   text-decoration: none;
-  color: #FFF;
 }
 
-.cajablanca{
-  background-color: #FFF;
-}
-input[type=text], input[type=email] {
-  color:#5C666F;
-  border: none;
-}
-input[type=password]{
-  color:#5C666F;
-  border: none;
-}
-input[type=submit]{
-  color: #FFF;
-  background-color: #692B8D;
-  border: none;
+.other a:hover{
+  font-family: OpenSans-Light;
+  font-size: 14pt;
+  color: #4DC1DF;
   text-decoration: none;
-  cursor: pointer;
 }
-.btn{
-  background-color: #3B5998!important;
-  color: #FFF!important;
 
-}
-.facebook {
+.iconbtn{
   font-size: 1.5em!important;
-  text-decoration: none;
+}
+
+@media(max-width:768px) {
+  .contacto{
+    font-size: 10pt!important;
+  }
+}
+
+@media(max-width:1221px) {
+  .textbtn{
+    display: none;
+
+  }
+  .botones{
+    height: 20%;
+  }
+  .boton{
+    font-size: 1em!important;
+  }
+  .other{
+    height: 30vh;
+  }
+}
+
+@media(max-width:480px) {
+  .contacto{
+    font-size: 8pt!important;
+  }
+}
+
+.contain{
+  text-align: center;
+  display: none;
+}
+
+/**
+ * Override feedback icon position
+ * See http://formvalidation.io/examples/adjusting-feedback-icon-position/
+ */
+
+.centrar{
+  text-align: center;
+}
+
+.borde{
+  border-bottom: 1px solid gray;
+}
+.oculto{
+  visibility: hidden;
+}
+.advertencia{
+  font-size: 8pt;
+  font-family: OpenSans-Regular;
+  color: red;
+}
+
+.pagination.custom > .insignia1 > button:hover,
+.pagination.custom > .insignia1 > button:focus,
+.pagination.custom > .insignia1 > span:hover,
+.pagination.custom > .insignia1 > span:focus,
+.pagination.custom > .insignia1.active > button,
+.pagination.custom > .insignia1.active > span {
+    background:#F0AD4E!important;
+    color: #FFF!important;
+}
+.pagination.custom > .insignia2 > button:hover,
+.pagination.custom > .insignia2 > button:focus,
+.pagination.custom > .insignia2 > span:hover,
+.pagination.custom > .insignia2 > span:focus,
+.pagination.custom > .insignia2.active > button,
+.pagination.custom > .insignia2.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > .insignia3 > button:hover,
+.pagination.custom > .insignia3 > button:focus,
+.pagination.custom > .insignia3 > span:hover,
+.pagination.custom > .insignia3 > span:focus,
+.pagination.custom > .insignia3.active > button,
+.pagination.custom > .insignia3.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > .insignia4 > button:hover,
+.pagination.custom > .insignia4 > button:focus,
+.pagination.custom > .insignia4 > span:hover,
+.pagination.custom > .insignia4 > span:focus,
+.pagination.custom > .insignia4.active > button,
+.pagination.custom > .insignia4.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > .insigniaespecial1 > button:hover,
+.pagination.custom > .insigniaespecial1 > button:focus,
+.pagination.custom > .insigniaespecial1 > span:hover,
+.pagination.custom > .insigniaespecial1 > span:focus,
+.pagination.custom > .insigniaespecial1.active > button,
+.pagination.custom > .insigniaespecial1.active > span {
+    background: gray!important;
+    color: #FFF!important;
+}
+.pagination.custom > .insigniaespecial2 > button:hover,
+.pagination.custom > .insigniaespecial2 > button:focus,
+.pagination.custom > .insigniaespecial2 > span:hover,
+.pagination.custom > .insigniaespecial2 > span:focus,
+.pagination.custom > .insigniaespecial2.active > button,
+.pagination.custom > .insigniaespecial2.active > span {
+    background: #692B8D!important;
+    color: #FFF!important;
+}
+
+.pagination.custom > .insigniadesarrollo1 > button:hover,
+.pagination.custom > .insigniadesarrollo1 > button:focus,
+.pagination.custom > .insigniadesarrollo1 > span:hover,
+.pagination.custom > .insigniadesarrollo1 > span:focus,
+.pagination.custom > .insigniadesarrollo1.active > button,
+.pagination.custom > .insigniadesarrollo1.active > span {
+    background:#5CB85C!important;
+    color: #FFF!important;
+}
+.pagination.custom > .insigniadesarrollo2 > button:hover,
+.pagination.custom > .insigniadesarrollo2 > button:focus,
+.pagination.custom > .insigniadesarrollo2 > span:hover,
+.pagination.custom > .insigniadesarrollo2 > span:focus,
+.pagination.custom > .insigniadesarrollo2.active > button,
+.pagination.custom > .insigniadesarrollo2.active > span {
+    background:#5BC0DE!important;
+    color: #FFF!important;
+}
+.pagination.custom > .insigniadesarrollo3 > button:hover,
+.pagination.custom > .insigniadesarrollo3 > button:focus,
+.pagination.custom > .insigniadesarrollo3 > span:hover,
+.pagination.custom > .insigniadesarrollo3 > span:focus,
+.pagination.custom > .insigniadesarrollo3.active > button,
+.pagination.custom > .insigniadesarrollo3.active > span {
+    background:#D9534F!important;
+    color: #FFF!important;
 }
