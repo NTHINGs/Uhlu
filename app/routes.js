@@ -4,6 +4,9 @@ var fs = require('fs');
 var bcrypt = require('bcrypt-nodejs');
 var path = require('path');  
 
+// Controlers
+var scouts = require('../app/controllers/scouts');
+
 var upload = multer({ 
     dest: 'public/fotoscasas/',
     rename: function(fieldname, filename) {
@@ -15,10 +18,25 @@ var upload = multer({
         }
     } 
 });
-module.exports = function(app, passport) {
+
+module.exports = function(app, passport, models) {
     app.get("/", function(req, res) {
-        res.sendFile(path.join(__dirname, '../public/views' ,'index.html'))
+        models.sequelize
+          .authenticate()
+          .then(function () {
+            console.log('Connection successful');
+            res.sendFile(path.join(__dirname, '../public/views' ,'index.html'))
+          })
+          .catch(function(error) {
+            console.log("Error creating connection:", error);
+          });
     });
+
+    app.get('/scouts', scouts.index);
+    app.get('/scouts/:cum', scouts.show);
+    app.post('/scouts', scouts.create);
+    app.put('/scouts', scouts.update);
+    app.delete('/scouts/:cum', scouts.delete);
 
 	app.get('/logout', function(req, res) {
 	    req.logout();

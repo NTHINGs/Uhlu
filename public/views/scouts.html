@@ -4,8 +4,9 @@
 	</md-button>
 </section>
 <h1 class='nada' ng-hide='scouts.length'>NO TIENES SCOUTS REGISTRADOS AÚN</h1>
-<md-content class="md-padding" layout-xs="column" layout="row">
-    <div flex-xs flex-gt-xs="100" flex-gt-sm="50" layout="column" ng-repeat='scout in scouts'>
+<div class="row">
+    <!-- <div flex-xs flex-gt-xs="100" flex-gt-sm="50" layout="column" layout-fill ng-repeat='scout in scouts'> -->
+    <div class="col-xs-12 col-md-6" layout="column" ng-repeat='scout in scouts'>
 		<md-card md-theme="default">
 			<md-card-title>
 				<md-card-title-text>
@@ -25,26 +26,27 @@
 					<div class="md-media-lg card-media"><img class='img-responsive' ng-src='{{scout.foto}}' width='150px' /></div>
 				</md-card-title-media>
 			</md-card-title>
-			<md-card-actions layout="row" layout-align="end center">
-				<a class="boton" href='#!scout/{{scout.cum}}/informacion'>
-					<md-button>
-						<span class='glyphicon glyphicon-user iconbtn'></span>
-						<div class='textbtn'>Información Personal</div>
+			<md-card-actions layout="row" layout-align="start center">
+				<md-button ng-click="borrar(scout)" class="btn-lg btn-lg-text" aria-label="Borrar Scout" layout-wrap flex aria-label="BORRAR">
+					<span class='glyphicon glyphicon-trash iconbtn morrarro'></span>
+				</md-button>
+				<span flex></span>
+				<a class="boton" href='#!scout/{{scout.cum}}/informacion' layout-wrap flex>
+					<md-button class="btn-lg btn-lg-text" aria-label="Informacion Personal">
+						<span class='glyphicon glyphicon-user iconbtn morrarro'></span>
 					</md-button>
 				</a>
-				<a class="boton" href='#!scout/{{scout.cum}}/fichamedica'>
-					<md-button>
-						<span class='glyphicon glyphicon-plus iconbtn'></span>
-						<div class='textbtn'>Ficha Médica</div>
+				<a class="boton" href='#!scout/{{scout.cum}}/fichamedica' layout-wrap flex>
+					<md-button class="btn-lg btn-lg-text" aria-label="Ficha Medica">
+						<span class='glyphicon glyphicon-plus iconbtn morrarro'></span>
 					</md-button>
 				</a>
-				<a class="boton" href='#!scout/{{scout.cum}}/progresionpersonal'>
-					<md-button>
-						<span class='glyphicon glyphicon-signal iconbtn'></span>
-						<div class='textbtn'>Progresión Personal</div>
+				<a class="boton" href='#!scout/{{scout.cum}}/progresionpersonal' layout-wrap flex>
+					<md-button class="btn-lg btn-lg-text" aria-label="Progresión Personal">
+						<span class='glyphicon glyphicon-signal iconbtn morrarro'></span>
 					</md-button>
 				</a>
 			</md-card-actions>
 		</md-card>
 	</div>
-</md-content>
+</div>

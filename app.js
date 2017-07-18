@@ -5,28 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var MemoryStore = require('session-memory-store')(session);
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  // SQLite only
-  storage: 'Uhlu.sqlite'
-});
-
-const User = sequelize.define('user', {
-  username: Sequelize.STRING,
-  birthday: Sequelize.DATE
-});
-
-sequelize.sync()
-  .then(() => User.create({
-    username: 'janedoe',
-    birthday: new Date(1980, 6, 20)
-  }))
-  .then(jane => {
-    console.log(jane.get({
-      plain: true
-    }));
-  });
+var models = require('./app/models/');
 
 var app      = express();
 var port     = process.env.PORT || 8080;
@@ -56,7 +35,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport, models); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 app.listen(port);

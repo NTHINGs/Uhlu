@@ -1,24 +1,62 @@
-app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert, $mdDialog, patrullas, scouts){
+app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert, $mdDialog, Patrullas, Scouts){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$rootScope.currentRoute='Tus Scouts';
 	$scope.scouts = [];
-	scouts.getScouts(1).then(function(scouts) {
+	Scouts.all().then(function(scouts) {
 		$scope.scouts = scouts;
 		$scope.scouts.forEach(function(scout) {
-			patrullas.getNombrePatrulla(scout.patrulla).then(function(nombre) {
+			Patrullas.getNombrePatrulla(scout.patrulla).then(function(nombre) {
 				scout.patrulla = nombre;
 			});
 		});
 	});
 
-	// TODO Hacerlo con una peticion get
+	$scope.borrar = function(scout) {
+		var scout = scout;
+		SweetAlert.swal({
+			title: "Estas seguro de querer eliminar a "+scout.nombre+"?",
+			text: "No vas a poder recuperarlo",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#692B8D",
+			confirmButtonText: "Si, eliminalo!",
+			closeOnConfirm: false
+		},function() {
+			Scouts.delete(scout.cum).then(function (s) {
+				SweetAlert.swal({
+					title: "Eliminado!",
+					text: ''+scout.nombre+' ha sido eliminado correctamente',
+					type: "success",
+					showCancelButton: false,
+					confirmButtonColor: "#692B8D",
+					confirmButtonText: "Ok!",
+					closeOnConfirm: true
+				}, 
+				function(){ 
+					console.log("EXITO");
+					$location.path('/');
+				});
+	        })
+	        .catch(function (error) {
+	        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error, "error");
+	        });
+			
+		});
+	}
+
 	//Modal
 	$scope.showAgregarScout = function(ev) {
-		patrullas.getPatrullas(1).then(function(patrullasArr) {
+		Patrullas.getPatrullas(1).then(function(patrullasArr) {
 			if(patrullasArr.length > 0){
 				$mdDialog.show({
-					controller: function($scope,patrullas){
-						ScoutProcess($scope, patrullas);
+					controller: function($scope,Patrullas){
+						$scope.scout = {};
+						ScoutProcess($scope, Patrullas);
+						// Modal Actions
+						$scope.cancel = function(){
+							$mdDialog.cancel(); 
+						};
+
 						$scope.save = function(){
 							console.log($scope.scout);
 							$mdDialog.hide($scope.scout);
@@ -39,18 +77,47 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert,
 						s = 'o';
 					}
 					// 'Exito', ''+scout.nombre+' Fue Agregad'+s+' Correctamente'
-					SweetAlert.swal({
-					   title: "Exito!",
-					   text: ''+scout.nombre+' Fue Agregad'+s+' Correctamente',
-					   type: "success",
-					   showCancelButton: false,
-					   confirmButtonColor: "#692B8D",
-					   confirmButtonText: "Ok!",
-					   closeOnConfirm: true}, 
-					function(){ 
-						console.log("EXITO");
-						$location.path('/');
-					});
+					// PARSE ProgresionPersonal
+					var fechas=scout.progresion.fechas;
+					var fechasFlatted = {};
+
+					for (var key in fechas) {
+					  if(key != 'promesa' && key != 'enlace'){
+					    for (var subKey in fechas[key]) {
+					      fechasFlatted['fecha' + key + subKey] = fechas[key][subKey];
+					    }
+					  }else{
+					    fechasFlatted['fecha' + key]=fechas[key];
+					  }
+					}
+					delete scout.progresion.fechas;
+					scout.progresionpersonal = jsonConcat(scout.progresion, fechasFlatted);
+					delete scout.progresion;
+					delete scout.patrullas;
+					scout = jsonConcat(scout, scout.fichamedica);
+					scout = jsonConcat(scout, scout.progresionpersonal);
+					delete scout.fichamedica;
+					delete scout.progresionpersonal;
+					scout.porcentaje = calcularPorcentaje(scout, $rootScope.totalseccion);
+					console.log(scout);
+					Scouts.new(scout).then(function (scout) {
+						SweetAlert.swal({
+							title: "Exito!",
+							text: ''+scout.nombre+' Fue Agregad'+s+' Correctamente',
+							type: "success",
+							showCancelButton: false,
+							confirmButtonColor: "#692B8D",
+							confirmButtonText: "Ok!",
+							closeOnConfirm: true
+						}, 
+						function(){ 
+							console.log("EXITO");
+							$location.path('/');
+						});
+			        })
+			        .catch(function (error) {
+			        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error, "error");
+			        });
 				}, function() {
 					
 				});
@@ -76,7 +143,7 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert,
 });//end scoutsCtrl
 
 
-app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $routeParams, patrullas, scouts){
+app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $routeParams, Patrullas, Scouts){
 	switch($routeParams.tab){ 
 		case "informacion":
 			$scope.informacion = true;
@@ -99,14 +166,24 @@ app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $r
 			$scope.progresion = false;
 	}
 	
-	scouts.getScout($routeParams.cum).then(function(scout) {
+	Scouts.get($routeParams.cum).then(function(scout) {
 		// body...
-		$scope.scout = scout;
+		$scope.scout = scout[0];
 		$scope.scout.fechanacimiento = new Date($scope.scout.fechanacimiento);
 		$rootScope.currentRoute='Scout '+$scope.scout.nombre;
+		ScoutProcess($scope, Patrullas);
+		$rootScope.insignias.forEach(function(insignia){			
+			if(!insignia.especial){
+				for (var i = 0 ; i < Object.keys(insignia.opciones).length; i++) {
+					$scope.scout['fecha'+insignia.nombre+(i + 1)] = new Date($scope.scout['fecha'+insignia.nombre+(i + 1)]);
+				}
+			}else{
+				$scope.scout['fecha'+insignia.nombre] = new Date($scope.scout['fecha'+insignia.nombre]);
+			}
+			
+		});
 	});
 	// console.log($scope.scout);
-	ScoutProcess($scope, patrullas);
 
 	$scope.save = function(){
 		if ($scope.scout.myImage == 'img/fpo_avatar.png') {
@@ -116,25 +193,31 @@ app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $r
 		if($scope.scout.genero == 'M'){
 			s = 'o';
 		}
+		console.log($rootScope.totalseccion)
+		$scope.scout.porcentaje = calcularPorcentaje($scope.scout, $rootScope.totalseccion);
 		// 'Exito', ''+scout.nombre+' Fue Agregad'+s+' Correctamente'
-		SweetAlert.swal({
-		   title: "Exito!",
-		   text: ''+$scope.scout.nombre+' Fue Editad'+s+' Correctamente',
-		   type: "success",
-		   showCancelButton: false,
-		   confirmButtonColor: "#692B8D",
-		   confirmButtonText: "Ok!",
-		   closeOnConfirm: true}, 
-		function(){ 
-			$location.path('/scout/'+$scope.scout.cum);
-		});
+		Scouts.update($scope.scout).then(function (scout) {
+			SweetAlert.swal({
+			   title: "Exito!",
+			   text: ''+$scope.scout.nombre+' Fue Editad'+s+' Correctamente',
+			   type: "success",
+			   showCancelButton: false,
+			   confirmButtonColor: "#692B8D",
+			   confirmButtonText: "Ok!",
+			   closeOnConfirm: true}, 
+			function(){ 
+				$location.path('/scout/'+$scope.scout.cum);
+			});
+        })
+        .catch(function (error) {
+        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error, "error");
+        });
 	};
 }); // end scoutCtrl
 
-function ScoutProcess($scope, patrullas) {
-	$scope.scout = {};
+function ScoutProcess($scope, Patrullas) {
 	// Patrullas del servicio para llenar el select en el modal
-	patrullas.getPatrullas(1).then(function(patrullas) {
+	Patrullas.getPatrullas(1).then(function(patrullas) {
 		// body...
 		$scope.scout.patrullas = patrullas;
 		$scope.scout.patrulla = $scope.scout.patrullas[0].idpatrulla;
@@ -150,6 +233,29 @@ function ScoutProcess($scope, patrullas) {
 	};
 
 	$scope.desarrollo= [{clicked: false, value: 1}, {clicked: false, value: 2}, {clicked: false, value: 5}];
+	switch($scope.scout.desarrollo){
+		case 1:
+			$scope.desarrollo= [{clicked: true, value: 1}, {clicked: false, value: 2}, {clicked: false, value: 5}];
+		break;
+		case 2:
+			$scope.desarrollo= [{clicked: false, value: 1}, {clicked: true, value: 2}, {clicked: false, value: 5}];
+		break;
+		case 3:
+			$scope.desarrollo= [{clicked: true, value: 1}, {clicked: true, value: 2}, {clicked: false, value: 5}];
+		break;
+		case 5:
+			$scope.desarrollo= [{clicked: false, value: 1}, {clicked: false, value: 2}, {clicked: true, value: 5}];
+		break;
+		case 6:
+			$scope.desarrollo= [{clicked: true, value: 1}, {clicked: false, value: 2}, {clicked: true, value: 5}];
+		break;
+		case 7:
+			$scope.desarrollo= [{clicked: false, value: 1}, {clicked: true, value: 2}, {clicked: true, value: 5}];
+		break;
+		case 8:
+			$scope.desarrollo= [{clicked: true, value: 1}, {clicked: true, value: 2}, {clicked: true, value: 5}];
+		break;
+	}
 	$scope.desarrolloClick = function(i) {
 		$scope.desarrollo[i-1].clicked = !$scope.desarrollo[i-1].clicked;
 		var valor = 0
@@ -158,20 +264,27 @@ function ScoutProcess($scope, patrullas) {
 				valor += d.value;
 			}
 		})
-		$scope.scout.progresion.desarrollo = valor;
+		$scope.scout.desarrollo = valor;
 	};
 
 	$scope.borrar = function(insignia) {
-		$scope.scout.progresion[insignia] = 0;
+		$scope.scout[insignia] = 0;
 		if(insignia == 'desarrollo'){
 			$scope.desarrollo.forEach(function(d) {
 				d.clicked = false;	
 			})
 		}
 	};
+}
 
-	// Modal Actions
-	$scope.cancel = function(){
-		$mdDialog.cancel(); 
-	};
+function jsonConcat(o1, o2) {
+ for (var key in o2) {
+  o1[key] = o2[key];
+ }
+ return o1;
+}
+
+function calcularPorcentaje(scout, totalseccion) {
+	var puntaje = scout.promesa + scout.etapa + scout.deporte + scout.expresion + scout.humanidades + scout.rescate + scout.ciencia + scout.vida + scout.desarrollo + scout.enlace;
+	return (puntaje*100/totalseccion).toFixed(2);
 }

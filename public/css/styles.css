@@ -1,4 +1,4 @@
-#imgdesarrollo{
+.imgdesarrollo{
   width: 250px;
 }
 /* Sidebar Styles */
@@ -231,4 +231,59 @@
 .pagination.custom > .insigniadesarrollo3.active > span {
     background:#D9534F!important;
     color: #FFF!important;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media ( max-width : 768px ) {
+  .btn-xs-text:not(span) {
+    font-size: 0pt !important;
+  }
+  .btn-xs-text.btn-lg .glyphicon {
+    font-size: 18pt !important;
+  }
+  .btn-xs-text .glyphicon {
+    font-size: 14pt !important;
+  }
+  .btn-xs-text.btn-sm .glyphicon {
+    font-size: 12pt !important;
+  }
+  .btn-xs-text.btn-xs .glyphicon {
+    font-size: 12pt !important;
+  }
+}
+/* Medium devices (desktops, 992px and up) */
+@media ( max-width : 992px ) {
+  .btn-md-text:not(span) {
+    font-size: 0pt !important;
+  }
+  .btn-md-text.btn-lg .glyphicon {
+    font-size: 18pt !important;
+  }
+  .btn-md-text .glyphicon {
+    font-size: 14pt !important;
+  }
+  .btn-md-text.btn-sm .glyphicon {
+    font-size: 12pt !important;
+  }
+  .btn-md-text.btn-xs .glyphicon {
+    font-size: 12pt !important;
+  }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media ( max-width : 1200px ) {
+  .btn-lg-text:not(span) {
+    font-size: 0pt !important;
+  }
+  .btn-lg-text.btn-lg .glyphicon {
+    font-size: 18pt !important;
+  }
+  .btn-lg-text .glyphicon {
+    font-size: 14pt !important;
+  }
+  .btn-lg-text.btn-sm .glyphicon {
+    font-size: 12pt !important;
+  }
+  .btn-lg-text.btn-xs .glyphicon {
+    font-size: 12pt !important;
+  }
 }

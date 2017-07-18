@@ -41,6 +41,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				$rootScope.area5="Kotick (Sociabilidad)";
 				// Espiritualidad
 				$rootScope.area6="Francisco de Asís (Espiritualidad)";
+				$rootScope.totalseccion = 38;
 				  
 				break;
 			case 'tropa':
@@ -67,6 +68,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				$rootScope.area5="Abeja (Sociabilidad)";
 				// Espiritualidad
 				$rootScope.area6="Arbol (Espiritualidad)";
+				$rootScope.totalseccion = 38;
 				  
 				break;
 			case 'comunidad':
@@ -93,6 +95,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				$rootScope.area5="Abeja (Sociabilidad)";
 				// Espiritualidad
 				$rootScope.area6="Arbol (Espiritualidad)";
+				$rootScope.totalseccion = 37;
 				  
 
 				break;
@@ -120,6 +123,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				$rootScope.area5="Sociabilidad";
 				// Espiritualidad
 				$rootScope.area6="Espiritualidad";
+				$rootScope.totalseccion = 31;
 				break;
 		}
 		$rootScope.insignias = Object.values($rootScope.insignias);

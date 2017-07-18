@@ -1,4 +1,4 @@
-app.service('patrullas', function($http) {
+app.service('Patrullas', function($http) {
 	this.getPatrullas = function (idscout) {
 		return $http.get('json/patrullas.json').then(function(data) {
 			return data.data

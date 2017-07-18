@@ -91,35 +91,35 @@
                             <h4>En caso de emergencia comunicarse con:</h4>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Persona de Contacto 1:</label>
-                                <input ng-model="scout.contacto1">
+                                <input ng-model="scout.fichamedica.contacto1">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Parentesco:</label>
-                                <input ng-model="scout.parentezco1">
+                                <input ng-model="scout.fichamedica.parentezco1">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Persona de Contacto 2:</label>
-                                <input ng-model="scout.contacto2">
+                                <input ng-model="scout.fichamedica.contacto2">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Parentesco:</label>
-                                <input ng-model="scout.parentezco2">
+                                <input ng-model="scout.fichamedica.parentezco2">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Teléfono de Contacto 1:</label>
-                                <input ng-model="scout.telefono1">
+                                <input ng-model="scout.fichamedica.telefono1">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Teléfono de Contacto 2:</label>
-                                <input ng-model="scout.telefono2">
+                                <input ng-model="scout.fichamedica.telefono2">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Email de Contacto:</label>
-                                <input ng-model="scout.emailcontacto">
+                                <input ng-model="scout.fichamedica.emailcontacto">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>Tipo de Sangre:</label>
-                                <md-select ng-model="scout.tiposangre">
+                                <md-select ng-model="scout.fichamedica.tiposangre">
                                     <md-option value="SIN TIPO">SIN TIPO DE SANGRE</md-option>
                                     <md-option value="O+">O+</md-option>
                                     <md-option value="O-">O-</md-option>
@@ -133,19 +133,19 @@
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Peso:</label>
-                                <input ng-model="scout.peso">
+                                <input ng-model="scout.fichamedica.peso">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Estatura:</label>
-                                <input ng-model="scout.estatura">
+                                <input ng-model="scout.fichamedica.estatura">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>No. Afiliación:</label>
-                                <input ng-model="scout.noafiliacion">
+                                <input ng-model="scout.fichamedica.noafiliacion">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>Seguro:</label>
-                                <md-select ng-model="scout.seguro">
+                                <md-select ng-model="scout.fichamedica.seguro">
                                     <md-option value="Ninguno">Ninguno</md-option>
                                     <md-option value="IMSS">IMSS</md-option>
                                     <md-option value="ISSSTE">ISSSTE</md-option>
@@ -157,19 +157,19 @@
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-xs>
                                 <label>Especifique (En caso de ser Particular u Otro):</label>
-                                <input ng-model="scout.especifique">
+                                <input ng-model="scout.fichamedica.especifique">
                             </md-input-container>
                             <div layout-gt-sm="row" ng-repeat='radio in $parent.radios'>
                                 <md-input-container class="md-block md-input-has-value" flex-gt-sm>
                                     <label>{{radio.label}}</label>
-                                    <md-radio-group ng-model="scout[radio.name]">
+                                    <md-radio-group ng-model="scout.fichamedica[radio.name]">
                                         <md-radio-button value="0" class="md-primary">NO</md-radio-button>
                                         <md-radio-button value="1">SI</md-radio-button>
                                     </md-radio-group>
                                 </md-input-container>
                                 <md-input-container class="md-block" flex-gt-sm ng-show='radio.especificacion'>
                                     <label>Especifíque</label>
-                                    <input type="text" ng-model="scout[radio.especificacion]">
+                                    <input type="text" ng-model="scout.fichamedica[radio.especificacion]">
                                 </md-input-container>
                             </div>
                         </md-content>
@@ -180,7 +180,7 @@
                                 <div class="col-md-6 vcenter" ng-init="scout.progresion[insignia.nombre] = 0">
                                     <h4>{{insignia.nombre | capitalize}}</h4>
                                     <input type="hidden" ng-model="scout.progresion[insignia.nombre]" id="{{insignia.nombre}}"></br>
-                                    <img ng-if='insignia.seccion != null' ng-src='img/insignias/{{insignia.seccion}}/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
+                                    <img ng-class="{'imgdesarrollo':insignia.nombre == 'desarrollo'}" ng-if='insignia.seccion != null' ng-src='img/insignias/{{insignia.seccion}}/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
                                     <img ng-if='insignia.seccion == null' ng-src='img/insignias/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
                                 </div>
                                 <div class="col-md-6">

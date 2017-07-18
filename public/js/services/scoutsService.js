@@ -1,21 +1,64 @@
-app.service('scouts', function($http) {
-	this.getScouts = function (idscout) {
-		return $http.get('json/scouts.json').then(function(data) {
-			return data.data
-		});
-		// return [];
-	};
-
-	this.getScout = function(cum) {
-		return $http.get('json/scouts.json').then(function(data) {
-			var s = {};
-			data.data.forEach(function(scout) {
-				if(scout.cum == cum) s=scout;
-			});
-			return s;
-		});
+app.service('Scouts', function($http, $q) {
+	return {
+		all: function(){
+			var deferred = $q.defer();
+			$http
+			  .get('/scouts')
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			  return deferred.promise;
+		},
+		new: function (scout) {
+		  var deferred = $q.defer();
+		  $http
+		    .post('/scouts', scout)
+		    .then(function (response) {
+		      deferred.resolve(response.data);
+		    })
+		    .catch(function (error) {
+		      deferred.reject(error);
+		    });
+		  return deferred.promise;
+		},
+		update: function(scout) {
+			var deferred = $q.defer();
+			$http
+			  .put('/scouts', scout)
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			return deferred.promise;
+		},
+		get: function(cum) {
+			var deferred = $q.defer();
+			$http
+			  .get('/scouts/'+cum)
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			  return deferred.promise;
+		},
+		delete: function(cum) {
+			var deferred = $q.defer();
+			$http
+			  .delete('/scouts/'+cum)
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			  return deferred.promise;
+		}
 	}
-
-	//TODO
-	this.setScout;
 });
