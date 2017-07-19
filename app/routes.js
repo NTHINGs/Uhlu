@@ -1,23 +1,7 @@
 // app/routes.js
-var multer  = require('multer')
-var fs = require('fs');
-var bcrypt = require('bcrypt-nodejs');
 var path = require('path');  
-
 // Controlers
 var scouts = require('../app/controllers/scouts');
-
-var upload = multer({ 
-    dest: 'public/fotoscasas/',
-    rename: function(fieldname, filename) {
-        return filename;
-    },
-    onFileUploadStart: function(file) {
-        if(file.mimetype !== 'image/jpg' && file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png') {
-            return false;
-        }
-    } 
-});
 
 module.exports = function(app, passport, models) {
     app.get("/", function(req, res) {
