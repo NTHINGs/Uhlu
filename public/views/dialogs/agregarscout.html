@@ -6,87 +6,114 @@
     height:350px;
 }
 </style>
-<md-dialog aria-label="Insertar Scout">
-    <form ng-cloak>
-        <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Insertar Scout</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    &times;
-                </md-button>
-            </div>
-        </md-toolbar>
+<md-dialog aria-label="Insertar Scout" flex>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Insertar Scout</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                &times;
+            </md-button>
+        </div>
+    </md-toolbar>
 
-        <md-dialog-content>
-            <md-content>
-                <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
-                    <md-tab label="Información Personal">
+    <md-dialog-content>
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+                <md-tab label="Información Personal">
+                    <md-tab-label>
+                        <p class='labeltab'>Información Personal</p>
+                        <div class='icontab'>
+                            <md-tooltip>Informacion Personal</md-tooltip>
+                            <span class='glyphicon glyphicon-user iconbtn morrarro'></span>
+                        </div>
+                    </md-tab-label>  
+                    <md-tab-body>
                         <md-content class="md-padding" layout-padding>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>Foto</label>
-                                <div>
-                                    Sube Una Foto: <input type="file" aria-label="Sube una foto" custom-on-change ng-model="scout.myImage"/>
-                                </div>
-                                <div class="cropArea">
-                                    <img-crop image="scout.myImage" result-image="scout.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
-                                </div>
-                                <div>Foto Que Usaremos:</div>
-                                <div><img ng-src="{{scout.foto}}" width="150px" /></div>
-                                <md-button class="md-raised md-primary" ng-click='defaultFoto($event)'>
-                                    Borrar Foto
-                                </md-button>
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>CUM</label>
-                                <input ng-model="scout.cum" required>
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>Nombre</label>
-                                <input ng-model="scout.nombre" required>
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm>
-                                <label>Género</label>
-                                <md-select ng-model="scout.genero">
-                                  <md-option value="F">
-                                    Femenino
-                                  </md-option>
-                                  <md-option value="M">
-                                    Masculino
-                                  </md-option>
-                                </md-select>
-                            </md-input-container>
-                            <md-input-container class="md-block">
-                                <label>Fecha de Nacimiento</label>
-                                <md-datepicker ng-model="scout.fechanacimiento" md-current-view="year" md-open-on-focus></md-datepicker>
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-sm ng-hide='$root.user.clan'>
-                                <label>{{$root.user.pequenogrupo}}</label>
-                                <md-select ng-model='scout.patrulla' required>
-                                  <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.idpatrulla}}">
-                                    {{patrulla.nombre}}
-                                  </md-option>
-                                </md-select>
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>Escuela</label>
-                                <input ng-model="scout.escuela">
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>E-mail</label>
-                                <input ng-model="scout.email">
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>Teléfono</label>
-                                <input ng-model="scout.telefono">
-                            </md-input-container>
-                            <md-input-container class="md-block" flex-gt-xs>
-                                <label>Domicilio</label>
-                                <input ng-model="scout.domicilio">
-                            </md-input-container>
+                            <form name='scoutForm' id='scoutForm' novalidate ng-submit="scoutForm.$valid && save()">
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>Foto</label>
+                                    <div>
+                                        Sube Una Foto: <input type="file" aria-label="Sube una foto" custom-on-change ng-model="scout.myImage" ng-click="fotocambiada = true"/>
+                                    </div>
+                                    <div class="cropArea" ng-show='fotocambiada'>
+                                        <img-crop image="scout.myImage" result-image="scout.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
+                                    </div>
+                                    <div>Foto Que Usaremos:</div>
+                                    <div><img ng-src="{{scout.foto}}" width="150px" /></div>
+                                    <md-button class="md-raised md-primary" ng-click='defaultFoto($event)'>
+                                        Borrar Foto
+                                    </md-button>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>CUM</label>
+                                    <input name='cum' ng-model="scout.cum" required>
+                                    <div ng-messages="scoutForm.cum.$error">
+                                        <div ng-message="required">El CUM es requerido.</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>Nombre</label>
+                                    <input name="nombre" ng-model="scout.nombre" required>
+                                    <div ng-messages="scoutForm.nombre.$error">
+                                        <div ng-message="required">El nombre es requerido.</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Género</label>
+                                    <md-select ng-model="scout.genero" ng-init="scout.genero = 'F'">
+                                      <md-option value="F">
+                                        Femenino
+                                      </md-option>
+                                      <md-option value="M">
+                                        Masculino
+                                      </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block">
+                                    <label>Fecha de Nac.</label>
+                                    <md-datepicker name="fechanacimiento" ng-model="scout.fechanacimiento" md-current-view="year" md-open-on-focus required></md-datepicker>
+                                    <div ng-messages="scoutForm.fechanacimiento.$error">
+                                        <div ng-message="required">La fecha es requerida.</div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-sm ng-hide='$root.user.clan'>
+                                    <label>{{$root.user.pequenogrupo}}</label>
+                                    <md-select ng-model='scout.patrulla'>
+                                      <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.idpatrulla}}">
+                                        {{patrulla.nombre}}
+                                      </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>Escuela</label>
+                                    <input ng-model="scout.escuela">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>E-mail</label>
+                                    <input ng-model="scout.email">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>Teléfono</label>
+                                    <input ng-model="scout.telefono">
+                                </md-input-container>
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>Domicilio</label>
+                                    <input ng-model="scout.domicilio">
+                                </md-input-container>
+                            </form>
                         </md-content>
-                    </md-tab>
-                    <md-tab label="Ficha Medica">
+                    </md-tab-body>
+                </md-tab>
+                <md-tab label="Ficha Medica">
+                    <md-tab-label>
+                        <p class='labeltab'>Ficha Medica</p>
+                        <div class='icontab'>
+                            <md-tooltip>Ficha Medica</md-tooltip>
+                            <span class='glyphicon glyphicon-plus iconbtn morrarro'></span>
+                        </div>
+                    </md-tab-label> 
+                    <md-tab-body>
                         <md-content class="md-padding" layout-padding>
                             <h4>En caso de emergencia comunicarse con:</h4>
                             <md-input-container class="md-block" flex-gt-xs>
@@ -173,8 +200,17 @@
                                 </md-input-container>
                             </div>
                         </md-content>
-                    </md-tab>
-                    <md-tab label="Progresión Personal">
+                    </md-tab-body>
+                </md-tab>
+                <md-tab label="Progresión Personal">
+                    <md-tab-label>
+                        <p class='labeltab'>Progresión Personal</p>
+                        <div class='icontab'>
+                            <md-tooltip>Progresión Personal</md-tooltip>
+                            <span class='glyphicon glyphicon-signal iconbtn morrarro'></span>
+                        </div>
+                    </md-tab-label> 
+                    <md-tab-body>
                         <md-content class="md-padding" layout-padding>
                             <div class="row borde centrar" ng-repeat='insignia in $parent.insignias' ng-init="outerIndex = $index">
                                 <div class="col-md-6 vcenter" ng-init="scout.progresion[insignia.nombre] = 0">
@@ -230,19 +266,20 @@
                                 </div>
                             </div>
                         </md-content>
-                    </md-tab>
-                </md-tabs>
-            </md-content>
-        </md-dialog-content>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </md-dialog-content>
 
-        <md-dialog-actions layout="row">
-            <p class="advertencia">
-            Al presionar el botón, se dará de alta al scout y se cerrará esta ventana, ¿no deseas dar de alta su ficha médica y su progresión de una vez? (Puedes ingresarlas después)
-            </p>
-            <span flex></span>
-            <md-button class="md-raised md-primary" ng-click="save()">
-                AGREGAR SCOUT
-            </md-button>
-        </md-dialog-actions>
-    </form>
+    <md-dialog-actions layout="row">
+        <p class="advertencia" ng-show="!scoutForm.$valid">
+            Los campos con * son requeridos
+        </p>
+        <span flex></span>
+        <md-button type="submit" id="agregarScout" value="Agregar" class="md-raised md-primary" form='scoutForm' aria-label="agregar" ng-disabled="!scoutForm.$valid">
+            AGREGAR SCOUT
+        </md-button>
+    </md-dialog-actions>
+    
 </md-dialog>

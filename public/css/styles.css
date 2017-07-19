@@ -1,6 +1,12 @@
+
 .imgdesarrollo{
   width: 250px;
 }
+
+.progress{
+  margin-right: 25px;
+}
+
 /* Sidebar Styles */
 .alinearizq{
     text-align: left;
@@ -66,9 +72,9 @@
   padding-top: 2.5vh;
   padding-bottom:2.5vh;
 }
-.other{
-  width: 100%;
-  height: 20vh;
+
+.fullwidth{
+  width: 100%!important;
 }
 
 .other h1{
@@ -93,34 +99,6 @@
 
 .iconbtn{
   font-size: 1.5em!important;
-}
-
-@media(max-width:768px) {
-  .contacto{
-    font-size: 10pt!important;
-  }
-}
-
-@media(max-width:1221px) {
-  .textbtn{
-    display: none;
-
-  }
-  .botones{
-    height: 20%;
-  }
-  .boton{
-    font-size: 1em!important;
-  }
-  .other{
-    height: 30vh;
-  }
-}
-
-@media(max-width:480px) {
-  .contacto{
-    font-size: 8pt!important;
-  }
 }
 
 .contain{
@@ -233,7 +211,36 @@
     color: #FFF!important;
 }
 
+.progress {
+  height: 50px!important;
+}
+.progress-bar{
+  background-color: #692b8d!important;
+  line-height: 50px!important;
+}
+.progress .sr-only { 
+  position: relative!important; 
+}
+
+.labeltab{
+  display: block;
+}
+
+.icontab{
+  display: none;
+}
 /* Small devices (tablets, 768px and up) */
+@media ( max-width : 370px ) {
+  .progress-bar span{
+    display: none;
+  }
+  .md-headline{
+    font-size: 18px!important; 
+  }
+  md-card-actions{
+    margin-right: 15px!important;
+  }
+}
 @media ( max-width : 768px ) {
   .btn-xs-text:not(span) {
     font-size: 0pt !important;
@@ -249,6 +256,14 @@
   }
   .btn-xs-text.btn-xs .glyphicon {
     font-size: 12pt !important;
+  }
+
+  .labeltab{
+    display: none;
+  }
+
+  .icontab{
+    display: block;
   }
 }
 /* Medium devices (desktops, 992px and up) */

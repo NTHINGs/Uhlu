@@ -4,7 +4,7 @@
 	</md-button>
 </section>
 <h1 class='nada' ng-hide='scouts.length'>NO TIENES SCOUTS REGISTRADOS AÚN</h1>
-<div class="row">
+<div class="row fullwidth">
     <!-- <div flex-xs flex-gt-xs="100" flex-gt-sm="50" layout="column" layout-fill ng-repeat='scout in scouts'> -->
     <div class="col-xs-12 col-md-6" layout="column" ng-repeat='scout in scouts'>
 		<md-card md-theme="default">
@@ -12,13 +12,12 @@
 				<md-card-title-text>
 					<span class="md-headline">{{scout.nombre}}</span>
 					<span class="md-subhead" ng-hide='user.clan'>{{user.pequenogrupo}}: {{scout.patrulla}}</span>
-					<p >Progresión:</p>
 					<div class='progress'>
-						<div ng-show='scout.porcentaje > 0' class='progress-bar {{user.colorbarra}}' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:{{scout.porcentaje}}%'>
-							{{scout.porcentaje}}%
+						<div ng-show='scout.porcentaje > 0' class='progress-bar' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:{{scout.porcentaje}}%;'>
+							<span>Progresión:</span> {{scout.porcentaje}}%
 						</div>
-						<div ng-show='scout.porcentaje == 0' class='progress-bar {{user.colorbarra}}' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:100%; background-color: gray!important'>
-							SIN PROGRESIÓN 0%
+						<div ng-show='scout.porcentaje == 0' class='progress-bar' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:100%; background-color: gray!important;'>
+							<span>SIN PROGRESIÓN</span> 0%
 						</div>
 					</div>
 				</md-card-title-text>
@@ -27,22 +26,28 @@
 				</md-card-title-media>
 			</md-card-title>
 			<md-card-actions layout="row" layout-align="start center">
-				<md-button ng-click="borrar(scout)" class="btn-lg btn-lg-text" aria-label="Borrar Scout" layout-wrap flex aria-label="BORRAR">
-					<span class='glyphicon glyphicon-trash iconbtn morrarro'></span>
-				</md-button>
+				<div layout-wrap flex>
+					<md-button ng-click="borrar(scout)" class="btn-lg btn-lg-text" aria-label="Borrar Scout" aria-label="BORRAR">
+						<md-tooltip>Borrar Scout</md-tooltip>
+						<span class='glyphicon glyphicon-trash iconbtn morrarro'></span>
+					</md-button>
+				</div>
 				<span flex></span>
 				<a class="boton" href='#!scout/{{scout.cum}}/informacion' layout-wrap flex>
 					<md-button class="btn-lg btn-lg-text" aria-label="Informacion Personal">
+						<md-tooltip>Informacion Personal</md-tooltip>
 						<span class='glyphicon glyphicon-user iconbtn morrarro'></span>
 					</md-button>
 				</a>
 				<a class="boton" href='#!scout/{{scout.cum}}/fichamedica' layout-wrap flex>
 					<md-button class="btn-lg btn-lg-text" aria-label="Ficha Medica">
+						<md-tooltip>Ficha Medica</md-tooltip>
 						<span class='glyphicon glyphicon-plus iconbtn morrarro'></span>
 					</md-button>
 				</a>
 				<a class="boton" href='#!scout/{{scout.cum}}/progresionpersonal' layout-wrap flex>
 					<md-button class="btn-lg btn-lg-text" aria-label="Progresión Personal">
+						<md-tooltip>Progresión Personal</md-tooltip>
 						<span class='glyphicon glyphicon-signal iconbtn morrarro'></span>
 					</md-button>
 				</a>
