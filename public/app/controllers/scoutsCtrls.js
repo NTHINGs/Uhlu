@@ -1,8 +1,8 @@
-app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert, $mdDialog, Patrullas, Scouts){
+app.controller('scoutsCtrl', function($scope, $rootScope, $route, $location, SweetAlert, $mdDialog, Patrullas, Scouts){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$rootScope.currentRoute='Tus Scouts';
 	$scope.scouts = [];
-	Scouts.all().then(function(scouts) {
+	Scouts.all($rootScope.user.id).then(function(scouts) {
 		$scope.scouts = scouts;
 		$scope.scouts.forEach(function(scout) {
 			Patrullas.getNombrePatrulla(scout.patrulla).then(function(nombre) {
@@ -34,11 +34,11 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert,
 				}, 
 				function(){ 
 					console.log("EXITO");
-					$location.path('/');
+					$route.reload();
 				});
 	        })
 	        .catch(function (error) {
-	        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error, "error");
+	        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
 	        });
 			
 		});
@@ -63,7 +63,7 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert,
 							$mdDialog.hide($scope.scout);	
 						};
 					},
-					templateUrl: '/views/dialogs/agregarscout.html',
+					templateUrl: '/dialogs/agregarscout.html',
 					parent: angular.element(document.body),
 					targetEvent: ev,
 					clickOutsideToClose:true,
@@ -100,6 +100,7 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert,
 					delete scout.fichamedica;
 					delete scout.progresionpersonal;
 					scout.porcentaje = calcularPorcentaje(scout, $rootScope.totalseccion);
+					scout.user_id = $rootScope.user.id;
 					console.log(scout);
 					Scouts.new(scout).then(function (scout) {
 						SweetAlert.swal({
@@ -113,11 +114,11 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert,
 						}, 
 						function(){ 
 							console.log("EXITO");
-							$location.path('/');
+							$route.reload();
 						});
 			        })
 			        .catch(function (error) {
-			        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error, "error");
+			        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
 			        });
 				}, function() {
 					
@@ -144,7 +145,7 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $location, SweetAlert,
 });//end scoutsCtrl
 
 
-app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $routeParams, Patrullas, Scouts){
+app.controller('scoutCtrl',function($scope,$rootScope, $route, $location, SweetAlert, $routeParams, Patrullas, Scouts){
 	switch($routeParams.tab){ 
 		case "informacion":
 			$scope.informacion = true;
@@ -170,6 +171,7 @@ app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $r
 	Scouts.get($routeParams.cum).then(function(scout) {
 		// body...
 		$scope.scout = scout[0];
+		console.log($scope.scout);
 		$scope.scout.fechanacimiento = new Date($scope.scout.fechanacimiento);
 		$rootScope.currentRoute='Scout '+$scope.scout.nombre;
 		ScoutProcess($scope, Patrullas);
@@ -177,9 +179,15 @@ app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $r
 			if(!insignia.especial){
 				for (var i = 0 ; i < Object.keys(insignia.opciones).length; i++) {
 					$scope.scout['fecha'+insignia.nombre+(i + 1)] = new Date($scope.scout['fecha'+insignia.nombre+(i + 1)]);
+					if($scope.scout['fecha'+insignia.nombre+(i + 1)].getFullYear() == '1969'){
+						$scope.scout['fecha'+insignia.nombre+(i + 1)] = null;
+					}
 				}
 			}else{
 				$scope.scout['fecha'+insignia.nombre] = new Date($scope.scout['fecha'+insignia.nombre]);
+				if($scope.scout['fecha'+insignia.nombre].getFullYear() == '1969'){
+					$scope.scout['fecha'+insignia.nombre] = null;
+				}
 			}
 			
 		});
@@ -197,6 +205,7 @@ app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $r
 		console.log($rootScope.totalseccion)
 		$scope.scout.porcentaje = calcularPorcentaje($scope.scout, $rootScope.totalseccion);
 		// 'Exito', ''+scout.nombre+' Fue Agregad'+s+' Correctamente'
+		$scope.scout.user_id = $rootScope.user.id
 		Scouts.update($scope.scout).then(function (scout) {
 			SweetAlert.swal({
 			   title: "Exito!",
@@ -211,7 +220,7 @@ app.controller('scoutCtrl',function($scope,$rootScope, $location, SweetAlert, $r
 			});
         })
         .catch(function (error) {
-        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error, "error");
+        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
         });
 	};
 }); // end scoutCtrl

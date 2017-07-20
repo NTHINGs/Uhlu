@@ -3,39 +3,39 @@ var app = angular.module('Uhlu', ['ngRoute', 'ngMaterial','ngMessages','ngImgCro
 app.config(function($routeProvider, $mdThemingProvider) {
 	$routeProvider
 	  .when("/", {
-	    templateUrl : "views/scouts.html", 
+	    templateUrl : "scouts.html", 
 	    controller: "scoutsCtrl"
 	  })
 	  .when("/scout/:cum/:tab", {
-	    templateUrl : "views/scout.html", 
+	    templateUrl : "scout.html", 
 	    controller: "scoutCtrl"
 	  })
 	  .when("/scout/:cum", {
-	    templateUrl : "views/scout.html", 
+	    templateUrl : "scout.html", 
 	    controller: "scoutCtrl"
 	  })
 	  .when("/patrullas", {
-	    templateUrl : "views/patrullas.html", 
+	    templateUrl : "patrullas.html", 
 	    controller: "patrullasCtrl"
 	  })
 	  .when("/patrulla/:idpatrulla/:nombre", {
-	    templateUrl : "views/patrulla.html", 
+	    templateUrl : "patrulla.html", 
 	    controller: "patrullaCtrl"
 	  })
 	  .when("/informes", {
-	    templateUrl : "views/informes.html", 
+	    templateUrl : "informes.html", 
 	    controller: "informesCtrl"
 	  })
 	  .when("/fichasreme", {
-	    templateUrl : "views/fichasreme.html", 
+	    templateUrl : "fichasreme.html", 
 	    controller: "fichasRemeCtrl"
 	  })
 	  .when("/fichareme/:id", {
-	    templateUrl : "views/fichareme.html", 
+	    templateUrl : "fichareme.html", 
 	    controller: "fichaRemeCtrl"
 	  })
 	  .when("/editarperfil", {
-	    templateUrl : "views/editarperfil.html", 
+	    templateUrl : "editarperfil.html", 
 	    controller: "editarPerfilCtrl"
 	  });
 

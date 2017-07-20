@@ -1,9 +1,9 @@
 app.service('Scouts', function($http, $q) {
 	return {
-		all: function(){
+		all: function(id){
 			var deferred = $q.defer();
 			$http
-			  .get('/scouts')
+			  .get('/scoutsfromuser/'+id)
 			  .then(function (response) {
 			    deferred.resolve(response.data);
 			  })

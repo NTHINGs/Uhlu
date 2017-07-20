@@ -17,11 +17,13 @@ var flash    = require('connect-flash');
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({
+	limit: '50mb',
     extended: true
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(express.static('public'));
 app.use(express.static('bower_components'));
+app.set('view engine', 'ejs');
 
 // required for passport
 app.use(session({
@@ -30,6 +32,7 @@ app.use(session({
     saveUninitialized: true,
     store: new MemoryStore(),
  } )); // session secret
+require('./app/config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

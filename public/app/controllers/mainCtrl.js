@@ -1,11 +1,14 @@
 app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	// TODO Hacerlo con una peticion get
-	$rootScope.user={
-		colorbarra: 'progress-bar-success',
-		pequenogrupo: 'Patrulla',
-		clan: false
+	$scope.user = function(user) {
+		$rootScope.user = JSON.parse(user);
+		
 	}
+	// $rootScope.user={
+	// 	pequenogrupo: 'Patrulla',
+	// 	clan: false
+	// }
 
 	$scope.isActive = function(route) {
 		return route === $location.path();
@@ -16,7 +19,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 	});
 	$http.get('json/insignias.json').then(function(data) {
 		$rootScope.insignias = data.data;
-		switch ('tropa') {
+		switch ($rootScope.user.seccion) {
 			case 'manada':
 				$rootScope.insignias.etapa.opciones.amarilla= "Lobo Pata Tierna";
 				$rootScope.insignias.etapa.opciones.verde= "Lobo Saltador";
@@ -42,7 +45,9 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				// Espiritualidad
 				$rootScope.area6="Francisco de Asís (Espiritualidad)";
 				$rootScope.totalseccion = 38;
-				  
+				
+				$rootScope.user.pequenogrupo= 'Seisena';
+				$rootScope.user.clan= false;
 				break;
 			case 'tropa':
 				$rootScope.insignias.etapa.opciones.amarilla= "Pista";
@@ -69,7 +74,10 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				// Espiritualidad
 				$rootScope.area6="Arbol (Espiritualidad)";
 				$rootScope.totalseccion = 38;
-				  
+
+				$rootScope.user.pequenogrupo= 'Patrulla';
+				$rootScope.user.clan= false;
+				  console.log("GO")
 				break;
 			case 'comunidad':
 				$rootScope.insignias.etapa.opciones.amarilla= "Búsqueda";
@@ -97,7 +105,8 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				$rootScope.area6="Arbol (Espiritualidad)";
 				$rootScope.totalseccion = 37;
 				  
-
+				$rootScope.user.pequenogrupo= 'Equipo';
+				$rootScope.user.clan= false;
 				break;
 			case 'clan':
 				$rootScope.insignias.etapa.opciones.amarilla= "Horquilla Amarilla";
@@ -124,6 +133,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 				// Espiritualidad
 				$rootScope.area6="Espiritualidad";
 				$rootScope.totalseccion = 31;
+				$rootScope.user.clan= true;
 				break;
 		}
 		$rootScope.insignias = Object.values($rootScope.insignias);
@@ -132,6 +142,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 		$scope.windowWidth= window.innerWidth;
 		$(window).resize(function(){
 		    $scope.$apply(function(){
+		    	console.log($rootScope.user);
 		       $scope.windowWidth= window.innerWidth;
 		       if ($scope.windowWidth < 768) {
 		       		$scope.toggle = false;

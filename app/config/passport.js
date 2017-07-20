@@ -1,112 +1,93 @@
-// config/passport.js
-
 // load all the things we need
-var LocalStrategy   = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 // load up the user model
-var mysql = require('mysql');
-var bcrypt = require('bcrypt-nodejs');
-var dbconfig = require('./database');
-var connection2 = mysql.createConnection(dbconfig.connection);
+var User = require('../models/').User;
 
-connection2.query('USE ' + dbconfig.database);
-// expose this function to our app using module.exports
+// load the auth variables
+var configAuth = require('./auth');
+
 module.exports = function(passport) {
-
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.idasesores);
+        done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        connection2.query("SELECT * FROM asesores WHERE idasesores = ? ",[id], function(err, rows){
-            done(err, rows[0]);
-        });
+            // done(null, user);
+        User.findById(id)
+        .then(function(user) {
+            done(null, user);
+        })
+        .catch(function(err) {
+            done(err, null);
+        })
     });
 
-    // =========================================================================
-    // LOCAL SIGNUP ============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
+    // code for login (use('local-login', new LocalStategy))
+    // code for signup (use('local-signup', new LocalStategy))
 
-/*    passport.use(
-        'local-signup',
-        new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField : 'username',
-            passwordField : 'password',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
-        },
-        function(req, username, password, done) {
-            // find a user whose email is the same as the forms email
-            // we are checking to see if the user trying to login already exists
-            connection2.query("SELECT * FROM asesores WHERE username = ?",[username], function(err, rows) {
-                if (err)
-                    return done(err);
-                if (rows.length) {
-                    return done(null, false, req.flash('signupMessage', 'El nombre de usuario ya existe.'));
+    // =========================================================================
+    // FACEBOOK ================================================================
+    // =========================================================================
+    passport.use(new FacebookStrategy({
+
+        // pull in our app id and secret from our auth.js file
+        clientID        : configAuth.facebookAuth.clientID,
+        clientSecret    : configAuth.facebookAuth.clientSecret,
+        callbackURL     : configAuth.facebookAuth.callbackURL,
+        profileFields   : configAuth.facebookAuth.profileFields
+
+    },
+
+    // facebook will send back the token and profile
+    function(token, refreshToken, profile, done) {
+
+        // asynchronous
+        process.nextTick(function() {
+
+            // find the user in the database based on their facebook id
+            User.findAll({
+                where: {
+                    facebookid: profile.id
+                 }
+            })
+            .then(function (user) {
+                if (user[0]) {
+                    return done(null, user[0]); // user found, return that user
                 } else {
-                    // if there is no user with that username
-                    // create the user
-                    var newUserMysql = {
-                        nombre: req.body.nombre,
-                        telefono: req.body.telefono,
-                        username: username,
-                        password: bcrypt.hashSync(password, null, null),  // use the generateHash function in our user model
-                        socio:req.body.socio
-                    };
+                    // if there is no user found with that facebook id, create them
+                    var newUser            = {};
 
-                    var insertQuery = "INSERT INTO asesores ( nombre, telefono, username, password, socio ) values (?,?,?,?,?)";
+                    // set all of the facebook information in our user model
+                    newUser.cum = "";
+                    newUser.seccion = "";
+                    newUser.grupo = "";
+                    newUser.provincia = "";
+                    newUser.facebookid    = profile.id; // set the users facebook id                   
+                    newUser.facebooktoken = token; // we will save the token that facebook provides to the user  
+                    newUser.facebookname  = (profile.name.givenName || "") + " " + (profile.name.middleName || "") + " " +  (profile.name.familyName || ""); // look at the passport user profile to see how names are returned
+                    newUser.facebookemail = profile.emails[0].value;
 
-                    connection2.query(insertQuery,[newUserMysql.nombre, newUserMysql.telefono, newUserMysql.username, newUserMysql.password, newUserMysql.socio],function(err, rows) {
-                        newUserMysql.idasesores = rows.insertId;
-                        console.log(newUserMysql);
-
-                        return done(null, newUserMysql);
-                    });
+                    // newUser.facebookemail = profile.emails[0].value; // facebook can return multiple emails so we'll take the first                
+                    // return done(null, newUser);
+                    // save our user to the database
+                    User.create(newUser)
+                      .then(function (newUser) {
+                        return done(null, newUser);
+                      })
+                      .catch(function (error){
+                        throw err
+                      });
                 }
+            })
+            .catch(function (error){
+              return done(error);
             });
-        })
-    );*/
+        });
 
-    // =========================================================================
-    // LOCAL LOGIN =============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
+    }));
 
-    passport.use(
-        'local-login',
-        new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField : 'username',
-            passwordField : 'password',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
-        },
-        function(req, username, password, done) { // callback with email and password from our form
-            connection2.query("SELECT * FROM asesores WHERE username = ?",[username], function(err, rows){
-                if (err)
-                    return done(err);
-                if (!rows.length) {
-                    return done(null, false, req.flash('loginMessage', 'Ese usuario no existe.')); // req.flash is the way to set flashdata using connect-flash
-                }
-
-                // if the user is found but the password is wrong
-                if (!bcrypt.compareSync(password, rows[0].password)){
-                    return done(null, false, req.flash('loginMessage', 'Oops! Esa no es tu contraseña.')); // create the loginMessage and save it to session as flashdata
-                }
-
-                // all is well, return successful user
-                return done(null, rows[0]);
-            });
-        })
-    );
 };

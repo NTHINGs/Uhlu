@@ -1,14 +1,10 @@
-Scout = require('../models/').Scout;
-// CRUD Operations for Scout Model
+User = require('../models/').User;
+// CRUD Operations for User Model
 module.exports= {
   index(req, res) {
-    Scout.findAll({
-      where: {
-        user_id: req.params.id
-      }
-    })
-      .then(function (Scouts) {
-        res.status(200).json(Scouts);
+    User.findAll()
+      .then(function (Users) {
+        res.status(200).json(Users);
       })
       .catch(function (error) {
         res.status(500).json(error);
@@ -16,24 +12,28 @@ module.exports= {
   },
 
   show(req, res) {
-    Scout.findAll({
+    User.findAll({
       where: {
-        cum: req.params.cum
+        id: req.params.id
       }
     })
-    .then(function (Scout) {
-      res.status(200).json(Scout);
+    .then(function (User) {
+      res.status(200).json(User);
     })
     .catch(function (error){
       res.status(500).json(error);
     });
   },
 
+  findById(id) {
+    return User.findById(id);
+  },
+
   create(req, res) {
     // res.status(200).json(req.body);
-    Scout.create(req.body)
-      .then(function (newScout) {
-        res.status(200).json(newScout);
+    User.create(req.body)
+      .then(function (newUser) {
+        res.status(200).json(newUser);
       })
       .catch(function (error){
         res.status(500).json(error);
@@ -41,7 +41,7 @@ module.exports= {
   },
 
   update(req, res) {
-    Scout.update(req.body, {
+    User.update(req.body, {
       where: {
         id: req.body.id
       }
@@ -56,9 +56,9 @@ module.exports= {
 
   delete(req, res) {
     console.log(req.params)
-    Scout.destroy({
+    User.destroy({
       where: {
-        cum: req.params.cum
+        id: req.params.id
       }
     })
     .then(function (deletedRecords) {

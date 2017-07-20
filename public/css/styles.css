@@ -212,6 +212,7 @@
 }
 
 .progress {
+  background-color: #263645!important;
   height: 50px!important;
 }
 .progress-bar{
@@ -231,7 +232,7 @@
 }
 /* Small devices (tablets, 768px and up) */
 @media ( max-width : 370px ) {
-  .progress-bar span{
+  .progress-bar .text{
     display: none;
   }
   .md-headline{
