@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
         var Scout = sequelize.define('Scout', {
         	cum: DataTypes.STRING, 
-        	foto: DataTypes.STRING,
+        	foto: DataTypes.TEXT,
         	nombre: DataTypes.STRING,
         	genero: DataTypes.STRING,
         	fechanacimiento: DataTypes.DATE,
@@ -101,7 +101,7 @@ module.exports = function(sequelize, DataTypes) {
 		underscored: true,
 		classMethods: {
 			associate: function(models) {
-
+                Scout.belongsTo(models.Patrulla)
 			}
 		}
 	});

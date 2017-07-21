@@ -3,18 +3,22 @@ var path = require('path');
 // Controlers
 var scouts = require('../app/controllers/scouts');
 var users = require('../app/controllers/users');
+var patrullas = require('../app/controllers/patrullas');
 
-module.exports = function(app, passport, models) {
+module.exports = function(app, passport, models, port) {
 
 //-------Render main AngularJS apps----------------------------------------------------------------------------
-    app.get("/", inicioSesion, faltanDatosUsuario,function(req, res) {
+    app.get("/",function(req, res) {
         models.sequelize
           .authenticate()
           .then(function () {
             console.log('Connection successful');
-            res.render(path.join(__dirname, '../public' ,'index.ejs'),{
-                user: JSON.stringify(req.user)
-            });
+            users.findById(1).then(function(user) {
+                res.render(path.join(__dirname, '../public' ,'index.ejs'),{
+                    user: JSON.stringify(user)
+                    // user: JSON.stringify(req.user)
+                });
+            })
           })
           .catch(function(error) {
             console.log("Error creating connection:", error);
@@ -50,17 +54,24 @@ module.exports = function(app, passport, models) {
 	});
 
 //-------API EndPoints----------------------------------------------------------------------------
-    app.get('/users', inicioSesion, users.index);
-    app.get('/users/:id', inicioSesion, users.show);
-    app.post('/users', inicioSesion, users.create);
-    app.put('/users', inicioSesion, users.update);
-    app.delete('/users/:id', inicioSesion, users.delete);
+    app.get('/users', users.index);
+    app.get('/users/:id', users.show);
+    app.post('/users', users.create);
+    app.put('/users', users.update);
+    app.delete('/users/:id', users.delete);
 
-    app.get('/scoutsfromuser/:id', inicioSesion, scouts.index);
-    app.get('/scouts/:cum', inicioSesion, scouts.show);
-    app.post('/scouts', inicioSesion, scouts.create);
-    app.put('/scouts', inicioSesion, scouts.update);
-    app.delete('/scouts/:cum', inicioSesion, scouts.delete);
+    // app.get('/patrullas', patrullas.index);
+    app.get('/patrullas/:id', patrullas.index);
+    app.get('/patrullas/:id/:nombre', patrullas.show);
+    app.post('/patrullas', patrullas.create);
+    app.put('/patrullas', patrullas.update);
+    app.delete('/patrullas/:id', patrullas.delete);
+
+    app.get('/scoutsfromuser/:id', scouts.index);
+    app.get('/scouts/:cum', scouts.show);
+    app.post('/scouts', scouts.create);
+    app.put('/scouts', scouts.update);
+    app.delete('/scouts/:cum', scouts.delete);
 //-------------------------------------------------------------------------------------------------------------
 
 };

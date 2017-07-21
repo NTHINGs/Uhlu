@@ -1,31 +1,64 @@
-app.service('Patrullas', function($http) {
-	this.getPatrullas = function (idscout) {
-		return $http.get('json/patrullas.json').then(function(data) {
-			return data.data
-		});
-		// return [];
-	};
-
-	this.getNombrePatrulla = function(idpatrulla) {
-		return $http.get('json/patrullas.json').then(function(data) {
-			var nombre = "";
-			data.data.forEach(function(patrulla) {
-				if(patrulla.idpatrulla == idpatrulla) nombre=patrulla.nombre;
-			});
-			return nombre;
-		});
-	};
-
-	this.getPatrulla = function(idpatrulla) {
-		return $http.get('json/patrullas.json').then(function(data) {
-			var p = {};
-			data.data.forEach(function(patrulla) {
-				if(patrulla.idpatrulla == idpatrulla) p=patrulla;
-			});
-			return p;
-		});
+app.service('Patrullas', function($http, $q) {
+	return {
+		all: function(id){
+			var deferred = $q.defer();
+			$http
+			  .get('/patrullas/'+id)
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			  return deferred.promise;
+		},
+		new: function (patrulla) {
+		  var deferred = $q.defer();
+		  $http
+		    .post('/patrullas', patrulla)
+		    .then(function (response) {
+		      deferred.resolve(response.data);
+		    })
+		    .catch(function (error) {
+		      deferred.reject(error);
+		    });
+		  return deferred.promise;
+		},
+		update: function(patrulla) {
+			var deferred = $q.defer();
+			$http
+			  .put('/patrullas', patrulla)
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			return deferred.promise;
+		},
+		get: function(id, nombre) {
+			var deferred = $q.defer();
+			$http
+			  .get('/patrullas/'+id+'/'+nombre)
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			  return deferred.promise;
+		},
+		delete: function(id) {
+			var deferred = $q.defer();
+			$http
+			  .delete('/patrullas/'+id)
+			  .then(function (response) {
+			    deferred.resolve(response.data);
+			  })
+			  .catch(function (error) {
+			    deferred.reject(error);
+			  });
+			  return deferred.promise;
+		}
 	}
-
-	//TODO
-	this.setPatrulla;
 });

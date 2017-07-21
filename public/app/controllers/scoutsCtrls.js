@@ -4,11 +4,7 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $route, $location, Swe
 	$scope.scouts = [];
 	Scouts.all($rootScope.user.id).then(function(scouts) {
 		$scope.scouts = scouts;
-		$scope.scouts.forEach(function(scout) {
-			Patrullas.getNombrePatrulla(scout.patrulla).then(function(nombre) {
-				scout.patrulla = nombre;
-			});
-		});
+		console.log($scope.scouts)
 	});
 
 	$scope.borrar = function(scout) {
@@ -46,13 +42,13 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $route, $location, Swe
 
 	//Modal
 	$scope.showAgregarScout = function(ev) {
-		Patrullas.getPatrullas(1).then(function(patrullasArr) {
+		Patrullas.all($rootScope.user.id).then(function(patrullasArr) {
 			if(patrullasArr.length > 0){
 				$mdDialog.show({
 					controller: function($scope,Patrullas){
 						$scope.scout = {};
 						$scope.scout.foto = 'img/fpo_avatar.png';
-						ScoutProcess($scope, Patrullas);
+						ScoutProcess($scope, $rootScope, Patrullas);
 						// Modal Actions
 						$scope.cancel = function(){
 							$mdDialog.cancel(); 
@@ -174,7 +170,7 @@ app.controller('scoutCtrl',function($scope,$rootScope, $route, $location, SweetA
 		console.log($scope.scout);
 		$scope.scout.fechanacimiento = new Date($scope.scout.fechanacimiento);
 		$rootScope.currentRoute='Scout '+$scope.scout.nombre;
-		ScoutProcess($scope, Patrullas);
+		ScoutProcess($scope, $rootcope, Patrullas);
 		$rootScope.insignias.forEach(function(insignia){			
 			if(!insignia.especial){
 				for (var i = 0 ; i < Object.keys(insignia.opciones).length; i++) {
@@ -225,12 +221,12 @@ app.controller('scoutCtrl',function($scope,$rootScope, $route, $location, SweetA
 	};
 }); // end scoutCtrl
 
-function ScoutProcess($scope, Patrullas) {
+function ScoutProcess($scope, $rootScope, Patrullas) {
 	// Patrullas del servicio para llenar el select en el modal
-	Patrullas.getPatrullas(1).then(function(patrullas) {
+	Patrullas.all($rootScope.user.id).then(function(patrullas) {
 		// body...
 		$scope.scout.patrullas = patrullas;
-		$scope.scout.patrulla = $scope.scout.patrullas[0].idpatrulla;
+		$scope.scout.patrulla_id = $scope.scout.patrullas[0].id;
 	});
 	// ImageCrop
 	$scope.scout.myImage='img/fpo_avatar.png';

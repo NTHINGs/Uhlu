@@ -1,54 +1,56 @@
 <style type="text/css">
-    .modal {
-        display: block;
-    }
-
-    .modal-body:before,
-    .modal-body:after {
-        display: table;
-        content: " ";
-    }
-
-    .modal-header:before,
-    .modal-header:after {
-        display: table;
-        content: " ";
-    }
-    .modal {
-        overflow-y:auto;
-    }
-    .cropArea {
-        background: #E4E4E4;
-        overflow: hidden;
-        width:500px;
-        height:350px;
-    }
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+}
 </style>
-<div class="modal-dialog">
-<!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" ng-click="cancel()">&times;</button>
-            <h4 class="modal-title">Insertar {{$root.user.pequenogrupo}}</h4>
+<md-dialog aria-label="Insertar {{$root.user.pequenogrupo}}" flex>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Insertar {{$root.user.pequenogrupo}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                &times;
+            </md-button>
         </div>
-        <div class="modal-body">
-            <label>Nombre</label>
-            <input class='form-control' type='text' ng-model="patrulla.nombre" value='' placeholder='Lobitos' required><br>
-            <label>Foto Banderín ó Foto Representativa (OPCIONAL)</label>
-            <!-- img/fpo_avatar.png -->
-            <div>
-                Sube Una Foto: <input type="file" custom-on-change ng-model="patrulla.myImage"/>
-            </div>
-            <div class="cropArea">
-                <img-crop image="patrulla.myImage" result-image="patrulla.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
-            </div>
-            <div>Foto Que Usaremos:</div>
-            <div><img ng-src="{{patrulla.foto}}" width="150px" /></div>
-            <button class="btn btn-default" ng-click='defaultFoto($event)'>Borrar Foto</button>
-            <br>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-default btn-block" ng-click='save()'>Agregar {{$root.user.pequenogrupo}}</button>
-        </div>
-    </div>
-</div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <md-content>
+            <form name='patrullaForm' id='patrullaForm' novalidate ng-submit="patrullaForm.$valid && save()">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Nombre</label>
+                    <input name="nombre" ng-model="patrulla.nombre" required>
+                    <div ng-messages="patrullaForm.nombre.$error">
+                        <div ng-message="required">El nombre es requerido.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Foto Representativa o del Banderin</label>
+                    <div>
+                        Sube Una Foto: <input type="file" aria-label="Sube una foto" custom-on-change ng-model="patrulla.myImage" ng-click="fotocambiada = true"/>
+                    </div>
+                    <div class="cropArea" ng-show='fotocambiada'>
+                        <img-crop image="patrulla.myImage" result-image="patrulla.foto" area-type="square" area-min-size="150" result-image-size="150"></img-crop>
+                    </div>
+                    <div>Foto Que Usaremos:</div>
+                    <div><img ng-src="{{patrulla.foto}}" width="150px" /></div>
+                    <md-button class="md-raised md-primary" ng-click='defaultFoto($event)'>
+                        Borrar Foto
+                    </md-button>
+                </md-input-container>
+            </form>
+        </md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <p class="advertencia" ng-show="!patrullaForm.$valid">
+            Los campos con * son requeridos
+        </p>
+        <span flex></span>
+        <md-button type="submit" id="agregarPatrulla" value="Agregar" class="md-raised md-primary" form='patrullaForm' aria-label="agregar" ng-disabled="!patrullaForm.$valid">
+            Agregar {{$root.user.pequenogrupo}}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

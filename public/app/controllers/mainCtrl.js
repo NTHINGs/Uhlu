@@ -3,7 +3,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 	// TODO Hacerlo con una peticion get
 	$scope.user = function(user) {
 		$rootScope.user = JSON.parse(user);
-		
+		console.log(user);
 	}
 	// $rootScope.user={
 	// 	pequenogrupo: 'Patrulla',

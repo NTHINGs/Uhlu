@@ -7,7 +7,7 @@ var User = require('../models/').User;
 // load the auth variables
 var configAuth = require('./auth');
 
-module.exports = function(passport) {
+module.exports = function(passport, port) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -37,7 +37,7 @@ module.exports = function(passport) {
         // pull in our app id and secret from our auth.js file
         clientID        : configAuth.facebookAuth.clientID,
         clientSecret    : configAuth.facebookAuth.clientSecret,
-        callbackURL     : configAuth.facebookAuth.callbackURL,
+        callbackURL     : 'http://localhost:'+port+'/auth/facebook/callback',
         profileFields   : configAuth.facebookAuth.profileFields
 
     },

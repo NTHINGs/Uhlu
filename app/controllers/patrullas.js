@@ -1,16 +1,14 @@
-Scout = require('../models/').Scout;
 Patrulla = require('../models/').Patrulla;
-// CRUD Operations for Scout Model
+// CRUD Operations for Patrulla Model
 module.exports= {
   index(req, res) {
-    Scout.findAll({
-      include: [{
-        model: Patrulla,
-        where: {user_id: req.params.id}
-      }]
+    Patrulla.findAll({
+        where: {
+        	user_id: req.params.id
+        }
     })
-      .then(function (Scouts) {
-        res.status(200).json(Scouts);
+      .then(function (Patrullas) {
+        res.status(200).json(Patrullas);
       })
       .catch(function (error) {
         console.log(error)
@@ -19,13 +17,14 @@ module.exports= {
   },
 
   show(req, res) {
-    Scout.findAll({
-      where: {
-        cum: req.params.cum
-      }
+    Patrulla.findAll({
+        where: {
+          id: req.params.id,
+          nombre: req.params.nombre
+        }
     })
-    .then(function (Scout) {
-      res.status(200).json(Scout);
+    .then(function (Patrulla) {
+      res.status(200).json(Patrulla);
     })
     .catch(function (error){
       res.status(500).json(error);
@@ -34,9 +33,9 @@ module.exports= {
 
   create(req, res) {
     // res.status(200).json(req.body);
-    Scout.create(req.body)
-      .then(function (newScout) {
-        res.status(200).json(newScout);
+    Patrulla.create(req.body)
+      .then(function (newPatrulla) {
+        res.status(200).json(newPatrulla);
       })
       .catch(function (error){
         res.status(500).json(error);
@@ -44,7 +43,7 @@ module.exports= {
   },
 
   update(req, res) {
-    Scout.update(req.body, {
+    Patrulla.update(req.body, {
       where: {
         id: req.body.id
       }
@@ -53,15 +52,16 @@ module.exports= {
       res.status(200).json(updatedRecords);
     })
     .catch(function (error){
+      console.log(error)
       res.status(500).json(error);
     });
   },
 
   delete(req, res) {
     console.log(req.params)
-    Scout.destroy({
+    Patrulla.destroy({
       where: {
-        cum: req.params.cum
+        id: req.params.id
       }
     })
     .then(function (deletedRecords) {

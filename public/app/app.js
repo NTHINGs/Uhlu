@@ -18,7 +18,7 @@ app.config(function($routeProvider, $mdThemingProvider) {
 	    templateUrl : "patrullas.html", 
 	    controller: "patrullasCtrl"
 	  })
-	  .when("/patrulla/:idpatrulla/:nombre", {
+	  .when("/patrulla/:id/:nombre", {
 	    templateUrl : "patrulla.html", 
 	    controller: "patrullaCtrl"
 	  })

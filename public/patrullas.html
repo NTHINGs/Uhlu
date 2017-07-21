@@ -1,23 +1,36 @@
-<style type="text/css">
-	.boton{
-	  font-size: 0.8em!important;
-	  vertical-align: middle;
-	  white-space: normal!important;
-	}
-</style>
-<button type="button" class="btn btn-default btn-block contacto" ng-click="modal()">
-	<span class="mas glyphicon glyphicon-plus"></span>Agregar Nueva Patrulla
-</button>
-<h1 class='nada' ng-hide='patrullas.length'>NO TIENES PATRULLAS REGISTRADAS AÚN</h1>
-<div class='tarjeta col-xs-12 col-md-6 vertical-center' ng-repeat='patrulla in patrullas'>
-	<div class='col-xs-4'>
-		<img class='img-responsive' ng-src='{{patrulla.foto}}' width='150px' />
-	</div>
-	<div class='col-xs-8 altoalcien'>
-		<p>{{patrulla.nombre}}</p>
-		<div class='botones'>
-			<a href='#!patrulla/{{patrulla.idpatrulla}}/{{patrulla.nombre}}' class='btn btn-default btn-block boton vertical-center'><span class='glyphicon glyphicon-floppy-disk'></span> EDITAR</a>
-		</div>
+<section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+	<md-button class="md-raised md-primary" aria-label="Agregar Nueva {{$root.user.pequenogrupo}}" ng-click="showAgregarPatrulla($event)">
+		<span class="glyphicon glyphicon-plus"></span>  Agregar Nueva {{$root.user.pequenogrupo}}
+	</md-button>
+</section>
+<h1 class='nada' ng-hide='patrullas.length'>NO TIENES {{$root.user.pequenogrupo | capitalize}}S REGISTRADOS AÚN</h1>
+<div class="row fullwidth">
+    <!-- <div flex-xs flex-gt-xs="100" flex-gt-sm="50" layout="column" layout-fill ng-repeat='patrulla in patrullas'> -->
+    <div class="col-xs-12 col-md-6" layout="column" ng-repeat='patrulla in patrullas'>
+		<md-card md-theme="default">
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">{{patrulla.nombre}}</span>
+				</md-card-title-text>
+				<md-card-title-media>
+					<div class="md-media-lg card-media"><img class='img-responsive' ng-src='{{patrulla.foto}}' width='150px' /></div>
+				</md-card-title-media>
+			</md-card-title>
+			<md-card-actions layout="row" layout-align="start center">
+				<div layout-wrap flex>
+					<md-button ng-click="borrar(patrulla)" class="btn-lg btn-lg-text" aria-label="Borrar {{$root.user.pequenogrupo}}" aria-label="BORRAR">
+						<md-tooltip>Borrar {{$root.user.pequenogrupo}}</md-tooltip>
+						<span class='glyphicon glyphicon-trash iconbtn morrarro'></span>
+					</md-button>
+				</div>
+				<span flex></span>
+				<a class="boton" href='#!patrulla/{{patrulla.id}}/{{patrulla.nombre}}' layout-wrap flex>
+					<md-button class="btn-lg btn-lg-text" aria-label="Informacion Personal">
+						<md-tooltip>Editar {{$root.user.pequenogrupo}}</md-tooltip>
+						<span class='glyphicon glyphicon-pencil iconbtn morrarro'></span>
+					</md-button>
+				</a>
+			</md-card-actions>
+		</md-card>
 	</div>
 </div>
-<!-- /.tarjeta-->
