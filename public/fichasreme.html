@@ -11,6 +11,9 @@
 			</div>
 		</div> -->
 	</form>
+	<md-button class="md-raised md-primary" aria-label="Filtro" data-toggle="collapse" data-target="#filter-panel">
+		<span class="glyphicon glyphicon-cog"></span>  Filtro
+	</md-button>
 	<div id="filter-panel" class="collapse filter-panel">
 		<form id="filtro" class="form-inline">
 			<md-input-container class="md-block" flex-gt-xs>
@@ -40,9 +43,6 @@
 			</md-button>
 		</form>
 	</div>
-	<md-button class="md-raised md-primary" aria-label="Filtro" data-toggle="collapse" data-target="#filter-panel">
-		<span class="glyphicon glyphicon-cog"></span>  Filtro
-	</md-button>
 
 	<span flex></span>
 	<md-button class="md-raised md-primary" aria-label="Agregar Nueva Ficha Reme" ng-click="showAgregarficha($event)">
@@ -59,7 +59,7 @@
 				<md-card-title-text>
 					<span class="md-headline">{{ficha.nombreactividad}}</span>
 					<span class="md-subhead">Sección: {{ficha.seccion}}</span>
-					<span class="md-subhead">Area:{{ficha.area}}:</span>
+					<span class="md-subhead">Area:{{ficha.area}}</span>
 				</md-card-title-text>
 			</md-card-title>
 		</md-card>
