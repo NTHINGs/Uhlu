@@ -17,26 +17,27 @@ app.controller('patrullasCtrl', function($scope, $rootScope, $route, $location, 
 			confirmButtonColor: "#692B8D",
 			confirmButtonText: "Si, eliminalo!",
 			closeOnConfirm: false
-		},function() {
-			Patrullas.delete(patrulla.id).then(function (s) {
-				SweetAlert.swal({
-					title: "Eliminado!",
-					text: ''+patrulla.nombre+' ha sido eliminado correctamente',
-					type: "success",
-					showCancelButton: false,
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok!",
-					closeOnConfirm: true
-				}, 
-				function(){ 
-					console.log("EXITO");
-					$route.reload();
-				});
-	        })
-	        .catch(function (error) {
-	        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-	        });
-			
+		},function(isConfirmed) {
+			if(isConfirmed){
+				Patrullas.delete(patrulla.id).then(function (s) {
+					SweetAlert.swal({
+						title: "Eliminado!",
+						text: ''+patrulla.nombre+' ha sido eliminado correctamente',
+						type: "success",
+						showCancelButton: false,
+						confirmButtonColor: "#692B8D",
+						confirmButtonText: "Ok!",
+						closeOnConfirm: true
+					}, 
+					function(){ 
+						console.log("EXITO");
+						$route.reload();
+					});
+		        })
+		        .catch(function (error) {
+		        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+		        });
+			}
 		});
 	}
 
