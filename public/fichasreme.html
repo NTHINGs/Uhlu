@@ -1,4 +1,4 @@
-<section layout="row" layout-sm="column" layout-align="space-around center" layout-wrap>
+<section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
 	<form>
 		<md-input-container class="md-block" flex-gt-xs layout-fill>
 	        <label>Busca Una Ficha Reme</label>
@@ -43,6 +43,8 @@
 	<md-button class="md-raised md-primary" aria-label="Filtro" data-toggle="collapse" data-target="#filter-panel">
 		<span class="glyphicon glyphicon-cog"></span>  Filtro
 	</md-button>
+
+	<span flex></span>
 	<md-button class="md-raised md-primary" aria-label="Agregar Nueva Ficha Reme" ng-click="showAgregarficha($event)">
 		<span class="glyphicon glyphicon-plus"></span>  Agregar Nueva Ficha Reme
 	</md-button>
@@ -56,12 +58,12 @@
 			<md-card-title-text>
 				<span class="md-headline">{{ficha.nombreactividad}}</span>
 				<span class="md-subhead">Sección: {{ficha.seccion}}</span>
-				<span class="md-subhead">Area: {{ficha.area}}:</span>
+				<span class="md-subhead">Area:{{ficha.area}}:</span>
 			</md-card-title-text>
 		</md-card-title>
 
 		<md-card-actions layout="row" layout-align="center center">
-			<div layout-wrap flex>
+			<div layout-wrap>
 				<a href='#!fichareme/{{ficha.idfichareme}}'>
 					<md-button ng-click="ver(ficha)" class="btn-lg btn-lg-text" aria-label="Ver Ficha" aria-label="VER">
 						<md-tooltip>VER</md-tooltip>
