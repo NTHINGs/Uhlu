@@ -45,20 +45,32 @@
 	</md-button>
 
 	<span flex></span>
-	<md-button class="md-raised md-primary" aria-label="Agregar Nueva Ficha Reme" ng-click="showAgregarPatrulla($event)">
+	<md-button class="md-raised md-primary" aria-label="Agregar Nueva Ficha Reme" ng-click="showAgregarficha($event)">
 		<span class="glyphicon glyphicon-plus"></span>  Agregar Nueva Ficha Reme
 	</md-button>
 </section>
 
 <h1 class='nada' ng-hide='fichasreme.length'>NO HAY FICHAS REME AÚN</h1>
 
-<div class='tarjeta col-xs-12 col-md-6 vertical-center' ng-repeat="ficha in fichasreme">
-	<div class='col-xs-12 altoalcien'>
-		<p>{{ficha.nombreactividad}}</p>
-		<p class='little'>Sección: {{ficha.seccion}}</p>
-		<p class='little'>{{ficha.area}}</p>
-		<div class='botones'>
-			<a href='#!fichareme/{{ficha.idfichareme}}' class='btn btn-default btn-block'><span class='glyphicon glyphicon-file'></span> VER</a>
-		</div>
-	</div>
+<div class="col-xs-12 col-md-6" layout="column" ng-repeat='ficha in fichasreme'>
+	<md-card md-theme="default">
+		<md-card-title>
+			<md-card-title-text>
+				<span class="md-headline">{{ficha.nombreactividad}}</span>
+				<span class="md-subhead">Sección: {{ficha.seccion}}</span>
+				<span class="md-subhead">{{ficha.area}}:</span>
+			</md-card-title-text>
+		</md-card-title>
+
+		<md-card-actions layout="row" layout-align="start center">
+			<div layout-wrap flex>
+				<a href='#!fichareme/{{ficha.idfichareme}}'>
+					<md-button ng-click="ver(ficha)" class="btn-lg btn-lg-text" aria-label="Ver Ficha" aria-label="VER">
+						<md-tooltip>VER</md-tooltip>
+						<span class='glyphicon glyphicon-file iconbtn morrarro'></span>
+					</md-button>
+				</a>
+			</div>
+		</md-card-actions>
+	</md-card>
 </div>
