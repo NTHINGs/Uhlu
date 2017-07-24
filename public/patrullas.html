@@ -3,7 +3,7 @@
 		<span class="glyphicon glyphicon-plus"></span>  Agregar Nueva {{$root.user.pequenogrupo}}
 	</md-button>
 </section>
-<h1 class='nada' ng-hide='patrullas.length'>NO TIENES {{$root.user.pequenogrupo | capitalize}}S REGISTRADOS AÚN</h1>
+<h1 class='nada' ng-hide='patrullas.length'>NO TIENES {{$root.user.pequenogrupo.toUpperCase()}}S REGISTRADOS AÚN</h1>
 <div class="row fullwidth">
     <!-- <div flex-xs flex-gt-xs="100" flex-gt-sm="50" layout="column" layout-fill ng-repeat='patrulla in patrullas'> -->
     <div class="col-xs-12 col-md-6" layout="column" ng-repeat='patrulla in patrullas'>
