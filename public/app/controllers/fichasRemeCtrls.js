@@ -1,4 +1,4 @@
-app.controller('fichasRemeCtrl', function($scope, $rootScope, $dialogs, $location, SweetAlert,fichasReme) {
+app.controller('fichasRemeCtrl', function($scope, $rootScope, $location, SweetAlert,fichasReme) {
 	$rootScope.currentRoute='Banco de Fichas Reme';
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$scope.fichasreme = [];
