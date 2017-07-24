@@ -52,10 +52,10 @@
 
 <h1 class='nada' ng-hide='fichasreme.length'>NO HAY FICHAS REME AÚN</h1>
 
-<a href='#!fichareme/{{ficha.idfichareme}}'>
+<a href='#!fichareme/{{ficha.idfichareme}}' ng-repeat='ficha in fichasreme'>
 	<md-button ng-click="ver(ficha)" class="btn-lg btn-lg-text" aria-label="Ver Ficha" aria-label="VER">
 		<md-tooltip>VER</md-tooltip>
-		<div class="col-xs-12 col-md-6" layout="column" ng-repeat='ficha in fichasreme'>
+		<div class="col-xs-12 col-md-6" layout="column">
 			<md-card md-theme="default">
 				<md-card-title>
 					<md-card-title-text>
