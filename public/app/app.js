@@ -44,7 +44,7 @@ app.config(function($routeProvider, $mdThemingProvider) {
 	      .accentPalette('purple', {'default': '800'})
 });
 
-app.filter('capitalize', function($rootScope) {
+app.filter('capitalize', function() {
     return function(input) {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
