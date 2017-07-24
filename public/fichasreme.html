@@ -52,25 +52,19 @@
 
 <h1 class='nada' ng-hide='fichasreme.length'>NO HAY FICHAS REME AÚN</h1>
 
-<div class="col-xs-12 col-md-6" layout="column" ng-repeat='ficha in fichasreme'>
-	<md-card md-theme="default">
-		<md-card-title>
-			<md-card-title-text>
-				<span class="md-headline">{{ficha.nombreactividad}}</span>
-				<span class="md-subhead">Sección: {{ficha.seccion}}</span>
-				<span class="md-subhead">Area:{{ficha.area}}:</span>
-			</md-card-title-text>
-		</md-card-title>
-
-		<md-card-actions layout="row" layout-align="center center">
-			<div flex>
-				<a href='#!fichareme/{{ficha.idfichareme}}'>
-					<md-button ng-click="ver(ficha)" class="btn-lg btn-lg-text" aria-label="Ver Ficha" aria-label="VER">
-						<md-tooltip>VER</md-tooltip>
-						<span class='glyphicon glyphicon-file iconbtn morrarro'></span>
-					</md-button>
-				</a>
-			</div>
-		</md-card-actions>
-	</md-card>
-</div>
+<a href='#!fichareme/{{ficha.idfichareme}}'>
+	<md-button ng-click="ver(ficha)" class="btn-lg btn-lg-text" aria-label="Ver Ficha" aria-label="VER">
+		<md-tooltip>VER</md-tooltip>
+		<div class="col-xs-12 col-md-6" layout="column" ng-repeat='ficha in fichasreme'>
+			<md-card md-theme="default">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{ficha.nombreactividad}}</span>
+						<span class="md-subhead">Sección: {{ficha.seccion}}</span>
+						<span class="md-subhead">Area:{{ficha.area}}:</span>
+					</md-card-title-text>
+				</md-card-title>
+			</md-card>
+		</div>
+	</md-button>
+</a>
