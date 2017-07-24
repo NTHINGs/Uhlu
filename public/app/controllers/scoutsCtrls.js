@@ -17,26 +17,27 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $route, $location, Swe
 			confirmButtonColor: "#692B8D",
 			confirmButtonText: "Si, eliminalo!",
 			closeOnConfirm: false
-		},function() {
-			Scouts.delete(scout.cum).then(function (s) {
-				SweetAlert.swal({
-					title: "Eliminado!",
-					text: ''+scout.nombre+' ha sido eliminado correctamente',
-					type: "success",
-					showCancelButton: false,
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok!",
-					closeOnConfirm: true
-				}, 
-				function(){ 
-					console.log("EXITO");
-					$route.reload();
+		},function(isConfirm) {
+			if(isConfirm){
+				Scouts.delete(scout.cum).then(function (s) {
+					SweetAlert.swal({
+						title: "Eliminado!",
+						text: ''+scout.nombre+' ha sido eliminado correctamente',
+						type: "success",
+						showCancelButton: false,
+						confirmButtonColor: "#692B8D",
+						confirmButtonText: "Ok!",
+						closeOnConfirm: true
+					}, 
+					function(){ 
+						console.log("EXITO");
+						$route.reload();
+					});
+				})
+				.catch(function (error) {
+					SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
 				});
-	        })
-	        .catch(function (error) {
-	        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-	        });
-			
+	    		}
 		});
 	}
 
