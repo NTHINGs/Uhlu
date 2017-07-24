@@ -12,42 +12,34 @@
 		</div> -->
 	</form>
 	<div id="filter-panel" class="collapse filter-panel">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<form id="filtro" class="form-inline">
-					<md-input-container class="md-block" flex-gt-xs>
-				        <label>Sección</label>
-				        <md-select ng-model="busqueda.seccion" ng-init="busqueda.seccion= 'cualquiera'">
-				        	<md-option value="cualquiera">Cualquiera</md-option>
-				        	<md-option value="manada">Manada</md-option>
-				        	<md-option value="tropa">Tropa</md-option>
-				        	<md-option value="comunidad">Comunidad</md-option>
-				        	<md-option value="clan">Clan</md-option>
-                        </md-select>
-					</md-input-container>
-					<md-input-container class="md-block" flex-gt-xs>
-				        <label>Área de desarrollo:</label>
-				        <md-select ng-model="busqueda.area" ng-init="busqueda.area= 'cualquiera'">
-				        	<md-option value="cualquiera">Cualquiera</md-option>
-				        	<md-option value="corporalidad">Corporalidad</md-option>
-				        	<md-option value="creatividad">Creatividad</md-option>
-				        	<md-option value="caracter">Carácter</md-option>
-				        	<md-option value="afectividad">Afectividad</md-option>
-				        	<md-option value="sociabilidad">Sociabilidad</md-option>
-				        	<md-option value="espiritualidad">Espiritualidad</md-option>
-                        </md-select>
-					</md-input-container>
-					<md-button class="md-raised md-primary" aria-label="Filtro">
-						<span class="glyphicon glyphicon-record"></span> Aplicar Filtro
-					</md-button>
-				</form>
-			</div>
-		</div>
+		<form id="filtro" class="form-inline">
+			<md-input-container class="md-block" flex-gt-xs>
+		        <label>Sección</label>
+		        <md-select ng-model="busqueda.seccion" ng-init="busqueda.seccion= 'cualquiera'">
+		        	<md-option value="cualquiera">Cualquiera</md-option>
+		        	<md-option value="manada">Manada</md-option>
+		        	<md-option value="tropa">Tropa</md-option>
+		        	<md-option value="comunidad">Comunidad</md-option>
+		        	<md-option value="clan">Clan</md-option>
+                </md-select>
+			</md-input-container>
+			<md-input-container class="md-block" flex-gt-xs>
+		        <label>Área de desarrollo:</label>
+		        <md-select ng-model="busqueda.area" ng-init="busqueda.area= 'cualquiera'">
+		        	<md-option value="cualquiera">Cualquiera</md-option>
+		        	<md-option value="corporalidad">Corporalidad</md-option>
+		        	<md-option value="creatividad">Creatividad</md-option>
+		        	<md-option value="caracter">Carácter</md-option>
+		        	<md-option value="afectividad">Afectividad</md-option>
+		        	<md-option value="sociabilidad">Sociabilidad</md-option>
+		        	<md-option value="espiritualidad">Espiritualidad</md-option>
+                </md-select>
+			</md-input-container>
+			<md-button class="md-raised md-primary" aria-label="Filtro">
+				<span class="glyphicon glyphicon-record"></span> Aplicar Filtro
+			</md-button>
+		</form>
 	</div>
-
-<!-- 	<button type="button" class="btn btn-block btn-default" data-toggle="collapse" data-target="#filter-panel">
-		<span class="glyphicon glyphicon-cog"></span> Filtro
-	</button> -->
 	<md-button class="md-raised md-primary" aria-label="Filtro" data-toggle="collapse" data-target="#filter-panel">
 		<span class="glyphicon glyphicon-cog"></span>  Filtro
 	</md-button>
