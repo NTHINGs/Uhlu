@@ -3,7 +3,7 @@ app.service('Fichas', function($http, $q) {
     all: function(id){
       var deferred = $q.defer();
       $http
-        .get('/fichas/'+id)
+        .get('/fichasfromuser/'+id)
         .then(function (response) {
           deferred.resolve(response.data);
         })
