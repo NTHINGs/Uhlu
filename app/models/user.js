@@ -16,6 +16,11 @@ module.exports = function(sequelize, DataTypes) {
 		classMethods: {
 			associate: function(models) {
 				User.hasMany(models.Patrulla,{
+					onDelete: 'cascade',
+					foreignKey: 'autor', 
+					sourceKey: 'id'
+				});
+				User.hasMany(models.Ficha,{
 					onDelete: 'cascade'
 				});
 			}
