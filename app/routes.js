@@ -4,6 +4,7 @@ var path = require('path');
 var scouts = require('../app/controllers/scouts');
 var users = require('../app/controllers/users');
 var patrullas = require('../app/controllers/patrullas');
+var fichas = require('../app/controllers/fichas');
 
 module.exports = function(app, passport, models, port) {
 
@@ -66,6 +67,13 @@ module.exports = function(app, passport, models, port) {
     app.post('/patrullas', patrullas.create);
     app.put('/patrullas', patrullas.update);
     app.delete('/patrullas/:id', patrullas.delete);
+
+    // app.get('/fichas', fichas.index);
+    app.get('/fichasfromuser/:id', fichas.index);
+    app.get('/fichas/:id', fichas.show);
+    app.post('/fichas', fichas.create);
+    app.put('/fichas', fichas.update);
+    app.delete('/fichas/:id', fichas.delete);
 
     app.get('/scoutsfromuser/:id', scouts.index);
     app.get('/scouts/:cum', scouts.show);
