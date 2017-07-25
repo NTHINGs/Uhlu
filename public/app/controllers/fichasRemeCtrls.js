@@ -1,96 +1,150 @@
-app.controller('fichasRemeCtrl', function($scope, $rootScope, $location, SweetAlert,Fichas) {
-  $rootScope.currentRoute='Banco de Fichas Reme';
-  // Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
-  $scope.fichasreme = [];
-  Fichas.getFichasReme(1).then(function(fichasreme) {
-    $scope.fichasreme = fichasreme;
-  });
+app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, SweetAlert, $mdDialog, Fichas){
+	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
+	$rootScope.currentRoute='Tus Fichas';
+	$scope.fichas = [];
+	Fichas.all($rootScope.user.id).then(function(fichas) {
+		$scope.fichas = fichas;
+		console.log(fichas)
+	});
 
-  // TODO Hacerlo con una peticion get
-  //Modal
-  $scope.modal = function() {
-    dlg = $dialogs.create('/views/dialogs/agregarfichareme.html','agregarFichaRemeCtrl',{},{key: true,back: 'static', size:'lg'});
-    dlg.result.then(function(fichareme){
-      SweetAlert.swal({
-         title: "Exito!",
-         text: ''+fichareme.nombreactividad+' Fue Agregada Correctamente',
-         type: "success",
-         showCancelButton: false,
-         confirmButtonColor: "#692B8D",
-         confirmButtonText: "Ok!",
-         closeOnConfirm: true}, 
-      function(){ 
-        console.log("EXITO");
-        $location.path('/fichasreme');
-      });
-        },function(){
-          //Close Fallback 
-        }); 
-  }//end modal
-});
+	$scope.borrar = function(ficha) {
+		var ficha = ficha;
+		SweetAlert.swal({
+			title: "Estas seguro de querer eliminar a "+ficha.nombre+"?",
+			text: "No vas a poder recuperarlo",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#692B8D",
+			confirmButtonText: "Si, eliminalo!",
+			closeOnConfirm: false
+		},function(isConfirmed) {
+			if(isConfirmed){
+				Fichas.delete(ficha.id).then(function (s) {
+					SweetAlert.swal({
+						title: "Eliminado!",
+						text: ''+ficha.nombre+' ha sido eliminado correctamente',
+						type: "success",
+						showCancelButton: false,
+						confirmButtonColor: "#692B8D",
+						confirmButtonText: "Ok!",
+						closeOnConfirm: true
+					}, 
+					function(){ 
+						console.log("EXITO");
+						$route.reload();
+					});
+		        })
+		        .catch(function (error) {
+		        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+		        });
+			}
+		});
+	}
 
-app.controller('agregarFichaRemeCtrl',function($scope,$rootScope, $modalInstance,data, Fichas){
-  $scope.fichareme = {};
-  $scope.fichareme.area = "corporalidad";
+	//Modal
+	$scope.showAgregarPatrulla = function(ev) {
+		$mdDialog.show({
+			controller: function($scope){
+				$scope.ficha = {};
+				$scope.ficha.foto = 'img/fpo_avatar_multi.png';
+				PatrullaProcess($scope);
+				// Modal Actions
+				$scope.cancel = function(){
+					$mdDialog.cancel(); 
+				};
 
-  $scope.fichareme.materiales = [];
-  $scope.add = function($event){
-    $event.preventDefault();
-      $event.stopPropagation();
-    $scope.fichareme.materiales.push({material: ''});
-  }
+				$scope.save = function(){
+					console.log($scope.ficha);
+					$mdDialog.hide($scope.ficha);	
+				};
+			},
+			templateUrl: '/dialogs/agregarficha.html',
+			parent: angular.element(document.body),
+			targetEvent: ev,
+			clickOutsideToClose:true,
+			fullscreen: 'false' // Only for -xs, -sm breakpoints.
+		})
+		.then(function(ficha) {
+			if (ficha.myImage == 'img/fpo_avatar_multi.png') {
+				ficha.foto = 'img/fpo_avatar_multi.png';
+			}
+			
+			ficha.user_id = $rootScope.user.id;
+			console.log(ficha);
+			Fichas.new(ficha).then(function (ficha) {
+				SweetAlert.swal({
+					title: "Exito!",
+					text: ''+ficha.nombre+' Fue Agregado Correctamente',
+					type: "success",
+					showCancelButton: false,
+					confirmButtonColor: "#692B8D",
+					confirmButtonText: "Ok!",
+					closeOnConfirm: true
+				}, 
+				function(){ 
+					console.log("EXITO");
+					$route.reload();
+				});
+	        })
+	        .catch(function (error) {
+	        	console.log(error);
+	        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+	        });
+		}, function() {
+			
+		});
+		
+	}//end modal
+});//end fichasCtrl
 
-  $scope.del = function(i, $event){
-    $event.preventDefault();
-      $event.stopPropagation();
-    $scope.fichareme.materiales.splice(i,1);
-  }
-  // Modal Actions
-  $scope.cancel = function(){
-    $modalInstance.dismiss('canceled');  
-  };
+app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetAlert, $routeParams, Fichas){
+	
+	Fichas.get($routeParams.id, $routeParams.nombre).then(function(ficha) {
+		// body...
+		$scope.ficha = ficha[0];
+		console.log($scope.ficha);
+		$rootScope.currentRoute='Patrulla '+$scope.ficha.nombre;
+		PatrullaProcess($scope);
+	});
+	// console.log($scope.ficha);
 
-  $scope.save = function(){
-    $modalInstance.close($scope.fichareme);
-  };
-}); // end agregarPatrulaCtrl
+	$scope.save = function(){
+		if ($scope.ficha.myImage == 'img/fpo_avatar_multi.png') {
+			$scope.ficha.foto = 'img/fpo_avatar_multi.png';
+		}
+		// 'Exito', ''+ficha.nombre+' Fue Agregad'+s+' Correctamente'
+		$scope.ficha.user_id = $rootScope.user.id
+		Fichas.update($scope.ficha).then(function (ficha) {
+			SweetAlert.swal({
+			   title: "Exito!",
+			   text: ''+$scope.ficha.nombre+' Fue Editado Correctamente',
+			   type: "success",
+			   showCancelButton: false,
+			   confirmButtonColor: "#692B8D",
+			   confirmButtonText: "Ok!",
+			   closeOnConfirm: true}, 
+			function(){ 
+				$location.path('/ficha/'+$scope.ficha.id+'/'+$scope.ficha.nombre);
+			});
+        })
+        .catch(function (error) {
+        	console.log(error)
+        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+        });
+	};
+}); // end fichaCtrl
 
-app.controller('fichaRemeCtrl',function($scope,$rootScope, $dialogs, $location, SweetAlert, $routeParams, Fichas){
-  $scope.fichareme = {};
+function PatrullaProcess($scope) {
+	// ImageCrop
+	$scope.ficha.myImage='img/fpo_avatar_multi.png';
+	if($scope.ficha.foto != 'img/fpo_avatar_multi.png'){
+		$scope.ficha.myImage = $scope.ficha.foto;
+	}
 
-  Fichas.getFichaReme($routeParams.id).then(function(fichareme){
-    $scope.fichareme = fichareme;
-    console.log($scope.fichareme)
-  });
-
-  $scope.add = function($event){
-    $event.preventDefault();
-      $event.stopPropagation();
-    $scope.fichareme.materiales.push({material: ''});
-  }
-
-  $scope.del = function(i, $event){
-    $event.preventDefault();
-      $event.stopPropagation();
-    $scope.fichareme.materiales.splice(i,1);
-  }
-  // Modal Actions
-  $scope.cancel = function(){
-    $modalInstance.dismiss('canceled');  
-  };
-
-  $scope.save = function(){
-    // 'Exito', ''+patrulla.nombre+' Fue Agregad'+s+' Correctamente'
-    SweetAlert.swal({
-       title: "Exito!",
-       text: ''+$scope.fichareme.nombreacividad+' Fue Editada Correctamente',
-       type: "success",
-       showCancelButton: false,
-       confirmButtonColor: "#692B8D",
-       confirmButtonText: "Ok!",
-       closeOnConfirm: true}, 
-    function(){ 
-      $location.path('/fichareme/'+$scope.fichareme.idfichareme+'/'+$scope.patrulla.nombre);
-    });
-  };
-}); // end patrullaCtrl
+	$scope.defaultFoto = function($event) {
+		$event.preventDefault();
+	   	$event.stopPropagation();
+		$scope.ficha.foto = 'img/fpo_avatar_multi.png';
+		$scope.ficha.myImage='img/fpo_avatar_multi.png';
+	};
+}//en patrullCtrl
