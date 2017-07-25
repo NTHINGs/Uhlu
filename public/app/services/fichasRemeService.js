@@ -1,21 +1,64 @@
-app.service('fichasReme', function($http) {
-	this.getFichasReme = function () {
-		return $http.get('json/fichasReme.json').then(function(data) {
-			return data.data
-		});
-		// return [];
-	};
-
-	this.getFichaReme = function(idfichareme) {
-		return $http.get('json/fichasReme.json').then(function(data) {
-			var f = {};
-			data.data.forEach(function(fichareme) {
-				if(fichareme.idfichareme == idfichareme) f=fichareme;
-			});
-			return f;
-		});
-	}
-
-	// //TODO
-	// this.setPatrulla;
+app.service('Fichas', function($http, $q) {
+  return {
+    all: function(id){
+      var deferred = $q.defer();
+      $http
+        .get('/fichas/'+id)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        })
+        .catch(function (error) {
+          deferred.reject(error);
+        });
+        return deferred.promise;
+    },
+    new: function (ficha) {
+      var deferred = $q.defer();
+      $http
+        .post('/fichas', ficha)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        })
+        .catch(function (error) {
+          deferred.reject(error);
+        });
+      return deferred.promise;
+    },
+    update: function(ficha) {
+      var deferred = $q.defer();
+      $http
+        .put('/fichas', ficha)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        })
+        .catch(function (error) {
+          deferred.reject(error);
+        });
+      return deferred.promise;
+    },
+    get: function(id) {
+      var deferred = $q.defer();
+      $http
+        .get('/fichas/'+id)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        })
+        .catch(function (error) {
+          deferred.reject(error);
+        });
+        return deferred.promise;
+    },
+    delete: function(id) {
+      var deferred = $q.defer();
+      $http
+        .delete('/fichas/'+id)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        })
+        .catch(function (error) {
+          deferred.reject(error);
+        });
+        return deferred.promise;
+    }
+  }
 });
