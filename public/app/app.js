@@ -28,11 +28,11 @@ app.config(function($routeProvider, $mdThemingProvider) {
 	  })
 	  .when("/fichasreme", {
 	    templateUrl : "fichasreme.html", 
-	    controller: "fichasRemeCtrl"
+	    controller: "fichasCtrl"
 	  })
 	  .when("/fichareme/:id", {
 	    templateUrl : "fichareme.html", 
-	    controller: "fichaRemeCtrl"
+	    controller: "fichaCtrl"
 	  })
 	  .when("/editarperfil", {
 	    templateUrl : "editarperfil.html", 
