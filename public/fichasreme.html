@@ -1,12 +1,16 @@
 <section layout="row" layout-sm="column" layout-align="end center" layout-wrap>
 	<form>
-		<md-input-container class="md-block" c>
-	        <label>Busca Una Ficha Reme</label>
-	        <input name="nombre" ng-model="busqueda.ficha">
-			<md-button class="md-raised md-primary" aria-label="Buscar">
-				<span class="glyphicon glyphicon-search"></span>  Buscar
-			</md-button>
-		</md-input-container>
+		<div layout="row" flex>
+			<md-input-container class="md-block" flex>
+		        <label>Busca Una Ficha Reme</label>
+		        <input name="nombre" ng-model="busqueda.ficha">
+			</md-input-container>
+			<div>
+				<md-button class="md-raised md-primary" aria-label="Buscar">
+					<span class="glyphicon glyphicon-search"></span>  Buscar
+				</md-button>
+			</div>
+		</div>
 <!-- 		<div class="input-group">
 			<input type="text" class="form-control" placeholder="Busca Una Ficha Reme" id="busca" name="busqueda" value="" required>
 			<div class="input-group-btn">
