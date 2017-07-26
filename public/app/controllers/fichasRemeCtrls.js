@@ -65,6 +65,11 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 				};
 
 				$scope.save = function(){
+					var materiales = "";
+					$scope.ficha.materiales.forEach(function(material) {
+						materiales += material +'<br>';
+					});
+					$scope.ficha.materiales = materiales;
 					console.log($scope.ficha);
 					$mdDialog.hide($scope.ficha);	
 				};
