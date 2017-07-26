@@ -17,7 +17,11 @@ module.exports = function(sequelize, DataTypes) {
 		underscored: true,
 		classMethods: {
 			associate: function(models) {
-				Ficha.belongsTo(models.User)
+				Ficha.belongsTo(models.User,{
+					onDelete: 'cascade',
+					foreignKey: 'autor', 
+					sourceKey: 'id'
+				})
 			}
 		}
 	});
