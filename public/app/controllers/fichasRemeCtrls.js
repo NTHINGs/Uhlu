@@ -93,16 +93,13 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 			fullscreen: 'false' // Only for -xs, -sm breakpoints.
 		})
 		.then(function(ficha) {
-			if (ficha.myImage == 'img/fpo_avatar_multi.png') {
-				ficha.foto = 'img/fpo_avatar_multi.png';
-			}
 			
-			ficha.user_id = $rootScope.user.id;
+			ficha.autor = $rootScope.user.id;
 			console.log(ficha);
 			Fichas.new(ficha).then(function (ficha) {
 				SweetAlert.swal({
 					title: "Exito!",
-					text: ''+ficha.nombre+' Fue Agregado Correctamente',
+					text: ''+ficha.nombreactividad+' Fue Agregado Correctamente',
 					type: "success",
 					showCancelButton: false,
 					confirmButtonColor: "#692B8D",
