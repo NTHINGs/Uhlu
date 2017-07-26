@@ -58,6 +58,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 			controller: function($scope){
 				$scope.ficha = {};
 				$scope.ficha.materiales = [];
+				$scope.ficha.areadedesarrollo = "corporalidad";
 				$scope.ficha.foto = 'img/fpo_avatar_multi.png';
 				// Modal Actions
 				$scope.cancel = function(){
