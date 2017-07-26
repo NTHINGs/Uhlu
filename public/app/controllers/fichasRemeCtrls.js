@@ -73,6 +73,8 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 					$event.preventDefault();
 				   	$event.stopPropagation();
 					$scope.ficha.materiales.push({material: ''});
+					var objDiv = angular.element(document.getElementById("dialog"));
+					objDiv.scrollTop = objDiv.scrollHeight;
 				}
 
 				$scope.del = function(i, $event){
