@@ -40,6 +40,10 @@ module.exports = function(app, passport, models, port) {
     app.get("/notificate",inicioSesion,function(req,res) {
 
     });
+    //For database deploy at Heroku
+    app.get("/database", function(req,res){
+       res.sendFile(path.join(__dirname, '../' ,'Uhlu.sqlite'));
+    });
 //-------Facebook Login---------------------------------------------------------------------------------------
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
