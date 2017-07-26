@@ -4,7 +4,7 @@ module.exports= {
   index(req, res) {
     Ficha.findAll({
         where: {
-        	autor: req.params.id
+            autor: req.params.id
         }
     })
       .then(function (Fichas) {
@@ -68,6 +68,21 @@ module.exports= {
     })
     .catch(function (error){
       res.status(500).json(error);
+    });
+  },
+
+  search(req, res){
+    Ficha.findAll({
+        where: {
+            nombreactividad: $like:req.params.query
+        }
+    })
+    .then(function (Fichas) {
+        res.status(200).json(Fichas);
+    })
+    .catch(function (error) {
+        console.log(error)
+        res.status(500).json(error);
     });
   }
 };
