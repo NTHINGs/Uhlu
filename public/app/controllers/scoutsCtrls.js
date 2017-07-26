@@ -171,7 +171,7 @@ app.controller('scoutCtrl',function($scope,$rootScope, $route, $location, SweetA
 		console.log($scope.scout);
 		$scope.scout.fechanacimiento = new Date($scope.scout.fechanacimiento);
 		$rootScope.currentRoute='Scout '+$scope.scout.nombre;
-		ScoutProcess($scope, $rootcope, Patrullas);
+		ScoutProcess($scope, $rootScope, Patrullas);
 		$rootScope.insignias.forEach(function(insignia){			
 			if(!insignia.especial){
 				for (var i = 0 ; i < Object.keys(insignia.opciones).length; i++) {
