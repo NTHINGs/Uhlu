@@ -91,7 +91,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 			ficha.seccion = $rootScope.user.seccion;
 			var materiales = "";
 			ficha.materiales.forEach(function(material) {
-				materiales += material +'<br>';
+				materiales += material.material +'<br>';
 			});
 			ficha.materiales = materiales;
 			ficha.autor = $rootScope.user.id;
