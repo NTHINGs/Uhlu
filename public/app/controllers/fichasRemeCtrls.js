@@ -57,7 +57,6 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 			controller: function($scope){
 				$scope.ficha = {};
 				$scope.ficha.foto = 'img/fpo_avatar_multi.png';
-				FichaProcess($scope);
 				// Modal Actions
 				$scope.cancel = function(){
 					$mdDialog.cancel(); 
