@@ -65,12 +65,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 				};
 
 				$scope.save = function(){
-					var materiales = "";
-					$scope.ficha.materiales.forEach(function(material) {
-						materiales += material +'<br>';
-					});
-					$scope.ficha.materiales = materiales;
-					console.log($scope.ficha);
+					
 					$mdDialog.hide($scope.ficha);	
 				};
 
@@ -93,8 +88,14 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 			fullscreen: 'false' // Only for -xs, -sm breakpoints.
 		})
 		.then(function(ficha) {
-			
+			ficha.seccion = $rootScope.user.seccion;
+			var materiales = "";
+			ficha.materiales.forEach(function(material) {
+				materiales += material +'<br>';
+			});
+			ficha.materiales = materiales;
 			ficha.autor = $rootScope.user.id;
+
 			console.log(ficha);
 			Fichas.new(ficha).then(function (ficha) {
 				SweetAlert.swal({
