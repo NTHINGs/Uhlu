@@ -56,17 +56,17 @@
                 </md-input-container>
         		<div layout="column" layout-wrap>
                     <label>Materiales</label>
-                	<md-button class="md-raised md-primary" aria-label="Buscar" ng-click='add($event)'>Agregar Material</md-button>
+	            	<div class="input-group" ng-repeat="material in ficha.materiales" layout="row" layout-fill>
+	            		<md-input-container class="md-block" flex-gt-xs> 
+	            			<label>Material</label>
+	            		    <input ng-model="material.material" >
+	            		</md-input-container>
+	            		<div>
+		        			<md-button ng-click="del($index, $event)" class="remove_field md-raised md-accent">Eliminar</md-button>
+	            		</div>
+	            	</div>
                 </div>
-            	<div class="input-group" ng-repeat="material in ficha.materiales" layout="row" layout-fill>
-            		<md-input-container class="md-block" flex-gt-xs> 
-            			<label>Material</label>
-            		    <input ng-model="material.material" >
-            		</md-input-container>
-            		<div>
-	        			<md-button ng-click="del($index, $event)" class="remove_field md-raised md-accent">Eliminar</md-button>
-            		</div>
-            	</div>
+                	<md-button class="md-raised md-primary" aria-label="Buscar" ng-click='add($event)'>Agregar Material</md-button>
             </form>	
         </md-content>
     </md-dialog-content>
