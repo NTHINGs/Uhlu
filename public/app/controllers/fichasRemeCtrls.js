@@ -47,7 +47,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 			controller: function($scope){
 				$scope.ficha = {};
 				$scope.ficha.foto = 'img/fpo_avatar_multi.png';
-				PatrullaProcess($scope);
+				FichaProcess($scope);
 				// Modal Actions
 				$scope.cancel = function(){
 					$mdDialog.cancel(); 
@@ -104,7 +104,7 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 		$scope.ficha = ficha[0];
 		console.log($scope.ficha);
 		$rootScope.currentRoute='Patrulla '+$scope.ficha.nombre;
-		PatrullaProcess($scope);
+		FichaProcess($scope);
 	});
 	// console.log($scope.ficha);
 
@@ -134,7 +134,7 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 	};
 }); // end fichaCtrl
 
-function PatrullaProcess($scope) {
+function FichaProcess($scope) {
 	// ImageCrop
 	$scope.ficha.myImage='img/fpo_avatar_multi.png';
 	if($scope.ficha.foto != 'img/fpo_avatar_multi.png'){
