@@ -54,13 +54,13 @@
                     <label>Tiempos</label>
                     <input ng-model="ficha.tiempos" >
                 </md-input-container>
-                <md-input-container class="md-block" flex-gt-xs>
+        		<div layout="column" layout-wrap>
                     <label>Materiales</label>
                 	<md-button class="md-raised md-primary" aria-label="Buscar" ng-click='add($event)'>Agregar Material</md-button>
-                </md-input-container>
+                </div>
             	<div class="input-group" ng-repeat="material in ficha.materiales">
             		<div layout="row" layout-wrap>
-	            		<md-input-container class="md-block" flex-gt-xs>
+	            		<md-input-container class="md-block" flex>
 	            		    <input ng-model="material.material" >
 	            		</md-input-container>
 	            		<div>
