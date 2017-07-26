@@ -75,6 +75,7 @@ module.exports = function(app, passport, models, port) {
     // app.get('/fichas', fichas.index);
     app.get('/fichasfromuser/:id', fichas.index);
     app.get('/fichas/:id', fichas.show);
+    app.get('/buscarficha/:query', fichas.search);
     app.post('/fichas', fichas.create);
     app.put('/fichas', fichas.update);
     app.delete('/fichas/:id', fichas.delete);
