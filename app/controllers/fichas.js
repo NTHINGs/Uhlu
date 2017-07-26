@@ -74,7 +74,9 @@ module.exports= {
   search(req, res){
     Ficha.findAll({
         where: {
-            nombreactividad: $like:req.params.query
+            nombreactividad: {
+                $like:req.params.query
+            }
         }
     })
     .then(function (Fichas) {
