@@ -59,10 +59,14 @@
                 	<md-button class="md-raised md-primary" aria-label="Buscar" ng-click='add($event)'>Agregar Material</md-button>
                 </md-input-container>
             	<div class="input-group" ng-repeat="material in ficha.materiales">
-            		<md-input-container class="md-block" flex-gt-xs>
-            		    <input ng-model="material.material" >
-            			<md-button ng-click="del($index, $event)" class="remove_field md-raised md-accent">Eliminar</md-button>
-            		</md-input-container>
+            		<div layout="row" layout-wrap>
+	            		<md-input-container class="md-block" flex-gt-xs>
+	            		    <input ng-model="material.material" >
+	            		</md-input-container>
+	            		<div>
+		        			<md-button ng-click="del($index, $event)" class="remove_field md-raised md-accent">Eliminar</md-button>
+	            		</div>
+            		</div>
             	</div>
             </form>	
         </md-content>
