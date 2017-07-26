@@ -1,163 +1,82 @@
-app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, SweetAlert, $mdDialog, Fichas){
-	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
-	$rootScope.currentRoute='Tus Fichas';
-	$scope.fichas = [];
-	Fichas.all($rootScope.user.id).then(function(fichas) {
-		$scope.fichas = fichas;
-		console.log(fichas)
-	});
+<style type="text/css">
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width:500px;
+        height:350px;
+    }
+</style>
+<md-dialog aria-label="Nueva Ficha REME" flex>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Nueva Ficha REME</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                &times;
+            </md-button>
+        </div>
+    </md-toolbar>
 
-	$scope.buscar = function(ev) {
-		Fichas.search($scope.busqueda.ficha)
-		.then(function(fichas) {
-			$scope.fichas = fichas;
-		})
-		.catch(function (error) {
-			SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-		});
-	};
-
-	$scope.borrar = function(ficha) {
-		var ficha = ficha;
-		SweetAlert.swal({
-			title: "Estas seguro de querer eliminar a "+ficha.nombre+"?",
-			text: "No vas a poder recuperarlo",
-			type: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#692B8D",
-			confirmButtonText: "Si, eliminalo!",
-			closeOnConfirm: false
-		},function(isConfirmed) {
-			if(isConfirmed){
-				Fichas.delete(ficha.id).then(function (s) {
-					SweetAlert.swal({
-						title: "Eliminado!",
-						text: ''+ficha.nombre+' ha sido eliminado correctamente',
-						type: "success",
-						showCancelButton: false,
-						confirmButtonColor: "#692B8D",
-						confirmButtonText: "Ok!",
-						closeOnConfirm: true
-					}, 
-					function(){ 
-						console.log("EXITO");
-						$route.reload();
-					});
-		        })
-		        .catch(function (error) {
-		        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-		        });
-			}
-		});
-	}
-
-
-	//Modal
-	$scope.showAgregarFicha = function(ev) {
-		$mdDialog.show({
-			controller: function($scope){
-				$scope.ficha = {};
-				$scope.ficha.materiales = [];
-				$scope.ficha.foto = 'img/fpo_avatar_multi.png';
-				// Modal Actions
-				$scope.cancel = function(){
-					$mdDialog.cancel(); 
-				};
-
-				$scope.save = function(){
-					console.log($scope.ficha);
-					$mdDialog.hide($scope.ficha);	
-				};
-
-				$scope.add = function($event){
-					$event.preventDefault();
-				   	$event.stopPropagation();
-					$scope.ficha.materiales.push({material: ''});
-					var objDiv = angular.element(document.getElementById("dialog"))[0];
-					objDiv.scrollTop = objDiv.scrollHeight;
-					console.log(objDiv)
-					console.log(objDiv.scrollHeight)
-					console.log(objDiv.scrollTop)
-				}
-
-				$scope.del = function(i, $event){
-					$event.preventDefault();
-				   	$event.stopPropagation();
-					$scope.ficha.materiales.splice(i,1);
-				}
-			},
-			templateUrl: '/dialogs/agregarFichaReme.html',
-			parent: angular.element(document.body),
-			targetEvent: ev,
-			clickOutsideToClose:true,
-			fullscreen: 'false' // Only for -xs, -sm breakpoints.
-		})
-		.then(function(ficha) {
-			if (ficha.myImage == 'img/fpo_avatar_multi.png') {
-				ficha.foto = 'img/fpo_avatar_multi.png';
-			}
-			
-			ficha.user_id = $rootScope.user.id;
-			console.log(ficha);
-			Fichas.new(ficha).then(function (ficha) {
-				SweetAlert.swal({
-					title: "Exito!",
-					text: ''+ficha.nombre+' Fue Agregado Correctamente',
-					type: "success",
-					showCancelButton: false,
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok!",
-					closeOnConfirm: true
-				}, 
-				function(){ 
-					console.log("EXITO");
-					$route.reload();
-				});
-	        })
-	        .catch(function (error) {
-	        	console.log(error);
-	        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-	        });
-		}, function() {
-			
-		});
-		
-	}//end modal
-});//end fichasCtrl
-
-app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetAlert, $routeParams, Fichas){
-	
-	Fichas.get($routeParams.id).then(function(ficha) {
-		// body...
-		$scope.ficha = ficha[0];
-		console.log($scope.ficha);
-		$rootScope.currentRoute=$scope.ficha.nombreactividad;
-	});
-	// console.log($scope.ficha);
-
-	$scope.save = function(){
-		if ($scope.ficha.myImage == 'img/fpo_avatar_multi.png') {
-			$scope.ficha.foto = 'img/fpo_avatar_multi.png';
-		}
-		// 'Exito', ''+ficha.nombre+' Fue Agregad'+s+' Correctamente'
-		$scope.ficha.user_id = $rootScope.user.id
-		Fichas.update($scope.ficha).then(function (ficha) {
-			SweetAlert.swal({
-			   title: "Exito!",
-			   text: ''+$scope.ficha.nombreactividad+' Fue Editado Correctamente',
-			   type: "success",
-			   showCancelButton: false,
-			   confirmButtonColor: "#692B8D",
-			   confirmButtonText: "Ok!",
-			   closeOnConfirm: true}, 
-			function(){ 
-				$location.path('/ficha/'+$scope.ficha.id);
-			});
-        })
-        .catch(function (error) {
-        	console.log(error)
-        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-        });
-	};
-}); // end fichaCtrl
-
+    <md-dialog-content>
+        <md-content id="dialog">
+            <form name='fichaForm' id='fichaForm' novalidate ng-submit="fichaForm.$valid && save()">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Nombre de la actividad</label>
+                    <input name="nombre" ng-model="ficha.nombre" required>
+                    <div ng-messages="fichaForm.nombre.$error">
+                        <div ng-message="required">El nombre es requerido.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>{{$root.objetivo}}</label>
+                    <md-select ng-model="ficha.area">
+                    	<md-option value="corporalidad">{{$root.area1}}</md-option>
+                    	<md-option value="creatividad">{{$root.area2}}</md-option>
+                    	<md-option value="caracter">{{$root.area3}}</md-option>
+                    	<md-option value="afectividad">{{$root.area4}}</md-option>
+                    	<md-option value="sociabilidad">{{$root.area5}}</md-option>
+                    	<md-option value="espiritualidad">{{$root.area6}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Participantes</label>
+                    <input ng-model="ficha.participantes" >
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Objetivo</label>
+                    <input ng-model="ficha.objetivoactividad" >
+                </md-input-container>                
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Descripción</label>
+                    <textarea ng-model="ficha.recomendaciones" rows="1" md-select-on-focus></textarea>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Tiempos</label>
+                    <input ng-model="ficha.tiempos" >
+                </md-input-container>
+        		<div layout="column" layout-wrap>
+                    <label>Materiales</label>
+                	<md-button class="md-raised md-primary" aria-label="Buscar" ng-click='add($event)'>Agregar Material</md-button>
+                </div>
+            	<div class="input-group" ng-repeat="material in ficha.materiales" layout="row" layout-fill>
+            		<md-input-container class="md-block" flex-gt-xs> 
+            			<label>Material</label>
+            		    <input ng-model="material.material" >
+            		</md-input-container>
+            		<div>
+	        			<md-button ng-click="del($index, $event)" class="remove_field md-raised md-accent">Eliminar</md-button>
+            		</div>
+            	</div>
+            </form>	
+        </md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <p class="advertencia" ng-show="!fichaForm.$valid">
+            Los campos con * son requeridos
+        </p>
+        <span flex></span>
+        <md-button type="submit" id="agregarFicha" value="Agregar" class="md-raised md-primary" form='fichaForm' aria-label="agregar" ng-disabled="!fichaForm.$valid">
+            Agregar Ficha Reme
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
