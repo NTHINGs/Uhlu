@@ -51,17 +51,6 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 		});
 	}
 
-	$scope.add = function($event){
-		$event.preventDefault();
-	   	$event.stopPropagation();
-		$scope.ficha.materiales.push({material: ''});
-	}
-
-	$scope.del = function(i, $event){
-		$event.preventDefault();
-	   	$event.stopPropagation();
-		$scope.ficha.materiales.splice(i,1);
-	}
 
 	//Modal
 	$scope.showAgregarFicha = function(ev) {
@@ -78,6 +67,18 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 					console.log($scope.ficha);
 					$mdDialog.hide($scope.ficha);	
 				};
+
+				$scope.add = function($event){
+					$event.preventDefault();
+				   	$event.stopPropagation();
+					$scope.ficha.materiales.push({material: ''});
+				}
+
+				$scope.del = function(i, $event){
+					$event.preventDefault();
+				   	$event.stopPropagation();
+					$scope.ficha.materiales.splice(i,1);
+				}
 			},
 			templateUrl: '/dialogs/agregarFichaReme.html',
 			parent: angular.element(document.body),
