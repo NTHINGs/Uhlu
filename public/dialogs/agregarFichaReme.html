@@ -58,7 +58,7 @@
                     <label>Materiales</label>
                 	<md-button class="md-raised md-primary" aria-label="Buscar" ng-click='add($event)'>Agregar Material</md-button>
                 </div>
-            	<div class="input-group" ng-repeat="material in ficha.materiales">
+            	<div class="input-group" ng-repeat="material in ficha.materiales" flex-gt-xs>
             		<div layout="row" layout-wrap>
 	            		<md-input-container class="md-block">
 	            		    <input ng-model="material.material" >
