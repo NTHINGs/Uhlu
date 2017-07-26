@@ -52,7 +52,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 	}
 
 	//Modal
-	$scope.showAgregarPatrulla = function(ev) {
+	$scope.showAgregarFicha = function(ev) {
 		$mdDialog.show({
 			controller: function($scope){
 				$scope.ficha = {};
@@ -68,7 +68,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 					$mdDialog.hide($scope.ficha);	
 				};
 			},
-			templateUrl: '/dialogs/agregarficha.html',
+			templateUrl: '/dialogs/agregarFichaReme.html',
 			parent: angular.element(document.body),
 			targetEvent: ev,
 			clickOutsideToClose:true,
@@ -109,12 +109,11 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 
 app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetAlert, $routeParams, Fichas){
 	
-	Fichas.get($routeParams.id, $routeParams.nombre).then(function(ficha) {
+	Fichas.get($routeParams.id).then(function(ficha) {
 		// body...
 		$scope.ficha = ficha[0];
 		console.log($scope.ficha);
-		$rootScope.currentRoute='Patrulla '+$scope.ficha.nombre;
-		FichaProcess($scope);
+		$rootScope.currentRoute=$scope.ficha.nombreactividad;
 	});
 	// console.log($scope.ficha);
 
@@ -127,14 +126,14 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 		Fichas.update($scope.ficha).then(function (ficha) {
 			SweetAlert.swal({
 			   title: "Exito!",
-			   text: ''+$scope.ficha.nombre+' Fue Editado Correctamente',
+			   text: ''+$scope.ficha.nombreactividad+' Fue Editado Correctamente',
 			   type: "success",
 			   showCancelButton: false,
 			   confirmButtonColor: "#692B8D",
 			   confirmButtonText: "Ok!",
 			   closeOnConfirm: true}, 
 			function(){ 
-				$location.path('/ficha/'+$scope.ficha.id+'/'+$scope.ficha.nombre);
+				$location.path('/ficha/'+$scope.ficha.id);
 			});
         })
         .catch(function (error) {
@@ -144,17 +143,3 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 	};
 }); // end fichaCtrl
 
-function FichaProcess($scope) {
-	// ImageCrop
-	$scope.ficha.myImage='img/fpo_avatar_multi.png';
-	if($scope.ficha.foto != 'img/fpo_avatar_multi.png'){
-		$scope.ficha.myImage = $scope.ficha.foto;
-	}
-
-	$scope.defaultFoto = function($event) {
-		$event.preventDefault();
-	   	$event.stopPropagation();
-		$scope.ficha.foto = 'img/fpo_avatar_multi.png';
-		$scope.ficha.myImage='img/fpo_avatar_multi.png';
-	};
-}//en patrullCtrl
