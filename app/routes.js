@@ -42,7 +42,7 @@ module.exports = function(app, passport, models, port) {
     });
     //For database deploy at Heroku
     app.get("/database", function(req,res){
-       res.sendFile(path.join(__dirname, '../' ,'Uhlu.sqlite'));
+       res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
     });
 //-------Facebook Login---------------------------------------------------------------------------------------
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
