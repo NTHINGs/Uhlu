@@ -1,4 +1,4 @@
-app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, SweetAlert, $mdDialog, Fichas){
+app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $timeout, $document, SweetAlert, $mdDialog, Fichas){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$rootScope.currentRoute='Tus Fichas';
 	$scope.fichas = [];
@@ -73,11 +73,13 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 					$event.preventDefault();
 				   	$event.stopPropagation();
 					$scope.ficha.materiales.push({material: ''});
-					var objDiv = angular.element(document.getElementById("dialog")[0]);
-					objDiv.scrollTop = objDiv.scrollHeight;
-					console.log(objDiv)
-					console.log(objDiv.scrollHeight)
-					console.log(objDiv.scrollTop)
+					$timeout(function() {
+						var objDiv = angular.element($document[0].querySelector("#dialog"));
+						objDiv[0].scrollTop = objDiv[0].scrollHeight;
+						console.log(objDiv)
+						console.log(objDiv[0].scrollHeight)
+						console.log(objDiv[0].scrollTop)
+					});
 				}
 
 				$scope.del = function(i, $event){
