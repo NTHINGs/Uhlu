@@ -60,8 +60,8 @@
                 </md-input-container>
             	<div class="input-group" ng-repeat="material in ficha.materiales">
             		<md-input-container class="md-block" flex-gt-xs>
-            		    <input ng-model="ficha.material.material" >
-            			<button ng-click="del($index, $event)" class="remove_field btn btn-secondary btn-danger">Eliminar</button>
+            		    <input ng-model="material.material" >
+            			<md-button ng-click="del($index, $event)" class="remove_field md-raised md-accent">Eliminar</md-button>
             		</md-input-container>
             	</div>
             </form>	
