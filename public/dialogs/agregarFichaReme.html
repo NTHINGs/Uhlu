@@ -1,72 +1,80 @@
 <style type="text/css">
-    .modal {
-        display: block;
-    }
-
-    .modal-body:before,
-    .modal-body:after {
-        display: table;
-        content: " ";
-    }
-
-    .modal-header:before,
-    .modal-header:after {
-        display: table;
-        content: " ";
-    }
-    .modal {
-        overflow-y:auto;
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width:500px;
+        height:350px;
     }
 </style>
-<div class="modal-dialog">
-	<!-- Modal content-->
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" ng-click="cancel()">&times;</button>
-			<h4 class="modal-title">Nueva Ficha REME</h4>
-		</div>
-		<div class="modal-body">
-		<form>
-			<label>Nombre de la actividad</label>
-			<input class='form-control' type='text' ng-model='fichareme.nombreactividad' value='' placeholder='Bulldog' required><br>
-			<label>{{$root.objetivo}}</label>
-			<select class="form-control" ng-model="fichareme.area">
-				<option value="corporalidad">{{$root.area1}}</option>
-				<option value="creatividad">{{$root.area2}}</option>
-				<option value="caracter">{{$root.area3}}</option>
-				<option value="afectividad">{{$root.area4}}</option>
-				<option value="sociabilidad">{{$root.area5}}</option>
-				<option value="espiritualidad">{{$root.area6}}</option>
-			</select><br>
+<md-dialog aria-label="Nueva Ficha REME" flex>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Nueva Ficha REME</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                &times;
+            </md-button>
+        </div>
+    </md-toolbar>
 
-			<!--Participantes-->
-			<label>Participantes</label>
-			<input class='form-control' type='text' ng-model='fichareme.participantes' value='' placeholder='10 o más' required><br>
-			<!-- Objetivo -->
-			<label>Objetivo</label>
-			<input class='form-control' type='text' ng-model='fichareme.objetivoactividad' value='' placeholder='Que todo scout aprenda que ejercistarse es importante' required><br>
-			<!-- Descripcion -->
-			<label>Descripción</label>
-			<textarea class="form-control" rows="5" ng-model="fichareme.descripcion" placeholder="Se asigna un atrapador que regularmente es alguien grande y fuerte. Al silbatazo corto, los participantes corren al otro extremo del área de juego, evitando ser atrapados.Al ser atrapados, se vuelven atrapadores." required></textarea><br>
-			<!-- Recomendaciones -->
-			<label>Recomendaciones</label>
-			<textarea class="form-control" rows="5" ng-model="fichareme.recomendaciones" placeholder="Tener cuidado con las lesiones físicas causadas por la agresividad del juego" required></textarea><br>
-			<!-- Tiempos -->
-			<label>Tiempos</label>
-			<input class='form-control' type='text' ng-model='fichareme.tiempos' value='' placeholder='15-20 min' required><br>
-			<!-- Materiales -->
-			<label>Materiales</label>
-			<button class="btn btn-success btn-block" ng-click='add($event)'>Agregar Material</button>
-				<div class="input-group" ng-repeat="material in fichareme.materiales">
-					<input class="material form-control" ng-model="fichareme.material.material" type="text">
-					<span class="input-group-btn">
-						<button ng-click="del($index, $event)" class="remove_field btn btn-secondary btn-danger">Eliminar</button>
-					</span>
-				</div>
-			</form>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-default btn-block" ng-click='save()'>Agregar Ficha Reme</button>
-		</div>
-	</div>
-</div> <!-- end .modal-dialog -->
+    <md-dialog-content>
+        <md-content>
+            <form name='fichaForm' id='fichaForm' novalidate ng-submit="fichaForm.$valid && save()">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Nombre de la actividad</label>
+                    <input name="nombre" ng-model="ficha.nombre" required>
+                    <div ng-messages="fichaForm.nombre.$error">
+                        <div ng-message="required">El nombre es requerido.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>{{$root.objetivo}}</label>
+                    <md-select ng-model="ficha.area">
+                    	<option value="corporalidad">{{$root.area1}}</option>
+                    	<option value="creatividad">{{$root.area2}}</option>
+                    	<option value="caracter">{{$root.area3}}</option>
+                    	<option value="afectividad">{{$root.area4}}</option>
+                    	<option value="sociabilidad">{{$root.area5}}</option>
+                    	<option value="espiritualidad">{{$root.area6}}</option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Participantes</label>
+                    <input ng-model="ficha.participantes" >
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Objetivo</label>
+                    <input ng-model="ficha.objetivoactividad" >
+                </md-input-container>                
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Descripción</label>
+                    <textarea ng-model="ficha.recomendaciones" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Tiempos</label>
+                    <input ng-model="ficha.tiempos" >
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Materiales</label>
+                    <input ng-model="ficha.tiempos" >
+                </md-input-container>
+                <md-button class="md-raised md-primary" aria-label="Buscar" ng-click='add($event)'>Agregar Material</md-button>
+            	<div class="input-group" ng-repeat="material in ficha.materiales">
+            		<md-input-container class="md-block" flex-gt-xs>
+            		    <input ng-model="ficha.material.material" >
+            			<button ng-click="del($index, $event)" class="remove_field btn btn-secondary btn-danger">Eliminar</button>
+            		</md-input-container>
+            	</div>
+            </form>	
+        </md-content>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <p class="advertencia" ng-show="!fichaForm.$valid">
+            Los campos con * son requeridos
+        </p>
+        <span flex></span>
+        <md-button type="submit" id="agregarFicha" value="Agregar" class="md-raised md-primary" form='fichaForm' aria-label="agregar" ng-disabled="!fichaForm.$valid">
+            Agregar Ficha Reme
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
