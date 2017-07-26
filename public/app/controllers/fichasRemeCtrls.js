@@ -7,6 +7,16 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 		console.log(fichas)
 	});
 
+	$scope.buscar = function(ev) {
+		Fichas.search($scope.busqueda.ficha)
+		.then(function(fichas) {
+			$scope.fichas = fichas;
+		})
+		.catch(function (error) {
+			SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+		});
+	};
+
 	$scope.borrar = function(ficha) {
 		var ficha = ficha;
 		SweetAlert.swal({
