@@ -10,8 +10,7 @@ module.exports = function(sequelize, DataTypes) {
 		descripcion: DataTypes.TEXT,
 		recomendaciones: DataTypes.STRING,
 		materiales: DataTypes.TEXT,
-		tiempos: DataTypes.STRING,
-		fecha: DataTypes.DATE,
+		tiempos: DataTypes.STRING
 	}, {
 		//set the timestamps to be underscored: (created_at, updated_at)
 		underscored: true,
