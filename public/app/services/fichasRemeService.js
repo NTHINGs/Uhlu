@@ -1,9 +1,9 @@
 app.service('Fichas', function($http, $q) {
   return {
-    all: function(id){
+    all: function(){
       var deferred = $q.defer();
       $http
-        .get('/fichasfromuser/'+id)
+        .get('/fichas')
         .then(function (response) {
           deferred.resolve(response.data);
         })
