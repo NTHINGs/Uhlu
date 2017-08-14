@@ -124,71 +124,74 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 	}//end modal
 
 	$scope.parseArea = function(seccion, area){
+		var nuevaarea = "";
 		switch (seccion) {
 			case 'manada':
 				switch(area){
 					case "corporalidad":
-						return "Bagheera (Corporalidad)";
+						nuevaarea = "Bagheera (Corporalidad)";
 					case "creatividad":
-						return "Kaa (Creatividad)";
+						nuevaarea = "Kaa (Creatividad)";
 					case "caracter":
-						return "Baloo (Carácter)";
+						nuevaarea = "Baloo (Carácter)";
 					case "afectividad":
-						return "Rikki-Tikki-Tavi (Afectividad)";
+						nuevaarea = "Rikki-Tikki-Tavi (Afectividad)";
 					case "sociabilidad":
-						return "Kotick (Sociabilidad)";
+						nuevaarea = "Kotick (Sociabilidad)";
 					case "espiritualidad":
-						return "Francisco de Asís (Espiritualidad)";
+						nuevaarea = "Francisco de Asís (Espiritualidad)";
 				};
 				break;
 			case 'tropa':
 				switch(area){
 					case "corporalidad":
-						return "Pez (Corporalidad)";
+						nuevaarea = "Pez (Corporalidad)";
 					case "creatividad":
-						return "Ave (Creatividad)";
+						nuevaarea = "Ave (Creatividad)";
 					case "caracter":
-						return "Tortuga (Carácter)";
+						nuevaarea = "Tortuga (Carácter)";
 					case "afectividad":
-						return "Flor (Afectividad)";
+						nuevaarea = "Flor (Afectividad)";
 					case "sociabilidad":
-						return "Abeja (Sociabilidad)";
+						nuevaarea = "Abeja (Sociabilidad)";
 					case "espiritualidad":
-						return "Árbol (Espiritualidad)";
+						nuevaarea = "Árbol (Espiritualidad)";
 				};
 				break;
 			case 'comunidad':
 				switch(area){
 					case "corporalidad":
-						return "Delfín (Corporalidad)";
+						nuevaarea = "Delfín (Corporalidad)";
 					case "creatividad":
-						return "Ave (Creatividad)";
+						nuevaarea = "Ave (Creatividad)";
 					case "caracter":
-						return "Caballo (Carácter)";
+						nuevaarea = "Caballo (Carácter)";
 					case "afectividad":
-						return "Flor (Afectividad)";
+						nuevaarea = "Flor (Afectividad)";
 					case "sociabilidad":
-						return "Abeja (Sociabilidad)";
+						nuevaarea = "Abeja (Sociabilidad)";
 					case "espiritualidad":
-						return "Árbol (Espiritualidad)";
+						nuevaarea = "Árbol (Espiritualidad)";
 				};
 				break;
 			case 'clan':
 				switch(area){
 					case "corporalidad":
-						return "Corporalidad";
+						nuevaarea = "Corporalidad";
 					case "creatividad":
-						return "Creatividad";
+						nuevaarea = "Creatividad";
 					case "caracter":
-						return "Carácter";
+						nuevaarea = "Carácter";
 					case "afectividad":
-						return "Afectividad";
+						nuevaarea = "Afectividad";
 					case "sociabilidad":
-						return "Sociabilidad";
+						nuevaarea = "Sociabilidad";
 					case "espiritualidad":
-						return "Espiritualidad";
+						nuevaarea = "Espiritualidad";
 				};
 				break;
+
+			return nuevaarea
 		}
 		
 	};//end parseArea
