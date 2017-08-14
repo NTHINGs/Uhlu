@@ -16,7 +16,7 @@ module.exports= {
   show(req, res) {
     Ficha.findAll({
       where: {
-        autor: req.params.id
+        id: req.params.id
       },
       include: [ {model: Users, attributes: 'facebookname' , required: true} ]
     })
