@@ -54,7 +54,7 @@
 </div>
 <div class="col-xs-12 infoficha">
 	<div class="negrita">Materiales:</div> 
-	<p ng-repeat="material in materiales = ficha.materiales.split('<br>')"> 
+	<p ng-repeat="material in materiales = ficha.materiales.split('<br>').splice(-1,1)"> 
 		- {{material}} 
 	</p>
 </div>
