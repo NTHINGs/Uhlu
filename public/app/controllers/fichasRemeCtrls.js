@@ -123,21 +123,74 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 		
 	}//end modal
 
-	$scope.parseArea = function(area){
-		switch(area){
-			case "corporalidad":
-				return $rootScope.area1;
-			case "creatividad":
-				return $rootScope.area2;
-			case "caracter":
-				return $rootScope.area3;
-			case "afectividad":
-				return $rootScope.area4;
-			case "sociabilidad":
-				return $rootScope.area5;
-			case "espiritualidad":
-				return $rootScope.area6;
-		};
+	$scope.parseArea = function(seccion, area){
+		switch (seccion) {
+			case 'manada':
+				switch(area){
+					case "corporalidad":
+						return "Bagheera (Corporalidad)";
+					case "creatividad":
+						return "Kaa (Creatividad)";
+					case "caracter":
+						return "Baloo (Carácter)";
+					case "afectividad":
+						return "Rikki-Tikki-Tavi (Afectividad)";
+					case "sociabilidad":
+						return "Kotick (Sociabilidad)";
+					case "espiritualidad":
+						return "Francisco de Asís (Espiritualidad)";
+				};
+				break;
+			case 'tropa':
+				switch(area){
+					case "corporalidad":
+						return "Pez (Corporalidad)";
+					case "creatividad":
+						return "Ave (Creatividad)";
+					case "caracter":
+						return "Tortuga (Carácter)";
+					case "afectividad":
+						return "Flor (Afectividad)";
+					case "sociabilidad":
+						return "Abeja (Sociabilidad)";
+					case "espiritualidad":
+						return "Árbol (Espiritualidad)";
+				};
+				break;
+			case 'comunidad':
+				switch(area){
+					case "corporalidad":
+						return "Delfín (Corporalidad)";
+					case "creatividad":
+						return "Ave (Creatividad)";
+					case "caracter":
+						return "Caballo (Carácter)";
+					case "afectividad":
+						return "Flor (Afectividad)";
+					case "sociabilidad":
+						return "Abeja (Sociabilidad)";
+					case "espiritualidad":
+						return "Árbol (Espiritualidad)";
+				};
+				break;
+			case 'clan':
+				switch(area){
+					case "corporalidad":
+						return "Corporalidad";
+					case "creatividad":
+						return "Creatividad";
+					case "caracter":
+						return "Carácter";
+					case "afectividad":
+						return "Afectividad";
+					case "sociabilidad":
+						return "Sociabilidad";
+					case "espiritualidad":
+						return "Espiritualidad";
+				};
+				break;
+		}
+		
 	};//end parseArea
 });//end fichasCtrl
 
