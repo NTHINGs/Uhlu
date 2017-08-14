@@ -191,7 +191,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 				};
 				break;
 
-			return nuevaarea
+			return nuevaarea;
 		}
 		
 	};//end parseArea
