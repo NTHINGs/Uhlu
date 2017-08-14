@@ -3,7 +3,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 	$rootScope.currentRoute='Tus Fichas';
 	$scope.fichas = [];
 	Fichas.all($rootScope.user.id).then(function(fichas) {
-		$scope.fichas = fichas;
+		$scope.fichas = fichas;		
 		console.log(fichas)
 	});
 
@@ -122,6 +122,23 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 		});
 		
 	}//end modal
+
+	$scope.parseArea = function(area){
+		switch(area){
+			case "corporalidad":
+				return $rootScope.area1;
+			case "creatividad":
+				return $rootScope.area2;
+			case "caracter":
+				return $rootScope.area3;
+			case "afectividad":
+				return $rootScope.area4;
+			case "sociabilidad":
+				return $rootScope.area5;
+			case "espiritualidad":
+				return $rootScope.area6;
+		};
+	};//end parseArea
 });//end fichasCtrl
 
 app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetAlert, $routeParams, Fichas){
