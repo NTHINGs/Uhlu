@@ -2,7 +2,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$rootScope.currentRoute='Tus Fichas';
 	$scope.fichas = [];
-	Fichas.all($rootScope.user.id).then(function(fichas) {
+	Fichas.all().then(function(fichas) {
 		$scope.fichas = fichas;		
 		console.log(fichas)
 	});
