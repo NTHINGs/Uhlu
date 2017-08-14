@@ -124,7 +124,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 	}//end modal
 
 	$scope.parseArea = function(seccion, area){
-		var nuevaarea = "";
+		var nuevaarea = "prueba";
 		switch (seccion) {
 			case 'manada':
 				switch(area){
