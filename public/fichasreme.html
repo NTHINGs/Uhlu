@@ -11,9 +11,7 @@
 	</md-button>
 </section>
 
-<h1 class='nada' ng-hide='fichas.length'>NO HAY FICHAS REME AÚN</h1>
-
-<a href='#!fichareme/{{ficha.id}}' ng-repeat='ficha in fichas | filter: busqueda.ficha'>
+<a href='#!fichareme/{{ficha.id}}' ng-repeat='ficha in filteredFichas = (fichas | filter: busqueda.ficha)'>
 	<div class="col-xs-12 col-md-6" layout="column">
 		<md-card md-theme="default">
 			<md-card-title>
@@ -26,3 +24,5 @@
 		</md-card>
 	</div>
 </a>
+<h1 class='nada' ng-hide='fichas.length'>NO HAY FICHAS REME AÚN</h1>
+<h1 class='nada' ng-hide='filteredFichas.length'>NO HAY FICHAS PARA ESA BÚSQUEDA</h1>
