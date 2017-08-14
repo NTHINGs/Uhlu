@@ -1,12 +1,9 @@
 Ficha = require('../models/').Ficha;
+Users = require('../models/').User;
 // CRUD Operations for Ficha Model
 module.exports= {
   index(req, res) {
-    Ficha.findAll({
-        where: {
-            autor: req.params.id
-        }
-    })
+    Ficha.findAll()
       .then(function (Fichas) {
         res.status(200).json(Fichas);
       })
@@ -18,9 +15,10 @@ module.exports= {
 
   show(req, res) {
     Ficha.findAll({
-        where: {
-          id: req.params.id
-        }
+      where: {
+        autor: req.params.id
+      },
+      include: [ {model: models.Users, attributes: 'facebookname' , required: true} ]
     })
     .then(function (Ficha) {
       res.status(200).json(Ficha);
