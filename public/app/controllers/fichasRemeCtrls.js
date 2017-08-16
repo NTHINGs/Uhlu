@@ -97,12 +97,12 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 	};
 
 	$scope.editar = function(id, $event){
-		
+
 	};
 
 	$scope.eliminar = function($event){
 		SweetAlert.swal({
-			title: "Estas seguro de querer eliminar la ficha "+$scope.ficha.nombre+"?",
+			title: "Estas seguro de querer eliminar la ficha "+$scope.ficha.nombreactividad+"?",
 			text: "No vas a poder recuperarla",
 			type: "warning",
 			showCancelButton: true,
@@ -114,7 +114,7 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 				Fichas.delete(ficha.id).then(function (s) {
 					SweetAlert.swal({
 						title: "Eliminada!",
-						text: ''+ficha.nombre+' ha sido eliminada correctamente',
+						text: ''+ficha.nombreactividad+' ha sido eliminada correctamente',
 						type: "success",
 						showCancelButton: false,
 						confirmButtonColor: "#692B8D",
