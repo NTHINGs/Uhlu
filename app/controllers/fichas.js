@@ -8,7 +8,7 @@ module.exports= {
         res.status(200).json(Fichas);
       })
       .catch(function (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).json(error);
       });
   },
@@ -24,6 +24,7 @@ module.exports= {
       res.status(200).json(Ficha);
     })
     .catch(function (error){
+      console.log(error);
       res.status(500).json(error);
     });
   },
@@ -49,7 +50,7 @@ module.exports= {
       res.status(200).json(updatedRecords);
     })
     .catch(function (error){
-      console.log(error)
+      console.log(error);
       res.status(500).json(error);
     });
   },
@@ -65,6 +66,7 @@ module.exports= {
       res.status(200).json(deletedRecords);
     })
     .catch(function (error){
+      console.log(error);
       res.status(500).json(error);
     });
   },
@@ -81,7 +83,7 @@ module.exports= {
         res.status(200).json(Fichas);
     })
     .catch(function (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).json(error);
     });
   }
