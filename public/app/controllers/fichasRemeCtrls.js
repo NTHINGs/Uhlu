@@ -5,7 +5,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $filter, $loca
 	Fichas.all().then(function(fichas) {
 
 		$scope.fichas = $filter('filter')(fichas, $scope.busqueda.ficha);		
-		console.log(fichas);
+		console.log($scope.fichas);
 	});
 
 
