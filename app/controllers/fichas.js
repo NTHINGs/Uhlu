@@ -18,7 +18,7 @@ module.exports= {
       where: {
         id: req.params.id
       },
-      include: [ {model: Users, attributes: 'facebookname' , required: true} ]
+      include: [ {model: Users} ]
     })
     .then(function (Ficha) {
       res.status(200).json(Ficha);
