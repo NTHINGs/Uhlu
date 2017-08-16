@@ -11,7 +11,7 @@
 	</md-button>
 </section>
 
-<a href='#!fichareme/{{ficha.id}}' ng-repeat='ficha in filteredFichas = (fichas | filter: busqueda.ficha)'>
+<a href='#!fichareme/{{ficha.id}}' ui-scroll='ficha in filteredFichas = (fichas | filter: busqueda.ficha)'>
 	<div class="col-xs-12 col-md-6" layout="column">
 		<md-card md-theme="default">
 			<md-card-title>
