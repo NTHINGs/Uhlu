@@ -19,7 +19,8 @@
 
 </style>
 <div class="col-xs-12">
-	<p>Elaborada por: {{ficha.autor}}</p>
+	<p>Elaborada por: {{ficha.facebookname}}</p>
+	<p>Fecha de creación: {{ficha.created_at | date:'yyyy-MM-dd HH:mm'}}</p>
 </div>
 <div class="float">
 	<button class="btn btn-default contacto" ng-click='imprimir($event)'><span class="mas glyphicon glyphicon-print iconbtn morrarro vcenter"></span><span class="textbtn vcenter  "> Imprimir</span></button>
@@ -32,10 +33,10 @@
 	<button class="btn btn-default contacto" ng-click='eliminar($event)'><span class="mas glyphicon glyphicon-remove iconbtn morrarro vcenter"></span><span class="textbtn vcenter  "> Borrar</span></button>
 </div>
 <div class="col-xs-12 infoficha">
-	<div class="negrita">Sección:</div> {{ficha.seccion}}
+	<div class="negrita">Sección:</div> {{ficha.seccion | capitalize}}
 </div>
 <div class="col-xs-12 infoficha">
-	<div class="negrita">{{ficha.objetivo}}:</div> {{ficha.areadesarrollo}}
+	<div class="negrita">{{parseArea(ficha.seccion)}}:</div> {{parseObjetivo(ficha.seccion, ficha.areadedesarrollo)}}
 </div>
 <div class="col-xs-12 infoficha">
 	<div class="negrita">Objetivo:</div> {{ficha.objetivo}}
@@ -57,7 +58,4 @@
 </div>
 <div class="col-xs-12 infoficha">
 	<div class="negrita">Tiempos:</div> {{ficha.tiempos}}
-</div>
-<div class="col-xs-12 infoficha">
-	<div class="negrita">Fecha:</div> {{ficha.created_at}}
 </div>
