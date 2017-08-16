@@ -122,107 +122,13 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $ti
 		});
 		
 	}//end modal
-
-	$scope.parseArea = function(seccion, area){
-		var nuevaarea = "";
-		switch (seccion) {
-			case 'manada':
-				switch(area){
-					case "corporalidad":
-						nuevaarea = "Bagheera (Corporalidad)";
-						break;
-					case "creatividad":
-						nuevaarea = "Kaa (Creatividad)";
-						break;
-					case "caracter":
-						nuevaarea = "Baloo (Carácter)";
-						break;
-					case "afectividad":
-						nuevaarea = "Rikki-Tikki-Tavi (Afectividad)";
-						break;
-					case "sociabilidad":
-						nuevaarea = "Kotick (Sociabilidad)";
-						break;
-					case "espiritualidad":
-						nuevaarea = "Francisco de Asís (Espiritualidad)";
-						break;
-				};
-				break;
-			case 'tropa':
-				switch(area){
-					case "corporalidad":
-						nuevaarea = "Pez (Corporalidad)";
-						break;
-					case "creatividad":
-						nuevaarea = "Ave (Creatividad)";
-						break;
-					case "caracter":
-						nuevaarea = "Tortuga (Carácter)";
-						break;
-					case "afectividad":
-						nuevaarea = "Flor (Afectividad)";
-						break;
-					case "sociabilidad":
-						nuevaarea = "Abeja (Sociabilidad)";
-						break;
-					case "espiritualidad":
-						nuevaarea = "Árbol (Espiritualidad)";
-						break;
-				};
-				break;
-			case 'comunidad':
-				switch(area){
-					case "corporalidad":
-						nuevaarea = "Delfín (Corporalidad)";
-						break;
-					case "creatividad":
-						nuevaarea = "Ave (Creatividad)";
-						break;
-					case "caracter":
-						nuevaarea = "Caballo (Carácter)";
-						break;
-					case "afectividad":
-						nuevaarea = "Flor (Afectividad)";
-						break;
-					case "sociabilidad":
-						nuevaarea = "Abeja (Sociabilidad)";
-						break;
-					case "espiritualidad":
-						nuevaarea = "Árbol (Espiritualidad)";
-						break;
-				};
-				break;
-			case 'clan':
-				switch(area){
-					case "corporalidad":
-						nuevaarea = "Corporalidad";
-						break;
-					case "creatividad":
-						nuevaarea = "Creatividad";
-						break;
-					case "caracter":
-						nuevaarea = "Carácter";
-						break;
-					case "afectividad":
-						nuevaarea = "Afectividad";
-						break;
-					case "sociabilidad":
-						nuevaarea = "Sociabilidad";
-						break;
-					case "espiritualidad":
-						nuevaarea = "Espiritualidad";
-						break;
-				};
-				break;
-
-			
-		}
-		return nuevaarea;
-	};//end parseArea
+	$scope.parseArea = $rootScope.parseArea;
+	$scope.parseObjetivo = $rootScope.parseObjetivo;
 });//end fichasCtrl
 
 app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetAlert, $routeParams, Fichas){
-	
+	$scope.parseArea = $rootScope.parseArea;
+	$scope.parseObjetivo = $rootScope.parseObjetivo;
 	Fichas.get($routeParams.id).then(function(ficha) {
 		// body...
 		$scope.ficha = ficha[0];
