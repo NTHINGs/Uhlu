@@ -123,7 +123,7 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 					}, 
 					function(){ 
 						console.log("EXITO");
-						$route.reload();
+						$location.path("#!/fichasreme");
 					});
 				})
 				.catch(function (error) {
