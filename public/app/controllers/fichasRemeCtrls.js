@@ -114,7 +114,7 @@ app.controller('fichaCtrl',function($scope,$rootScope, $route, $location, SweetA
 				Fichas.delete($scope.ficha.id).then(function (s) {
 					SweetAlert.swal({
 						title: "Eliminada!",
-						text: ''+$scope.ficha.nombreactividad+' ha sido eliminada correctamente',
+						text: 'La Ficha '+$scope.ficha.nombreactividad+' ha sido eliminada correctamente',
 						type: "success",
 						showCancelButton: false,
 						confirmButtonColor: "#692B8D",
