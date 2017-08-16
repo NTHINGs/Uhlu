@@ -1,10 +1,11 @@
-app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, $timeout, $document, SweetAlert, $mdDialog, Fichas){
+app.controller('fichasCtrl', function($scope, $rootScope, $route, $filter, $location, $timeout, $document, SweetAlert, $mdDialog, Fichas){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$rootScope.currentRoute='Tus Fichas';
 	$scope.fichas = [];
 	Fichas.all().then(function(fichas) {
-		$scope.fichas = fichas;		
-		console.log(fichas)
+
+		$scope.fichas = $filter('filter')(fichas, $scope.busqueda.ficha);		
+		console.log(fichas);
 	});
 
 
