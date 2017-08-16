@@ -24,6 +24,7 @@
     "angular-route": "^1.6.5",
     "ng-img-crop": "ngImgCrop#^0.3.2",
     "ngSweetAlert": "angular-sweetalert#^1.1.2",
-    "angular-i18n": "^1.6.5"
+    "angular-i18n": "^1.6.5",
+    "angular-ui-scroll": "^1.6.3"
   }
 }
