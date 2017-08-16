@@ -149,6 +149,124 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location){
 		       }
 		    });
 		});
+
+		$rootScope.parseArea = function(seccion){
+			var nuevaarea = "";
+			switch (seccion) {
+				case 'manada':
+					nuevaarea = "Presa";
+					break;
+				case 'tropa':
+					nuevaarea = "Territorio";
+					break;
+				case 'comunidad':
+					nuevaarea = "Desafío";
+					break;
+				case 'clan':
+					nuevaarea = "Área de Desarrollo";
+					break;				
+			}
+			return nuevaarea;
+		};//end parseArea
+
+		$rootScope.parseObjetivo = function(seccion, area){
+			var objetivo = "";
+			switch (seccion) {
+				case 'manada':
+					switch(area){
+						case "corporalidad":
+							objetivo = "Bagheera (Corporalidad)";
+							break;
+						case "creatividad":
+							objetivo = "Kaa (Creatividad)";
+							break;
+						case "caracter":
+							objetivo = "Baloo (Carácter)";
+							break;
+						case "afectividad":
+							objetivo = "Rikki-Tikki-Tavi (Afectividad)";
+							break;
+						case "sociabilidad":
+							objetivo = "Kotick (Sociabilidad)";
+							break;
+						case "espiritualidad":
+							objetivo = "Francisco de Asís (Espiritualidad)";
+							break;
+					};
+					break;
+				case 'tropa':
+					switch(area){
+						case "corporalidad":
+							objetivo = "Pez (Corporalidad)";
+							break;
+						case "creatividad":
+							objetivo = "Ave (Creatividad)";
+							break;
+						case "caracter":
+							objetivo = "Tortuga (Carácter)";
+							break;
+						case "afectividad":
+							objetivo = "Flor (Afectividad)";
+							break;
+						case "sociabilidad":
+							objetivo = "Abeja (Sociabilidad)";
+							break;
+						case "espiritualidad":
+							objetivo = "Árbol (Espiritualidad)";
+							break;
+					};
+					break;
+				case 'comunidad':
+					switch(area){
+						case "corporalidad":
+							objetivo = "Delfín (Corporalidad)";
+							break;
+						case "creatividad":
+							objetivo = "Ave (Creatividad)";
+							break;
+						case "caracter":
+							objetivo = "Caballo (Carácter)";
+							break;
+						case "afectividad":
+							objetivo = "Flor (Afectividad)";
+							break;
+						case "sociabilidad":
+							objetivo = "Abeja (Sociabilidad)";
+							break;
+						case "espiritualidad":
+							objetivo = "Árbol (Espiritualidad)";
+							break;
+					};
+					break;
+				case 'clan':
+					switch(area){
+						case "corporalidad":
+							objetivo = "Corporalidad";
+							break;
+						case "creatividad":
+							objetivo = "Creatividad";
+							break;
+						case "caracter":
+							objetivo = "Carácter";
+							break;
+						case "afectividad":
+							objetivo = "Afectividad";
+							break;
+						case "sociabilidad":
+							objetivo = "Sociabilidad";
+							break;
+						case "espiritualidad":
+							objetivo = "Espiritualidad";
+							break;
+					};
+					break;
+	
+				
+			}
+			return objetivo;
+		};//end parseArea
+
+
 	});
 	
 });
