@@ -7,9 +7,110 @@ module.exports = {
             if(value === null){
                 return "";
             }
+            // Primera letra mayuscula en la seccion
+            if(key == "seccion"){
+                return value.charAt(0).toUpperCase() + value.slice(1)
+            }
             return value;
         });
         Ficha = JSON.parse(fichaTemp);
+        // Parsear area de desarrollo
+        var areadedesarrollo = "";
+        var area = "";
+        switch (Ficha.seccion) {
+            case 'manada':
+                area = "Presa";
+                switch(Ficha.areadedesarrollo){
+                    case "corporalidad":
+                        areadedesarrollo = "Bagheera (Corporalidad)";
+                        break;
+                    case "creatividad":
+                        areadedesarrollo = "Kaa (Creatividad)";
+                        break;
+                    case "caracter":
+                        areadedesarrollo = "Baloo (Carácter)";
+                        break;
+                    case "afectividad":
+                        areadedesarrollo = "Rikki-Tikki-Tavi (Afectividad)";
+                        break;
+                    case "sociabilidad":
+                        areadedesarrollo = "Kotick (Sociabilidad)";
+                        break;
+                    case "espiritualidad":
+                        areadedesarrollo = "Francisco de Asís (Espiritualidad)";
+                        break;
+                };
+                break;
+            case 'tropa':
+                 = "Territorio";
+                switch(Ficha.areadedesarrollo){
+                    case "corporalidad":
+                        areadedesarrollo = "Pez (Corporalidad)";
+                        break;
+                    case "creatividad":
+                        areadedesarrollo = "Ave (Creatividad)";
+                        break;
+                    case "caracter":
+                        areadedesarrollo = "Tortuga (Carácter)";
+                        break;
+                    case "afectividad":
+                        areadedesarrollo = "Flor (Afectividad)";
+                        break;
+                    case "sociabilidad":
+                        areadedesarrollo = "Abeja (Sociabilidad)";
+                        break;
+                    case "espiritualidad":
+                        areadedesarrollo = "Árbol (Espiritualidad)";
+                        break;
+                };
+                break;
+            case 'comunidad':
+                area = "Desafío";
+                switch(Ficha.areadedesarrollo){
+                    case "corporalidad":
+                        areadedesarrollo = "Delfín (Corporalidad)";
+                        break;
+                    case "creatividad":
+                        areadedesarrollo = "Ave (Creatividad)";
+                        break;
+                    case "caracter":
+                        areadedesarrollo = "Caballo (Carácter)";
+                        break;
+                    case "afectividad":
+                        areadedesarrollo = "Flor (Afectividad)";
+                        break;
+                    case "sociabilidad":
+                        areadedesarrollo = "Abeja (Sociabilidad)";
+                        break;
+                    case "espiritualidad":
+                        areadedesarrollo = "Árbol (Espiritualidad)";
+                        break;
+                };
+                break;
+            case 'clan':
+                area = "Área de Desarrollo";
+                switch(Ficha.areadedesarrollo){
+                    case "corporalidad":
+                        areadedesarrollo = "Corporalidad";
+                        break;
+                    case "creatividad":
+                        areadedesarrollo = "Creatividad";
+                        break;
+                    case "caracter":
+                        areadedesarrollo = "Carácter";
+                        break;
+                    case "afectividad":
+                        areadedesarrollo = "Afectividad";
+                        break;
+                    case "sociabilidad":
+                        areadedesarrollo = "Sociabilidad";
+                        break;
+                    case "espiritualidad":
+                        areadedesarrollo = "Espiritualidad";
+                        break;
+                };
+                break;
+        }
         // Parsear materiales string a array
         var materiales =[];
         Ficha.materiales.split("<br>").slice(0,Ficha.materiales.split('<br>').length - 1).forEach(function(material){
@@ -33,8 +134,8 @@ module.exports = {
                         widths: [ 'auto', 'auto', 'auto', '*' ],
                         
                         body: [
-                            [ 'NOMBRE DE LA ACTIVIDAD', 'SECCIÓN', 'ÁREA DE DESARROLLO', 'PARTICIPANTES' ],
-                            [ ''+Ficha.nombreactividad+'', ''+Ficha.seccion+'', ''+Ficha.areadedesarrollo+'', ''+Ficha.participantes+'' ]
+                            [ 'NOMBRE DE LA ACTIVIDAD', 'SECCIÓN', ''+area.toUpperCase()+'', 'PARTICIPANTES' ],
+                            [ ''+Ficha.nombreactividad+'', ''+Ficha.seccion+'', ''+areadedesarrollo+'', ''+Ficha.participantes+'' ]
                         ]
                     },
                     style: 'marginBot'
