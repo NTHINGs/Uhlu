@@ -11,7 +11,7 @@ module.exports = {
                 creator: 'http://uhluscout.com'
             },
             content: [
-                { text: Ficha.titulo, style: 'header'},
+                { text: '"'+Ficha.titulo+'"', style: 'header'},
                 {
                     layout: 'headerLineOnly',
                     table: {
@@ -20,7 +20,7 @@ module.exports = {
                         
                         body: [
                             [ 'NOMBRE DE LA ACTIVIDAD', 'SECCIÓN', 'ÁREA DE DESARROLLO', 'PARTICIPANTES' ],
-                            [ Ficha.nombreactividad, Ficha.seccion, Ficha.areadedesarrollo, Ficha.participantes ]
+                            [ '"'+Ficha.nombreactividad+'"', '"'+Ficha.seccion+'"', '"'+Ficha.areadedesarrollo+'"', '"'+Ficha.participantes+'"' ]
                         ]
                     },
                     style: 'marginBot'
@@ -33,7 +33,7 @@ module.exports = {
                         
                         body: [
                             [ 'DESCRIPCIÓN DE LA ACTIVIDAD'],
-                            [ Ficha.descripcion]
+                            [ '"'+Ficha.descripcion+'"']
                         ]
                     },
                     style: 'marginBot'
@@ -46,7 +46,7 @@ module.exports = {
                         
                         body: [
                             [ 'RECOMENDACIONES'],
-                            [ Ficha.recomendaciones]
+                            [ '"'+Ficha.recomendaciones+'"']
                         ]
                     },
                     style: 'marginBot'
@@ -81,7 +81,7 @@ module.exports = {
                         
                         body: [
                             [ 'TIEMPOS', 'AUTOR', 'FECHA'],
-                            [ Ficha.tiempos, Ficha.User.facebookname, Ficha.created_at]
+                            [ '"'+Ficha.tiempos+'"', '"'+Ficha.User.facebookname+'"', '"'+Ficha.created_at+'"']
                         ]
                     },
                     style: 'marginBot'
