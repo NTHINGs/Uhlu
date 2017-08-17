@@ -3,12 +3,15 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $filter, $loca
 	$rootScope.currentRoute='Tus Fichas';
 	$scope.fichas = [];
 	Fichas.all().then(function(fichas) {
-
-		$scope.fichas = $filter('filter')(fichas, $scope.busqueda.ficha);		
+		// TODO
+		$scope.fichas = fichas		
 		console.log($scope.fichas);
 	});
 
-
+	// Busqueda
+	$scope.busca = function(){
+		$scope.fichas = $filter('filter')($scope.fichas, $scope.busqueda.ficha);
+	};
 	//Modal
 	$scope.showAgregarFicha = function(ev) {
 		$mdDialog.show({
