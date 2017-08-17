@@ -9,7 +9,7 @@
 <md-dialog aria-label="Nueva Ficha REME" flex>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2>Nueva Ficha REME</h2>
+            <h2>{{actividad}} Ficha REME</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="cancel()">
                 &times;
@@ -80,7 +80,7 @@
         </p>
         <span flex></span>
         <md-button type="submit" id="agregarFicha" value="Agregar" class="md-raised md-primary" form='fichaForm' aria-label="agregar" ng-disabled="!fichaForm.$valid">
-            Agregar Ficha Reme
+            {{actividad}} Ficha Reme
         </md-button>
     </md-dialog-actions>
 </md-dialog>
