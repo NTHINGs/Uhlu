@@ -5,7 +5,7 @@ module.exports = {
         // Parsear materiales string a array
         var materiales =[];
         Ficha.materiales.split("<br>").slice(0,Ficha.materiales.split('<br>').length - 1).forEach(function(material){
-            materiales.push({"material":material});
+            materiales.push(material);
         });
         // PDF Content
         var dd= {
