@@ -1,3 +1,6 @@
+// Third Party
+var PDFDocument = require('pdfkit');
+// Models
 Ficha = require('../models/').Ficha;
 Users = require('../models/').User;
 // CRUD Operations for Ficha Model
