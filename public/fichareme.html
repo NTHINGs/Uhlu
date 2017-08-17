@@ -23,7 +23,7 @@
 	<p>Fecha de creación: {{ficha.created_at | date:'dd-MM-yyyy HH:mm'}}</p>
 </div>
 <div class="float">
-	<md-button class="md-raised md-primary" aria-label="Imprimir" ng-click='imprimir()'>
+	<md-button class="md-raised md-primary" aria-label="Imprimir" href="https://uhlu.herokuapp.com/imprimirFicha/{{ficha.id}}">
 			<span class="glyphicon glyphicon-print"></span>  Imprimir
 	</md-button>
 </div>
