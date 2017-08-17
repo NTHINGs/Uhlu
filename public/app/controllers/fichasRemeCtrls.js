@@ -9,9 +9,9 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 	});
 
 	// Lazy Load
-	$scope.fichasDisplayed = 2;
+	$scope.fichasDisplayed = 8;
 	$scope.loadMore = function(){
-		$scope.fichasDisplayed += 2;
+		$scope.fichasDisplayed += 8;
 	};
 	//Modal
 	$scope.showAgregarFicha = function(ev) {
