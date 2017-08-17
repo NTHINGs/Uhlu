@@ -2,7 +2,7 @@
 	<div layout="row" layout-align="center center" flex-gt-xs>
 		<md-input-container class="md-block" flex>
 	        <label>Busca Una Ficha Reme</label>
-	        <input name="nombre" ng-model="busqueda.ficha" ng-change="busca()" placeholder="Puedes buscar por nombre, sección y área">
+	        <input name="nombre" ng-model="busqueda.ficha" placeholder="Puedes buscar por nombre, sección y área">
 		</md-input-container>
 	</div>
 	<span flex></span>
@@ -11,7 +11,7 @@
 	</md-button>
 </section>
 
-<a href='#!fichareme/{{ficha.id}}' ui-scroll='ficha in fichas'>
+<a href='#!fichareme/{{ficha.id}}' ng-repeat='ficha in filteredFichas = (fichas | filter: busqueda.ficha) | limitTo:fichasDisplayed'>
 	<div class="col-xs-12 col-md-6" layout="column">
 		<md-card md-theme="default">
 			<md-card-title>
@@ -24,4 +24,9 @@
 		</md-card>
 	</div>
 </a>
+<div class="col-xs-12">
+	<md-button class="md-raised md-primary" aria-label="Mostrar Más Fichas" ng-click="loadMore()">
+		<span class="glyphicon glyphicon-refresh"></span>  Mostrar Más Fichas
+	</md-button>
+</div>
 <h1 class='nada' ng-hide='fichas.length'>NO HAY FICHAS</h1>
