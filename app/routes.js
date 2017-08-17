@@ -1,10 +1,12 @@
 // app/routes.js
-var path = require('path');  
+var path        = require('path');  
+var PDFDocument = require('pdfkit');
 // Controlers
-var scouts = require('../app/controllers/scouts');
-var users = require('../app/controllers/users');
-var patrullas = require('../app/controllers/patrullas');
-var fichas = require('../app/controllers/fichas');
+var scouts      = require('../app/controllers/scouts');
+var users       = require('../app/controllers/users');
+var patrullas   = require('../app/controllers/patrullas');
+var fichas      = require('../app/controllers/fichas');
+
 
 module.exports = function(app, passport, models, port) {
 
@@ -44,6 +46,14 @@ module.exports = function(app, passport, models, port) {
     app.get("/database", function(req,res){
        res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
     });
+
+//-------PDF Generations--------------------------------------------------------------------------------------
+    app.post('/printFicha', function(req, res){
+        doc = new PDFDocument();
+        doc.pipe(res);
+        doc.end();     
+        // req.body
+    });
 //-------Facebook Login---------------------------------------------------------------------------------------
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
@@ -75,7 +85,6 @@ module.exports = function(app, passport, models, port) {
     // app.get('/fichas', fichas.index);
     app.get('/fichas', fichas.index);
     app.get('/fichas/:id', fichas.show);
-    app.get('/buscarficha/:query', fichas.search);
     app.post('/fichas', fichas.create);
     app.put('/fichas', fichas.update);
     app.delete('/fichas/:id', fichas.delete);
