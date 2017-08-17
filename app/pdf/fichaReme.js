@@ -126,8 +126,18 @@ module.exports = {
                 creator: 'http://uhluscout.com'
             },
             content: [
-                { image: path.join(__dirname, '/../../public/img/logo.png'), width: 100,height: 100},
-                { text: ''+Ficha.nombreactividad+'', style: 'header'},
+                {
+                    layout: 'noBorders',
+                    table: {
+                        headerRows: 0,
+                        widths: [ '*', '*'],
+                        
+                        body: [
+                            [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 125,height: 125}, { text: ''+Ficha.nombreactividad+'', style: 'header'}]
+                        ]
+                    },
+                    style: 'marginBot'
+                },
                 {
                     layout: 'headerLineOnly',
                     table: {
