@@ -145,7 +145,7 @@ module.exports = {
                         widths: [ 'auto', 'auto', 'auto', '*' ],
                         
                         body: [
-                            [ 'NOMBRE DE LA ACTIVIDAD', 'SECCIÓN', ''+area.toUpperCase()+'', 'PARTICIPANTES' ],
+                            [ { text: 'NOMBRE DE LA ACTIVIDAD', style: 'morrarro' }, { text: 'SECCIÓN', style: 'morrarro' }, { text: ''+area.toUpperCase()+'', style: 'morrarro' }, { text: 'PARTICIPANTES', style: 'morrarro' } ],
                             [ ''+Ficha.nombreactividad+'', ''+Ficha.seccion+'', ''+areadedesarrollo+'', ''+Ficha.participantes+'' ]
                         ]
                     },
@@ -158,7 +158,7 @@ module.exports = {
                         widths: [ '*'],
                         
                         body: [
-                            [ 'DESCRIPCIÓN DE LA ACTIVIDAD'],
+                            [ { text: 'DESCRIPCIÓN DE LA ACTIVIDAD', style: 'morrarro' }],
                             [ ''+Ficha.descripcion+'']
                         ]
                     },
@@ -171,7 +171,7 @@ module.exports = {
                         widths: [ '*'],
                         
                         body: [
-                            [ 'RECOMENDACIONES'],
+                            [ { text: 'RECOMENDACIONES', style: 'morrarro' }],
                             [ ''+Ficha.recomendaciones+'']
                         ]
                     },
@@ -202,7 +202,7 @@ module.exports = {
                         widths: [ '*', '*', '*'],
                         
                         body: [
-                            [ 'TIEMPOS', 'AUTOR', 'FECHA'],
+                            [ {text: 'TIEMPOS', style: 'morrarro' }, {text: 'AUTOR', style: 'morrarro' }, {text: 'FECHA', style: 'morrarro' }],
                             [ ''+Ficha.tiempos+'', ''+Ficha.User.facebookname+'', ''+Ficha.created_at+'']
                         ]
                     },
