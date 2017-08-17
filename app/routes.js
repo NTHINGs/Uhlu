@@ -1,6 +1,5 @@
 // app/routes.js
 var path        = require('path');  
-var PDFDocument = require('pdfkit');
 // Controlers
 var scouts      = require('../app/controllers/scouts');
 var users       = require('../app/controllers/users');
