@@ -17,6 +17,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 	$scope.showAgregarFicha = function(ev) {
 		$mdDialog.show({
 			controller: function($scope){
+				$scope.actividad = "Agregar";
 				$scope.ficha = {};
 				$scope.ficha.materiales = [];
 				$scope.ficha.areadedesarrollo = "corporalidad";
@@ -27,7 +28,6 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 				};
 
 				$scope.save = function(){
-					
 					$mdDialog.hide($scope.ficha);	
 				};
 
@@ -97,14 +97,21 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 		$rootScope.currentRoute=$scope.ficha.nombreactividad;
 	});
 
-	$scope.imprimir = function(id, $event){
+	$scope.imprimir = function(id, event){
 
 	};
 	//Modal
-	$scope.editar = function(ev) {
+	$scope.editar = function(id, ev) {
 		$mdDialog.show({
 			controller: function($scope){
 				// Modal Actions
+				$scope.actividad = "Editar";
+				console.log(id);
+				Fichas.get(id).then(function(ficha) {
+					// body...
+					$scope.ficha = ficha[0];
+					console.log($scope.ficha);
+				});
 				$scope.cancel = function(){
 					$mdDialog.cancel(); 
 				};
@@ -144,7 +151,7 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 			Fichas.update(ficha).then(function (ficha) {
 				SweetAlert.swal({
 					title: "Exito!",
-					text: ''+ficha.nombreactividad+' Fue Agregado Correctamente',
+					text: 'La Ficha '+ficha.nombreactividad+' Fue Editada Correctamente',
 					type: "success",
 					showCancelButton: false,
 					confirmButtonColor: "#692B8D",
@@ -166,7 +173,7 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 		
 	};//end modal
 
-	$scope.eliminar = function($event){
+	$scope.eliminar = function(){
 		SweetAlert.swal({
 			title: "Estas seguro de querer eliminar la ficha "+$scope.ficha.nombreactividad+"?",
 			text: "No vas a poder recuperarla",
