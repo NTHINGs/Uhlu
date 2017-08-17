@@ -47,50 +47,42 @@ module.exports = function(app, passport, models, port) {
        res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
     });
 
-//-------PDF Generations--------------------------------------------------------------------------------------
-    app.post('/printFicha', function(req, res){
-        doc = new PDFDocument();
-        // Adding PDF Content
-        doc.text("Hola!");
-        doc.pipe(res);
-        doc.end();     
-        // req.body
-    });
-//-------Facebook Login---------------------------------------------------------------------------------------
+    //-------Facebook Login---------------------------------------------------------------------------------------
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
+    
     app.get('/auth/facebook/callback',
-      passport.authenticate('facebook', {
-          successRedirect : '/',
-          failureRedirect : '/error'
+    passport.authenticate('facebook', {
+        successRedirect : '/',
+        failureRedirect : '/error'
     }));
-
+    
 	app.get('/logout', function(req, res) {
-	    req.logout();
+        req.logout();
 	    res.redirect('/bye');
 	});
-
-//-------API EndPoints----------------------------------------------------------------------------
+    
+    //-------API EndPoints----------------------------------------------------------------------------
     app.get('/users', users.index);
     app.get('/users/:id', users.show);
     app.post('/users', users.create);
     app.put('/users', users.update);
     app.delete('/users/:id', users.delete);
-
+    
     // app.get('/patrullas', patrullas.index);
     app.get('/patrullas/:id', patrullas.index);
     app.get('/patrullas/:id/:nombre', patrullas.show);
     app.post('/patrullas', patrullas.create);
     app.put('/patrullas', patrullas.update);
     app.delete('/patrullas/:id', patrullas.delete);
-
+    
     // app.get('/fichas', fichas.index);
     app.get('/fichas', fichas.index);
     app.get('/fichas/:id', fichas.show);
     app.post('/fichas', fichas.create);
     app.put('/fichas', fichas.update);
     app.delete('/fichas/:id', fichas.delete);
-
+    app.get('/imprimirFicha/:id', fichas.print);
+    
     app.get('/scoutsfromuser/:id', scouts.index);
     app.get('/scouts/:cum', scouts.show);
     app.post('/scouts', scouts.create);
