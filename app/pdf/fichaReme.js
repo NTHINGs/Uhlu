@@ -42,7 +42,7 @@ module.exports = {
                 };
                 break;
             case 'tropa':
-                 = "Territorio";
+                area = "Territorio";
                 switch(Ficha.areadedesarrollo){
                     case "corporalidad":
                         areadedesarrollo = "Pez (Corporalidad)";
