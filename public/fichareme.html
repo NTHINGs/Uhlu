@@ -23,19 +23,19 @@
 	<p>Fecha de creación: {{ficha.created_at | date:'dd-MM-yyyy HH:mm'}}</p>
 </div>
 <div class="float">
-	<md-button class="md-raised md-primary" aria-label="Imprimir" ng-click='imprimir($event)'>
+	<md-button class="md-raised md-primary" aria-label="Imprimir" ng-click='imprimir()'>
 			<span class="glyphicon glyphicon-print"></span>  Imprimir
 	</md-button>
 </div>
 <!-- Si el usuario es el dueño -->
 <div class="float">
 	<div class="float">
-		<md-button class="md-raised md-primary" aria-label="Editar" ng-click='editar($event)'>
+		<md-button class="md-raised md-primary" aria-label="Editar" ng-click='editar(ficha.id,$event)'>
 			<span class="glyphicon glyphicon-edit"></span>  Editar
 		</md-button>
 	</div>
 	<div class="float">
-		<md-button class="md-raised md-primary" aria-label="Eliminar" ng-click='eliminar($event)'>
+		<md-button class="md-raised md-primary" aria-label="Eliminar" ng-click='eliminar()'>
 				<span class="glyphicon glyphicon-remove"></span>  Eliminar
 		</md-button>
 	</div>
