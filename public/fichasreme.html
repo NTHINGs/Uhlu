@@ -2,7 +2,7 @@
 	<div layout="row" layout-align="center center" flex-gt-xs>
 		<md-input-container class="md-block" flex>
 	        <label>Busca Una Ficha Reme</label>
-	        <input name="nombre" ng-model="busqueda.ficha" placeholder="Puedes buscar por nombre, sección y área">
+	        <input name="nombre" ng-model="busqueda.ficha" ng-change="busca()" placeholder="Puedes buscar por nombre, sección y área">
 		</md-input-container>
 	</div>
 	<span flex></span>
