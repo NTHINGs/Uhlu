@@ -69,22 +69,5 @@ module.exports= {
       console.log(error);
       res.status(500).json(error);
     });
-  },
-
-  search(req, res){
-    Ficha.findAll({
-        where: {
-            nombreactividad: {
-                $like:req.params.query
-            }
-        }
-    })
-    .then(function (Fichas) {
-        res.status(200).json(Fichas);
-    })
-    .catch(function (error) {
-        console.log(error);
-        res.status(500).json(error);
-    });
   }
 };
