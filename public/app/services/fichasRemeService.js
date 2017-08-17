@@ -60,5 +60,17 @@ app.service('Fichas', function($http, $q) {
         });
         return deferred.promise;
     },
+    print: function(ficha) {
+      var deferred = $q.defer();
+      $http
+        .post('/printFicha', ficha)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        })
+        .catch(function (error) {
+          deferred.reject(error);
+        });
+        return deferred.promise;
+    },
   }
 });
