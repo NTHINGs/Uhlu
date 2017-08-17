@@ -8,9 +8,10 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $filter, $loca
 		console.log($scope.fichas);
 	});
 
-	// Busqueda
-	$scope.busca = function(){
-		$scope.fichas = $filter('filter')($scope.fichas, $scope.busqueda.ficha);
+	// Lazy Load
+	$scope.totalDisplayed = 2;
+	$scope.loadMore = function(){
+		$scope.totalDisplayed += 2;
 	};
 	//Modal
 	$scope.showAgregarFicha = function(ev) {
