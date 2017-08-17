@@ -42,7 +42,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 				   	$event.stopPropagation();
 					$scope.ficha.materiales.splice(i,1);
 				}
-			},
+			},//End controller mdDialog
 			templateUrl: '/dialogs/agregarFichaReme.html',
 			parent: angular.element(document.body),
 			targetEvent: ev,
@@ -146,19 +146,17 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 			fullscreen: 'false' // Only for -xs, -sm breakpoints.
 		})
 		.then(function(ficha) {
-			ficha.seccion = $rootScope.user.seccion;
 			var materiales = "";
 			ficha.materiales.forEach(function(material) {
 				materiales += material.material +'<br>';
 			});
 			ficha.materiales = materiales;
-			ficha.autor = $rootScope.user.id;
 
 			console.log(ficha);
 			Fichas.update(ficha).then(function (ficha) {
 				SweetAlert.swal({
 					title: "Exito!",
-					text: 'La Ficha '+ficha.nombreactividad+' Fue Editada Correctamente',
+					text: 'La Ficha Fue Editada Correctamente',
 					type: "success",
 					showCancelButton: false,
 					confirmButtonColor: "#692B8D",
