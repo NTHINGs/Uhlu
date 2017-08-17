@@ -1,4 +1,4 @@
-app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, SweetAlert, $mdDialog, Fichas){
+app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $mdDialog, Fichas){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$rootScope.currentRoute='Tus Fichas';
 	$scope.fichas = [];
@@ -87,7 +87,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, $location, Swe
 	$scope.parseObjetivo = $rootScope.parseObjetivo;
 });//end fichasCtrl
 
-app.controller('fichaCtrl',function($scope, $rootScope, $route, $location, SweetAlert, $mdDialog, Fichas){
+app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $location, SweetAlert, $mdDialog, Fichas){
 	$scope.parseArea = $rootScope.parseArea;
 	$scope.parseObjetivo = $rootScope.parseObjetivo;
 	Fichas.get($routeParams.id).then(function(ficha) {
