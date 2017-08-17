@@ -1,5 +1,3 @@
-// Third Party
-var PdfPrinter = require('pdfmake/src/printer');
 //PdfModule
 var fichaReme = require('../pdf/fichaReme');
 // Models
@@ -84,7 +82,6 @@ module.exports = {
             include: [{ model: Users }]
         })
             .then(function (Ficha) {
-                console.log(Ficha[0].dataValues);
                 var doc = fichaReme.pdf(Ficha[0].dataValues);
                 doc.pipe(res);
                 doc.end();
