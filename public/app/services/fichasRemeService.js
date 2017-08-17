@@ -63,7 +63,7 @@ app.service('Fichas', function($http, $q) {
     print: function(ficha) {
       var deferred = $q.defer();
       $http
-        .post('/printFicha', ficha)
+        .post('/printFicha', ficha, {responseType:'arraybuffer'})
         .then(function (response) {
           deferred.resolve(response.data);
         })
