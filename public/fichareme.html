@@ -28,7 +28,7 @@
 	</md-button>
 </div>
 <!-- Si el usuario es el dueño -->
-<div class="float">
+<div ng-if="ficha.User.id == $root.user.id" class="float">
 	<div class="float">
 		<md-button class="md-raised md-primary" aria-label="Editar" ng-click='editar(ficha.id,$event)'>
 			<span class="glyphicon glyphicon-edit"></span>  Editar
