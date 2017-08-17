@@ -107,7 +107,7 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 
 	$scope.imprimir = function(){
 		Fichas.print($scope.ficha).then(function(ficha) {
-			console.log(ficha);
+			console.log("PDF Generado");
 		})
 		.catch(function (error) {
 			console.log(error);
