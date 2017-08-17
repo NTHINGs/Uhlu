@@ -105,15 +105,6 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 		SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
 	});
 
-	$scope.imprimir = function(){
-		Fichas.print($scope.ficha).then(function(ficha) {
-			console.log("PDF Generado");
-		})
-		.catch(function (error) {
-			console.log(error);
-			SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-		});
-	};
 	//Modal
 	$scope.editar = function(id, ev) {
 		$mdDialog.show({
