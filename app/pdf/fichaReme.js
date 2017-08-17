@@ -215,10 +215,14 @@ module.exports = {
                     fontSize: 22,
                     bold: true,
                     alignment: 'right',
-                    margin: [ 0, 0, 0, 25 ]
+                    margin: [ 0, 0, 0, 25 ],
+                    color: 'purple'
                 },
                 marginBot:{
                     margin: [ 0, 0, 0, 25 ]
+                },
+                morrarro:{
+                    color: 'purple'
                 },
                 footer: {
                     bold: true,
