@@ -111,7 +111,7 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 					// body...
 					$scope.ficha = ficha[0];
 					// Parsear materiales string a array
-					var materiales = $scope.materiales.split("<br>").slice(0,$scope.materiales.split('<br>').length - 1);
+					var materiales = $scope.ficha.materiales.split("<br>").slice(0,$scope.ficha.materiales.split('<br>').length - 1);
 					var materialesObject =[];
 					materiales.forEach(function(material){
 						materialesObject.push({"material":material});
