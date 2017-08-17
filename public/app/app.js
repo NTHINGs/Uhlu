@@ -1,5 +1,5 @@
 // SELECT S.foto, S.nombre,S.cum,(P.nombre) as patrulla,Pr.porcentaje FROM scouts S, patrullas P, users U,progresionespersonales  Pr WHERE S.patrulla=P.idpatrullas AND P.usuario=U.id AND S.cum=Pr.scout AND U.username=:username
-var app = angular.module('Uhlu', ['ngRoute', 'ngMaterial','ngMessages','ngImgCrop', 'oitozero.ngSweetAlert', 'ui.scroll', 'ui.scroll.grid']);
+var app = angular.module('Uhlu', ['ngRoute', 'ngMaterial','ngMessages','ngImgCrop', 'oitozero.ngSweetAlert']);
 app.config(function($routeProvider, $mdThemingProvider) {
 	$routeProvider
 	  .when("/", {
