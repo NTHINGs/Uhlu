@@ -84,6 +84,7 @@ module.exports = {
             include: [{ model: Users }]
         })
             .then(function (Ficha) {
+                console.log(Ficha);
                 var doc = fichaReme.pdf(Ficha);
                 doc.pipe(res);
                 doc.end();
