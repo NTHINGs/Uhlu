@@ -50,6 +50,8 @@ module.exports = function(app, passport, models, port) {
 //-------PDF Generations--------------------------------------------------------------------------------------
     app.post('/printFicha', function(req, res){
         doc = new PDFDocument();
+        // Adding PDF Content
+        doc.text("Hola!");
         doc.pipe(res);
         doc.end();     
         // req.body
