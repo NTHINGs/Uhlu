@@ -2,17 +2,22 @@ var PdfPrinter = require('pdfmake/src/printer');
 var path = require('path');
 module.exports = { 
     pdf: function(Ficha) {
+        // Parsear materiales string a array
+        var materiales =[];
+        Ficha.materiales.split("<br>").slice(0,Ficha.materiales.split('<br>').length - 1).forEach(function(material){
+            materiales.push({"material":material});
+        });
         // PDF Content
         var dd= {
             info: {
-                title: Ficha.titulo,
-                author: Ficha.User.facebookname,
-                subject: Ficha.titulo,
+                title: ''+Ficha.nombreactividad+'',
+                author: ''+Ficha.User.facebookname+'',
+                subject: ''+Ficha.nombreactividad+'',
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
             },
             content: [
-                { text: '"'+Ficha.titulo+'"', style: 'header'},
+                { text: ''+Ficha.nombreactividad+'', style: 'header'},
                 {
                     layout: 'headerLineOnly',
                     table: {
@@ -21,7 +26,7 @@ module.exports = {
                         
                         body: [
                             [ 'NOMBRE DE LA ACTIVIDAD', 'SECCIÓN', 'ÁREA DE DESARROLLO', 'PARTICIPANTES' ],
-                            [ '"'+Ficha.nombreactividad+'"', '"'+Ficha.seccion+'"', '"'+Ficha.areadedesarrollo+'"', '"'+Ficha.participantes+'"' ]
+                            [ ''+Ficha.nombreactividad+'', ''+Ficha.seccion+'', ''+Ficha.areadedesarrollo+'', ''+Ficha.participantes+'' ]
                         ]
                     },
                     style: 'marginBot'
@@ -34,7 +39,7 @@ module.exports = {
                         
                         body: [
                             [ 'DESCRIPCIÓN DE LA ACTIVIDAD'],
-                            [ '"'+Ficha.descripcion+'"']
+                            [ ''+Ficha.descripcion+'']
                         ]
                     },
                     style: 'marginBot'
@@ -47,7 +52,7 @@ module.exports = {
                         
                         body: [
                             [ 'RECOMENDACIONES'],
-                            [ '"'+Ficha.recomendaciones+'"']
+                            [ ''+Ficha.recomendaciones+'']
                         ]
                     },
                     style: 'marginBot'
@@ -63,11 +68,7 @@ module.exports = {
                             [ 
                                 {
                                 // to treat a paragraph as a bulleted list, set an array of items under the ul key
-                                ul: [
-                                    'Item 1',
-                                    'Item 2',
-                                    'Item 3',
-                                ]
+                                ul: materiales
                                 },
                             ]
                         ]
@@ -82,7 +83,7 @@ module.exports = {
                         
                         body: [
                             [ 'TIEMPOS', 'AUTOR', 'FECHA'],
-                            [ '"'+Ficha.tiempos+'"', '"'+Ficha.User.facebookname+'"', '"'+Ficha.created_at+'"']
+                            [ ''+Ficha.tiempos+'', ''+Ficha.User.facebookname+'', ''+Ficha.created_at+'']
                         ]
                     },
                     style: 'marginBot'
