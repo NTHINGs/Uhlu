@@ -16,7 +16,7 @@
     "multer": "^1.2.0",
     "passport": "^0.3.2",
     "passport-facebook": "^1.0.0",
-    "pdfkit": "^0.8.3",
+    "pdfmake": "^0.1.32",
     "sequelize": "^3.21.0",
     "session-memory-store": "^0.2.2",
     "sqlite3": "^3.1.3",
