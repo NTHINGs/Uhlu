@@ -2,18 +2,6 @@ var PdfPrinter = require('pdfmake/src/printer');
 var path = require('path');
 module.exports = { 
     pdf: function(Ficha) {
-        // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
-        var fichaTemp = JSON.stringify(Ficha, function(key, value){
-            if(value === null){
-                return "";
-            }
-            // Primera letra mayuscula en la seccion
-            if(key == "seccion"){
-                return value.charAt(0).toUpperCase() + value.slice(1)
-            }
-            return value;
-        });
-        Ficha = JSON.parse(fichaTemp);
         // Parsear area de desarrollo
         var areadedesarrollo = "";
         var area = "";
@@ -110,7 +98,19 @@ module.exports = {
                         break;
                 };
                 break;
-        }
+        };
+        // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
+        var fichaTemp = JSON.stringify(Ficha, function(key, value){
+            if(value === null){
+                return "";
+            }
+            // Primera letra mayuscula en la seccion
+            if(key == "seccion"){
+                return value.charAt(0).toUpperCase() + value.slice(1)
+            }
+            return value;
+        });
+        Ficha = JSON.parse(fichaTemp);
         // Parsear materiales string a array
         var materiales =[];
         Ficha.materiales.split("<br>").slice(0,Ficha.materiales.split('<br>').length - 1).forEach(function(material){
