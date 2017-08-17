@@ -60,17 +60,5 @@ app.service('Fichas', function($http, $q) {
         });
         return deferred.promise;
     },
-    search: function(query) {
-      var deferred = $q.defer();
-      $http
-        .get('/buscarficha/'+query)
-        .then(function (response) {
-          deferred.resolve(response.data);
-        })
-        .catch(function (error) {
-          deferred.reject(error);
-        });
-        return deferred.promise;
-    },
   }
 });
