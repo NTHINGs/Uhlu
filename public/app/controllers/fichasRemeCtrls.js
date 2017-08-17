@@ -110,6 +110,13 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 				Fichas.get(id).then(function(ficha) {
 					// body...
 					$scope.ficha = ficha[0];
+					// Parsear materiales string a array
+					var materiales = $scope.materiales.split("<br>").slice(0,$scope.materiales.split('<br>').length - 1);
+					var materialesObject =[];
+					materiales.forEach(function(material){
+						materialesObject.push({"material":material});
+					});
+					$scope.ficha.materiales = materialesObject;
 					console.log($scope.ficha);
 				});
 				$scope.cancel = function(){
