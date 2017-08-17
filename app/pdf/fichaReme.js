@@ -106,10 +106,10 @@ module.exports = {
 
         var fontDescriptors = {
             Roboto: {
-            normal: path.join(__dirname, '..', 'examples', '/fonts/Roboto-Regular.ttf'),
-            bold: path.join(__dirname, '..', 'examples', '/fonts/Roboto-Medium.ttf'),
-            italics: path.join(__dirname, '..', 'examples', '/fonts/Roboto-Italic.ttf'),
-            bolditalics: path.join(__dirname, '..', 'examples', '/fonts/Roboto-MediumItalic.ttf')
+            normal: './fonts/Roboto-Regular.ttf',
+            bold: './fonts/Roboto-Medium.ttf',
+            italics: './fonts/Roboto-Italic.ttf',
+            bolditalics: './fonts/Roboto-MediumItalic.ttf'
             }
         };
         var printer = new pdfMakePrinter(fontDescriptors);
