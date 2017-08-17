@@ -1,3 +1,4 @@
+var PdfPrinter = require('pdfmake/src/printer');
 module.exports = { 
     pdf: function(Ficha) {
         // PDF Content
@@ -112,7 +113,7 @@ module.exports = {
                 bolditalics: './fonts/Roboto-MediumItalic.ttf'
             }
         };
-        var printer = new pdfMakePrinter(fontDescriptors);
+        var printer = new PdfPrinter(fontDescriptors);
         return printer.createPdfKitDocument(dd);
     }
 };
