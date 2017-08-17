@@ -69,5 +69,14 @@ module.exports= {
       console.log(error);
       res.status(500).json(error);
     });
+  },
+  
+  print(req, res) {
+    doc = new PDFDocument();
+    // Adding PDF Content
+    doc.text("Hola!");
+    doc.pipe(res);
+    doc.end();     
+    // req.body
   }
 };
