@@ -126,7 +126,7 @@ module.exports = {
                 creator: 'http://uhluscout.com'
             },
             content: [
-                { image: path.join(__dirname, '/../../public/img/logo.png'), width: 150,height: 150},
+                { image: path.join(__dirname, '/../../public/img/logo.png'), width: 50,height: 50},
                 { text: ''+Ficha.nombreactividad+'', style: 'header'},
                 {
                     layout: 'headerLineOnly',
