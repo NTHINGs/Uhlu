@@ -184,7 +184,7 @@ module.exports = {
                         widths: [ '*'],
                         
                         body: [
-                            [ 'MATERIALES'],
+                            [ { text: 'MATERIALES', style: 'morrarro' }],
                             [ 
                                 {
                                 // to treat a paragraph as a bulleted list, set an array of items under the ul key
@@ -202,7 +202,7 @@ module.exports = {
                         widths: [ '*', '*', '*'],
                         
                         body: [
-                            [ {text: 'TIEMPOS', style: 'morrarro' }, {text: 'AUTOR', style: 'morrarro' }, {text: 'FECHA', style: 'morrarro' }],
+                            [ { text: 'TIEMPOS', style: 'morrarro' }, { text: 'AUTOR', style: 'morrarro' }, { text: 'FECHA', style: 'morrarro' }],
                             [ ''+Ficha.tiempos+'', ''+Ficha.User.facebookname+'', ''+Ficha.created_at+'']
                         ]
                     },
