@@ -1,4 +1,5 @@
 var PdfPrinter = require('pdfmake/src/printer');
+var path = require('path');
 module.exports = { 
     pdf: function(Ficha) {
         // PDF Content
@@ -107,10 +108,10 @@ module.exports = {
 
         var fontDescriptors = {
             Roboto: {
-                normal: './fonts/Roboto-Regular.ttf',
-                bold: './fonts/Roboto-Medium.ttf',
-                italics: './fonts/Roboto-Italic.ttf',
-                bolditalics: './fonts/Roboto-MediumItalic.ttf'
+                normal: path.join(__dirname, '/fonts/Roboto-Regular.ttf'),
+                bold: path.join(__dirname, '/fonts/Roboto-Medium.ttf'),
+                italics: path.join(__dirname, '/fonts/Roboto-Italic.ttf'),
+                bolditalics: path.join(__dirname, '/fonts/Roboto-MediumItalic.ttf')
             }
         };
         var printer = new PdfPrinter(fontDescriptors);
