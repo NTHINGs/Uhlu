@@ -6,6 +6,10 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 		// TODO
 		$scope.fichas = fichas		
 		console.log($scope.fichas);
+	})
+	.catch(function (error) {
+		console.log(error);
+		SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
 	});
 
 	// Lazy Load
@@ -95,10 +99,20 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 		$scope.ficha = ficha[0];
 		console.log($scope.ficha);
 		$rootScope.currentRoute=$scope.ficha.nombreactividad;
+	})
+	.catch(function (error) {
+		console.log(error);
+		SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
 	});
 
-	$scope.imprimir = function(id, event){
-
+	$scope.imprimir = function(){
+		Fichas.print($scope.ficha).then(function(ficha) {
+			console.log(ficha);
+		})
+		.catch(function (error) {
+			console.log(error);
+			SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+		});
 	};
 	//Modal
 	$scope.editar = function(id, ev) {
@@ -118,6 +132,10 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 					});
 					$scope.ficha.materiales = materialesObject;
 					console.log($scope.ficha);
+				})
+				.catch(function (error) {
+					console.log(error);
+					SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
 				});
 				$scope.cancel = function(){
 					$mdDialog.cancel(); 
