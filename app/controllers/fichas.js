@@ -32,6 +32,9 @@ module.exports = {
             include: [{ model: Users }]
         })
             .then(function (Ficha) {
+                var areaYObjetivoPorSeccion = config.areaYObjetivoPorSeccion(Ficha.seccion, Ficha.areadedesarrollo);
+                Ficha.dataValues.area = areaYObjetivoPorSeccion.area;
+                Ficha.dataValues.nombrearea = areaYObjetivoPorSeccion.nombrearea;
                 res.status(200).json(Ficha);
             })
             .catch(function (error) {
