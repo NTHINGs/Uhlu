@@ -1,12 +1,12 @@
 module.exports = { 
     areaYObjetivoPorSeccion: function(seccion, areadedesarrollo) {
         var data = {
-            objetivo: "",
+            nombrearea: "",
             area: ""
         };
         switch (seccion) {
             case 'manada':
-                data.objetivo = "Presa";
+                data.nombrearea = "Presa";
                 switch(areadedesarrollo){
                     case "corporalidad":
                         data.area = "Bagheera (Corporalidad)";
@@ -29,7 +29,7 @@ module.exports = {
                 };
                 break;
             case 'tropa':
-                data.objetivo = "Territorio";
+                data.nombrearea = "Territorio";
                 switch(areadedesarrollo){
                     case "corporalidad":
                         data.area = "Pez (Corporalidad)";
@@ -52,7 +52,7 @@ module.exports = {
                 };
                 break;
             case 'comunidad':
-                data.objetivo = "Desafío";
+                data.nombrearea = "Desafío";
                 switch(areadedesarrollo){
                     case "corporalidad":
                         data.area = "Delfín (Corporalidad)";
@@ -75,7 +75,7 @@ module.exports = {
                 };
                 break;
             case 'clan':
-                data.objetivo = "Área de Desarrollo";
+                data.nombrearea = "Área de Desarrollo";
                 switch(areadedesarrollo){
                     case "corporalidad":
                         data.area = "Corporalidad";
@@ -226,7 +226,7 @@ module.exports = {
 				data.insignias.etapa.seccion='manada';
 				data.insignias.desarrollo.seccion='manada';
 				data.insignias.enlace.seccion='manada';
-				data.objetivo="Presa";
+				data.nombrearea="Presa";
 				//Corporalidad
 				data.area1="Bagheera (Corporalidad)";
 				// Creatividad
@@ -255,7 +255,7 @@ module.exports = {
 				data.insignias.etapa.seccion='tropa';
 				data.insignias.desarrollo.seccion='tropa';
 				data.insignias.enlace.seccion='tropa';
-				data.objetivo="Territorio";
+				data.nombrearea="Territorio";
 				//Corporalidad
 				data.area1="Pez (Corporalidad)";
 				// Creatividad
@@ -284,7 +284,7 @@ module.exports = {
 				data.insignias.etapa.seccion='comunidad';
 				data.insignias.desarrollo.seccion='comunidad';
 				data.insignias.enlace.seccion='comunidad';
-				data.objetivo="Desafío";
+				data.nombrearea="Desafío";
 				//Corporalidad
 				data.area1="Delfín (Corporalidad)";
 				// Creatividad
@@ -313,7 +313,7 @@ module.exports = {
 				data.insignias.etapa.seccion='clan';
 				data.insignias.desarrollo.seccion='clan';
 				data.insignias.enlace.seccion='clan';
-				data.objetivo="Área de Desarrollo";
+				data.nombrearea="Área de Desarrollo";
 				//Corporalidad
 				data.area1="Corporalidad";
 				// Creatividad
