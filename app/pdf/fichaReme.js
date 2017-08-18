@@ -7,7 +7,7 @@ module.exports = {
         // Parsear area de desarrollo
         var areaYObjetivoPorSeccion = config.areaYObjetivoPorSeccion(Ficha.seccion, Ficha.areadedesarrollo);
         var areadedesarrollo = areaYObjetivoPorSeccion.area;
-        var objetivo = areaYObjetivoPorSeccion.objetivo;
+        var nombrearea = areaYObjetivoPorSeccion.nombrearea;
         // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
         var fichaTemp = JSON.stringify(Ficha, function(key, value){
             if(value === null){
@@ -54,7 +54,7 @@ module.exports = {
                         widths: [ 'auto', 'auto', 'auto', '*' ],
                         
                         body: [
-                            [ { text: 'NOMBRE DE LA ACTIVIDAD', style: 'morrarro' }, { text: 'SECCIÓN', style: 'morrarro' }, { text: ''+objectivo.toUpperCase()+'', style: 'morrarro' }, { text: 'PARTICIPANTES', style: 'morrarro' } ],
+                            [ { text: 'NOMBRE DE LA ACTIVIDAD', style: 'morrarro' }, { text: 'SECCIÓN', style: 'morrarro' }, { text: ''+nombrearea.toUpperCase()+'', style: 'morrarro' }, { text: 'PARTICIPANTES', style: 'morrarro' } ],
                             [ ''+Ficha.nombreactividad+'', ''+Ficha.seccion+'', ''+areadedesarrollo+'', ''+Ficha.participantes+'' ]
                         ]
                     },
