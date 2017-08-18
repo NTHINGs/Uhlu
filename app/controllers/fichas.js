@@ -12,8 +12,8 @@ module.exports = {
             .then(function (Fichas) {
                 Fichas.forEach(function(ficha){
                     var areaYObjetivoPorSeccion = config.areaYObjetivoPorSeccion(ficha.seccion, ficha.areadedesarrollo);
-                    ficha.area = areaYObjetivoPorSeccion.area;
-                    ficha.nombrearea = areaYObjetivoPorSeccion.nombrearea;
+                    ficha.dataValues.area = areaYObjetivoPorSeccion.area;
+                    ficha.dataValues.nombrearea = areaYObjetivoPorSeccion.nombrearea;
                 })
                 console.log(Fichas);
                 res.status(200).json(Fichas);
