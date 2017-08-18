@@ -67,6 +67,19 @@ module.exports = {
                         widths: [ '*'],
                         
                         body: [
+                            [ { text: 'OBJETIVOS EDUCATIVOS', style: 'morrarro' }],
+                            [ ''+Ficha.objetivo+'']
+                        ]
+                    },
+                    style: 'marginBot'
+                },
+                {
+                    layout: 'headerLineOnly',
+                    table: {
+                        headerRows: 1,
+                        widths: [ '*'],
+                        
+                        body: [
                             [ { text: 'DESCRIPCIÓN DE LA ACTIVIDAD', style: 'morrarro' }],
                             [ ''+Ficha.descripcion+'']
                         ]
