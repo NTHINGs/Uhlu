@@ -1,4 +1,4 @@
-app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $mdDialog, Fichas){
+app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $mdDialog, Fichas, Config){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$rootScope.currentRoute='Tus Fichas';
 	$scope.fichas = [];
@@ -87,13 +87,29 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 		});
 		
 	}//end modal
-	$scope.parseArea = $rootScope.parseArea;
-	$scope.parseObjetivo = $rootScope.parseObjetivo;
+	$scope.parseArea = function(seccion){
+		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
+			return data.area;
+		});
+	};
+	$scope.parseObjetivo= function(seccion, area){
+		Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
+			return data.objetivo;
+		});
+	};
 });//end fichasCtrl
 
-app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $location, SweetAlert, $mdDialog, Fichas){
-	$scope.parseArea = $rootScope.parseArea;
-	$scope.parseObjetivo = $rootScope.parseObjetivo;
+app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $location, SweetAlert, $mdDialog, Fichas, Config){
+	$scope.parseArea = function(seccion){
+		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
+			return data.area;
+		});
+	};
+	$scope.parseObjetivo= function(seccion, area){
+		Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
+			return data.objetivo;
+		});
+	};
 	Fichas.get($routeParams.id).then(function(ficha) {
 		// body...
 		$scope.ficha = ficha[0];
