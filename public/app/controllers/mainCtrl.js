@@ -38,16 +38,5 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config
 	$scope.isActive = function(route) {
 		return route === $location.path();
 	}
-
-	$rootScope.parseArea = function(seccion){
-		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
-			return data.area;
-		});
-	};
-	$rootScope.parseObjetivo= function(seccion, area){
-		Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
-			return data.objetivo;
-		});
-	};
 	
 });
