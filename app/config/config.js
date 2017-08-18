@@ -213,6 +213,7 @@ module.exports = {
                 "especial":true
             }
         };
+        data.user={};
         switch (seccion) {
 			case 'manada':
 				data.insignias.etapa.opciones.amarilla= "Lobo Pata Tierna";
