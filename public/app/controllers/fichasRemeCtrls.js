@@ -88,27 +88,35 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 		
 	}//end modal
 	$scope.parseArea = function(seccion){
-		return Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
-			return data.area;
+		var temp = "";
+		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
+			temp = data.area;
 		});
+		return temp;
 	};
 	$scope.parseObjetivo= function(seccion, area){
-		return Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
-			return data.objetivo;
+		var temp = "";
+		Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
+			temp = data.objetivo;
 		});
+		return temp;
 	};
 });//end fichasCtrl
 
 app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $location, SweetAlert, $mdDialog, Fichas, Config){
 	$scope.parseArea = function(seccion){
-		return Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
-			return data.area;
+		var temp = "";
+		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
+			temp = data.area;
 		});
+		return temp;
 	};
 	$scope.parseObjetivo= function(seccion, area){
-		return Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
-			return data.objetivo;
+		var temp = "";
+		Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
+			temp = data.objetivo;
 		});
+		return temp;
 	};
 	Fichas.get($routeParams.id).then(function(ficha) {
 		// body...
