@@ -15,7 +15,6 @@ module.exports = {
                     ficha.dataValues.area = areaYObjetivoPorSeccion.area;
                     ficha.dataValues.nombrearea = areaYObjetivoPorSeccion.nombrearea;
                 })
-                console.log(Fichas);
                 res.status(200).json(Fichas);
             })
             .catch(function (error) {
@@ -32,10 +31,11 @@ module.exports = {
             include: [{ model: Users }]
         })
             .then(function (Ficha) {
-                console.log(Ficha);
-                var areaYObjetivoPorSeccion = config.areaYObjetivoPorSeccion(Ficha.seccion, Ficha.areadedesarrollo);
-                Ficha.dataValues.area = areaYObjetivoPorSeccion.area;
-                Ficha.dataValues.nombrearea = areaYObjetivoPorSeccion.nombrearea;
+                Ficha.forEach(function(ficha){
+                    var areaYObjetivoPorSeccion = config.areaYObjetivoPorSeccion(ficha.seccion, ficha.areadedesarrollo);
+                    ficha.dataValues.area = areaYObjetivoPorSeccion.area;
+                    ficha.dataValues.nombrearea = areaYObjetivoPorSeccion.nombrearea;
+                })
                 res.status(200).json(Ficha);
             })
             .catch(function (error) {
