@@ -3,19 +3,17 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config
 	$scope.user = function(user) {
 		$rootScope.user = JSON.parse(user);
 		console.log(user);
+		Config.insigniasPorSeccion($rootScope.user.seccion).then(function(data){
+			$rootScope = $rootScope.concat(data);
+		});
+		Config.radiosFichaMedica().then(function(data){
+			$rootScope.radios = data;
+		});
 	}
 
 	$scope.isActive = function(route) {
 		return route === $location.path();
 	}
-
-	Config.radiosFichaMedica().then(function(data){
-		$rootScope.radios = data;
-	});
-
-	Config.insigniasPorSeccion($rootScope.user.seccion).then(function(data){
-		$rootScope = $rootScope.concat(data);
-	});
 
 	$rootScope.parseArea = function(seccion){
 		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
