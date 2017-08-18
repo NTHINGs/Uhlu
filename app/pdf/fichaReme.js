@@ -1,104 +1,13 @@
 var PdfPrinter = require('pdfmake/src/printer');
 var path = require('path');
+var config = require('../config/config');
+
 module.exports = { 
     pdf: function(Ficha) {
         // Parsear area de desarrollo
-        var areadedesarrollo = "";
-        var area = "";
-        switch (Ficha.seccion) {
-            case 'manada':
-                area = "Presa";
-                switch(Ficha.areadedesarrollo){
-                    case "corporalidad":
-                        areadedesarrollo = "Bagheera (Corporalidad)";
-                        break;
-                    case "creatividad":
-                        areadedesarrollo = "Kaa (Creatividad)";
-                        break;
-                    case "caracter":
-                        areadedesarrollo = "Baloo (Carácter)";
-                        break;
-                    case "afectividad":
-                        areadedesarrollo = "Rikki-Tikki-Tavi (Afectividad)";
-                        break;
-                    case "sociabilidad":
-                        areadedesarrollo = "Kotick (Sociabilidad)";
-                        break;
-                    case "espiritualidad":
-                        areadedesarrollo = "Francisco de Asís (Espiritualidad)";
-                        break;
-                };
-                break;
-            case 'tropa':
-                area = "Territorio";
-                switch(Ficha.areadedesarrollo){
-                    case "corporalidad":
-                        areadedesarrollo = "Pez (Corporalidad)";
-                        break;
-                    case "creatividad":
-                        areadedesarrollo = "Ave (Creatividad)";
-                        break;
-                    case "caracter":
-                        areadedesarrollo = "Tortuga (Carácter)";
-                        break;
-                    case "afectividad":
-                        areadedesarrollo = "Flor (Afectividad)";
-                        break;
-                    case "sociabilidad":
-                        areadedesarrollo = "Abeja (Sociabilidad)";
-                        break;
-                    case "espiritualidad":
-                        areadedesarrollo = "Árbol (Espiritualidad)";
-                        break;
-                };
-                break;
-            case 'comunidad':
-                area = "Desafío";
-                switch(Ficha.areadedesarrollo){
-                    case "corporalidad":
-                        areadedesarrollo = "Delfín (Corporalidad)";
-                        break;
-                    case "creatividad":
-                        areadedesarrollo = "Ave (Creatividad)";
-                        break;
-                    case "caracter":
-                        areadedesarrollo = "Caballo (Carácter)";
-                        break;
-                    case "afectividad":
-                        areadedesarrollo = "Flor (Afectividad)";
-                        break;
-                    case "sociabilidad":
-                        areadedesarrollo = "Abeja (Sociabilidad)";
-                        break;
-                    case "espiritualidad":
-                        areadedesarrollo = "Árbol (Espiritualidad)";
-                        break;
-                };
-                break;
-            case 'clan':
-                area = "Área de Desarrollo";
-                switch(Ficha.areadedesarrollo){
-                    case "corporalidad":
-                        areadedesarrollo = "Corporalidad";
-                        break;
-                    case "creatividad":
-                        areadedesarrollo = "Creatividad";
-                        break;
-                    case "caracter":
-                        areadedesarrollo = "Carácter";
-                        break;
-                    case "afectividad":
-                        areadedesarrollo = "Afectividad";
-                        break;
-                    case "sociabilidad":
-                        areadedesarrollo = "Sociabilidad";
-                        break;
-                    case "espiritualidad":
-                        areadedesarrollo = "Espiritualidad";
-                        break;
-                };
-                break;
-        };
+        var areaYObjetivoPorSeccion = config.areaYObjetivoPorSeccion(Ficha.seccion, Ficha.areadedesarrollo);
+        var areadedesarrollo = areaYObjetivoPorSeccion.area;
+        var objetivo = areaYObjetivoPorSeccion.objetivo;
         // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
         var fichaTemp = JSON.stringify(Ficha, function(key, value){
             if(value === null){
@@ -145,7 +54,7 @@ module.exports = {
                         widths: [ 'auto', 'auto', 'auto', '*' ],
                         
                         body: [
-                            [ { text: 'NOMBRE DE LA ACTIVIDAD', style: 'morrarro' }, { text: 'SECCIÓN', style: 'morrarro' }, { text: ''+area.toUpperCase()+'', style: 'morrarro' }, { text: 'PARTICIPANTES', style: 'morrarro' } ],
+                            [ { text: 'NOMBRE DE LA ACTIVIDAD', style: 'morrarro' }, { text: 'SECCIÓN', style: 'morrarro' }, { text: ''+objectivo.toUpperCase()+'', style: 'morrarro' }, { text: 'PARTICIPANTES', style: 'morrarro' } ],
                             [ ''+Ficha.nombreactividad+'', ''+Ficha.seccion+'', ''+areadedesarrollo+'', ''+Ficha.participantes+'' ]
                         ]
                     },
