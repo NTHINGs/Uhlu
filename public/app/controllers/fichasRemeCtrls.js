@@ -88,12 +88,12 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 		
 	}//end modal
 	$scope.parseArea = function(seccion){
-		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
+		return Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
 			return data.area;
 		});
 	};
 	$scope.parseObjetivo= function(seccion, area){
-		Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
+		return Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
 			return data.objetivo;
 		});
 	};
@@ -101,12 +101,12 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 
 app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $location, SweetAlert, $mdDialog, Fichas, Config){
 	$scope.parseArea = function(seccion){
-		Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
+		return Config.areaYObjetivoPorSeccion(seccion, "").then(function(data){
 			return data.area;
 		});
 	};
 	$scope.parseObjetivo= function(seccion, area){
-		Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
+		return Config.areaYObjetivoPorSeccion(seccion, area).then(function(data){
 			return data.objetivo;
 		});
 	};
