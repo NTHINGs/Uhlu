@@ -1,5 +1,7 @@
 //PdfModule
 var fichaReme = require('../pdf/fichaReme');
+// Config
+var config = require('../config/config');
 // Models
 Ficha = require('../models/').Ficha;
 Users = require('../models/').User;
@@ -8,6 +10,11 @@ module.exports = {
     index(req, res) {
         Ficha.findAll()
             .then(function (Fichas) {
+                Fichas.forEach(function(ficha){
+                    var areaYObjetivoPorSeccion = config.areaYObjetivoPorSeccion(ficha.seccion, ficha.areadedesarrollo);
+                    ficha.area = areaYObjetivoPorSeccion.area;
+                    ficha.nombrearea = areaYObjetivoPorSeccion.nombrearea;
+                })
                 res.status(200).json(Fichas);
             })
             .catch(function (error) {
