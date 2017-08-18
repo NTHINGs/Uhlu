@@ -23,18 +23,6 @@ app.service('Config', function($http, $q) {
                 deferred.reject(error);
             });
             return deferred.promise;
-        },
-        areaYObjetivoPorSeccion: function(seccion, area){
-            var deferred = $q.defer();
-            $http
-            .get('/config/areaYObjetivoPorSeccion/' + seccion + '/' + area)
-            .then(function (response) {
-                deferred.resolve(response.data);
-            })
-            .catch(function (error) {
-                deferred.reject(error);
-            });
-            return deferred.promise;
         }
     }
   });
