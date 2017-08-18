@@ -16,11 +16,10 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config
 			$rootScope.user.clan = data.user.clan;
 			$rootScope.user.pequenogrupo = data.user.pequenogrupo;
 			$rootScope.insignias = Object.values(data.insignias);
+			Config.radiosFichaMedica().then(function(data){
+				$rootScope.radios = data;
+			});
 		});
-		Config.radiosFichaMedica().then(function(data){
-			$rootScope.radios = data;
-		});
-		
 	}
 
 	// Manejar el menu responsivo para tamaño movil
