@@ -15,6 +15,7 @@ module.exports = {
                     ficha.area = areaYObjetivoPorSeccion.area;
                     ficha.nombrearea = areaYObjetivoPorSeccion.nombrearea;
                 })
+                console.log(Fichas);
                 res.status(200).json(Fichas);
             })
             .catch(function (error) {
