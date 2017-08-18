@@ -4,6 +4,7 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config
 		$rootScope.user = JSON.parse(user);
 		console.log(user);
 		Config.insigniasPorSeccion($rootScope.user.seccion).then(function(data){
+			console.log(data);
 			$rootScope = $rootScope.concat(data);
 		});
 		Config.radiosFichaMedica().then(function(data){
