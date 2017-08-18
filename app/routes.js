@@ -6,6 +6,9 @@ var users       = require('../app/controllers/users');
 var patrullas   = require('../app/controllers/patrullas');
 var fichas      = require('../app/controllers/fichas');
 
+// Config
+var config      = require('../app/config/config');
+
 
 module.exports = function(app, passport, models, port) {
 
@@ -39,21 +42,22 @@ module.exports = function(app, passport, models, port) {
     });
 
     app.get("/notificate",inicioSesion,function(req,res) {
-
+        // TODO
     });
     //For database deploy at Heroku
     app.get("/database", function(req,res){
-       res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
+        res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
     });
 
     //-------Facebook Login---------------------------------------------------------------------------------------
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     
     app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect : '/',
-        failureRedirect : '/error'
-    }));
+        passport.authenticate('facebook', {
+            successRedirect : '/',
+            failureRedirect : '/error'
+        })
+    );
     
 	app.get('/logout', function(req, res) {
         req.logout();
@@ -67,14 +71,12 @@ module.exports = function(app, passport, models, port) {
     app.put('/users', users.update);
     app.delete('/users/:id', users.delete);
     
-    // app.get('/patrullas', patrullas.index);
     app.get('/patrullas/:id', patrullas.index);
     app.get('/patrullas/:id/:nombre', patrullas.show);
     app.post('/patrullas', patrullas.create);
     app.put('/patrullas', patrullas.update);
     app.delete('/patrullas/:id', patrullas.delete);
     
-    // app.get('/fichas', fichas.index);
     app.get('/fichas', fichas.index);
     app.get('/fichas/:id', fichas.show);
     app.post('/fichas', fichas.create);
@@ -87,6 +89,18 @@ module.exports = function(app, passport, models, port) {
     app.post('/scouts', scouts.create);
     app.put('/scouts', scouts.update);
     app.delete('/scouts/:cum', scouts.delete);
+
+    app.get('/config/insigniasPorSeccion/:seccion',function(req, res){
+        res.status(200).json(config.insigniasPorSeccion(req.params.seccion));
+    });
+
+    app.get('/config/radiosFichaMedica',function(req, res){
+        res.status(200).json(config.radiosFichaMedica());
+    });
+    
+    app.get('/config/areaYObjetivoPorSeccion/:seccion/:area',function(req, res){
+        res.status(200).json(config.areaYObjetivoPorSeccion(req.params.seccion, req.params.area));
+    });
 //-------------------------------------------------------------------------------------------------------------
 
 };
