@@ -22,10 +22,6 @@ app.config(function($routeProvider, $mdThemingProvider) {
 	    templateUrl : "patrulla.html", 
 	    controller: "patrullaCtrl"
 	  })
-	  .when("/informes", {
-	    templateUrl : "informes.html", 
-	    controller: "informesCtrl"
-	  })
 	  .when("/fichasreme", {
 	    templateUrl : "fichasreme.html", 
 	    controller: "fichasCtrl"
