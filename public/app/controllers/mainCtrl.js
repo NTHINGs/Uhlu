@@ -5,12 +5,35 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config
 		console.log(user);
 		Config.insigniasPorSeccion($rootScope.user.seccion).then(function(data){
 			console.log(data);
-			$rootScope = $rootScope.concat(data);
+			$rootScope.area1 = data.area1;
+			$rootScope.area2 = data.area2;
+			$rootScope.area3 = data.area3;
+			$rootScope.area4 = data.area4;
+			$rootScope.area5 = data.area5;
+			$rootScope.area6 = data.area6;
+			$rootScope.objetivo = data.objetivo;
+			$rootScope.totalseccion = data.totalseccion;
+			$rootScope.user.clan = data.user.clan;
+			$rootScope.user.pequenogrupo = data.user.pequenogrupo;
+			$rootScope.insignias = Object.values(data.insignias);
 		});
 		Config.radiosFichaMedica().then(function(data){
 			$rootScope.radios = data;
 		});
+		
 	}
+
+	// Manejar el menu responsivo para tamaño movil
+	$scope.windowWidth= window.innerWidth;
+	$(window).resize(function(){
+		$scope.$apply(function(){
+			console.log($rootScope.user);
+		   $scope.windowWidth= window.innerWidth;
+		   if ($scope.windowWidth < 768) {
+				   $scope.toggle = false;
+		   }
+		});
+	});
 
 	$scope.isActive = function(route) {
 		return route === $location.path();
