@@ -44,7 +44,7 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $route, $location, Swe
 	// Imprimir
 	$scope.showImprimir = function(ev){
 		$mdDialog.show({
-			controller: imprimirCtrl,
+			controller: 'imprimirCtrl',
 			templateUrl: '/dialogs/imprimir.html',
 			parent: angular.element(document.body),
 			targetEvent: ev,
