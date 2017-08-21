@@ -15,13 +15,19 @@
                 <div class="col-xs-12">
                     <md-radio-group ng-model="print.opcion" ng-init="print.opcion = 'general'">
                         <md-radio-button value="general" class="md-primary" ng-click="patrullaClicked = false">General</md-radio-button>
-                        <md-radio-button value="patrulla" class="md-primary" ng-click="patrullaClicked = true">Por {{$root.user.pequenogrupo}}</md-radio-button>
+                        <md-radio-button value="patrulla" class="md-primary" ng-click="patrullaClicked = true">
+                            <div class="col-xs-12 col-sm-2">
+                                Por {{$root.user.pequenogrupo}}
+                            </div>
+                            <div class="col-xs-12 col-sm-2">
+                                <md-select ng-model='print.patrulla' aria-label="Patrullas" ng-disabled="!patrullaClicked">
+                                    <md-option ng-repeat="patrulla in patrullas" value="{{patrulla.id}}">
+                                    {{patrulla.nombre}}
+                                    </md-option>
+                                </md-select>
+                            </div>
+                        </md-radio-button>
                     </md-radio-group>
-                    <md-select ng-model='print.patrulla' ng-disabled="!patrullaClicked">
-                      <md-option ng-repeat="patrulla in patrullas" value="{{patrulla.id}}">
-                        {{patrulla.nombre}}
-                      </md-option>
-                    </md-select>
                 </div>
             </div>
             <div class="row">
