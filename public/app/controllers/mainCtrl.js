@@ -26,7 +26,6 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config
 	$scope.windowWidth= window.innerWidth;
 	$(window).resize(function(){
 		$scope.$apply(function(){
-			console.log($rootScope.user);
 		   $scope.windowWidth= window.innerWidth;
 		   if ($scope.windowWidth < 768) {
 				   $scope.toggle = false;
