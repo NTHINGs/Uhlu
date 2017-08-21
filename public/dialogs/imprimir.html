@@ -17,7 +17,7 @@
                         <md-radio-button value="general" class="md-primary" ng-click="patrullaClicked = false">General</md-radio-button>
                         <md-radio-button value="patrulla" class="md-primary" ng-click="patrullaClicked = true">Por {{$root.user.pequenogrupo}}</md-radio-button>
                     </md-radio-group>
-                    <md-select ng-model='print.patrulla' ng-disabled="patrullaClicked">
+                    <md-select ng-model='print.patrulla' ng-disabled="!patrullaClicked">
                       <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.id}}">
                         {{patrulla.nombre}}
                       </md-option>
