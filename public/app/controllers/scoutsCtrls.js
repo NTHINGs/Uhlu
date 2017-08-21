@@ -41,6 +41,18 @@ app.controller('scoutsCtrl', function($scope, $rootScope, $route, $location, Swe
 		});
 	}
 
+	// Imprimir
+	$scope.showImprimir = function(ev){
+		$mdDialog.show({
+			controller: imprimirCtrl,
+			templateUrl: '/dialogs/imprimir.html',
+			parent: angular.element(document.body),
+			targetEvent: ev,
+			clickOutsideToClose:true,
+			fullscreen: 'false' // Only for -xs, -sm breakpoints.
+		})
+	};
+
 	//Modal
 	$scope.showAgregarScout = function(ev) {
 		Patrullas.all($rootScope.user.id).then(function(patrullasArr) {
