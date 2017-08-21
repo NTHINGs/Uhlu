@@ -1,3 +1,3 @@
-app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config){
+app.controller('imprimirCtrl', function($scope, $rootScope, $http, $location, Config){
 	
 });
