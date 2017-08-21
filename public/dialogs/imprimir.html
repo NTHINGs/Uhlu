@@ -18,7 +18,7 @@
                         <md-radio-button value="patrulla" class="md-primary" ng-click="patrullaClicked = true">Por {{$root.user.pequenogrupo}}</md-radio-button>
                     </md-radio-group>
                     <md-select ng-model='print.patrulla' ng-disabled="!patrullaClicked">
-                      <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.id}}">
+                      <md-option ng-repeat="patrulla in patrullas" value="{{patrulla.id}}">
                         {{patrulla.nombre}}
                       </md-option>
                     </md-select>
