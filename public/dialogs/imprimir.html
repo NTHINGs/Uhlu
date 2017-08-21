@@ -1,1 +1,47 @@
-<h1>IT WORKS</h1>
+<md-dialog aria-label="Imprimir" flex>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Imprimir Informes</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                &times;
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <md-content>
+            <div class="row">
+                <div class="col-xs-12">
+                    <md-radio-group ng-model="print.opcion" ng-init="print.opcion = 'general'">
+                        <md-radio-button value="general" class="md-primary" ng-click="patrullaClicked = false">General</md-radio-button>
+                        <md-radio-button value="patrulla" class="md-primary" ng-click="patrullaClicked = true">Por {{$root.user.pequenogrupo}}</md-radio-button>
+                    </md-radio-group>
+                    <md-select ng-model='print.patrulla' ng-disabled="patrullaClicked">
+                      <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.id}}">
+                        {{patrulla.nombre}}
+                      </md-option>
+                    </md-select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <md-button class="md-raised md-primary" aria-label="Directorio" ng-click="generarReporte('directorio')">
+                        <span class="glyphicon glyphicon-user"></span>  Directorio
+                    </md-button>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <md-button class="md-raised md-primary" aria-label="Ficha Médica" ng-click="generarReporte('fichamedica')">
+                        <span class="glyphicon glyphicon-plus"></span>  Ficha Médica
+                    </md-button>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <md-button class="md-raised md-primary" aria-label="Cuadro de Adelanto" ng-click="generarReporte('cuadroadelanto')">
+                        <span class="glyphicon glyphicon-signal"></span>  Cuadro de Adelanto
+                    </md-button>
+                </div>
+            </div>
+        </md-content>
+    </md-dialog-content>
+</md-dialog>
+    
