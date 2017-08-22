@@ -11,16 +11,18 @@
 
     <md-dialog-content>
         <md-content class="container-fluid">
-            <div class="row">
+            <div class="row" style="padding-top:15px;">
                 <div class="col-xs-12">
                     <md-radio-group ng-model="print.opcion" ng-init="print.opcion = 'general'">
                         <md-radio-button value="general" class="md-primary" ng-click="patrullaClicked = false">General</md-radio-button>
                         <md-radio-button value="patrulla" class="md-primary" ng-click="patrullaClicked = true">Por {{$root.user.pequenogrupo}}</md-radio-button>
                     </md-radio-group>
+                </div>
+                <div class="col-xs-12">
                     <md-select ng-model='print.patrulla' aria-label="Patrullas" ng-disabled="!patrullaClicked">
-                      <md-option ng-repeat="patrulla in patrullas" value="{{patrulla.id}}">
-                        {{patrulla.nombre}}
-                      </md-option>
+                        <md-option ng-repeat="patrulla in patrullas" value="{{patrulla.id}}">
+                            {{patrulla.nombre}}
+                        </md-option>
                     </md-select>
                 </div>
             </div>
