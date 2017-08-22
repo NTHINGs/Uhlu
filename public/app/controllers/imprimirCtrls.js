@@ -1,4 +1,4 @@
-app.controller('imprimirCtrl', function($scope, $rootScope, $mdDialog, Patrullas){
+app.controller('imprimirCtrl', function($scope, $rootScope, $mdDialog, Patrullas, Imprimir){
     $scope.patrullaClicked = false;
 
     Patrullas.all($rootScope.user.id).then(function(patrullas) {
@@ -7,7 +7,9 @@ app.controller('imprimirCtrl', function($scope, $rootScope, $mdDialog, Patrullas
 
     $scope.generarReporte = function(tipo){
         console.log(tipo);
-    }
+        Imprimir.generarReporte(tipo, print);
+        
+    };
 
 	$scope.cancel = function(){
         $mdDialog.cancel(); 
