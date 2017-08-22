@@ -1,5 +1,9 @@
 Scout = require('../models/').Scout;
 Patrulla = require('../models/').Patrulla;
+
+// Reportes
+var pdf = require('../app/pdf/generarReporte');
+
 // CRUD Operations for Scout Model
 module.exports= {
   index(req, res) {
@@ -9,13 +13,13 @@ module.exports= {
         where: {user_id: req.params.id}
       }]
     })
-      .then(function (Scouts) {
+    .then(function (Scouts) {
         res.status(200).json(Scouts);
-      })
-      .catch(function (error) {
-        console.log(error)
+    })
+    .catch(function (error) {
+    console.log(error)
         res.status(500).json(error);
-      });
+    });
   },
 
   show(req, res) {
@@ -70,5 +74,55 @@ module.exports= {
     .catch(function (error){
       res.status(500).json(error);
     });
+  }, 
+
+  reporte(req, res){
+    //req.body.tipo = 'directorio' || 'fichamedica' || 'cuadroadelanto'
+    //req.body.print = { opcion: 'general' || 'patrulla' , patrulla: idpatrulla }
+
+    // Cambiar los parametros dependiendo del alcance del reporte.
+    var params = {}
+    if(req.body.print.opcion == 'patrulla'){
+        params = {
+            include: [{
+                model: Patrulla,
+                where: {user_id: req.params.id}
+            }],
+            where: {patrulla_id: req.body.print.patrulla}
+        }
+    }else if(req.body.print.opcion == 'general'){
+        params = {
+            include: [{
+                model: Patrulla,
+                where: {user_id: req.params.id}
+            }]
+        }
+    }
+
+    // Query
+    Scout.findAll(params)
+    .then(function(Scouts){
+        console.log(Scouts);
+        var doc = null;
+        //Generar el documento dependiendo del tipo seleccionado
+        switch(req.body.tipo){
+            case 'directorio':
+                doc = pdf.generarDirectorio(Scouts);
+                break;
+            case 'fichamedica':
+                doc = pdf.generarFichaMedica(Scouts);
+                break;
+            case 'cuadroadelanto':
+                doc = pdf.generarCuadroAdelanto(Scouts);
+                break;
+        }
+
+        // Enviar el pdf al navegador
+        doc.pipe(res);
+        doc.end();
+    })
+    .catch(function(error){
+        res.status(500).json(error);
+    })
   }
 };
