@@ -9,7 +9,6 @@ var fichas      = require('../app/controllers/fichas');
 // Config
 var config      = require('../app/config/config');
 
-
 module.exports = function(app, passport, models, port) {
 
 //-------Render main AngularJS apps----------------------------------------------------------------------------
@@ -89,6 +88,7 @@ module.exports = function(app, passport, models, port) {
     app.post('/scouts', scouts.create);
     app.put('/scouts', scouts.update);
     app.delete('/scouts/:cum', scouts.delete);
+    app.post('/generarReporte', scouts.reporte);
 
     app.get('/config/insigniasPorSeccion/:seccion',function(req, res){
         res.status(200).json(config.insigniasPorSeccion(req.params.seccion));
@@ -101,6 +101,7 @@ module.exports = function(app, passport, models, port) {
     app.get('/config/areaYObjetivoPorSeccion/:seccion/:area',function(req, res){
         res.status(200).json(config.areaYObjetivoPorSeccion(req.params.seccion, req.params.area));
     });
+
 //-------------------------------------------------------------------------------------------------------------
 
 };
