@@ -81,17 +81,18 @@ module.exports= {
     //req.body.print = { opcion: 'general' || 'patrulla' , patrulla: idpatrulla }
 
     // Cambiar los parametros dependiendo del alcance del reporte.
-    console.log(req.body);
+    console.log(req.params);
     var params = {}
-    if(req.body.print.opcion == 'patrulla'){
+    // TODO HARDCODED USER ID
+    if(req.params.opcion == 'patrulla'){
         params = {
             include: [{
                 model: Patrulla,
                 where: {user_id: '1'}
             }],
-            where: {patrulla_id: req.body.print.patrulla}
+            where: {patrulla_id: req.params.patrulla}
         }
-    }else if(req.body.print.opcion == 'general'){
+    }else if(req.params.opcion == 'general'){
         params = {
             include: [{
                 model: Patrulla,
@@ -106,7 +107,7 @@ module.exports= {
         console.log(Scouts);
         var doc = null;
         //Generar el documento dependiendo del tipo seleccionado
-        switch(req.body.tipo){
+        switch(req.params.tipo){
             case 'directorio':
                 doc = pdf.generarDirectorio(Scouts);
                 // Enviar el pdf al navegador
