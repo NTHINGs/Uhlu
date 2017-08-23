@@ -8,7 +8,7 @@ app.service('Imprimir', function($http, $q) {
             }
             $http
             .post('/generarReporte', body)
-            .then(function (response) {
+            .then(function (data) {
                 var file = new Blob([data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
                 window.open(fileURL);
