@@ -9,6 +9,7 @@ var fontDescriptors = {
         bolditalics: path.join(__dirname, '/fonts/Roboto-MediumItalic.ttf')
     }
 };
+
 module.exports = {
     generarDirectorio(Scouts) {
         console.log(Scouts);
@@ -34,7 +35,7 @@ module.exports = {
                 { text: Scouts[i].dataValues.cum},
                 { text: Scouts[i].dataValues.nombre},
                 { text: Scouts[i].dataValues.genero},
-                { text: Scouts[i].dataValues.fechanacimiento},
+                { text: '' + Scouts[i].dataValues.fechanacimiento.getDate() + '/' + (Scouts[i].dataValues.fechanacimiento.getMonth() + 1) + '/' + Scouts[i].dataValues.fechanacimiento.getFullYear() + ''},
                 { text: Scouts[i].dataValues.escuela},
                 { text: Scouts[i].dataValues.email},
                 { text: Scouts[i].dataValues.telefono},
