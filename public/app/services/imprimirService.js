@@ -1,11 +1,11 @@
-app.service('Imprimir', function($http, $location) {
+app.service('Imprimir', function($http, $window) {
     return {
         generarReporte: function(tipo, print){
-            var searchParams = {tipo:tipo, opcion:print.opcion};
+            var patrulla = '';
             if(typeof(print.patrulla) != 'undefined'){
-                searchParams.patrulla = print.patrulla;
+                patrulla = '&patrulla' + print.patrulla;
             }
-            $location.path('/generarReporte').search(searchParams);
+            $window.location.href = '/generarReporte?tipo=' + tipo + '&opcion=' + print.opcion + patrulla;
         }
     }
   });
