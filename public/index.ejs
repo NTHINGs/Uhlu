@@ -79,17 +79,17 @@
 				<li class="sidebar-brand">
 					<img src="img/logo.png"/>
 
-					<a class="link alinearizq" href="#!editarperfil" ng-click="toggle = !toggle"><span class="glyphicon glyphicon-cog"></span> Editar Mi Cuenta</a>
+					<a class="link alinearizq" href="/editarperfil" ng-click="toggle = !toggle"><span class="glyphicon glyphicon-cog"></span> Editar Mi Cuenta</a>
 				</li>
 				<li class="pages">
-					<a ng-class="{active:isActive('/')}" href="#/!" ng-click="toggle = !toggle"><span class="glyphicon glyphicon-user"></span> Mis Scouts</a>
+					<a ng-class="{active:isActive('/')}" href="/" ng-click="toggle = !toggle"><span class="glyphicon glyphicon-user"></span> Mis Scouts</a>
 				</li>
 				<!-- Si es $root.user.clan no debe aparecer -->
 				<li class='pages' ng-hide='$root.user.clan'>
-					<a ng-class="{active:isActive('/patrullas')}" href='#!patrullas' ng-click="toggle = !toggle"><span class='glyphicon glyphicon-list-alt'></span> Mis {{$root.user.pequenogrupo}}s</a>
+					<a ng-class="{active:isActive('/patrullas')}" href='/patrullas' ng-click="toggle = !toggle"><span class='glyphicon glyphicon-list-alt'></span> Mis {{$root.user.pequenogrupo}}s</a>
 				</li>
 				<li class="pages">
-					<a ng-class="{active:isActive('/fichasreme')}" href="#!fichasreme" ng-click="toggle = !toggle"><span class="glyphicon glyphicon-file"></span> Banco de Fichas Reme</a>
+					<a ng-class="{active:isActive('/fichasreme')}" href="/fichasreme" ng-click="toggle = !toggle"><span class="glyphicon glyphicon-file"></span> Banco de Fichas Reme</a>
 				</li>
 				<li>
 					<a href="https://www.facebook.com/Uhlu-850407085026750/" target="_blank"><span class="glyphicon glyphicon-thumbs-up"></span> Facebook</a>
