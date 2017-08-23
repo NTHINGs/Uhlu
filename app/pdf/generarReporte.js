@@ -11,6 +11,26 @@ var fontDescriptors = {
 };
 module.exports = {
     generarDirectorio(Scouts) {
+        var rows = [];
+        Scouts.forEach(function(scout){
+            // 'FOTO' 'CUM' 'NOMBRE' 'GÉNERO' 'FECHA DE NACIMIENTO' 'ESCUELA' 'E-MAIL' 'TELÉFONO' 'DOMICILIO'
+            rows.push([ 
+                {
+                    image: scout.dataValues.foto,
+                    width: 150,
+                    height: 150
+                }, 
+                { text: scout.dataValues.cum},
+                { text: scout.dataValues.nombre},
+                { text: scout.dataValues.genero},
+                { text: scout.dataValues.fechanacimiento},
+                { text: scout.dataValues.escuela},
+                { text: scout.dataValues.email},
+                { text: scout.dataValues.telefono},
+                { text: scout.dataValues.domicilio},
+            ]);
+        });
+
         // PDF Content
         var dd= {
             info: {
@@ -37,11 +57,29 @@ module.exports = {
                     layout: 'headerLineOnly',
                     table: {
                         headerRows: 1,
-                        widths: [ 'auto', 'auto', 'auto', '*' ],
-                        
+                        widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', '*' ],
+                        // cum: DataTypes.STRING, 
+                        // foto: DataTypes.TEXT,
+                        // nombre: DataTypes.STRING,
+                        // genero: DataTypes.STRING,
+                        // fechanacimiento: DataTypes.DATE,
+                        // escuela: DataTypes.STRING,
+                        // email: DataTypes.STRING,
+                        // telefono: DataTypes.STRING,
+                        // domicilio: DataTypes.STRING,
                         body: [
-                            [ { text: 'NOMBRE DE LA ACTIVIDAD', style: 'morrarro' }, { text: 'SECCIÓN', style: 'morrarro' }, { text: ''+nombrearea.toUpperCase()+'', style: 'morrarro' }, { text: 'PARTICIPANTES', style: 'morrarro' } ],
-                            [ ''+Ficha.nombreactividad+'', ''+Ficha.seccion+'', ''+areadedesarrollo+'', ''+Ficha.participantes+'' ]
+                            [ 
+                                { text: 'FOTO', style: 'morrarro' }, 
+                                { text: 'CUM', style: 'morrarro' }, 
+                                { text: 'NOMBRE', style: 'morrarro' }, 
+                                { text: 'GÉNERO', style: 'morrarro' }, 
+                                { text: 'FECHA DE NACIMIENTO', style: 'morrarro' }, 
+                                { text: 'ESCUELA', style: 'morrarro' }, 
+                                { text: 'E-MAIL', style: 'morrarro' },
+                                { text: 'TELÉFONO', style: 'morrarro' }, 
+                                { text: 'DOMICILIO', style: 'morrarro' },
+                            ],
+                            rows
                         ]
                     },
                     style: 'marginBot'
