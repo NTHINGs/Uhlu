@@ -88,7 +88,7 @@ module.exports = function(app, passport, models, port) {
     app.post('/scouts', scouts.create);
     app.put('/scouts', scouts.update);
     app.delete('/scouts/:cum', scouts.delete);
-    app.get('/#!/generarReporte', scouts.reporte);
+    app.get('/generarReporte', scouts.reporte);
 
     app.get('/config/insigniasPorSeccion/:seccion',function(req, res){
         res.status(200).json(config.insigniasPorSeccion(req.params.seccion));
