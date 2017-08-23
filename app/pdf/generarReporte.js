@@ -11,7 +11,17 @@ var fontDescriptors = {
 };
 module.exports = {
     generarDirectorio(Scouts) {
-        var rows = [];
+        var rows = [[
+            { text: 'FOTO', style: 'morrarro' }, 
+            { text: 'CUM', style: 'morrarro' }, 
+            { text: 'NOMBRE', style: 'morrarro' }, 
+            { text: 'GÉNERO', style: 'morrarro' }, 
+            { text: 'FECHA DE NACIMIENTO', style: 'morrarro' }, 
+            { text: 'ESCUELA', style: 'morrarro' }, 
+            { text: 'E-MAIL', style: 'morrarro' },
+            { text: 'TELÉFONO', style: 'morrarro' }, 
+            { text: 'DOMICILIO', style: 'morrarro' },
+        ]];
         for(var i = 0; i < Scouts.length; i++){
             // 'FOTO' 'CUM' 'NOMBRE' 'GÉNERO' 'FECHA DE NACIMIENTO' 'ESCUELA' 'E-MAIL' 'TELÉFONO' 'DOMICILIO'
             rows.push([ 
@@ -66,20 +76,7 @@ module.exports = {
                         // email: DataTypes.STRING,
                         // telefono: DataTypes.STRING,
                         // domicilio: DataTypes.STRING,
-                        body: [
-                            [ 
-                                { text: 'FOTO', style: 'morrarro' }, 
-                                { text: 'CUM', style: 'morrarro' }, 
-                                { text: 'NOMBRE', style: 'morrarro' }, 
-                                { text: 'GÉNERO', style: 'morrarro' }, 
-                                { text: 'FECHA DE NACIMIENTO', style: 'morrarro' }, 
-                                { text: 'ESCUELA', style: 'morrarro' }, 
-                                { text: 'E-MAIL', style: 'morrarro' },
-                                { text: 'TELÉFONO', style: 'morrarro' }, 
-                                { text: 'DOMICILIO', style: 'morrarro' },
-                            ],
-                            rows
-                        ]
+                        body: rows
                     },
                     style: 'marginBot'
                 },
