@@ -2,7 +2,7 @@ Scout = require('../models/').Scout;
 Patrulla = require('../models/').Patrulla;
 
 // Reportes
-var pdf = require('../app/pdf/generarReporte');
+var pdf = require('../pdf/generarReporte');
 
 // CRUD Operations for Scout Model
 module.exports= {
