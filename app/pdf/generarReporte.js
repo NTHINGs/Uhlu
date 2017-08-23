@@ -40,6 +40,7 @@ module.exports = {
                 { text: Scouts[i].dataValues.domicilio},
             ]);
         }
+        console.log(rows);
         // PDF Content
         var dd= {
             info: {
