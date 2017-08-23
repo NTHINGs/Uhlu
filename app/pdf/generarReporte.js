@@ -28,8 +28,8 @@ module.exports = {
             rows.push([ 
                 {
                     image: Scouts[i].dataValues.foto,
-                    width: 150,
-                    height: 150
+                    width: 50,
+                    height: 50
                 }, 
                 { text: Scouts[i].dataValues.cum},
                 { text: Scouts[i].dataValues.nombre},
@@ -51,6 +51,7 @@ module.exports = {
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
             },
+            pageOrientation: 'landscape',
             content: [
                 {
                     layout: 'noBorders',
@@ -69,15 +70,6 @@ module.exports = {
                     table: {
                         headerRows: 1,
                         widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', '*' ],
-                        // cum: DataTypes.STRING, 
-                        // foto: DataTypes.TEXT,
-                        // nombre: DataTypes.STRING,
-                        // genero: DataTypes.STRING,
-                        // fechanacimiento: DataTypes.DATE,
-                        // escuela: DataTypes.STRING,
-                        // email: DataTypes.STRING,
-                        // telefono: DataTypes.STRING,
-                        // domicilio: DataTypes.STRING,
                         body: rows
                     },
                     style: 'marginBot'
