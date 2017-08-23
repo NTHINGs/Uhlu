@@ -28,17 +28,17 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-4">
-                    <md-button class="md-raised md-primary" aria-label="Directorio" ng-click="generarReporte('directorio')">
+                    <md-button class="md-raised md-primary" aria-label="Directorio" href="https://uhlu.herokuapp.com/generarReporte?tipo=directorio^opcion={{print.opcion}}^patrulla={{print.patrulla}}">
                         <span class="glyphicon glyphicon-user"></span>  Directorio
                     </md-button>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                    <md-button class="md-raised md-primary" aria-label="Ficha Médica" ng-click="generarReporte('fichamedica')">
+                    <md-button class="md-raised md-primary" aria-label="Ficha Médica" href="https://uhlu.herokuapp.com/generarReporte?tipo=fichamedica^opcion={{print.opcion}}^patrulla={{print.patrulla}}">
                         <span class="glyphicon glyphicon-plus"></span>  Ficha Médica
                     </md-button>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                    <md-button class="md-raised md-primary" aria-label="Cuadro de Adelanto" ng-click="generarReporte('cuadroadelanto')">
+                    <md-button class="md-raised md-primary" aria-label="Cuadro de Adelanto" href="https://uhlu.herokuapp.com/generarReporte?tipo=cuadroadelanto^opcion={{print.opcion}}^patrulla={{print.patrulla}}">
                         <span class="glyphicon glyphicon-signal"></span>  Cuadro de Adelanto
                     </md-button>
                 </div>
