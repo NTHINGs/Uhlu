@@ -109,18 +109,23 @@ module.exports= {
         switch(req.body.tipo){
             case 'directorio':
                 doc = pdf.generarDirectorio(Scouts);
+                // Enviar el pdf al navegador
+                doc.pipe(res);
+                doc.end();
                 break;
             case 'fichamedica':
                 doc = pdf.generarFichaMedica(Scouts);
+                // Enviar el pdf al navegador
+                doc.pipe(res);
+                doc.end();
                 break;
             case 'cuadroadelanto':
                 doc = pdf.generarCuadroAdelanto(Scouts);
+                // Enviar el pdf al navegador
+                doc.pipe(res);
+                doc.end();
                 break;
         }
-
-        // Enviar el pdf al navegador
-        doc.pipe(res);
-        doc.end();
     })
     .catch(function(error){
         res.status(500).json(error);
