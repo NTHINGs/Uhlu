@@ -7,7 +7,7 @@ app.service('Imprimir', function($http, $q) {
                 print: print
             }
             $http
-            .post('/generarReporte', body)
+            .get('/generarReporte', body)
             .then(function (response) {
                 deferred.resolve(response.data);
             })
