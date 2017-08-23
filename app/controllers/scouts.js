@@ -87,7 +87,7 @@ module.exports= {
         params = {
             include: [{
                 model: Patrulla,
-                where: {user_id: req.user.id}
+                where: {user_id: '1'}
             }],
             where: {patrulla_id: req.body.print.patrulla}
         }
@@ -95,7 +95,7 @@ module.exports= {
         params = {
             include: [{
                 model: Patrulla,
-                where: {user_id: req.user.id}
+                where: {user_id: '1'}
             }]
         }
     }
