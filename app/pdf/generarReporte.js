@@ -61,7 +61,7 @@ module.exports = {
                         widths: [ '*', '*'],
                         
                         body: [
-                            [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 100,height: 100}, { text: 'Directorio', style: 'header'}]
+                            [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 80,height: 80}, { text: 'Directorio', style: 'header'}]
                         ]
                     },
                     style: 'marginBot'
