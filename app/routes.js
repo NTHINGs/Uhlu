@@ -88,7 +88,7 @@ module.exports = function(app, passport, models, port) {
     app.post('/scouts', scouts.create);
     app.put('/scouts', scouts.update);
     app.delete('/scouts/:cum', scouts.delete);
-    app.post('/generarReporte', scouts.reporte);
+    app.get('/generarReporte', scouts.reporte);
 
     app.get('/config/insigniasPorSeccion/:seccion',function(req, res){
         res.status(200).json(config.insigniasPorSeccion(req.params.seccion));
@@ -108,16 +108,16 @@ module.exports = function(app, passport, models, port) {
 // Middlewares
 // route middleware to make sure a user is logged in
 function inicioSesion(req, res, next) {
-    // Si el usuario tiene todos sus campos llenos. Continuar, si no mandarlo a la pagina para que los llene
-
+    
     // if user is authenticated in the session, carry on 
     if (req.isAuthenticated())
         return next();
-
+    
     // if they aren't redirect them to the home page
     res.redirect('/auth/facebook');
 }
 
+// Si el usuario tiene todos sus campos llenos. Continuar, si no mandarlo a la pagina para que los llene
 function faltanDatosUsuario(req, res, next) {
     users.findById(req.user.id)
     .then(function (User) {
