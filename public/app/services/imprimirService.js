@@ -9,8 +9,11 @@ app.service('Imprimir', function($http, $q) {
             $http
             .post('/generarReporte', body)
             .then(function (data) {
+                console.log(data);
                 var file = new Blob([data], {type: 'application/pdf'});
+                console.log(file);
                 var fileURL = URL.createObjectURL(file);
+                console.log(fileURL);
                 window.open(fileURL);
             })
             .catch(function (error) {
