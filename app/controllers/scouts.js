@@ -81,6 +81,7 @@ module.exports= {
     //req.body.print = { opcion: 'general' || 'patrulla' , patrulla: idpatrulla }
 
     // Cambiar los parametros dependiendo del alcance del reporte.
+    console.log(req.body);
     var params = {}
     if(req.body.print.opcion == 'patrulla'){
         params = {
