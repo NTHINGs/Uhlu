@@ -11,6 +11,7 @@ var fontDescriptors = {
 };
 module.exports = {
     generarDirectorio(Scouts) {
+        console.log(Scouts);
         var rows = [[
             { text: 'FOTO', style: 'morrarro' }, 
             { text: 'CUM', style: 'morrarro' }, 
