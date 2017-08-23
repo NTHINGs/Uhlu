@@ -7,7 +7,7 @@ app.controller('imprimirCtrl', function($scope, $rootScope, $mdDialog, Patrullas
 
     $scope.generarReporte = function(tipo){
         console.log(tipo);
-        Imprimir.generarReporte(tipo, print);
+        Imprimir.generarReporte(tipo, $scope.print);
         
     };
 
