@@ -29,7 +29,7 @@ module.exports = {
                 { text: Scouts[i].dataValues.telefono},
                 { text: Scouts[i].dataValues.domicilio},
             ]);
-        });
+        }
         // PDF Content
         var dd= {
             info: {
