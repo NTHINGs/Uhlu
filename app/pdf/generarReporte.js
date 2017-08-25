@@ -38,7 +38,7 @@ module.exports = {
                 }, 
                 { text: Scouts[i].dataValues.cum},
                 { text: Scouts[i].dataValues.nombre},
-                { text: Scouts[i].dataValues.Patrulla.nombre},
+                { text: Scouts[i].dataValues.Patrulla.dataValues.nombre},
                 { text: Scouts[i].dataValues.genero},
                 { text: '' + Scouts[i].dataValues.fechanacimiento.getDate() + '/' + (Scouts[i].dataValues.fechanacimiento.getMonth() + 1) + '/' + Scouts[i].dataValues.fechanacimiento.getFullYear() + ''},
                 { text: Scouts[i].dataValues.escuela},
