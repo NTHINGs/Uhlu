@@ -17,6 +17,7 @@ module.exports = {
             { text: 'FOTO', style: 'morrarro' }, 
             { text: 'CUM', style: 'morrarro' }, 
             { text: 'NOMBRE', style: 'morrarro' }, 
+            { text: 'PATRULLA', style: 'morrarro' }, 
             { text: 'GÉNERO', style: 'morrarro' }, 
             { text: 'FECHA DE NACIMIENTO', style: 'morrarro' }, 
             { text: 'ESCUELA', style: 'morrarro' }, 
@@ -37,6 +38,7 @@ module.exports = {
                 }, 
                 { text: Scouts[i].dataValues.cum},
                 { text: Scouts[i].dataValues.nombre},
+                { text: Scouts[i].dataValues.Patrulla.nombre},
                 { text: Scouts[i].dataValues.genero},
                 { text: '' + Scouts[i].dataValues.fechanacimiento.getDate() + '/' + (Scouts[i].dataValues.fechanacimiento.getMonth() + 1) + '/' + Scouts[i].dataValues.fechanacimiento.getFullYear() + ''},
                 { text: Scouts[i].dataValues.escuela},
@@ -45,7 +47,6 @@ module.exports = {
                 { text: Scouts[i].dataValues.domicilio},
             ]);
         }
-        console.log(rows);
         // PDF Content
         var dd= {
             info: {
