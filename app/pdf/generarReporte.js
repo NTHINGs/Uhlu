@@ -26,6 +26,9 @@ module.exports = {
         ]];
         for(var i = 0; i < Scouts.length; i++){
             // 'FOTO' 'CUM' 'NOMBRE' 'GÉNERO' 'FECHA DE NACIMIENTO' 'ESCUELA' 'E-MAIL' 'TELÉFONO' 'DOMICILIO'
+            if(Scouts[i].dataValues.foto == 'img/fpo_avatar.png'){
+                Scouts[i].dataValues.foto = '../../public/img/fpo_avatar.png';
+            }
             rows.push([ 
                 {
                     image: Scouts[i].dataValues.foto,
