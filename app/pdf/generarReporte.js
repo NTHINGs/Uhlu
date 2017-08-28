@@ -73,7 +73,7 @@ module.exports = {
                     layout: 'headerLineOnly',
                     table: {
                         headerRows: 1,
-                        widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', '*' ],
+                        widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', '*' ],
                         body: []
                     },
                     style: 'marginBot'
@@ -101,9 +101,8 @@ module.exports = {
             }
         };//end dd
         
+        // Agregar Filas
         dd.content[1].table.body = rows;
-
-        console.log(JSON.stringify(dd));
         
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
