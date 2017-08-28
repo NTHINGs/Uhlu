@@ -103,7 +103,7 @@ module.exports = {
         
         dd.content[1].table.body = rows;
 
-        console.log(dd);
+        console.log(JSON.stringify(dd));
         
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
