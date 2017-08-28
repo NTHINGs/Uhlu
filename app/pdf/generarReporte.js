@@ -143,9 +143,6 @@ module.exports = {
             }
         };//end dd
 
-        // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
-        Scouts = JSON.parse(JSON.stringify(Scouts).replace(/null/g, '""'));
-
         // Generar una pagina por scout
         for(var i = 0; i < Scouts.length; i++){
 
