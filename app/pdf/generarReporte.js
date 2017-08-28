@@ -161,7 +161,7 @@ module.exports = {
                         
                         // TODO FORMATO
                         body: [
-                            [ { text: 'CUM: '+ Scouts[i].dataValues.cum + '' , style: 'morrarro'}, { text: 'Sección: '+ seccion + '', style: 'morrarro'} ],
+                            [ { text: 'CUM: '+ Scouts[i].dataValues.cum + '' , style: 'morrarro'}, { text: 'Sección: '+ seccion.charAt(0).toUpperCase() + seccion.slice(1) + '', style: 'morrarro'} ],
                             [ { text: 'Nombre: '+ Scouts[i].dataValues.nombre + '',  colSpan: 2 , style: 'morrarro'}, { text: ''} ],
                         ]
                     },
@@ -198,7 +198,7 @@ module.exports = {
         
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
-    generarCuadroAdelanto(Scouts) {
+    generarCuadroAdelanto(Scouts, seccion) {
         
     }
 };
