@@ -104,7 +104,6 @@ module.exports= {
     // Query
     Scout.findAll(params)
     .then(function(Scouts){
-        console.log(Scouts);
         var doc = null;
         //Generar el documento dependiendo del tipo seleccionado
         switch(req.query.tipo){
