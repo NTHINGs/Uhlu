@@ -114,13 +114,13 @@ module.exports= {
                 doc.end();
                 break;
             case 'fichamedica':
-                doc = pdf.generarFichaMedica(Scouts);
+                doc = pdf.generarFichaMedica(Scouts, 'tropa');
                 // Enviar el pdf al navegador
                 doc.pipe(res);
                 doc.end();
                 break;
             case 'cuadroadelanto':
-                doc = pdf.generarCuadroAdelanto(Scouts);
+                doc = pdf.generarCuadroAdelanto(Scouts, 'tropa');
                 // Enviar el pdf al navegador
                 doc.pipe(res);
                 doc.end();
