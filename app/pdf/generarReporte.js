@@ -102,6 +102,8 @@ module.exports = {
         };//end dd
         
         dd.content[1].table.body = rows;
+
+        console.log(dd);
         
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
