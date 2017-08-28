@@ -10,6 +10,10 @@ var fontDescriptors = {
     }
 };
 
+function fichaTranslate(value){
+    return value == 1 ? "SI" : value == 0 ? "NO" : null;
+}
+
 module.exports = {
     generarDirectorio(Scouts) {
         var rows = [[
@@ -107,6 +111,7 @@ module.exports = {
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
     generarFichaMedica(Scouts, seccion) {
+        
         var dd= {
             info: {
                 title: 'FichasMedica',
@@ -140,6 +145,15 @@ module.exports = {
 
         // Generar una pagina por scout
         for(var i = 0; i < Scouts.length; i++){
+            // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
+            var scoutTemp = JSON.stringify(Scouts[i], function(key, value){
+                if(value === null){
+                    return "";
+                }
+                return value;
+            });
+            Scouts[i] = JSON.parse(scoutTemp);
+
             var page = [
                 {
                     layout: 'noBorders',
@@ -175,10 +189,53 @@ module.exports = {
                         
                         // TODO FORMATO
                         body: [
-                            [ { text: 'En caso de emergencia comunicarse con:', colSpan: 3 , style: 'morrarro'}, { text: ''}, { text: ''}],
+                            [ { text: 'En caso de emergencia comunicarse con', colSpan: 3 , style: 'morrarro'}, { text: ''}, { text: ''}],
                             [ { text: 'Nombre: '+ Scouts[i].dataValues.contacto1 + ''}, { text: 'Parentesco: '+ Scouts[i].dataValues.parentezco1 + '' }, { text:'Teléfono: '+ Scouts[i].dataValues.telefono1 + '' } ],
                             [ { text: 'Nombre: '+ Scouts[i].dataValues.contacto2 + ''}, { text: 'Parentesco: '+ Scouts[i].dataValues.parentezco2 + '' }, { text:'Teléfono: '+ Scouts[i].dataValues.telefono2 + '' } ],
                             [ { text: 'E-mail: '+ Scouts[i].dataValues.emailcontacto + '', colSpan: 3}, { text: '' }, { text:'' } ],
+                        ]
+                    },
+                    style: 'marginBot'
+                },
+                {
+                    layout: 'lightHorizontalLines',
+                    table: {
+                        headerRows: 0,
+                        widths: [ '*', '*'],
+                        
+                        // TODO FORMATO
+                        body: [
+                            [ { text: 'Datos Médicos Generales', colSpan: 2 , style: 'morrarro'}, { text: ''}],
+                            [ { text: 'Tipo de Sangre: '+ Scouts[i].dataValues.tiposangre + ''}, { text: 'Peso: '+ Scouts[i].dataValues.peso + '' }],
+                            [ { text: 'Estatura: '+ Scouts[i].dataValues.estatura + '', colSpan: 2}, { text: '' }],
+                            [ { text: 'No. Afiliación: '+ Scouts[i].dataValues.noafiliacion + '', colSpan: 2}, { text:'' } ],
+                            [ { text: 'Seguro: '+ Scouts[i].dataValues.seguro + ''}, { text:'Especificación: '+ Scouts[i].dataValues.especifique + '' } ],
+                        ]
+                    },
+                    style: 'marginBot'
+                },
+                {
+                    layout: 'lightHorizontalLines',
+                    table: {
+                        headerRows: 0,
+                        widths: [ '*', '*'],
+                        
+                        // TODO FORMATO
+                        body: [
+                            [ { text: 'Otros', colSpan: 2 , style: 'morrarro'}, { text: ''}],
+                            [ { text: 'Padece de pie plano: '+ fichaTranslate(Scouts[i].dataValues.pieplano) + ''}, { text: 'Usa zapato ortopédico: '+ fichaTranslate(Scouts[i].dataValues.pieplano) + '' }],
+                            [ { text: 'Operación reciente: '+ fichaTranslate(Scouts[i].dataValues.operacion) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.espoperacion + '' }],
+                            [ { text: 'Tiene alguna limitación física: '+ fichaTranslate(Scouts[i].dataValues.limitacion) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.esplimitacion + '' }],
+                            [ { text: 'Se ha realizado alguna transfusión sanguínea: '+ fichaTranslate(Scouts[i].dataValues.transfusion) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.esptransfusion + '' }],
+                            [ { text: 'Tiene alguna alergia o reacción a medicamentos o alimentos: '+ fichaTranslate(Scouts[i].dataValues.alergia) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.espalergia + '' }],
+                            [ { text: 'Padece alguna enfermedad como diabetes o hipertensión: '+ fichaTranslate(Scouts[i].dataValues.enfermedad) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.espenfermedad + '' }],
+                            [ { text: 'Actualmente esta bajo tratamiento médico: '+ fichaTranslate(Scouts[i].dataValues.tratamiento) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.esptratamiento + '' }],
+                            [ { text: 'Tiene problemas para oir o ver: '+ fichaTranslate(Scouts[i].dataValues.veroir) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.espveroir + '' }],
+                            [ { text: 'Utiliza algún aparato auditivo, dental o prótesis: '+ fichaTranslate(Scouts[i].dataValues.aparato) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.espaparato + '' }],
+                            [ { text: 'Cuenta con alguna dieta especial: '+ fichaTranslate(Scouts[i].dataValues.dieta) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.espdieta + '' }],
+                            [ { text: 'Fuma, toma ó consume drogas: '+ fichaTranslate(Scouts[i].dataValues.drogas) + ''}, { text: 'Especifique: '+ Scouts[i].dataValues.espdrogas + '' }],
+                            [ { text: 'Cuenta con el esquema nacional de vacunación completo: '+ fichaTranslate(Scouts[i].dataValues.vacunas) + '', colSpan: 2}, { text: ''}],
+                            [ { text: 'En caso de ser mujer, ¿se encuentra embarazada?: '+ fichaTranslate(Scouts[i].dataValues.embarazo) + '', colSpan: 2}, { text: ''}]
                         ]
                     },
                     style: 'marginBot'
