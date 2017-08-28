@@ -107,7 +107,68 @@ module.exports = {
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
     generarFichaMedica(Scouts) {
-        
+        var dd= {
+            info: {
+                title: 'Directorio',
+                author: 'Uhlu',
+                subject: 'Directorio',
+                keywords: 'scouts',
+                creator: 'http://uhluscout.com'
+            },
+            pageOrientation: 'Portrait',
+            content: [
+                [
+                    {
+                        layout: 'noBorders',
+                        table: {
+                            headerRows: 0,
+                            widths: [ '*', '*'],
+                            
+                            body: [
+                                [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 80,height: 80}, { text: 'Ficha Médica', style: 'header'}]
+                            ]
+                        },
+                        style: 'marginBot'
+                    },
+                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer'}  
+                ],
+                [
+                    {
+                        layout: 'noBorders',
+                        table: {
+                            headerRows: 0,
+                            widths: [ '*', '*'],
+                            
+                            body: [
+                                [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 80,height: 80}, { text: 'Ficha Médica', style: 'header'}]
+                            ]
+                        },
+                        style: 'marginBot'
+                    },
+                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer'}  
+                ]
+            ],
+            styles: {
+                header: {
+                    fontSize: 22,
+                    bold: true,
+                    alignment: 'right',
+                    margin: [ 0, 0, 0, 25 ],
+                    color: 'purple'
+                },
+                marginBot:{
+                    margin: [ 0, 0, 0, 25 ]
+                },
+                morrarro:{
+                    color: 'purple'
+                },
+                footer: {
+                    bold: true,
+                    alignment: 'right'
+                },
+            }
+        };//end dd
+        return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
     generarCuadroAdelanto(Scouts) {
         
