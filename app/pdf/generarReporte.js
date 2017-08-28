@@ -106,12 +106,12 @@ module.exports = {
         
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
-    generarFichaMedica(Scouts) {
+    generarFichaMedica(Scouts, seccion) {
         var dd= {
             info: {
-                title: 'Directorio',
+                title: 'FichasMedica',
                 author: 'Uhlu',
-                subject: 'Directorio',
+                subject: 'FichaMedica',
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
             },
@@ -161,8 +161,8 @@ module.exports = {
                         
                         // TODO FORMATO
                         body: [
-                            [ { text: 'CUM: '+ Scouts[i].dataValues.cum + ''}, { text: 'Sección: '+ Scouts[i].dataValues.seccion + '' } ],
-                            [ { text: 'Nombre: '+ Scouts[i].dataValues.nombre + '',  colSpan: 2}, { text: ''} ],
+                            [ { text: 'CUM: '+ Scouts[i].dataValues.cum + '' , style: 'morrarro'}, { text: 'Sección: '+ seccion + '', style: 'morrarro'} ],
+                            [ { text: 'Nombre: '+ Scouts[i].dataValues.nombre + '',  colSpan: 2 , style: 'morrarro'}, { text: ''} ],
                         ]
                     },
                     style: 'marginBot'
@@ -175,10 +175,10 @@ module.exports = {
                         
                         // TODO FORMATO
                         body: [
-                            [ { text: 'En caso de emergencia comunicarse con:', colSpan: 3 }, { text: ''}, { text: ''}],
+                            [ { text: 'En caso de emergencia comunicarse con:', colSpan: 3 , style: 'morrarro'}, { text: ''}, { text: ''}],
                             [ { text: 'Nombre: '+ Scouts[i].dataValues.contacto1 + ''}, { text: 'Parentesco: '+ Scouts[i].dataValues.parentezco1 + '' }, { text:'Teléfono: '+ Scouts[i].dataValues.telefono1 + '' } ],
                             [ { text: 'Nombre: '+ Scouts[i].dataValues.contacto2 + ''}, { text: 'Parentesco: '+ Scouts[i].dataValues.parentezco2 + '' }, { text:'Teléfono: '+ Scouts[i].dataValues.telefono2 + '' } ],
-                            [ { text: 'Nombre: '+ Scouts[i].dataValues.emailcontacto + '', colSpan: 3}, { text: '' }, { text:'' } ],
+                            [ { text: 'E-mail: '+ Scouts[i].dataValues.emailcontacto + '', colSpan: 3}, { text: '' }, { text:'' } ],
                         ]
                     },
                     style: 'marginBot'
