@@ -130,7 +130,7 @@ module.exports = {
                         },
                         style: 'marginBot'
                     },
-                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer'}  
+                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'}  
                 ],
                 [
                     {
@@ -145,7 +145,7 @@ module.exports = {
                         },
                         style: 'marginBot'
                     },
-                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer'}  
+                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'}  
                 ]
             ],
             styles: {
