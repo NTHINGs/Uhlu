@@ -144,13 +144,8 @@ module.exports = {
         };//end dd
 
         // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
-        var scoutTemp = JSON.stringify(Scouts, function(key, value){
-            if(value === null){
-                return "";
-            }
-            return value;
-        });
-        Scouts = JSON.parse(scoutTemp);
+        Scouts = JSON.parse(JSON.stringify(Scouts).replace(/null/g, '""'));
+
         // Generar una pagina por scout
         for(var i = 0; i < Scouts.length; i++){
 
