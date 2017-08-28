@@ -60,6 +60,7 @@
 	<script type="text/javascript" src='app/controllers/imprimirCtrls.js'></script>
 
 	<!-- Directives -->
+	<script type="text/javascript" src='app/directives/loading.js'></script>
 	<script type="text/javascript" src='app/directives/customOnChange.js'></script>
 	<script type="text/javascript" src='app/directives/resize.js'></script>
 	<!-- Services -->
@@ -71,9 +72,6 @@
 
 </head>
 <body>
-	<div class="LoadingModal">
-    	<div class="LoadingWheel" loading>
-	</div>
 	<div id="wrapper" ng-controller="mainCtrl" ng-class="{'toggled' : toggle && windowWidth < 768}" resize ng-init="user('<%=user%>')">
 	 	<!-- Sidebar -->
 	 	<div id="sidebar-wrapper">
