@@ -143,16 +143,16 @@ module.exports = {
             }
         };//end dd
 
+        // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
+        var scoutTemp = JSON.stringify(Scouts, function(key, value){
+            if(value === null){
+                return "";
+            }
+            return value;
+        });
+        Scouts = JSON.parse(scoutTemp);
         // Generar una pagina por scout
         for(var i = 0; i < Scouts.length; i++){
-            // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
-            // var scoutTemp = JSON.stringify(Scouts[i], function(key, value){
-            //     if(value === null){
-            //         return "";
-            //     }
-            //     return value;
-            // });
-            // Scouts[i] = JSON.parse(scoutTemp);
 
             var page = [
                 {
@@ -207,9 +207,8 @@ module.exports = {
                         body: [
                             [ { text: 'Datos Médicos Generales', colSpan: 2 , style: 'morrarro'}, { text: ''}],
                             [ { text: 'Tipo de Sangre: '+ Scouts[i].dataValues.tiposangre + ''}, { text: 'Peso: '+ Scouts[i].dataValues.peso + '' }],
-                            [ { text: 'Estatura: '+ Scouts[i].dataValues.estatura + '', colSpan: 2}, { text: '' }],
-                            [ { text: 'No. Afiliación: '+ Scouts[i].dataValues.noafiliacion + '', colSpan: 2}, { text:'' } ],
-                            [ { text: 'Seguro: '+ Scouts[i].dataValues.seguro + ''}, { text:'Especificación: '+ Scouts[i].dataValues.especifique + '' } ],
+                            [ { text: 'Estatura: '+ Scouts[i].dataValues.estatura + ''}, { text: 'No. Afiliación: '+ Scouts[i].dataValues.noafiliacion + ''}],
+                            [ { text: 'Seguro: '+ Scouts[i].dataValues.seguro + ''}, { text:'Especificación: '+ Scouts[i].dataValues.especifique + '' } ]
                         ]
                     },
                     style: 'marginBot'
