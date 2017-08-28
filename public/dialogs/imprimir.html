@@ -19,11 +19,14 @@
                     </md-radio-group>
                 </div>
                 <div class="col-xs-12">
-                    <md-select ng-model='print.patrulla' aria-label="Patrullas" ng-disabled="!patrullaClicked">
-                        <md-option ng-repeat="patrulla in patrullas" value="{{patrulla.id}}">
-                            {{patrulla.nombre}}
-                        </md-option>
-                    </md-select>
+                    <md-input-container class="md-block">
+                        <label>{{$root.user.pequenogrupo}}</label>
+                        <md-select ng-model='print.patrulla' aria-label="Patrullas" ng-disabled="!patrullaClicked">
+                            <md-option ng-repeat="patrulla in patrullas" value="{{patrulla.id}}">
+                                {{patrulla.nombre}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
                 </div>
             </div>
             <div class="row">
