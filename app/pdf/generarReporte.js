@@ -146,13 +146,13 @@ module.exports = {
         // Generar una pagina por scout
         for(var i = 0; i < Scouts.length; i++){
             // Validar Ficha para reemplazar nulos por strings vacios, para que no aparezca "null" en el pdf
-            var scoutTemp = JSON.stringify(Scouts[i], function(key, value){
-                if(value === null){
-                    return "";
-                }
-                return value;
-            });
-            Scouts[i] = JSON.parse(scoutTemp);
+            // var scoutTemp = JSON.stringify(Scouts[i], function(key, value){
+            //     if(value === null){
+            //         return "";
+            //     }
+            //     return value;
+            // });
+            // Scouts[i] = JSON.parse(scoutTemp);
 
             var page = [
                 {
