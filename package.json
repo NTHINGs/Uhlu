@@ -4,6 +4,7 @@
   "description": "Scouters del siglo XXI",
   "main": "app.js",
   "dependencies": {
+    "angular-loading-directive": "^1.0.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "connect-flash": "^0.1.1",
