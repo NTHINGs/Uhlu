@@ -140,7 +140,7 @@ module.exports = {
 
         // Generar una pagina por scout
         for(var i = 0; i < Scouts.length; i++){
-            dd.content.push([
+            var page = [
                 {
                     layout: 'noBorders',
                     table: {
@@ -153,9 +153,47 @@ module.exports = {
                     },
                     style: 'marginBot'
                 },
-    
-                { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'}  
-            ]);
+                {
+                    layout: 'noBorders',
+                    table: {
+                        headerRows: 0,
+                        widths: [ '*', '*'],
+                        
+                        // TODO FORMATO
+                        body: [
+                            [ { text: 'CUM: '+ Scouts[i].dataValues.cum + ''}, { text: 'Sección: '+ Scouts[i].dataValues.seccion + '' } ],
+                            [ { text: 'Nombre: '+ Scouts[i].dataValues.nombre + '',  colSpan: 2}, { text: ''} ],
+                        ]
+                    },
+                    style: 'marginBot'
+                },
+                {
+                    layout: 'lightHorizontalLines',
+                    table: {
+                        headerRows: 0,
+                        widths: [ '*', '*', '*'],
+                        
+                        // TODO FORMATO
+                        body: [
+                            [ { text: 'En caso de emergencia comunicarse con:', colSpan: 3 }, { text: ''}, { text: ''}],
+                            [ { text: 'Nombre: '+ Scouts[i].dataValues.contacto1 + ''}, { text: 'Parentesco: '+ Scouts[i].dataValues.parentezco1 + '' }, { text:'Teléfono: '+ Scouts[i].dataValues.telefono1 + '' } ],
+                            [ { text: 'Nombre: '+ Scouts[i].dataValues.contacto2 + ''}, { text: 'Parentesco: '+ Scouts[i].dataValues.parentezco2 + '' }, { text:'Teléfono: '+ Scouts[i].dataValues.telefono2 + '' } ],
+                            [ { text: 'Nombre: '+ Scouts[i].dataValues.emailcontacto + '', colSpan: 3}, { text: '' }, { text:'' } ],
+                        ]
+                    },
+                    style: 'marginBot'
+                }
+            ];
+
+            // Agregar salto de linea si existen mas scouts para formar otra pagina
+            if(i != Scouts.length - 1){
+                page.push({ text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'});
+            }else{
+                page.push({ text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer'});
+            }
+
+            // Agregar la pagina
+            dd.content.push(page);
         }
         
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
