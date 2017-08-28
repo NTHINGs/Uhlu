@@ -12,9 +12,9 @@ app.directive('loading', ['$http' ,function ($http)
             scope.$watch(scope.isLoading, function (v)  
             {  
                 if(v){  
-                    elm.show();  
+                    elm.style.display = 'block';  
                 }else{  
-                    elm.hide();  
+                    elm.style.display = 'none'; 
                 }  
             });  
         }  
