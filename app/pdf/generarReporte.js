@@ -116,38 +116,7 @@ module.exports = {
                 creator: 'http://uhluscout.com'
             },
             pageOrientation: 'Portrait',
-            content: [
-                [
-                    {
-                        layout: 'noBorders',
-                        table: {
-                            headerRows: 0,
-                            widths: [ '*', '*'],
-                            
-                            body: [
-                                [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 80,height: 80}, { text: 'Ficha Médica', style: 'header'}]
-                            ]
-                        },
-                        style: 'marginBot'
-                    },
-                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'}  
-                ],
-                [
-                    {
-                        layout: 'noBorders',
-                        table: {
-                            headerRows: 0,
-                            widths: [ '*', '*'],
-                            
-                            body: [
-                                [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 80,height: 80}, { text: 'Ficha Médica', style: 'header'}]
-                            ]
-                        },
-                        style: 'marginBot'
-                    },
-                    { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'}  
-                ]
-            ],
+            content: [],
             styles: {
                 header: {
                     fontSize: 22,
@@ -168,6 +137,27 @@ module.exports = {
                 },
             }
         };//end dd
+
+        // Generar una pagina por scout
+        for(var i = 0; i < Scouts.length; i++){
+            dd.content.push([
+                {
+                    layout: 'noBorders',
+                    table: {
+                        headerRows: 0,
+                        widths: [ '*', '*', '*'],
+                        
+                        body: [
+                            [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 80,height: 80}, { text: 'Ficha Médica', style: 'header'}, { text: ''+Scouts[i].dataValues.nombre+'', style: 'header'}]
+                        ]
+                    },
+                    style: 'marginBot'
+                },
+    
+                { text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'}  
+            ]);
+        }
+        
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
     generarCuadroAdelanto(Scouts) {
