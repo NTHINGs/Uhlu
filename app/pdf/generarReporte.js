@@ -259,7 +259,7 @@ module.exports = {
             pageMargins: 10,
             content: [
                 {
-                    layout: 'noBorders',
+                    layout: 'lightHorizontalLines',
                     table: {
                         headerRows: 0,
                         // promesa:
@@ -274,7 +274,8 @@ module.exports = {
                         // desarrollo:
                         // enlace:
                         // 11 insignias
-                        widths: [ '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%'],
+                        // widths: [ '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%'],
+                        widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
                         
                         body: [
                             [ 
@@ -293,17 +294,17 @@ module.exports = {
                             ],
                             [
                                 { text: 'NOMBRE', style: 'morrarro'},
-                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 50,height: 50},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 50,height: 50}
+                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 60,height: 16.3},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60}
                             ]
                         ]
                     },
