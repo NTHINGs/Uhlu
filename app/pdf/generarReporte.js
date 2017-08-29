@@ -295,17 +295,17 @@ module.exports = {
                             ],
                             [
                                 { text: 'NOMBRE', style: 'morrarro'},
-                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 80,height: 21.73},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60}
+                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 80,height: 21.73, alignment: 'center' },
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60, alignment: 'center' }
                             ]
                         ]
                     },
