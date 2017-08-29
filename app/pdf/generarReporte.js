@@ -304,7 +304,7 @@ module.exports = {
                                 { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60},
                                 { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60},
                                 { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 100,height: 27.16},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 80,height: 21.73},
                                 { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60}
                             ]
                         ]
