@@ -256,7 +256,7 @@ module.exports = {
                 creator: 'http://uhluscout.com'
             },
             pageOrientation: 'landscape',
-            pageMargins: [ 10 ],
+            pageMargins: 10,
             content: [
                 {
                     layout: 'noBorders',
