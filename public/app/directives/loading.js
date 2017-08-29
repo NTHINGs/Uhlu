@@ -9,7 +9,6 @@ app.directive('loading', ['$http' ,function ($http)
             };  
  
             scope.$watch(scope.isLoading, function (v){  
-                console.log(elm);
                 if(v){  
                     jQuery(elm).show();  
                 }else{  
