@@ -295,16 +295,121 @@ module.exports = {
                             ],
                             [
                                 { text: 'NOMBRE', style: 'morrarro'},
-                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60, alignment: 'center' },
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 80,height: 21.73, alignment: 'center' },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Promesa: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Etapa 1: "+'20/07/2017' },
+                                            { text: "Fecha Etapa 2: "+'20/07/2017' },
+                                            { text: "Fecha Etapa 3: "+'20/07/2017' },
+                                            { text: "Fecha Etapa 4: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Deportes Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Deportes Verde: "+'20/07/2017' },
+                                            { text: "Fecha Deportes Azul: "+'20/07/2017' },
+                                            { text: "Fecha Deportes Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Ecología Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Ecología Verde: "+'20/07/2017' },
+                                            { text: "Fecha Ecología Azul: "+'20/07/2017' },
+                                            { text: "Fecha Ecología Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Expresión Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Expresión Verde: "+'20/07/2017' },
+                                            { text: "Fecha Expresión Azul: "+'20/07/2017' },
+                                            { text: "Fecha Expresión Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Humanidades Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Humanidades Verde: "+'20/07/2017' },
+                                            { text: "Fecha Humanidades Azul: "+'20/07/2017' },
+                                            { text: "Fecha Humanidades Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Seguridad y Rescate Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Seguridad y Rescate Verde: "+'20/07/2017' },
+                                            { text: "Fecha Seguridad y Rescate Azul: "+'20/07/2017' },
+                                            { text: "Fecha Seguridad y Rescate Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Ciencia y Tecnología Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Ciencia y Tecnología Verde: "+'20/07/2017' },
+                                            { text: "Fecha Ciencia y Tecnología Azul: "+'20/07/2017' },
+                                            { text: "Fecha Ciencia y Tecnología Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Vida al Aire Libre Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Vida al Aire Libre Verde: "+'20/07/2017' },
+                                            { text: "Fecha Vida al Aire Libre Azul: "+'20/07/2017' },
+                                            { text: "Fecha Vida al Aire Libre Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/desarrollo_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Desarrollo Sustentable Amarilla: "+'20/07/2017' },
+                                            { text: "Fecha Desarrollo Sustentable Verde: "+'20/07/2017' },
+                                            { text: "Fecha Desarrollo Sustentable Azul: "+'20/07/2017' },
+                                            { text: "Fecha Desarrollo Sustentable Roja: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
+                                {
+                                    columns: [
+                                        [
+                                            { image: path.join(__dirname, '/../../public/img/insignias/enlace_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { text: "Fecha Senda de Enlace: "+'20/07/2017' },
+                                        ]
+                                    ]
+                                },
                                 { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60, alignment: 'center' }
                             ]
                         ]
