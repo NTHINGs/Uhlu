@@ -255,7 +255,7 @@ module.exports = {
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
             },
-            pageOrientation: 'Portrait',
+            pageOrientation: 'landscape',
             content: [
                 {
                     layout: 'noBorders',
@@ -292,17 +292,17 @@ module.exports = {
                             ],
                             [
                                 { text: 'LOBOS', style: 'header'},
-                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 25,height: 25},
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 25,height: 25}
+                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 50,height: 50},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 50,height: 50}
                             ]
                         ]
                     },
