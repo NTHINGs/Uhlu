@@ -324,6 +324,7 @@ module.exports = {
                     margin: [ 0, 0, 0, 25 ]
                 },
                 morrarro:{
+                    fontSize: 15,
                     color: 'purple'
                 },
                 footer: {
