@@ -114,9 +114,9 @@ module.exports = {
         
         var dd= {
             info: {
-                title: 'FichasMedica',
+                title: 'FichasMedicas',
                 author: 'Uhlu',
-                subject: 'FichaMedica',
+                subject: 'FichaMedicas',
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
             },
@@ -247,6 +247,89 @@ module.exports = {
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
     generarCuadroAdelanto(Scouts, seccion) {
-        
+        var dd= {
+            info: {
+                title: 'CuadroDeAdelanto',
+                author: 'Uhlu',
+                subject: 'CuadroDeAdelanto',
+                keywords: 'scouts',
+                creator: 'http://uhluscout.com'
+            },
+            pageOrientation: 'Portrait',
+            content: [
+                {
+                    layout: 'noBorders',
+                    table: {
+                        headerRows: 0,
+                        // promesa:
+                        // etapa:
+                        // deporte:
+                        // ecologia:
+                        // expresion:
+                        // humanidades:
+                        // rescate:
+                        // ciencia:
+                        // vida:
+                        // desarrollo:
+                        // enlace:
+                        // 11 insignias
+                        widths: [ '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
+                        
+                        body: [
+                            [ 
+                                { text: 'PATRULLA', style: 'morrarro'},
+                                { text: 'PROMESA', style: 'morrarro'},
+                                { text: 'ETAPA', style: 'morrarro'},
+                                { text: 'DEPORTES', style: 'morrarro'},
+                                { text: 'ECOLOGIA', style: 'morrarro'},
+                                { text: 'EXPRESION Y COMUNICACION', style: 'morrarro'},
+                                { text: 'HUMANIDADES', style: 'morrarro'},
+                                { text: 'SEGURIDAD Y RESCATE', style: 'morrarro'},
+                                { text: 'CIENCIA Y TECNOLOGIA', style: 'morrarro'},
+                                { text: 'VIDA AL AIRE LIBRE', style: 'morrarro'},
+                                { text: 'DESARROLLO SUSTENTABLE', style: 'morrarro'},
+                                { text: 'SENDA DE ENLACE', style: 'morrarro'},
+                            ],
+                            [
+                                { text: 'LOBOS', style: 'header'},
+                                { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 25,height: 25},
+                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 25,height: 25}
+                            ]
+                        ]
+                    },
+                    style: 'marginBot'
+                }
+            ],
+            styles: {
+                header: {
+                    fontSize: 22,
+                    bold: true,
+                    alignment: 'right',
+                    margin: [ 0, 0, 0, 25 ],
+                    color: 'purple'
+                },
+                marginBot:{
+                    margin: [ 0, 0, 0, 25 ]
+                },
+                morrarro:{
+                    color: 'purple'
+                },
+                footer: {
+                    bold: true,
+                    alignment: 'right'
+                },
+            }
+        };//end dd
+
+        return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     }
 };
