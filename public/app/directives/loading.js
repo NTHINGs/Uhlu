@@ -11,9 +11,9 @@ app.directive('loading', ['$http' ,function ($http)
             scope.$watch(scope.isLoading, function (v){  
                 console.log(elm);
                 if(v){  
-                    elm.show();  
+                    elm[0].show();  
                 }else{  
-                    elm.hide();  
+                    elm[0].hide();  
                 }  
             });  
         }  
