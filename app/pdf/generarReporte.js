@@ -394,7 +394,7 @@ module.exports = {
                                 {
                                     columns: [
                                         [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/desarrollo_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 60,height: 60, alignment: 'center' },
                                             { text: "Fecha Desarrollo Sustentable Amarilla: "+'20/07/2017' },
                                             { text: "Fecha Desarrollo Sustentable Verde: "+'20/07/2017' },
                                             { text: "Fecha Desarrollo Sustentable Azul: "+'20/07/2017' },
@@ -405,12 +405,11 @@ module.exports = {
                                 {
                                     columns: [
                                         [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/enlace_0.png'), width: 60,height: 60, alignment: 'center' },
+                                            { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60, alignment: 'center' },
                                             { text: "Fecha Senda de Enlace: "+'20/07/2017' },
                                         ]
                                     ]
-                                },
-                                { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60, alignment: 'center' }
+                                }
                             ]
                         ]
                     },
