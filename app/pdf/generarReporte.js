@@ -255,6 +255,7 @@ module.exports = {
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
             },
+            pageSize: 'A5',
             pageOrientation: 'landscape',
             pageMargins: 10,
             content: [
