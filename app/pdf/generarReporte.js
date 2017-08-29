@@ -256,6 +256,7 @@ module.exports = {
                 creator: 'http://uhluscout.com'
             },
             pageOrientation: 'landscape',
+            pageMargins: [ 10 ],
             content: [
                 {
                     layout: 'noBorders',
@@ -277,7 +278,7 @@ module.exports = {
                         
                         body: [
                             [ 
-                                { text: 'PATRULLA', style: 'morrarro'},
+                                { text: 'PATRULLA: LOBOS', style: 'morrarro'},
                                 { text: 'PROMESA', style: 'morrarro'},
                                 { text: 'ETAPA', style: 'morrarro'},
                                 { text: 'DEPORTES', style: 'morrarro'},
@@ -291,7 +292,7 @@ module.exports = {
                                 { text: 'SENDA DE ENLACE', style: 'morrarro'},
                             ],
                             [
-                                { text: 'LOBOS', style: 'header'},
+                                { text: 'NOMBRE', style: 'morrarro'},
                                 { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 50,height: 50},
                                 { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 50,height: 50},
                                 { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 50,height: 50},
