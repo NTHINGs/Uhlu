@@ -260,27 +260,25 @@ module.exports = {
             pageMargins: 10,
             content: [
                 {
+                    layout: 'noBorders',
+                    table: {
+                        headerRows: 0,
+                        widths: [ '*', '*'],
+                        
+                        body: [
+                            [ { image: path.join(__dirname, '/../../public/img/logo.png'), width: 80,height: 80}, { text: 'Cuadro de Adelanto', style: 'header'}]
+                        ]
+                    },
+                    style: 'marginBot'
+                },
+                {
                     layout: 'lightHorizontalLines',
                     table: {
                         headerRows: 1,
-                        // promesa:
-                        // etapa:
-                        // deporte:
-                        // ecologia:
-                        // expresion:
-                        // humanidades:
-                        // rescate:
-                        // ciencia:
-                        // vida:
-                        // desarrollo:
-                        // enlace:
-                        // 11 insignias
-                        widths: [ '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%'],
-                        // widths: [ '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
-                        
+                        widths: [ '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%'],                        
                         body: [
                             [ 
-                                { text: 'PATRULLA: LOBOS', style: 'morrarro'},
+                                { text: ''},
                                 { text: 'PROMESA', style: 'morrarro'},
                                 { text: 'ETAPA', style: 'morrarro'},
                                 { text: 'DEPORTES', style: 'morrarro'},
@@ -294,6 +292,7 @@ module.exports = {
                                 { text: 'SENDA DE ENLACE', style: 'morrarro'},
                             ],
                             [
+                                // TODO JUNTAR NOMBRE CON PATRULLA PARA PARSEO MAS SENCILLO
                                 { text: 'NOMBRE', style: 'morrarro'},
                                 {
                                     columns: [
