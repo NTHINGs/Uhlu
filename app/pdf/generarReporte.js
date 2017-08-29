@@ -276,7 +276,7 @@ module.exports = {
                         // enlace:
                         // 11 insignias
                         // widths: [ '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%', '8.33%'],
-                        widths: [ 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto', 'auto'],
+                        widths: [ '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'],
                         
                         body: [
                             [ 
