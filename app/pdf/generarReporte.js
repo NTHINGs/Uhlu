@@ -164,8 +164,6 @@ module.exports = {
                     table: {
                         headerRows: 0,
                         widths: [ '*', '*'],
-                        
-                        // TODO FORMATO
                         body: [
                             [ { text: 'CUM: '+ Scouts[i].dataValues.cum + '' , style: 'morrarro'}, { text: 'Sección: '+ seccion.charAt(0).toUpperCase() + seccion.slice(1) + '', style: 'morrarro'} ],
                             [ { text: 'Nombre: '+ Scouts[i].dataValues.nombre + '',  colSpan: 2 , style: 'morrarro'}, { text: ''} ],
@@ -178,8 +176,6 @@ module.exports = {
                     table: {
                         headerRows: 0,
                         widths: [ '*', '*', '*'],
-                        
-                        // TODO FORMATO
                         body: [
                             [ { text: 'En caso de emergencia comunicarse con', colSpan: 3 , style: 'morrarro'}, { text: ''}, { text: ''}],
                             [ { text: 'Nombre: '+ Scouts[i].dataValues.contacto1 + ''}, { text: 'Parentesco: '+ Scouts[i].dataValues.parentezco1 + '' }, { text:'Teléfono: '+ Scouts[i].dataValues.telefono1 + '' } ],
@@ -194,8 +190,6 @@ module.exports = {
                     table: {
                         headerRows: 0,
                         widths: [ '*', '*'],
-                        
-                        // TODO FORMATO
                         body: [
                             [ { text: 'Datos Médicos Generales', colSpan: 2 , style: 'morrarro'}, { text: ''}],
                             [ { text: 'Tipo de Sangre: '+ Scouts[i].dataValues.tiposangre + ''}, { text: 'Peso: '+ Scouts[i].dataValues.peso + '' }],
@@ -210,8 +204,6 @@ module.exports = {
                     table: {
                         headerRows: 0,
                         widths: [ '*', '*'],
-                        
-                        // TODO FORMATO
                         body: [
                             [ { text: 'Otros', colSpan: 2 , style: 'morrarro'}, { text: ''}],
                             [ { text: 'Padece de pie plano: '+ fichaTranslate(Scouts[i].dataValues.pieplano) + ''}, { text: 'Usa zapato ortopédico: '+ fichaTranslate(Scouts[i].dataValues.pieplano) + '' }],
@@ -290,124 +282,6 @@ module.exports = {
                                 { text: 'VIDA AL AIRE LIBRE', style: 'morrarro'},
                                 { text: 'DESARROLLO SUSTENTABLE', style: 'morrarro'},
                                 { text: 'SENDA DE ENLACE', style: 'morrarro'},
-                            ],
-                            [
-                                // TODO JUNTAR NOMBRE CON PATRULLA PARA PARSEO MAS SENCILLO
-                                { text: 'NOMBRE', style: 'morrarro'},
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/promesa_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Promesa: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/tropa/etapa_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Pista: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Senda: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Rumbo: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Travesía: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Deportes Amarilla: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Deportes Verde: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Deportes Azul: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Deportes Roja: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Ecología Amarilla: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Ecología Verde: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Ecología Azul: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Ecología Roja: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Expresión Amarilla: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Expresión Verde: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Expresión Azul: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Expresión Roja: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Humanidades Amarilla: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Humanidades Verde: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Humanidades Azul: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Humanidades Roja: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Rescate Amarilla: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Rescate Verde: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Rescate Azul: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Rescate Roja: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Ciencia Amarilla: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Ciencia Verde: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Ciencia Azul: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Ciencia Roja: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha V.A.L. Amarilla: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha V.A.L. Verde: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha V.A.L. Azul: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha V.A.L. Roja: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/tropa/desarrollo_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Mafeking: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Paxtu: "+'20/07/2017', style: 'fecha' },
-                                            { text: "Fecha Brownsea: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                },
-                                {
-                                    columns: [
-                                        [
-                                            { image: path.join(__dirname, '/../../public/img/insignias/tropa/enlace_0.png'), width: 60,height: 60, alignment: 'center' },
-                                            { text: "Fecha Senda de Enlace: "+'20/07/2017', style: 'fecha' },
-                                        ]
-                                    ]
-                                }
                             ]
                         ]
                     },
@@ -439,6 +313,136 @@ module.exports = {
                 },
             }
         };//end dd
+
+        for(var i = 0; i < Scouts.length; i++){
+            dd.content[0].table.body.push([
+                // TODO JUNTAR NOMBRE CON PATRULLA PARA PARSEO MAS SENCILLO
+                {
+                    columns:[
+                        [
+                            { text: ''+Scouts[i].dataValues.nombre+'', style: 'morrarro'},
+                        ],
+                        [
+                            { text: 'Patrulla: '+Scouts[i].dataValues.Patrulla.dataValues.nombre+''}
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/promesa_'+Scouts[i].dataValues.promesa+'.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Promesa: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/'+seccion+'/etapa_'+Scouts[i].dataValues.etapa+'.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Pista: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Senda: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Rumbo: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Travesía: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/deporte_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Deportes Amarilla: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Deportes Verde: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Deportes Azul: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Deportes Roja: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/ecologia_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Ecología Amarilla: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Ecología Verde: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Ecología Azul: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Ecología Roja: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/expresion_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Expresión Amarilla: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Expresión Verde: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Expresión Azul: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Expresión Roja: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/humanidades_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Humanidades Amarilla: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Humanidades Verde: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Humanidades Azul: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Humanidades Roja: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/rescate_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Rescate Amarilla: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Rescate Verde: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Rescate Azul: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Rescate Roja: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/ciencia_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Ciencia Amarilla: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Ciencia Verde: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Ciencia Azul: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Ciencia Roja: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/vida_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha V.A.L. Amarilla: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha V.A.L. Verde: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha V.A.L. Azul: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha V.A.L. Roja: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/'+seccion+'/desarrollo_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Mafeking: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Paxtu: "+'20/07/2017', style: 'fecha' },
+                            { text: "Fecha Brownsea: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                },
+                {
+                    columns: [
+                        [
+                            { image: path.join(__dirname, '/../../public/img/insignias/'+seccion+'/enlace_0.png'), width: 60,height: 60, alignment: 'center' },
+                            { text: "Fecha Senda de Enlace: "+'20/07/2017', style: 'fecha' },
+                        ]
+                    ]
+                }
+            ]);
+        }
 
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     }
