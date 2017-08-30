@@ -15,6 +15,14 @@ function fichaTranslate(value){
     return value == 1 ? "SI" : value == 0 ? "NO" : null;
 }
 
+function parseFecha(fecha){
+    if(fecha != null){
+        return fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear();
+    }else{
+        return "SIN FECHA"
+    }
+}
+
 module.exports = {
     generarDirectorio(Scouts) {
         var rows = [[
@@ -418,9 +426,9 @@ module.exports = {
                 console.log("VALOR: "+Scouts[i].dataValues[insignias[y].nombre]);
                 for(var x = 0; x < (Scouts[i].dataValues[insignias[y].nombre] + 1); x++){
                     if(insignias[y].nombre != 'promesa' && insignias[y].nombre != 'etapa' && insignias[y].nombre != 'desarrollo' && insignias[y].nombre != 'senda'){
-                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y].nombre].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getFullYear() + ''});                
+                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                
                     }else{
-                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y].nombre].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getFullYear() + ''});                                    
+                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                                    
                     }
                 }
             }
