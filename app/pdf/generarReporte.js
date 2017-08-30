@@ -1,5 +1,6 @@
 var PdfPrinter = require('pdfmake/src/printer');
 var path = require('path');
+var config = require('../config/config');
 
 var fontDescriptors = {
     Roboto: {
@@ -239,6 +240,7 @@ module.exports = {
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
     },
     generarCuadroAdelanto(Scouts, seccion) {
+        var data = config.insigniasPorSeccion(seccion);
         var dd= {
             info: {
                 title: 'CuadroDeAdelanto',
@@ -328,8 +330,7 @@ module.exports = {
                 {
                     columns: [
                         [
-                            { image: path.join(__dirname, '/../../public/img/insignias/promesa_'+Scouts[i].dataValues.promesa+'.png'), width: 60,height: 60, alignment: 'center' },
-                            { text: "Fecha Promesa: "+'20/07/2017', style: 'fecha' },
+                            { image: path.join(__dirname, '/../../public/img/insignias/promesa_'+Scouts[i].dataValues.promesa+'.png'), width: 60,height: 60, alignment: 'center' }
                         ]
                     ]
                 },
@@ -440,6 +441,21 @@ module.exports = {
                     ]
                 }
             ];
+
+            //columna, insignia (String), insignia (Valor)
+            var insignias = Object.values(data.insignias);
+            // insigniaValor = Scouts[i].dataValues.promesa
+            insignia = promesa
+            var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
+            for(var y = 0; y < 11; y++){
+                for(var x = 0; x < Scouts[i].dataValues[insignias[y]]; x++){
+                    if(insignias[y] != 'promesa' && insignias[y] != 'etapa' && insignias[y] != 'desarrollo' && insignias[y] != 'senda'){
+                        row[y].columns[0].push({ text: 'Fecha '+insignias[y].charAt(0).toUpperCase() + insignias[y].slice(1)+': ' + Scouts[i].dataValues['fecha'+insignias[y]].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y]].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y]].getFullYear() + ''});                
+                    }else{
+                        row[y].columns[0].push({ text: 'Fecha '+insignias[y].charAt(0).toUpperCase() + insignias[y].slice(1)+' '+colores[x]+': ' + Scouts[i].dataValues['fecha'+insignias[y]].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y]].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y]].getFullYear() + ''});                                    
+                    }
+                }
+            }
             dd.content[1].table.body.push(row);
         }
 
