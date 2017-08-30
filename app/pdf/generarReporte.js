@@ -315,7 +315,7 @@ module.exports = {
         };//end dd
 
         for(var i = 0; i < Scouts.length; i++){
-            dd.content[0].table.body.push([
+            dd.content[1].table.body.push([
                 // TODO JUNTAR NOMBRE CON PATRULLA PARA PARSEO MAS SENCILLO
                 {
                     columns:[
