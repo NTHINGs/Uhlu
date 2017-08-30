@@ -220,7 +220,7 @@
                                     <img ng-if='insignia.seccion == null' ng-src='img/insignias/{{insignia.nombre}}_{{scout.progresion[insignia.nombre]}}.png'/></br>
                                 </div>
                                 <div class="col-md-6">
-                                    <md-button class="md-raised" ng-click="borrar(insignia.nombre)">BORRAR {{insignia.nombre | uppercase}}</md-button>
+                                    <md-button class="md-raised" ng-click="borrarDialog(insignia.nombre)">BORRAR {{insignia.nombre | uppercase}}</md-button>
                                     <nav>
                                         <ul class="pagination custom">
                                             <li ng-if='!insignia.especial  && insignia.nombre != "desarrollo"' ng-repeat="opcion in insignia.opciones" class="insignia{{$index + 1}}" ng-class="{'active':  scout.progresion[insignia.nombre] == $index+1}">
