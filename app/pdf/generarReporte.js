@@ -413,6 +413,7 @@ module.exports = {
             // insigniaValor = Scouts[i].dataValues.promesa
             // insignia = promesa
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
+            console.log(insignias);
             for(var y = 1; y <= 11; y++){
                 for(var x = 0; x < Scouts[i].dataValues[insignias[y]]; x++){
                     if(insignias[y] != 'promesa' && insignias[y] != 'etapa' && insignias[y] != 'desarrollo' && insignias[y] != 'senda'){
