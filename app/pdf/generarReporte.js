@@ -447,7 +447,7 @@ module.exports = {
                 return data.insignias[key];
             });
             // insigniaValor = Scouts[i].dataValues.promesa
-            insignia = promesa
+            // insignia = promesa
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
             for(var y = 0; y < 11; y++){
                 for(var x = 0; x < Scouts[i].dataValues[insignias[y]]; x++){
