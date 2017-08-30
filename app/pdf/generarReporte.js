@@ -308,6 +308,7 @@ module.exports = {
                 },
                 fecha: {
                     fontSize: 8,
+                    alignment: 'center',
                     margin: [ 0, 0, 0, 5]
                 },
                 marginBot:{
@@ -326,7 +327,6 @@ module.exports = {
 
         for(var i = 0; i < Scouts.length; i++){
             var row = [
-                // TODO JUNTAR NOMBRE CON PATRULLA PARA PARSEO MAS SENCILLO
                 {
                     columns:[
                         [
