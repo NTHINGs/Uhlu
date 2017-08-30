@@ -424,45 +424,45 @@ module.exports = {
                     //Desarrollo sustentable requiere estar afuera del ciclo por los valores personalizados
                     switch(Scouts[i].dataValues[insignias[y].nombre]){
                         case 1:
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + '', style: 'fecha'});
                             break;
                         case 2:
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + '', style: 'fecha'});
                             break;
                         case 3:
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});                                        
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + '', style: 'fecha'});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + '', style: 'fecha'});                                        
                             break;
                         case 5:
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + '', style: 'fecha'});
                             break;
                         case 6:
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + '', style: 'fecha'});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + '', style: 'fecha'});
                             break;
                         case 7:
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});                                    
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + '', style: 'fecha'});                                    
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + '', style: 'fecha'});
                             break;
                         case 8:
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});                                    
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});                                    
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + '', style: 'fecha'});                                    
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + '', style: 'fecha'});                                    
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + '', style: 'fecha'});
                             break;
                     }
                 }
                 for(var x = 0; x < Scouts[i].dataValues[insignias[y].nombre]; x++){
                     if(insignias[y].nombre == 'promesa' || insignias[y].nombre == 'senda'){
                         //Si es promesa o senda
-                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                        
+                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + '', style: 'fecha'});                        
                     }else{
                         if(insignias[y].nombre == 'etapa'){
                             //Si es etapa jalar el nombre personalizado por seccion
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones[colores[x].charAt(0).toLowerCase() + colores[x].slice(1)]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                            
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones[colores[x].charAt(0).toLowerCase() + colores[x].slice(1)]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + '', style: 'fecha'});                            
                         }else{
                             //Insignias amarilla, verde, azul y roja
                             if(insignias[y].nombre != 'desarrollo'){
-                                row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                    
+                                row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + '', style: 'fecha'});                                    
                             }
                         }
                     }
