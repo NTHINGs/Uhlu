@@ -420,21 +420,48 @@ module.exports = {
             });
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
             for(var y = 0; y < 11; y++){
+                if(insignias[y].nombre == 'desarrollo'){
+                    //Desarrollo sustentable requiere estar afuera del ciclo por los valores personalizados
+                    switch(Scouts[i].dataValues[insignias[y].nombre]){
+                        case 1:
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});
+                            break;
+                        case 2:
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});
+                            break;
+                        case 3:
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});                                        
+                            break;
+                        case 5:
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            break;
+                        case 6:
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            break;
+                        case 7:
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});                                    
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            break;
+                        case 8:
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['verde']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo1']) + ''});                                    
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['azul']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo2']) + ''});                                    
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones['roja']+': ' + parseFecha(Scouts[i].dataValues['fechadesarrollo3']) + ''});
+                            break;
+                    }
+                }
                 for(var x = 0; x < Scouts[i].dataValues[insignias[y].nombre]; x++){
                     if(insignias[y].nombre == 'promesa' || insignias[y].nombre == 'senda'){
+                        //Si es promesa o senda
                         row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                        
                     }else{
                         if(insignias[y].nombre == 'etapa'){
-                            // colores[x]
+                            //Si es etapa jalar el nombre personalizado por seccion
                             row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones[colores[x].charAt(0).toLowerCase() + colores[x].slice(1)]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                            
                         }else{
-                            if(insignias[y].nombre == 'desarrollo'){
-                                if(x != 0){
-                                    row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones[colores[x].charAt(0).toLowerCase() + colores[x].slice(1)]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                                            
-                                }
-                            }else{
-                                row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                    
-                            }
+                            //Insignias amarilla, verde, azul y roja
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                    
                         }
                     }
                 }
