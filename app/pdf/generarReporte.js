@@ -419,7 +419,6 @@ module.exports = {
                 return data.insignias[key];
             });
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
-            console.log(insignias);
             for(var y = 0; y < 11; y++){
                 for(var x = 0; x < Scouts[i].dataValues[insignias[y].nombre]; x++){
                     if(insignias[y].nombre == 'promesa' || insignias[y].nombre == 'senda'){
