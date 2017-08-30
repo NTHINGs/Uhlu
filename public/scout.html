@@ -219,7 +219,7 @@
                                     </li>
 
                                     <li ng-if='insignia.nombre == "desarrollo"' ng-repeat="opcion in insignia.opciones" class="insigniadesarrollo{{$index + 1}}" ng-class="{'active':desarrollo[$index].clicked}">
-                                        <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="desarrolloClick($index+1)">{{opcion}}</md-button>
+                                        <md-button class="md-raised {{insignia.nombre}}{{$index + 1}}" ng-click="desarrolloClick($index+1, false)">{{opcion}}</md-button>
                                     </li>
                                 </ul>
                             </nav>
