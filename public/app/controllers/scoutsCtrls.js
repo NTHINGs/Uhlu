@@ -278,7 +278,7 @@ function ScoutProcess($scope, $rootScope, Patrullas) {
 			$scope.desarrollo= [{clicked: true, value: 1}, {clicked: true, value: 2}, {clicked: true, value: 5}];
 		break;
 	}
-	$scope.desarrolloClick = function(i) {
+	$scope.desarrolloClick = function(i, fromDialog) {
 		$scope.desarrollo[i-1].clicked = !$scope.desarrollo[i-1].clicked;
 		var valor = 0
 		$scope.desarrollo.forEach(function(d) {
@@ -286,7 +286,11 @@ function ScoutProcess($scope, $rootScope, Patrullas) {
 				valor += d.value;
 			}
 		})
-		$scope.scout.desarrollo = valor;
+		if(fromDialog){
+			$scope.scout.progresion.desarrollo = valor;
+		}else{
+			$scope.scout.desarrollo = valor
+		}
 	};
 
 	$scope.borrar = function(insignia) {
