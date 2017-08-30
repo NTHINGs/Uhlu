@@ -143,36 +143,28 @@
 }
 
 .pagination.custom > .insignia1 > button:hover,
-.pagination.custom > .insignia1 > button:focus,
 .pagination.custom > .insignia1 > span:hover,
-.pagination.custom > .insignia1 > span:focus,
 .pagination.custom > .insignia1.active > button,
 .pagination.custom > .insignia1.active > span {
     background:#F0AD4E!important;
     color: #FFF!important;
 }
 .pagination.custom > .insignia2 > button:hover,
-.pagination.custom > .insignia2 > button:focus,
 .pagination.custom > .insignia2 > span:hover,
-.pagination.custom > .insignia2 > span:focus,
 .pagination.custom > .insignia2.active > button,
 .pagination.custom > .insignia2.active > span {
     background:#5CB85C!important;
     color: #FFF!important;
 }
 .pagination.custom > .insignia3 > button:hover,
-.pagination.custom > .insignia3 > button:focus,
 .pagination.custom > .insignia3 > span:hover,
-.pagination.custom > .insignia3 > span:focus,
 .pagination.custom > .insignia3.active > button,
 .pagination.custom > .insignia3.active > span {
     background:#5BC0DE!important;
     color: #FFF!important;
 }
 .pagination.custom > .insignia4 > button:hover,
-.pagination.custom > .insignia4 > button:focus,
 .pagination.custom > .insignia4 > span:hover,
-.pagination.custom > .insignia4 > span:focus,
 .pagination.custom > .insignia4.active > button,
 .pagination.custom > .insignia4.active > span {
     background:#D9534F!important;
@@ -180,18 +172,14 @@
 }
 
 .pagination.custom > .insigniaespecial1 > button:hover,
-.pagination.custom > .insigniaespecial1 > button:focus,
 .pagination.custom > .insigniaespecial1 > span:hover,
-.pagination.custom > .insigniaespecial1 > span:focus,
 .pagination.custom > .insigniaespecial1.active > button,
 .pagination.custom > .insigniaespecial1.active > span {
     background: gray!important;
     color: #FFF!important;
 }
 .pagination.custom > .insigniaespecial2 > button:hover,
-.pagination.custom > .insigniaespecial2 > button:focus,
 .pagination.custom > .insigniaespecial2 > span:hover,
-.pagination.custom > .insigniaespecial2 > span:focus,
 .pagination.custom > .insigniaespecial2.active > button,
 .pagination.custom > .insigniaespecial2.active > span {
     background: #692B8D!important;
@@ -199,27 +187,21 @@
 }
 
 .pagination.custom > .insigniadesarrollo1 > button:hover,
-.pagination.custom > .insigniadesarrollo1 > button:focus,
 .pagination.custom > .insigniadesarrollo1 > span:hover,
-.pagination.custom > .insigniadesarrollo1 > span:focus,
 .pagination.custom > .insigniadesarrollo1.active > button,
 .pagination.custom > .insigniadesarrollo1.active > span {
     background:#5CB85C!important;
     color: #FFF!important;
 }
 .pagination.custom > .insigniadesarrollo2 > button:hover,
-.pagination.custom > .insigniadesarrollo2 > button:focus,
 .pagination.custom > .insigniadesarrollo2 > span:hover,
-.pagination.custom > .insigniadesarrollo2 > span:focus,
 .pagination.custom > .insigniadesarrollo2.active > button,
 .pagination.custom > .insigniadesarrollo2.active > span {
     background:#5BC0DE!important;
     color: #FFF!important;
 }
 .pagination.custom > .insigniadesarrollo3 > button:hover,
-.pagination.custom > .insigniadesarrollo3 > button:focus,
 .pagination.custom > .insigniadesarrollo3 > span:hover,
-.pagination.custom > .insigniadesarrollo3 > span:focus,
 .pagination.custom > .insigniadesarrollo3.active > button,
 .pagination.custom > .insigniadesarrollo3.active > span {
     background:#D9534F!important;
