@@ -461,7 +461,9 @@ module.exports = {
                             row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].opciones[colores[x].charAt(0).toLowerCase() + colores[x].slice(1)]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                            
                         }else{
                             //Insignias amarilla, verde, azul y roja
-                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                    
+                            if(insignias[y].nombre != 'desarrollo'){
+                                row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                    
+                            }
                         }
                     }
                 }
