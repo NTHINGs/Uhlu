@@ -315,15 +315,13 @@ module.exports = {
         };//end dd
 
         for(var i = 0; i < Scouts.length; i++){
-            dd.content[1].table.body.push([
+            var row = [
                 // TODO JUNTAR NOMBRE CON PATRULLA PARA PARSEO MAS SENCILLO
                 {
                     columns:[
                         [
                             { text: ''+Scouts[i].dataValues.nombre+'', style: 'morrarro'},
-                        ],
-                        [
-                            { text: 'Patrulla: '+Scouts[i].dataValues.Patrulla.dataValues.nombre+''}
+                            { text: 'Patrulla: '+Scouts[i].dataValues.Patrulla.dataValues.nombre+'', style: 'morrarro'}
                         ]
                     ]
                 },
@@ -441,7 +439,8 @@ module.exports = {
                         ]
                     ]
                 }
-            ]);
+            ];
+            dd.content[1].table.body.push(row);
         }
 
         return new PdfPrinter(fontDescriptors).createPdfKitDocument(dd);
