@@ -414,12 +414,12 @@ module.exports = {
             // insignia = promesa
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
             console.log(insignias);
-            for(var y = 1; y <= 11; y++){
+            for(var y = 0; y < 11; y++){
                 for(var x = 0; x < Scouts[i].dataValues[insignias[y].nombre]; x++){
                     if(insignias[y].nombre != 'promesa' && insignias[y].nombre != 'etapa' && insignias[y].nombre != 'desarrollo' && insignias[y].nombre != 'senda'){
-                        row[y].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y].nombre].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getFullYear() + ''});                
+                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y].nombre].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getFullYear() + ''});                
                     }else{
-                        row[y].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y].nombre].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getFullYear() + ''});                                    
+                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getDate() + '/' + (Scouts[i].dataValues['fecha'+insignias[y].nombre].getMonth() + 1) + '/' + Scouts[i].dataValues['fecha'+insignias[y].nombre].getFullYear() + ''});                                    
                     }
                 }
             }
