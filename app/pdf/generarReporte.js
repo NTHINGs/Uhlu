@@ -414,17 +414,13 @@ module.exports = {
                 }
             ];
 
-            //columna, insignia (String), insignia (Valor)
+            // Agregar fechas de la insignia (si es que la tiene)
             var insignias = Object.keys(data.insignias).map(function(key) {
                 return data.insignias[key];
             });
-            // insigniaValor = Scouts[i].dataValues.promesa
-            // insignia = promesa
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
             for(var y = 0; y < 11; y++){
-                console.log("INSIGNIA: "+insignias[y].nombre);
-                console.log("VALOR: "+Scouts[i].dataValues[insignias[y].nombre]);
-                for(var x = 0; x < (Scouts[i].dataValues[insignias[y].nombre] + 1); x++){
+                for(var x = 0; x < Scouts[i].dataValues[insignias[y].nombre]; x++){
                     if(insignias[y].nombre != 'promesa' && insignias[y].nombre != 'etapa' && insignias[y].nombre != 'desarrollo' && insignias[y].nombre != 'senda'){
                         row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                
                     }else{
@@ -432,7 +428,6 @@ module.exports = {
                     }
                 }
             }
-            console.log(JSON.stringify(row));
             dd.content[1].table.body.push(row);
         }
 
