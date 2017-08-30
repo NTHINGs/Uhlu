@@ -443,7 +443,9 @@ module.exports = {
             ];
 
             //columna, insignia (String), insignia (Valor)
-            var insignias = Object.values(data.insignias);
+            var insignias = Object.keys(data.insignias).map(function(key) {
+                return data.insignias[key];
+            });
             // insigniaValor = Scouts[i].dataValues.promesa
             insignia = promesa
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
