@@ -421,10 +421,21 @@ module.exports = {
             var colores =['Amarilla', 'Verde', 'Azul', 'Roja'];
             for(var y = 0; y < 11; y++){
                 for(var x = 0; x < Scouts[i].dataValues[insignias[y].nombre]; x++){
-                    if(insignias[y].nombre != 'promesa' && insignias[y].nombre != 'etapa' && insignias[y].nombre != 'desarrollo' && insignias[y].nombre != 'senda'){
-                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                
+                    if(insignias[y].nombre == 'promesa' || insignias[y].nombre == 'senda'){
+                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                        
                     }else{
-                        row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre]) + ''});                                    
+                        if(insignias[y].nombre == 'etapa'){
+                            // colores[x]
+                            row[y+1].columns[0].push({ text: 'Fecha '+insignias[y][insignias[y].nombre].opciones[colores[x].charAt(0).toLowerCase() + colores[x].slice(1)]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                            
+                        }else{
+                            if(insignias[y].nombre == 'desarrollo'){
+                                if(x != 0){
+                                    row[y+1].columns[0].push({ text: 'Fecha '+insignias[y][insignias[y].nombre].opciones[colores[x].charAt(0).toLowerCase() + colores[x].slice(1)]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                                            
+                                }
+                            }else{
+                                row[y+1].columns[0].push({ text: 'Fecha '+insignias[y].nombre.charAt(0).toUpperCase() + insignias[y].nombre.slice(1)+' '+colores[x]+': ' + parseFecha(Scouts[i].dataValues['fecha'+insignias[y].nombre + (x+1)]) + ''});                                    
+                            }
+                        }
                     }
                 }
             }
