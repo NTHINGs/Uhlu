@@ -297,6 +297,14 @@ function ScoutProcess($scope, $rootScope, Patrullas) {
 			})
 		}
 	};
+	$scope.borrarDialog = function(insignia) {
+		$scope.scout.progresion[insignia] = 0;
+		if(insignia == 'desarrollo'){
+			$scope.desarrollo.forEach(function(d) {
+				d.clicked = false;	
+			})
+		}
+	};
 }
 
 function jsonConcat(o1, o2) {
