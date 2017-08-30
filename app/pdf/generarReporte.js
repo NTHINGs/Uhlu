@@ -401,7 +401,7 @@ module.exports = {
                 {
                     columns: [
                         [
-                            { image: path.join(__dirname, '/../../public/img/insignias/'+seccion+'/desarrollo_'+Scouts[i].dataValues.desarrollo+'.png'), width: 110,height: 30, alignment: 'center' },
+                            { image: path.join(__dirname, '/../../public/img/insignias/'+seccion+'/desarrollo_'+Scouts[i].dataValues.desarrollo+'.png'), width: 100,height: 27, alignment: 'center' },
                         ]
                     ]
                 },
