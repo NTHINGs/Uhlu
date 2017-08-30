@@ -9,11 +9,13 @@ module.exports = {
 		dialect: 'mysql'
 	},
 	staging: {
-		url: process.env.DATABASE_URL,
-		dialect: 'sqlite'
+		url: '',
+		dialect: 'sqlite',
+		storage: 'Uhlu.sqlite'
 	},
 	test: {
-		url: process.env.DATABASE_URL,
-		dialect: 'sqlite'
+		url: '',
+		dialect: 'sqlite',
+		storage: 'Uhlu.sqlite'
 	}
 };
