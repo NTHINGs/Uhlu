@@ -1,1 +1,74 @@
-editarperfil.html
+<md-content>
+    <form name='userForm' id='userForm' novalidate ng-submit="userForm.$valid && save()">
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>CUM</label>
+            <input name='cum' ng-model="user.cum" required>
+            <div ng-messages="userForm.cum.$error">
+                <div ng-message="required">El CUM es requerido.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Sección</label>
+            <md-select name="seccion" ng-model="user.seccion" required>
+                <md-option value="manada">
+                    Manada de Lobatos
+                </md-option>
+                <md-option value="tropa">
+                    Tropa de Scouts
+                </md-option>
+                <md-option value="comunidad">
+                    Comunidad de Caminantes
+                </md-option>
+                <md-option value="clan">
+                    Clan de Rovers
+                </md-option>
+            </md-select>
+            <div ng-messages="userForm.seccion.$error">
+                <div ng-message="required">La sección es requerida.</div>
+            </div>
+        </md-input-container>
+
+        <!-- TODO (POSIBLE) traer todas las provincias y grupos del pais -->
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Provincia</label>
+            <md-select name="provincia" md-on-close="searchProvincia = ''" ng-model="user.provincia" required>
+                <md-select-header class="demo-select-header">
+                    <input ng-model="searchProvincia" type="search" placeholder="Buscar Provincia.." class="md-text">
+                </md-select-header>
+                <md-optgroup label="provincias">
+                    <md-option ng-value="provincia" ng-repeat="provincia in provincias | filter:searchProvincia">{{provincia}}</md-option>
+                </md-optgroup>
+            </md-select>
+            <div ng-messages="userForm.provincia.$error">
+                <div ng-message="required">La provincia es requerida.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Grupo</label>
+            <input type="number" name='grupo' ng-model="user.grupo" required>
+            <!-- <md-select name="grupo" md-on-close="searchGrupo = ''" ng-model="user.grupo" required>
+                <md-select-header class="demo-select-header">
+                    <input ng-model="searchGrupo" type="search" placeholder="Buscar Grupo.." class="md-text">
+                </md-select-header>
+                <md-optgroup label="grupos">
+                    <md-option ng-value="grupo" ng-repeat="grupo in grupos | filter:searchGrupo">{{grupo}}</md-option>
+                </md-optgroup>
+            </md-select> -->
+            <div ng-messages="userForm.grupo.$error">
+                <div ng-message="required">El grupo es requerido.</div>
+            </div>
+        </md-input-container>
+
+        <div layout="row">
+            <p class="advertencia" ng-show="!userForm.$valid">
+                Los campos con * son requeridos
+            </p>
+            <span flex></span>
+            <md-button type="submit" value="Guardar" class="md-raised md-primary" aria-label="guardar" ng-disabled="!userForm.$valid">
+                GUARDAR CAMBIOS
+            </md-button>
+        </div>
+    </form>
+</md-content>
