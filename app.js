@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 var express  = require('express');
 var session  = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -22,7 +21,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(express.static('public'));
-app.use(express.static('bower_components'));
+app.use(express.static('node_modules'));
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+    next();
+});
 app.set('view engine', 'ejs');
 
 // required for passport

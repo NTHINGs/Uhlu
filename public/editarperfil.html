@@ -33,9 +33,6 @@
         <md-input-container class="md-block" flex-gt-xs>
             <label>Provincia</label>
             <md-select name="provincia" md-on-close="searchProvincia = ''" ng-model="user.provincia" required>
-                <md-select-header class="demo-select-header">
-                    <input ng-model="searchProvincia" type="search" placeholder="Buscar Provincia.." class="md-text">
-                </md-select-header>
                 <md-optgroup label="provincias">
                     <md-option ng-value="provincia" ng-repeat="provincia in provincias | filter:searchProvincia">{{provincia}}</md-option>
                 </md-optgroup>

@@ -50,6 +50,7 @@ module.exports= {
       res.status(200).json(updatedRecords);
     })
     .catch(function (error){
+      console.log(error);
       res.status(500).json(error);
     });
   },

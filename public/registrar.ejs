@@ -30,7 +30,7 @@
     <script src="angular/angular.min.js"></script>
     <script src='angular-i18n/angular-locale_es-mx.js'></script>
     <script src='sweetalert/dist/sweetalert.min.js'></script>
-    <script src='ngSweetAlert/SweetAlert.min.js'></script>
+    <script src='angular-sweetalert/SweetAlert.min.js'></script>
 	<script src="angular-animate/angular-animate.min.js"></script>
 	<script src="angular-aria/angular-aria.min.js"></script>
 	<script src="angular-messages/angular-messages.min.js"></script>
@@ -43,7 +43,10 @@
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('registerCtrl', function($scope, $rootScope, SweetAlert, Users){
     		$scope.initUser = function(user) {
-    			$scope.user = JSON.parse(user);
+				$scope.user = JSON.parse(user);
+				Users.getProvincias().then(function(provincias){
+        			$scope.provincias = provincias;
+    			});
     		}
 
     		$scope.save = function() {
@@ -85,6 +88,18 @@
 					  .catch(function (error) {
 					    deferred.reject(error);
 					  });
+					return deferred.promise;
+				},
+				getProvincias: function(){
+					var deferred = $q.defer();
+					$http
+					.get('/config/provincias')
+					.then(function(response){ 
+						deferred.resolve(response.data);
+					})
+					.catch(function (error) {
+						deferred.reject(error);
+					});
 					return deferred.promise;
 				}
     		}
@@ -155,12 +170,16 @@
 	        	    </div>
 	        	</md-input-container>
 	        	<md-input-container class="md-block" flex-gt-xs>
-	        	    <label>Provincia</label>
-	        	    <input name='provincia' ng-model="user.provincia" required>
-	        	    <div ng-messages="scouterForm.provincia.$error">
-	        	        <div ng-message="required">La provincia es requerida.</div>
-	        	    </div>
-	        	</md-input-container>
+					<label>Provincia</label>
+					<md-select name="provincia" md-on-close="searchProvincia = ''" ng-model="user.provincia" required>
+						<md-optgroup label="provincias">
+							<md-option ng-value="provincia" ng-repeat="provincia in provincias | filter:searchProvincia">{{provincia}}</md-option>
+						</md-optgroup>
+					</md-select>
+					<div ng-messages="userForm.provincia.$error">
+						<div ng-message="required">La provincia es requerida.</div>
+					</div>
+				</md-input-container>
 	        	<div layout="row">
 	        	    <p class="advertencia" ng-show="!scouterForm.$valid">
 	        	        Los campos con * son requeridos

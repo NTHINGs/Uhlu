@@ -1,3 +1,6 @@
+var request = require('request');
+var cheerio = require('cheerio');
+
 module.exports = { 
     areaYObjetivoPorSeccion: function(seccion, areadedesarrollo) {
         var data = {
@@ -420,5 +423,33 @@ module.exports = {
                 "especificacion":null
             }
         ];
+    },
+    provincias: function(req, res){
+        url = 'http://www.scouts.org.mx/dirpro.html';
+        
+        // The structure of our request call
+        // The first parameter is our URL
+        // The callback function takes 3 parameters, an error, response status code and the html
+    
+        request(url, function(error, response, html){
+    
+            // First we'll check to make sure no errors occurred when making the request
+    
+            if(!error){
+                // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
+    
+                var $ = cheerio.load(html);
+    
+                // Finally, we'll define the variables we're going to capture
+    
+                var provincias = [];
+                $('.product h3').filter(function(){
+                    var data = $(this);
+                    provincias.push(data.text());
+                })
+
+                res.status(200).json(provincias);
+            }
+        })
     }
 };

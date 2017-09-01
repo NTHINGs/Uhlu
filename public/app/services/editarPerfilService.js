@@ -3,11 +3,21 @@ app.service('EditarPerfil', function($http, $q) {
         getProvincias: function(){
             var deferred = $q.defer();
             $http
-            .get('http://www.scouts.org.mx/dirpro.html')
-            .then(function(response){
-                var html = response.data;
- 
-                deferred.resolve();
+            .get('/config/provincias')
+            .then(function(response){ 
+                deferred.resolve(response.data);
+            })
+            .catch(function (error) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        },
+        editarPerfil: function(user){
+            var deferred = $q.defer();
+            $http
+            .put('/users', user)
+            .then(function(response){ 
+                deferred.resolve(response.data);
             })
             .catch(function (error) {
                 deferred.reject(error);

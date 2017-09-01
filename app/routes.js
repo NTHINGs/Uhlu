@@ -12,17 +12,17 @@ var config      = require('../app/config/config');
 module.exports = function(app, passport, models, port) {
 
 //-------Render main AngularJS apps----------------------------------------------------------------------------
-    app.get("/",function(req, res) {
+    app.get("/", inicioSesion, faltanDatosUsuario, function(req, res) {
         models.sequelize
           .authenticate()
           .then(function () {
             console.log('Connection successful');
-            users.findById(1).then(function(user) {
+            // users.findById(1).then(function(user) {
                 res.render(path.join(__dirname, '../public' ,'index.ejs'),{
-                    user: JSON.stringify(user)
-                    // user: JSON.stringify(req.user)
+                    // user: JSON.stringify(user)
+                    user: JSON.stringify(req.user)
                 });
-            })
+            // })
           })
           .catch(function(error) {
             console.log("Error creating connection:", error);
@@ -40,11 +40,11 @@ module.exports = function(app, passport, models, port) {
         res.render(path.join(__dirname, '../public' ,'bye.ejs'));
     });
 
-    app.get("/notificate",inicioSesion,function(req,res) {
+    app.get("/notificate",inicioSesion, faltanDatosUsuario,function(req,res) {
         // TODO
     });
     //For database deploy at Heroku
-    app.get("/database", function(req,res){
+    app.get("/database", inicioSesion, function(req,res){
         res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
     });
 
@@ -64,43 +64,43 @@ module.exports = function(app, passport, models, port) {
 	});
     
     //-------API EndPoints----------------------------------------------------------------------------
-    app.get('/users', users.index);
-    app.get('/users/:id', users.show);
-    app.post('/users', users.create);
-    app.put('/users', users.update);
-    app.delete('/users/:id', users.delete);
+    app.get('/users/:id', inicioSesion, users.show);
+    app.put('/users', inicioSesion, users.update);
+    app.delete('/users/:id', inicioSesion, users.delete);
     
-    app.get('/patrullas/:id', patrullas.index);
-    app.get('/patrullas/:id/:nombre', patrullas.show);
-    app.post('/patrullas', patrullas.create);
-    app.put('/patrullas', patrullas.update);
-    app.delete('/patrullas/:id', patrullas.delete);
+    app.get('/patrullas/:id', inicioSesion, patrullas.index);
+    app.get('/patrullas/:id/:nombre', inicioSesion, patrullas.show);
+    app.post('/patrullas', inicioSesion, patrullas.create);
+    app.put('/patrullas', inicioSesion, patrullas.update);
+    app.delete('/patrullas/:id', inicioSesion, patrullas.delete);
     
-    app.get('/fichas', fichas.index);
-    app.get('/fichas/:id', fichas.show);
-    app.post('/fichas', fichas.create);
-    app.put('/fichas', fichas.update);
-    app.delete('/fichas/:id', fichas.delete);
-    app.get('/imprimirFicha/:id', fichas.print);
+    app.get('/fichas', inicioSesion, fichas.index);
+    app.get('/fichas/:id', inicioSesion, fichas.show);
+    app.post('/fichas', inicioSesion, fichas.create);
+    app.put('/fichas', inicioSesion, fichas.update);
+    app.delete('/fichas/:id', inicioSesion, fichas.delete);
+    app.get('/imprimirFicha/:id', inicioSesion, fichas.print);
     
-    app.get('/scoutsfromuser/:id', scouts.index);
-    app.get('/scouts/:cum', scouts.show);
-    app.post('/scouts', scouts.create);
-    app.put('/scouts', scouts.update);
-    app.delete('/scouts/:cum', scouts.delete);
-    app.get('/generarReporte', scouts.reporte);
+    app.get('/scoutsfromuser/:id', inicioSesion, scouts.index);
+    app.get('/scouts/:cum', inicioSesion, scouts.show);
+    app.post('/scouts', inicioSesion, scouts.create);
+    app.put('/scouts', inicioSesion, scouts.update);
+    app.delete('/scouts/:cum', inicioSesion, scouts.delete);
+    app.get('/generarReporte', inicioSesion, scouts.reporte);
 
-    app.get('/config/insigniasPorSeccion/:seccion',function(req, res){
+    app.get('/config/insigniasPorSeccion/:seccion', inicioSesion,function(req, res){
         res.status(200).json(config.insigniasPorSeccion(req.params.seccion));
     });
 
-    app.get('/config/radiosFichaMedica',function(req, res){
+    app.get('/config/radiosFichaMedica', inicioSesion,function(req, res){
         res.status(200).json(config.radiosFichaMedica());
     });
     
-    app.get('/config/areaYObjetivoPorSeccion/:seccion/:area',function(req, res){
+    app.get('/config/areaYObjetivoPorSeccion/:seccion/:area', inicioSesion,function(req, res){
         res.status(200).json(config.areaYObjetivoPorSeccion(req.params.seccion, req.params.area));
     });
+
+    app.get('/config/provincias', config.provincias);
 
 //-------------------------------------------------------------------------------------------------------------
 

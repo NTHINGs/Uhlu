@@ -1,5 +1,5 @@
 var app = angular.module('Uhlu', ['ngRoute', 'ngMaterial','ngMessages','ngImgCrop', 'oitozero.ngSweetAlert']);
-app.config(function($routeProvider, $mdThemingProvider) {
+app.config(function($routeProvider, $mdThemingProvider, $httpProvider) {
 	$routeProvider
 	  .when("/", {
 	    templateUrl : "scouts.html", 
@@ -44,3 +44,5 @@ app.filter('capitalize', function() {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
+
+

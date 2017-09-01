@@ -1,10 +1,9 @@
-app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config){
+app.controller('mainCtrl', function($scope, $rootScope, $http, $location,$localStorage, Config){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$scope.user = function(user) {
-		$rootScope.user = JSON.parse(user);
 		console.log(user);
+		$rootScope.user = JSON.parse(user);
 		Config.insigniasPorSeccion($rootScope.user.seccion).then(function(data){
-			console.log(data);
 			$rootScope.area1 = data.area1;
 			$rootScope.area2 = data.area2;
 			$rootScope.area3 = data.area3;
