@@ -42,6 +42,7 @@
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('loginCtrl', function($scope, $rootScope, $http, SweetAlert){
+			$scope.user = {};
     		$scope.save = function() {
 				$http
 				.post('/entrar', user)
