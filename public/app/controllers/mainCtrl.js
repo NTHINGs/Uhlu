@@ -1,4 +1,4 @@
-app.controller('mainCtrl', function($scope, $rootScope, $http, $location,$localStorage, Config){
+app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
 	$scope.user = function(user) {
 		console.log(user);
