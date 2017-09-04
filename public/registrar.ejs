@@ -97,7 +97,7 @@
     			signup: function(user) {
 					var deferred = $q.defer();
 					$http
-					  .post('/signup', user)
+					  .post('/registrarse', user)
 					  .then(function (response) {
 					    deferred.resolve(response.data);
 					  })
@@ -169,7 +169,7 @@
 	        	    <label>Confirma Tu Contraseña</label>
 	        	    <input name='confirmpassword' type='password' ng-model="user.confirmpassword" compare-to="user.password" required>
 	        	    <div ng-messages="scouterForm.confirmpassword.$error">
-	        	        <div ng-message="required">Las contraseñas no coinciden.</div>
+	        	        <div ng-message="compareTo">Las contraseñas no coinciden.</div>
 	        	    </div>
 	        	</md-input-container>
 	        	<md-input-container class="md-block" flex-gt-xs>
