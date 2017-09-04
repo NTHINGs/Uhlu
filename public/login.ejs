@@ -42,15 +42,8 @@
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('loginCtrl', function($scope, $rootScope, $http, SweetAlert){
-    		$scope.save = function() {
-				$http
-				.post('/entrar', $scope.user)
-				.then(function (response) {
-				})
-				.catch(function (error) {
-					SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-				});
-    		}
+			console.log(typeof(<%=message%>));
+			// SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
     	});
 
     	app.config(function($mdThemingProvider) {
@@ -100,7 +93,7 @@
 	        	        <div ng-message="required">La Contraseña es requerida.</div>
 	        	    </div>
 	        	</md-input-container>
-				<%=message%>
+				
 	        	<div layout="row">
 					<md-button href="/registrarse" class="md-raised md-primary" aria-label="Login">
 	        	        Crear Cuenta
