@@ -5,7 +5,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 var User = require('../models/').User;
 
 // Variables
-var configAuth = require('./auth');
+// var configAuth = require('./auth');
 
 module.exports = function(passport, env) {
 
