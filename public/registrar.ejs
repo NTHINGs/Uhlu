@@ -47,7 +47,14 @@
 			});
 
     		if('<%=message%>'.length > 0){
-				SweetAlert.swal("Ooops..", '<%=message%> si no tienes o no recuerdas tu contraseña da click aqui <a href="/olvide">Olvidé mi contraseña</a>', "error");
+				SweetAlert.swal({
+					title: "Ooops..",
+					text: '<%=message%> si no tienes o no recuerdas tu contraseña da click aqui <a href="/olvide">Olvidé mi contraseña</a>',
+					confirmButtonColor: "#692B8D",
+					confirmButtonText: "Ok",
+					closeOnConfirm: true,
+					html: true
+				});
 			}
     	});
 
