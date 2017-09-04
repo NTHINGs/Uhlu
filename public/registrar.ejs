@@ -46,27 +46,9 @@
 				$scope.provincias = provincias;
 			});
 
-    		$scope.save = function() {
-    			Users.signup($scope.user)
-    			.then(function(user) {
-    				SweetAlert.swal({
-    					title: "Exito!",
-    					text: 'Bienvenid@ a Uhlu',
-    					type: "success",
-    					showCancelButton: false,
-    					confirmButtonColor: "#692B8D",
-    					confirmButtonText: "Gracias!",
-    					closeOnConfirm: true
-    				}, 
-    				function(){ 
-    					console.log("EXITO");
-    					window.location = "http://uhlu.herokuapp.com/"
-    				});
-    			})
-    			.catch(function(error) {
-    				SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-    			})
-    		}
+    		if('<%=message%>'.length > 0){
+				SweetAlert.swal("Ooops..", '<%=message%>', "error");
+			}
     	});
 
     	app.config(function($mdThemingProvider) {
@@ -94,18 +76,6 @@
 
     	app.service('Users', function($http, $q) {
     		return {
-    			signup: function(user) {
-					var deferred = $q.defer();
-					$http
-					  .post('/registrarse', user)
-					  .then(function (response) {
-					    deferred.resolve(response.data);
-					  })
-					  .catch(function (error) {
-					    deferred.reject(error);
-					  });
-					return deferred.promise;
-				},
 				getProvincias: function(){
 					var deferred = $q.defer();
 					$http
@@ -150,7 +120,7 @@
 				Hola!
 				<br><small>Proporcionanos los siguientes datos para ingresar a Uhlu</small>
 			</h1>
-	        <form name='scouterForm' id='scouterForm' novalidate ng-submit="scouterForm.$valid && save()">
+	        <form name='scouterForm' id='scouterForm' novalidate ng-submit="scouterForm.$valid" action="/registrarse" method="POST">
 	        	<md-input-container class="md-block" flex-gt-xs>
 	        	    <label>Email</label>
 	        	    <input name='email' ng-model="user.email" required>
