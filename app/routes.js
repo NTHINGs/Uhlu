@@ -35,17 +35,17 @@ module.exports = function(app, passport, models, port) {
 
     app.post('/entrar', passport.authenticate('local-login', {
         successRedirect : '/',
-        failureRedirect : '/login',
-        failureFlash : true 
+        failureRedirect : '/entrar',
+        failureFlash : true
     }));
 
-    app.get("/signup", inicioSesion, function(req, res) {
+    app.get("/registrarse", function(req, res) {
         res.render(path.join(__dirname, '../public' ,'registrar.ejs'));
     });
 
-    app.post('/signup', passport.authenticate('local-signup', {
+    app.post('/registrarse', passport.authenticate('local-signup', {
         successRedirect : '/',
-        failureRedirect : '/signup',
+        failureRedirect : '/registrarse',
         failureFlash : true
     }));
 
