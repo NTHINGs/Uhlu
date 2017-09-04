@@ -12,7 +12,7 @@ var config      = require('../app/config/config');
 module.exports = function(app, passport, models, port) {
 
 //-------Render main AngularJS apps----------------------------------------------------------------------------
-    app.get("/", inicioSesion, faltanDatosUsuario, function(req, res) {
+    app.get("/", inicioSesion, function(req, res) {
         models.sequelize
           .authenticate()
           .then(function () {
@@ -29,39 +29,46 @@ module.exports = function(app, passport, models, port) {
           });
     });
 
-    app.get("/registrar", inicioSesion, function(req, res) {
-        console.log(req.user)
-        res.render(path.join(__dirname, '../public' ,'registrar.ejs'),{
-            user: JSON.stringify(req.user)
-        });
+    app.get("/entrar", function(req, res){
+        res.render(path.join(__dirname, '../public' ,'login.ejs'));
     });
 
-    app.get("/bye", function(req, res) {
-        res.render(path.join(__dirname, '../public' ,'bye.ejs'));
+    app.post('/entrar', passport.authenticate('local-login', {
+        successRedirect : '/',
+        failureRedirect : '/login',
+        failureFlash : true 
+    }));
+
+    app.get("/signup", inicioSesion, function(req, res) {
+        res.render(path.join(__dirname, '../public' ,'registrar.ejs'));
     });
 
-    app.get("/notificate",inicioSesion, faltanDatosUsuario,function(req,res) {
-        // TODO
-    });
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/',
+        failureRedirect : '/signup',
+        failureFlash : true
+    }));
+
+    app.get('/logout', function(req, res) {
+        req.logout();
+	    res.render(path.join(__dirname, '../public' ,'bye.ejs'));
+	});
+
     //For database deploy at Heroku
     app.get("/database", inicioSesion, function(req,res){
         res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
     });
 
     //-------Facebook Login---------------------------------------------------------------------------------------
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    // app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect : '/',
-            failureRedirect : '/error'
-        })
-    );
+    // app.get('/auth/facebook/callback',
+    //     passport.authenticate('facebook', {
+    //         successRedirect : '/',
+    //         failureRedirect : '/error'
+    //     })
+    // );
     
-	app.get('/logout', function(req, res) {
-        req.logout();
-	    res.redirect('/bye');
-	});
     
     //-------API EndPoints----------------------------------------------------------------------------
     app.get('/users/:id', inicioSesion, users.show);
@@ -114,22 +121,23 @@ function inicioSesion(req, res, next) {
         return next();
     
     // if they aren't redirect them to the home page
-    res.redirect('/auth/facebook');
+    // res.redirect('/auth/facebook');
+    res.redirect('/entrar');
 }
 
 // Si el usuario tiene todos sus campos llenos. Continuar, si no mandarlo a la pagina para que los llene
-function faltanDatosUsuario(req, res, next) {
-    users.findById(req.user.id)
-    .then(function (User) {
-        if(User.dataValues.cum == ''|| User.dataValues.seccion == '' || User.dataValues.grupo == '' || User.dataValues.provincia == ''){
-            res.redirect('/registrar');
-        }else{
-            return next();
-        }
-    })
-    .catch(function (error){
-        console.log("ERROR" + error)
-      return error;
-    });
+// function faltanDatosUsuario(req, res, next) {
+//     users.findById(req.user.id)
+//     .then(function (User) {
+//         if(User.dataValues.cum == ''|| User.dataValues.seccion == '' || User.dataValues.grupo == '' || User.dataValues.provincia == ''){
+//             res.redirect('/registrar');
+//         }else{
+//             return next();
+//         }
+//     })
+//     .catch(function (error){
+//         console.log("ERROR" + error)
+//       return error;
+//     });
 
-}
+// }
