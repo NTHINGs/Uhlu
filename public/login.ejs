@@ -45,10 +45,11 @@
 			if('<%=message%>'.length > 0){
 				SweetAlert.swal({
 					title: "Ooops..",
-					text: '<%=message%> si no tienes o no recuerdas tu contraseña da click aqui <a href="/olvide">Olvidé mi contraseña</a>',
+					text: '<%=message%>',
 					confirmButtonColor: "#692B8D",
 					confirmButtonText: "Ok",
 					closeOnConfirm: true,
+					type: "error",
 					html: true
 				});
 			}
