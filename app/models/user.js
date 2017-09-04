@@ -6,10 +6,8 @@ module.exports = function(sequelize, DataTypes) {
 		seccion: DataTypes.STRING,
 		grupo: DataTypes.INTEGER,
 		provincia: DataTypes.STRING,
-		facebookid: DataTypes.STRING,
-		facebooktoken: DataTypes.STRING,
-		facebookname: DataTypes.STRING,
-		facebookemail: DataTypes.STRING,
+		email: DataTypes.STRING,
+		password: DataTypes.STRING
 	}, {
 		//set the timestamps to be underscored: (created_at, updated_at)
 		underscored: true,
