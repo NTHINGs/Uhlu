@@ -42,8 +42,9 @@
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('loginCtrl', function($scope, $rootScope, $http, SweetAlert){
-			console.log(typeof(<%=message%>));
-			// SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+			if('<%=message%>'.length > 0){
+				SweetAlert.swal("Ooops..", '<%=message%>', "error");
+			}
     	});
 
     	app.config(function($mdThemingProvider) {
