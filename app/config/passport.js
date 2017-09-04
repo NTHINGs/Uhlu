@@ -1,20 +1,19 @@
-// load all the things we need
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-// load up the user model
+// Model
 var User = require('../models/').User;
 
-// load the auth variables
+// Variables
 var configAuth = require('./auth');
 
-module.exports = function(passport, port) {
+module.exports = function(passport, env) {
 
-    // used to serialize the user for the session
+    // Serializar usuario a la sesion
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
 
-    // used to deserialize the user
+    // Deserializar usuario de la sesion
     passport.deserializeUser(function(id, done) {
             // done(null, user);
         User.findById(id)
@@ -26,68 +25,121 @@ module.exports = function(passport, port) {
         })
     });
 
-    // code for login (use('local-login', new LocalStategy))
-    // code for signup (use('local-signup', new LocalStategy))
+    // =========================================================================
+    // LOCAL ===================================================================
+    // =========================================================================
+    passport.use('local-login', new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true
+    },
+    function(req, email, password, done) {
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({
+            where: {
+                email: email,
+            }
+        })
+        .then(function(user) {
+            if (!user)
+                return done(null, false, req.flash('loginMessage', 'Ese usuario no existe!.'));
+
+            if (!bcrypt.compareSync(password, user.password))
+                return done(null, false, req.flash('loginMessage', 'Oops! contraseña incorrecta.'));
+
+            return done(null, user);
+        })
+        .catch(function (error){
+            return done(error);
+        });
+
+    }));
+
+    passport.use('local-signup', new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true
+    },
+    function(req, email, password, done) {
+        process.nextTick(function() {
+            User.findOne({
+                where: {
+                    email: email,
+                }
+            })
+            .then(function(user) {
+                if (user) {
+                    return done(null, false, req.flash('signupMessage', 'Ese Email Ya Existe En Uhlu.'));
+                } else {
+                    var newUser = {};
+
+                    newUser.cum = req.body.cum;
+                    newUser.seccion = req.body.seccion;
+                    newUser.grupo = req.body.grupo;
+                    newUser.provincia = req.body.provincia;
+                    newUser.email = email;
+                    newUser.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+
+                    User.create(newUser)
+                    .then(function (newUser) {
+                        return done(null, newUser);
+                    })
+                    .catch(function (error){
+                        throw err
+                    });
+                }
+
+            })
+            .catch(function (error){
+                return done(error);
+            });
+
+        });
+
+    }));
 
     // =========================================================================
     // FACEBOOK ================================================================
     // =========================================================================
-    passport.use(new FacebookStrategy({
+    // passport.use(new FacebookStrategy(configAuth[env].facebookAuth,
+    // function(token, refreshToken, profile, done) {
+    //     process.nextTick(function() {
+    //         // Encontrar al usuario en la base de datos
+    //         User.findAll({
+    //             where: {
+    //                 facebookid: profile.id,
+    //                 $and:{ facebookemail: profile.emails[0].value }
+    //              }
+    //         })
+    //         .then(function (user) {
+    //             if (user[0]) {
+    //                 return done(null, user[0]);
+    //             } else {
+    //                 var newUser = {};
+    //                 newUser.cum = "";
+    //                 newUser.seccion = "";
+    //                 newUser.grupo = "";
+    //                 newUser.provincia = "";
+    //                 newUser.facebookid    = profile.id;
+    //                 newUser.facebooktoken = token;
+    //                 newUser.facebookname  = (profile.name.givenName || "") + " " + (profile.name.middleName || "") + " " +  (profile.name.familyName || "");
+    //                 newUser.facebookemail = profile.emails[0].value;
 
-        // pull in our app id and secret from our auth.js file
-        clientID        : configAuth.facebookAuth.clientID,
-        clientSecret    : configAuth.facebookAuth.clientSecret,
-        callbackURL     : 'http://localhost:'+port+'/auth/facebook/callback',
-        profileFields   : configAuth.facebookAuth.profileFields
+    //                 User.create(newUser)
+    //                 .then(function (newUser) {
+    //                     return done(null, newUser);
+    //                 })
+    //                 .catch(function (error){
+    //                     throw err
+    //                 });
+    //             }
+    //         })
+    //         .catch(function (error){
+    //           return done(error);
+    //         });
+    //     });
 
-    },
-
-    // facebook will send back the token and profile
-    function(token, refreshToken, profile, done) {
-
-        // asynchronous
-        process.nextTick(function() {
-
-            // find the user in the database based on their facebook id
-            User.findAll({
-                where: {
-                    facebookid: profile.id
-                 }
-            })
-            .then(function (user) {
-                if (user[0]) {
-                    return done(null, user[0]); // user found, return that user
-                } else {
-                    // if there is no user found with that facebook id, create them
-                    var newUser            = {};
-
-                    // set all of the facebook information in our user model
-                    newUser.cum = "";
-                    newUser.seccion = "";
-                    newUser.grupo = "";
-                    newUser.provincia = "";
-                    newUser.facebookid    = profile.id; // set the users facebook id                   
-                    newUser.facebooktoken = token; // we will save the token that facebook provides to the user  
-                    newUser.facebookname  = (profile.name.givenName || "") + " " + (profile.name.middleName || "") + " " +  (profile.name.familyName || ""); // look at the passport user profile to see how names are returned
-                    newUser.facebookemail = profile.emails[0].value;
-
-                    // newUser.facebookemail = profile.emails[0].value; // facebook can return multiple emails so we'll take the first                
-                    // return done(null, newUser);
-                    // save our user to the database
-                    User.create(newUser)
-                      .then(function (newUser) {
-                        return done(null, newUser);
-                      })
-                      .catch(function (error){
-                        throw err
-                      });
-                }
-            })
-            .catch(function (error){
-              return done(error);
-            });
-        });
-
-    }));
+    // }));
 
 };
