@@ -30,7 +30,7 @@ module.exports = function(app, passport, models, port) {
     });
 
     app.get("/entrar", function(req, res){
-        res.render(path.join(__dirname, '../public' ,'login.ejs'));
+        res.render(path.join(__dirname, '../public' ,'login.ejs'), { message: req.flash('loginMessage') });
     });
 
     app.post('/entrar', passport.authenticate('local-login', {
@@ -40,7 +40,7 @@ module.exports = function(app, passport, models, port) {
     }));
 
     app.get("/registrarse", function(req, res) {
-        res.render(path.join(__dirname, '../public' ,'registrar.ejs'));
+        res.render(path.join(__dirname, '../public' ,'registrar.ejs'),{ message: req.flash('signupMessage') });
     });
 
     app.post('/registrarse', passport.authenticate('local-signup', {
