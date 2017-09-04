@@ -42,15 +42,12 @@
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('registerCtrl', function($scope, $rootScope, SweetAlert, Users){
-    		$scope.initUser = function(user) {
-				$scope.user = JSON.parse(user);
-				Users.getProvincias().then(function(provincias){
-        			$scope.provincias = provincias;
-    			});
-    		}
+			Users.getProvincias().then(function(provincias){
+				$scope.provincias = provincias;
+			});
 
     		$scope.save = function() {
-    			Users.update($scope.user)
+    			Users.signup($scope.user)
     			.then(function(user) {
     				SweetAlert.swal({
     					title: "Exito!",
@@ -63,7 +60,7 @@
     				}, 
     				function(){ 
     					console.log("EXITO");
-    					window.location = "http://localhost:8080/"
+    					window.location = "http://uhlu.herokuapp.com/"
     				});
     			})
     			.catch(function(error) {
@@ -74,14 +71,33 @@
 
     	app.config(function($mdThemingProvider) {
 			$mdThemingProvider.theme('default').primaryPalette('purple').dark(); 
-    	});
+		});
+		
+		app.directive("compareTo", function(){
+			return {
+				require: "ngModel",
+				scope: {
+					otherModelValue: "=compareTo"
+				},
+				link: function(scope, element, attributes, ngModel) {
+					
+					ngModel.$validators.compareTo = function(modelValue) {
+						return modelValue == scope.otherModelValue;
+					};
+		
+					scope.$watch("otherModelValue", function() {
+						ngModel.$validate();
+					});
+				}
+			};
+		});
 
     	app.service('Users', function($http, $q) {
     		return {
-    			update: function(user) {
+    			signup: function(user) {
 					var deferred = $q.defer();
 					$http
-					  .put('/users', user)
+					  .post('/signup', user)
 					  .then(function (response) {
 					    deferred.resolve(response.data);
 					  })
@@ -127,14 +143,35 @@
 </head>
 
 <body ng-controller="registerCtrl">
-	<md-content class="md-padding" layout-padding ng-init="initUser('<%=user%>')">
+	<md-content class="md-padding" layout-padding>
 		<div class="container-fluid registerContainer" >
 			<img class="img-responsive center-block" src="img/logo.png">
 			<h1>
-				Hola, {{user.facebookname}}!
-				<br><small>Nos faltan algunos de tus datos para completar tu registro</small>
+				Hola!
+				<br><small>Proporcionanos los siguientes datos para ingresar a Uhlu</small>
 			</h1>
 	        <form name='scouterForm' id='scouterForm' novalidate ng-submit="scouterForm.$valid && save()">
+	        	<md-input-container class="md-block" flex-gt-xs>
+	        	    <label>Email</label>
+	        	    <input name='email' ng-model="user.email" required>
+	        	    <div ng-messages="scouterForm.email.$error">
+	        	        <div ng-message="required">El Email es requerido.</div>
+	        	    </div>
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-xs>
+	        	    <label>Contraseña</label>
+	        	    <input name='password' type='password' ng-model="user.password" required>
+	        	    <div ng-messages="scouterForm.password.$error">
+	        	        <div ng-message="required">La contraseña es requerida.</div>
+	        	    </div>
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-xs>
+	        	    <label>Confirma Tu Contraseña</label>
+	        	    <input name='confirmpassword' type='password' ng-model="user.confirmpassword" compare-to="user.password" required>
+	        	    <div ng-messages="scouterForm.confirmpassword.$error">
+	        	        <div ng-message="required">Las contraseñas no coinciden.</div>
+	        	    </div>
+	        	</md-input-container>
 	        	<md-input-container class="md-block" flex-gt-xs>
 	        	    <label>CUM</label>
 	        	    <input name='cum' ng-model="user.cum" required>
