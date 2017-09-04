@@ -46,19 +46,6 @@
 				$http
 				.post('/entrar', $scope.user)
 				.then(function (response) {
-					SweetAlert.swal({
-    					title: "Exito!",
-    					text: 'Bienvenid@ a Uhlu',
-    					type: "success",
-    					showCancelButton: false,
-    					confirmButtonColor: "#692B8D",
-    					confirmButtonText: "Gracias!",
-    					closeOnConfirm: true
-    				}, 
-    				function(){ 
-    					console.log("EXITO");
-    					window.location = "http://uhlu.herokuapp.com/"
-    				});
 				})
 				.catch(function (error) {
 					SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
