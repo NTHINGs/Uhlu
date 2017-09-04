@@ -1,4 +1,4 @@
-var FacebookStrategy = require('passport-facebook').Strategy;
+// var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
 
 // Model
@@ -79,6 +79,7 @@ module.exports = function(passport, env) {
                     newUser.seccion = req.body.seccion;
                     newUser.grupo = req.body.grupo;
                     newUser.provincia = req.body.provincia;
+                    newUser.nombre = req.body.nombre;
                     newUser.email = email;
                     newUser.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 
