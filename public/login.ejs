@@ -53,6 +53,16 @@
 					html: true
 				});
 			}
+
+			$scope.existing = function(){
+				SweetAlert.swal({
+					title: "Ya tenías cuenta?",
+					text: 'Si ya tenias una cuenta en Uhlu, puedes generar una contraseña aqui. Te llegará un correo a la dirección de Facebook que teníamos dada de alta. <a href="/olvide">Generar contraseña</a>',
+					confirmButtonColor: "#692B8D",
+					confirmButtonText: "Ok",
+					closeOnConfirm: true
+				});
+			}
     	});
 
     	app.config(function($mdThemingProvider) {
@@ -108,6 +118,11 @@
 	        	    </div>
 	        	</md-input-container>
 				<a id='olvide' href="/olvide">Olvidé mi contraseña</a>
+				<div layout="row">
+					<md-button ng-click='existing' class="md-raised md-primary" aria-label="Login">
+	        	        Generar Contraseña a Cuenta Existente
+	        	    </md-button>
+				</div>
 	        	<div layout="row">
 					<md-button href="/registrarse" class="md-raised md-primary" aria-label="Login">
 	        	        Crear Cuenta
