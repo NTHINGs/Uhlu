@@ -41,18 +41,12 @@
     <!-- App -->
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
-    	app.controller('registerCtrl', function($scope, $rootScope, SweetAlert, Users){
-    		$scope.initUser = function(user) {
-				$scope.user = JSON.parse(user);
-				Users.getProvincias().then(function(provincias){
-        			$scope.provincias = provincias;
-    			});
-    		}
-
+    	app.controller('loginCtrl', function($scope, $rootScope, SweetAlert, Users){
     		$scope.save = function() {
-    			Users.update($scope.user)
-    			.then(function(user) {
-    				SweetAlert.swal({
+				$http
+				.post('/entrar', user)
+				.then(function (response) {
+					SweetAlert.swal({
     					title: "Exito!",
     					text: 'Bienvenid@ a Uhlu',
     					type: "success",
@@ -63,48 +57,18 @@
     				}, 
     				function(){ 
     					console.log("EXITO");
-    					window.location = "http://localhost:8080/"
+    					window.location = "http://uhlu.herokuapp.com/"
     				});
-    			})
-    			.catch(function(error) {
-    				SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
-    			})
+				})
+				.catch(function (error) {
+					SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+				});
     		}
     	});
 
     	app.config(function($mdThemingProvider) {
 			$mdThemingProvider.theme('default').primaryPalette('purple').dark(); 
     	});
-
-    	app.service('Users', function($http, $q) {
-    		return {
-    			update: function(user) {
-					var deferred = $q.defer();
-					$http
-					  .put('/users', user)
-					  .then(function (response) {
-					    deferred.resolve(response.data);
-					  })
-					  .catch(function (error) {
-					    deferred.reject(error);
-					  });
-					return deferred.promise;
-				},
-				getProvincias: function(){
-					var deferred = $q.defer();
-					$http
-					.get('/config/provincias')
-					.then(function(response){ 
-						deferred.resolve(response.data);
-					})
-					.catch(function (error) {
-						deferred.reject(error);
-					});
-					return deferred.promise;
-				}
-    		}
-    	});
-
     </script>
 
 	<style type="text/css">
@@ -126,67 +90,36 @@
 	</style>
 </head>
 
-<body ng-controller="registerCtrl">
-	<md-content class="md-padding" layout-padding ng-init="initUser('<%=user%>')">
+<body ng-controller="loginCtrl">
+	<md-content class="md-padding" layout-padding>
 		<div class="container-fluid registerContainer" >
 			<img class="img-responsive center-block" src="img/logo.png">
 			<h1>
-				Hola, {{user.facebookname}}!
-				<br><small>Nos faltan algunos de tus datos para completar tu registro</small>
+				Bienvenido a Uhlu!
 			</h1>
-	        <form name='scouterForm' id='scouterForm' novalidate ng-submit="scouterForm.$valid && save()">
+	        <form name='loginForm' id='loginForm' novalidate ng-submit="loginForm.$valid && save()">
 	        	<md-input-container class="md-block" flex-gt-xs>
-	        	    <label>CUM</label>
-	        	    <input name='cum' ng-model="user.cum" required>
-	        	    <div ng-messages="scouterForm.cum.$error">
-	        	        <div ng-message="required">El CUM es requerido.</div>
-	        	    </div>
-	        	</md-input-container>
-	        	<md-input-container class="md-block" flex-gt-sm>
-	        	    <label>Seccion</label>
-	        	    <md-select name="seccion" ng-model="user.seccion" required>
-	        	      <md-option value="manada">
-	        	        Manada de Lobatos
-	        	      </md-option>
-	        	      <md-option value="tropa">
-	        	        Tropa de Scouts
-	        	      </md-option>
-	        	      <md-option value="comunidad">
-	        	        Comunidad de Caminantes
-	        	      </md-option>
-	        	      <md-option value="clan">
-	        	        Clan de Rovers
-	        	      </md-option>
-	        	    </md-select>
-	        	    <div ng-messages="scouterForm.seccion.$error">
-	        	        <div ng-message="required">La seccion es requerida.</div>
+	        	    <label>Email</label>
+	        	    <input name='email' ng-model="user.email" required>
+	        	    <div ng-messages="loginForm.email.$error">
+	        	        <div ng-message="required">El Email es requerido.</div>
 	        	    </div>
 	        	</md-input-container>
 	        	<md-input-container class="md-block" flex-gt-xs>
-	        	    <label>Grupo</label>
-	        	    <input type="number" name='grupo' ng-model="user.grupo" required>
-	        	    <div ng-messages="scouterForm.grupo.$error">
-	        	        <div ng-message="required">El grupo es requerido.</div>
+	        	    <label>Contraseña</label>
+	        	    <input name='password' ng-model="user.password" required>
+	        	    <div ng-messages="loginForm.password.$error">
+	        	        <div ng-message="required">La Contraseña es requerida.</div>
 	        	    </div>
 	        	</md-input-container>
-	        	<md-input-container class="md-block" flex-gt-xs>
-					<label>Provincia</label>
-					<md-select name="provincia" md-on-close="searchProvincia = ''" ng-model="user.provincia" required>
-						<md-optgroup label="provincias">
-							<md-option ng-value="provincia" ng-repeat="provincia in provincias | filter:searchProvincia">{{provincia}}</md-option>
-						</md-optgroup>
-					</md-select>
-					<div ng-messages="userForm.provincia.$error">
-						<div ng-message="required">La provincia es requerida.</div>
-					</div>
-				</md-input-container>
+	        	
 	        	<div layout="row">
-	        	    <p class="advertencia" ng-show="!scouterForm.$valid">
+	        	    <p class="advertencia" ng-show="!loginForm.$valid">
 	        	        Los campos con * son requeridos
 	        	    </p>
 	        	    <span flex></span>
-	        	    <md-button type="submit" value="Registrar" class="md-raised md-primary" aria-label="registrar" ng-disabled="!scouterForm.$valid">
-	        	        REGISTRAR
+	        	    <md-button type="submit" value="Login" class="md-raised md-primary" aria-label="Login" ng-disabled="!loginForm.$valid">
+	        	        Iniciar Sesión
 	        	    </md-button>
 	        	</div>
 	        </form>
