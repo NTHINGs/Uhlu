@@ -129,12 +129,12 @@ module.exports = function(app, passport, models, port) {
     app.get('/olvide/:token', function(req, res){
         users.findByToken(req.params.token)
         .then(function(result){
-            var user = result[0].dataValues;
-            if(!user){
+            if(!result[0]){
                 console.log("token "+req.params.token+" inválido")
                 req.flash('message', 'Este link es inválido o ya expiró');
                 return res.redirect('/entrar');
             }
+            var user = result[0].dataValues;
 
             res.render(path.join(__dirname, '../public' ,'olvide.ejs'), {token: req.params.token});
         })
