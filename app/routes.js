@@ -56,6 +56,12 @@ module.exports = function(app, passport, models, port) {
         failureFlash : true
     }));
 
+    app.use(function(req, res, next){
+        res.locals.message = req.flash('message');
+        res.locals.success = req.flash('success');
+        next();
+    });
+
     app.post('/mandarEmailRecuperacion',function(req, res){
         async.waterfall([
             function(done){
