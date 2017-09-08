@@ -45,7 +45,7 @@
 			Users.getProvincias().then(function(provincias){
 				$scope.provincias = provincias;
 			});
-			<%if(message){%>
+			<%if(locals.message){%>
 				SweetAlert.swal({
 					title: "Ooops..",
 					text: '<%=message%> si no tienes o no recuerdas tu contraseña da click aqui'+
