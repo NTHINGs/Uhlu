@@ -59,7 +59,10 @@ module.exports = function(app, passport, models, port) {
             function(done){
                 crypto.randomBytes(20, function(err, buf){
                     var token = buf.toString('hex');
-                    done(err, token);
+                    if(err){
+                        res.status(500).send(err);
+                    }
+                    done(null, token);
                 });
             },
             function(token, done){
