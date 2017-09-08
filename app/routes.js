@@ -81,11 +81,11 @@ module.exports = function(app, passport, models, port) {
                         }
                     })
                     .then(function (user) {
-                        done(null, user);
+                        done(null, token, user);
                     })
                     .catch(function (error){
                         console.log(error);
-                        done(error, user);
+                        done(error, token, user);
                     });
                 })
                 .catch(function(error){
