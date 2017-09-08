@@ -93,7 +93,7 @@ module.exports = function(app, passport, models, port) {
                 });
             },
             function(token, user, done){
-                var smtp = nodemailer.createTransport('SMTP', {
+                var smtp = nodemailer.createTransport({
                     service: 'Gmail',
                     auth: {
                         user: 'uhluscout@gmail.com',
