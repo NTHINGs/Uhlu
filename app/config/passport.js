@@ -44,10 +44,10 @@ module.exports = function(passport, env) {
         })
         .then(function(user) {
             if (!user)
-                return done(null, false, req.flash('loginMessage', 'Ese usuario no existe!.'));
+                return done(null, false, req.flash('message', 'Ese usuario no existe!.'));
 
             if (!bcrypt.compareSync(password, user.password))
-                return done(null, false, req.flash('loginMessage', 'Oops! contraseña incorrecta.'));
+                return done(null, false, req.flash('message', 'Oops! contraseña incorrecta.'));
 
             return done(null, user);
         })
@@ -71,7 +71,7 @@ module.exports = function(passport, env) {
             })
             .then(function(user) {
                 if (user) {
-                    return done(null, false, req.flash('signupMessage', 'Ese Email Ya Existe En Uhlu.'));
+                    return done(null, false, req.flash('message', 'Ese Email Ya Existe En Uhlu.'));
                 } else {
                     var newUser = {};
 
