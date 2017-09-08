@@ -59,17 +59,14 @@ module.exports = function(app, passport, models, port) {
             function(done){
                 crypto.randomBytes(20, function(err, buf){
                     var token = buf.toString('hex');
-                    if(err){
-                        res.status(500).send(err);
-                    }
-                    done(null, token);
+                    done(err, token);
                 });
             },
             function(token, done){
                 users.findByEmail(req.body.email)
                 .then(function(user){
                     if(!user){
-                        res.status(500).send('No tenemos registrada una cuenta con ese email');
+                        done('No tenemos registrada una cuenta con ese email', token, user);
                     }
                     
                     user.passwordToken = token;
@@ -84,7 +81,7 @@ module.exports = function(app, passport, models, port) {
                     });
                 })
                 .catch(function(error){
-                    res.status(500).send('Ocurrió un error '+ error);
+                    done(error, token, user);
                 });
             },
             function(token, user, done){
@@ -109,7 +106,7 @@ module.exports = function(app, passport, models, port) {
                 })
             }
         ], function(err, message){
-            // if(err) res.status(500).send('Ocurrió un error '+ err);
+            if(err) return res.status(500).send('Ocurrió un error '+ err);
             //Todo salio bien
             res.status(200).send(message);
         })
