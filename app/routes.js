@@ -93,6 +93,7 @@ module.exports = function(app, passport, models, port) {
                 });
             },
             function(token, user, done){
+                console.log(user);
                 var smtp = nodemailer.createTransport({
                     host: 'smtp.gmail.com',
                     port: 465,
