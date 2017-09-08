@@ -8,7 +8,9 @@ module.exports = function(sequelize, DataTypes) {
 		provincia: DataTypes.STRING,
 		nombre: DataTypes.STRING,
 		email: DataTypes.STRING,
-		password: DataTypes.STRING
+		password: DataTypes.STRING,
+		passwordToken: DataTypes.STRING,
+		passwordExpires: DataTypes.DATE
 	}, {
 		//set the timestamps to be underscored: (created_at, updated_at)
 		underscored: true,
