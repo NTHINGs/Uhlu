@@ -42,17 +42,19 @@
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('loginCtrl', function($scope, $rootScope, SweetAlert){
-			if('<%=message%>'.length > 0){
-				SweetAlert.swal({
-					title: "Ooops..",
-					text: '<%=message%>',
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok",
-					closeOnConfirm: true,
-					type: "error",
-					html: true
-				});
-			}
+			<%if(message)%>
+				if('<%=message%>'.length > 0){
+					SweetAlert.swal({
+						title: "Ooops..",
+						text: '<%=message%>',
+						confirmButtonColor: "#692B8D",
+						confirmButtonText: "Ok",
+						closeOnConfirm: true,
+						type: "error",
+						html: true
+					});
+				}
+			<%}%>
 
 			$scope.olvide = function(olvide){
 				var title = "¿Olvidaste tu contraseña?";
