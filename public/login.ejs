@@ -42,8 +42,8 @@
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('loginCtrl', function($scope, $rootScope, $http, SweetAlert){
-			console.log(<%=locals.message%>)
-			<%if(locals.message){%>
+
+			<%if(message){%>
 				SweetAlert.swal({
 					title: "Ooops..",
 					text: '<%=message%>',
@@ -54,7 +54,7 @@
 					html: true
 				});
 			<%}%>
-			<%if(locals.success){%>
+			<%if(success){%>
 				SweetAlert.swal({
 					title: "Contraseña Cambiada Correctamente",
 					text: '<%=success%>',
