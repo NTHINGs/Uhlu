@@ -1,191 +1,305 @@
-<!DOCTYPE html>
-<html ng-app="registerUhlu">
-<head>
-	<meta charset="utf-8">
-    <title>Uhlu</title>
-    <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no" />
-    <!-- Dependencies CSS -->
-    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="angular-material/angular-material.min.css">
-    <link rel="stylesheet" href="sweetalert/dist/sweetalert.css" media="screen" title="no title" charset="utf-8">
-    <!-- FAVICON -->
-    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <!-- DEPENDENCIES -->
-    <script src="angular/angular.min.js"></script>
-    <script src='angular-i18n/angular-locale_es-mx.js'></script>
-    <script src='sweetalert/dist/sweetalert.min.js'></script>
-    <script src='angular-sweetalert/SweetAlert.min.js'></script>
-	<script src="angular-animate/angular-animate.min.js"></script>
-	<script src="angular-aria/angular-aria.min.js"></script>
-	<script src="angular-messages/angular-messages.min.js"></script>
-	<script src="angular-material/angular-material.min.js"></script>
-	<script src="jquery/dist/jquery.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+// app/routes.js
+var path        = require('path');  
+var nodemailer  = require('nodemailer');
+var bcrypt      = require('bcrypt-nodejs');
+var async       = require('async');
+var crypto      = require('crypto');
 
-    <!-- App -->
-    <script type="text/javascript">
-    	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
-    	app.controller('loginCtrl', function($scope, $rootScope, $http, SweetAlert){
-			<%if(message){%>
-				SweetAlert.swal({
-					title: "Ooops..",
-					text: '<%=message%>',
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok",
-					closeOnConfirm: true,
-					type: "error",
-					html: true
-				});
-			<%}%>
-			<%if(success){%>
-				SweetAlert.swal({
-					title: "Contraseña Cambiada Correctamente",
-					text: '<%=success%>',
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok",
-					closeOnConfirm: true,
-					type: "success"
-				});
-			<%}%>
+// Controlers
+var scouts      = require('../app/controllers/scouts');
+var users       = require('../app/controllers/users');
+var patrullas   = require('../app/controllers/patrullas');
+var fichas      = require('../app/controllers/fichas');
 
-			$scope.olvide = function(olvide){
-				var title = "¿Olvidaste tu contraseña?";
-				if(olvide == "generar"){
-					title = "Generar nueva contraseña";
-				}
-				SweetAlert.swal({
-					title: title,
-					text: "Ingresa el correo que usas en Uhlu",
-					type: "input",
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok",
-					closeOnConfirm: true,
-					showCancelButton: true,
-					html: true
-				}, 
-				function(email){ 
-					if (email === false) return false;
-  
-					if (email === "") {
-						swal.showInputError("Necesitas escribir un correo!");
-						return false
-					}
-					$http.post('/mandarEmailRecuperacion', {email: email})
-					.then(function(message){
-						SweetAlert.swal({
-							title: "Correo Enviado!",
-							text: message.data,
-							confirmButtonColor: "#692B8D",
-							confirmButtonText: "Ok",
-							closeOnConfirm: true,
-							type: "success"
-						});
-					})
-					.catch(function(error){
-						console.log(error);
-						SweetAlert.swal({
-							title: "Ooops..",
-							text: error.data,
-							confirmButtonColor: "#692B8D",
-							confirmButtonText: "Ok",
-							closeOnConfirm: true,
-							type: "error"
-						});
-					});
-					// $window.location.href = '/mandarEmailRecuperacion?email=' + mail;
-				});
-			}
-    	});
+var User        = require('../app/models/').User;
 
-    	app.config(function($mdThemingProvider) {
-			$mdThemingProvider.theme('default').primaryPalette('purple').dark(); 
-    	});
-    </script>
+// Config
+var config      = require('../app/config/config');
 
-	<style type="text/css">
-		md-content{
-			background: url('css/img/bg-1.png') no-repeat center center fixed;
-			background-size: cover;
-			height: 100vh;
-		}
+module.exports = function(app, passport, models, port) {
 
-		.registerContainer{
-			color: rgb(250,250,250);
-			background-color: #263645;
-			margin:10%;
-		}
+//-------Render main AngularJS apps----------------------------------------------------------------------------
+    app.get("/", inicioSesion, function(req, res) {
+        models.sequelize
+          .authenticate( )
+          .then(function () {
+            console.log('Connection successful');
+            // users.findById(1).then(function(user) {
+                res.render(path.join(__dirname, '../public' ,'index.ejs'),{
+                    // user: JSON.stringify(user)
+                    user: JSON.stringify(req.user)
+                });
+            // })
+          })
+          .catch(function(error) {
+            console.log("Error creating connection:", error);
+          });
+    });
 
-		h1{
-			text-align: center;
-		}
+    app.get("/entrar", function(req, res){
+        res.render(path.join(__dirname, '../public' ,'login.ejs'));
+    });
 
-		#olvide{
-			color: #692b8d;
-			font-weight: bold;
-			text-decoration: none;
-		}
-	</style>
-</head>
+    app.post('/entrar', passport.authenticate('local-login', {
+        successRedirect : '/',
+        failureRedirect : '/entrar',
+        failureFlash : true
+    }));
 
-<body ng-controller="loginCtrl">
-	<md-content class="md-padding" layout-padding>
-		<div class="container-fluid registerContainer" >
-			<img class="img-responsive center-block" src="img/logo.png">
-			<h1>
-				Bienvenido a Uhlu!
-			</h1>
-	        <form name='loginForm' id='loginForm' novalidate ng-submit="loginForm.$valid" action="/entrar" method="POST">
-	        	<md-input-container class="md-block" flex-gt-xs>
-	        	    <label>Email</label>
-	        	    <input name='email' ng-model="user.email" required>
-	        	    <div ng-messages="loginForm.email.$error">
-	        	        <div ng-message="required">El Email es requerido.</div>
-	        	    </div>
-	        	</md-input-container>
-	        	<md-input-container class="md-block" flex-gt-xs>
-	        	    <label>Contraseña</label>
-	        	    <input name='password' type="password" ng-model="user.password" required>
-	        	    <div ng-messages="loginForm.password.$error">
-	        	        <div ng-message="required">La Contraseña es requerida.</div>
-	        	    </div>
-				</md-input-container>
-				<div layout="row">
-					<md-button ng-click='olvide()' class="md-raised md-primary" aria-label="Olvidé mi contraseña">
-	        	        Olvidé mi contraseña
-	        	    </md-button>
-				</div>
-				<div layout="row">
-					<md-button ng-click='olvide("generar")' class="md-raised md-primary" aria-label="Login">
-	        	        Generar Contraseña a Cuenta Existente
-	        	    </md-button>
-				</div>
-	        	<div layout="row">
-					<md-button href="/registrarse" class="md-raised md-primary" aria-label="Login">
-	        	        Crear Cuenta
-	        	    </md-button>
-	        	    <span flex></span>
-	        	    <md-button type="submit" value="Login" class="md-raised md-primary" aria-label="Login" ng-disabled="!loginForm.$valid">
-	        	        Iniciar Sesión
-	        	    </md-button>
-	        	</div>
-	        </form>
-		</div>
-    </md-content>
-</body>
-</html>
+    app.get("/registrarse", function(req, res) {
+        res.render(path.join(__dirname, '../public' ,'registrar.ejs'));
+    });
+
+    app.post('/registrarse', passport.authenticate('local-signup', {
+        successRedirect : '/',
+        failureRedirect : '/signup',
+        failureFlash : true
+    }));
+
+    app.use(function(req, res, next){
+        res.locals.message = req.flash('message');
+        res.locals.success = req.flash('success');
+        next();
+    });
+
+    app.post('/mandarEmailRecuperacion',function(req, res){
+        async.waterfall([
+            function(done){
+                crypto.randomBytes(20, function(err, buf){
+                    var token = buf.toString('hex');
+                    done(err, token);
+                });
+            },
+            function(token, done){
+                users.findByEmail(req.body.email)
+                .then(function(result){
+                    var user = result[0].dataValues;
+                    if(!user){
+                        done('No tenemos registrada una cuenta con ese email', token, user);
+                    }
+                    
+                    user.passwordToken = token;
+                    user.passwordExpires = Date.now() + 3600000;
+
+                    User.update(user, {
+                        where: {
+                          id: user.id
+                        }
+                    })
+                    .then(function (updatedRecords) {
+                        done(null, token, user);
+                    })
+                    .catch(function (error){
+                        console.log(error);
+                        done(error, token, user);
+                    });
+                })
+                .catch(function(error){
+                    done(error, token, null);
+                });
+            },
+            function(token, user, done){
+                console.log(user);
+                var smtp = nodemailer.createTransport({
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true, // use SSL
+                    auth: {
+                        user: 'uhluscout@gmail.com',
+                        pass: '3838134223'
+                    }
+                });
+                var mailOptions = {
+                    to: user.email,
+                    from: '',
+                    subject: 'Reinicio de contraseña Uhlu',
+                    text: 'Estas recibiendo esto debido a que solicitaste un reinicio de tu contraseña'+
+                    'Da click al siguiente link, o pégalo en tu navegador para completar el reinicio '+
+                    'http://' + req.headers.host + '/olvide/' + token + '\n\n' +
+                    'SI NO SOLICITASTE UN REINICIO DE CONTRASEÑA, SIMPLEMENTE IGNORA ESTE CORREO.'
+                };
+                smtp.sendMail(mailOptions, function(err){
+                    done(err, 'Envíamos correctamente un correo con instrucciones al correo: '+user.email);
+                })
+            }
+        ], function(err, message){
+            if(err){
+                console.log(err);
+                return res.status(500).send('Ocurrió un error '+ err);
+            }
+            //Todo salio bien
+            res.status(200).send(message);
+        })
+    });
+
+    app.get('/olvide/:token', function(req, res){
+        users.findByToken(req.params.token)
+        .then(function(result){
+            var user = result[0].dataValues;
+            if(!user){
+                console.log("token "+req.params.token+" inválido")
+                req.flash('message', 'Este link es inválido o ya expiró');
+                return res.redirect('/entrar');
+            }
+
+            res.render(path.join(__dirname, '../public' ,'olvide.ejs'), {token: req.params.token});
+        })
+        .catch(function(error){
+            req.flash('message', 'Algo salió mal: '+error);
+            return res.redirect('/entrar');
+        })
+    });
+
+    app.post('/olvide/:token', function(req, res){
+        async.waterfall([
+            function(done){
+                users.findByToken(req.params.token)
+                .then(function(result){
+                    var user = result[0].dataValues;
+                    if(!user){
+                        req.flash('message', 'Este link es inválido o ya expiró');
+                        return res.redirect('/entrar');
+                    }
+                    
+                    user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
+                    user.passwordToken = undefined;
+                    user.passwordExpires = undefined;
+
+                    User.update(user, {
+                        where: {
+                          id: user.id
+                        }
+                    })
+                    .then(function (updatedRecords) {
+                        done(null, user);
+                    })
+                    .catch(function (error){
+                        console.log(error);
+                        done(error, user);
+                    });
+                });
+            },
+            function(user, done){
+                var smtp = nodemailer.createTransport({
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true, // use SSL
+                    auth: {
+                        user: 'uhluscout@gmail.com',
+                        pass: '3838134223'
+                    }
+                });
+                var mailOptions = {
+                    to: user.email,
+                    from: '',
+                    subject: 'Tu contraseña en Uhlu ha cambiado',
+                    text: 'Estas recibiendo esto debido a que solicitaste un reinicio de tu contraseña'+
+                    'La contraseña en la cuenta '+user.email+' ha sido cambiada correctamente.'
+                };
+                smtp.sendMail(mailOptions, function(err){
+                    done(err, 'Tu contraseña ha sido reiniciada correctamente');
+                });
+            }
+        ], function(err, message){
+            if(err){
+                req.flash('message', 'Ocurrió un error '+err);
+                return res.redirect('/entrar');
+            }
+            //Todo salio bien
+            req.flash('success', message);
+            return res.redirect('/entrar');
+        })
+    })
+
+    app.get('/logout', function(req, res) {
+        req.logout();
+	    res.render(path.join(__dirname, '../public' ,'bye.ejs'));
+    });
+    
+    //For database deploy at Heroku
+    app.get("/database", inicioSesion, function(req,res){
+        res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
+    });
+
+    //-------Facebook Login---------------------------------------------------------------------------------------
+    // app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    
+    // app.get('/auth/facebook/callback',
+    //     passport.authenticate('facebook', {
+    //         successRedirect : '/',
+    //         failureRedirect : '/error'
+    //     })
+    // );
+    
+    
+    //-------API EndPoints----------------------------------------------------------------------------
+    app.get('/users/:id', inicioSesion, users.show);
+    app.put('/users', inicioSesion, users.update);
+    app.delete('/users/:id', inicioSesion, users.delete);
+    
+    app.get('/patrullas/:id', inicioSesion, patrullas.index);
+    app.get('/patrullas/:id/:nombre', inicioSesion, patrullas.show);
+    app.post('/patrullas', inicioSesion, patrullas.create);
+    app.put('/patrullas', inicioSesion, patrullas.update);
+    app.delete('/patrullas/:id', inicioSesion, patrullas.delete);
+    
+    app.get('/fichas', inicioSesion, fichas.index);
+    app.get('/fichas/:id', inicioSesion, fichas.show);
+    app.post('/fichas', inicioSesion, fichas.create);
+    app.put('/fichas', inicioSesion, fichas.update);
+    app.delete('/fichas/:id', inicioSesion, fichas.delete);
+    app.get('/imprimirFicha/:id', inicioSesion, fichas.print);
+    
+    app.get('/scoutsfromuser/:id', inicioSesion, scouts.index);
+    app.get('/scouts/:cum', inicioSesion, scouts.show);
+    app.post('/scouts', inicioSesion, scouts.create);
+    app.put('/scouts', inicioSesion, scouts.update);
+    app.delete('/scouts/:cum', inicioSesion, scouts.delete);
+    app.get('/generarReporte', inicioSesion, scouts.reporte);
+
+    app.get('/config/insigniasPorSeccion/:seccion', inicioSesion,function(req, res){
+        res.status(200).json(config.insigniasPorSeccion(req.params.seccion));
+    });
+
+    app.get('/config/radiosFichaMedica', inicioSesion,function(req, res){
+        res.status(200).json(config.radiosFichaMedica());
+    });
+    
+    app.get('/config/areaYObjetivoPorSeccion/:seccion/:area', inicioSesion,function(req, res){
+        res.status(200).json(config.areaYObjetivoPorSeccion(req.params.seccion, req.params.area));
+    });
+
+    app.get('/config/provincias', config.provincias);
+
+//-------------------------------------------------------------------------------------------------------------
+
+};
+// Middlewares
+// route middleware to make sure a user is logged in
+function inicioSesion(req, res, next) {
+    
+    // if user is authenticated in the session, carry on 
+    if (req.isAuthenticated())
+        return next();
+    
+    // if they aren't redirect them to the home page
+    // res.redirect('/auth/facebook');
+    res.redirect('/entrar');
+}
+
+// Si el usuario tiene todos sus campos llenos. Continuar, si no mandarlo a la pagina para que los llene
+// function faltanDatosUsuario(req, res, next) {
+//     users.findById(req.user.id)
+//     .then(function (User) {
+//         if(User.dataValues.cum == ''|| User.dataValues.seccion == '' || User.dataValues.grupo == '' || User.dataValues.provincia == ''){
+//             res.redirect('/registrar');
+//         }else{
+//             return next();
+//         }
+//     })
+//     .catch(function (error){
+//         console.log("ERROR" + error)
+//       return error;
+//     });
+
+// }
