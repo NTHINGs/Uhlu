@@ -106,7 +106,7 @@ module.exports = function(app, passport, models, port) {
                 })
             }
         ], function(err, message){
-            if(err) res.status(500).send('Ocurrió un error '+ err);
+            // if(err) res.status(500).send('Ocurrió un error '+ err);
             //Todo salio bien
             res.status(200).send(message);
         })
