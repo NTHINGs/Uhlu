@@ -40,7 +40,7 @@ module.exports = function(app, passport, models, port) {
 
     app.post('/entrar', passport.authenticate('local-login', {
         successRedirect : '/',
-        failureRedirect : '/login',
+        failureRedirect : '/entrar',
         failureFlash : true
     }));
 
