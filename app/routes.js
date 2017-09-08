@@ -44,7 +44,7 @@ module.exports = function(app, passport, models, port) {
         failureFlash : true
     }));
 
-    app.get("/registrarse", inicioSesion, function(req, res) {
+    app.get("/registrarse", function(req, res) {
         res.render(path.join(__dirname, '../public' ,'registrar.ejs'));
     });
 
