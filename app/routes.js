@@ -94,7 +94,9 @@ module.exports = function(app, passport, models, port) {
             },
             function(token, user, done){
                 var smtp = nodemailer.createTransport({
-                    service: 'Gmail',
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true, // use SSL
                     auth: {
                         user: 'uhluscout@gmail.com',
                         pass: '3838134223'
