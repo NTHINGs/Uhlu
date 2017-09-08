@@ -80,7 +80,7 @@ module.exports = function(app, passport, models, port) {
                           id: user.id
                         }
                     })
-                    .then(function (user) {
+                    .then(function (updatedRecords) {
                         done(null, token, user);
                     })
                     .catch(function (error){
