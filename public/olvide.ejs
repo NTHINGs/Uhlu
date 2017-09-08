@@ -42,7 +42,7 @@
     <script type="text/javascript">
     	var app = angular.module('changePasswordUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('changePasswordCtrl', function($scope, $rootScope, SweetAlert){
-			<%if(message)%>
+			<%if(message){%>
 				SweetAlert.swal({
 					title: "Ooops..",
 					text: '<%=message%>',
