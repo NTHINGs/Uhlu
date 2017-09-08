@@ -73,7 +73,7 @@ module.exports = function(app, passport, models, port) {
                     user.passwordExpires = Date.now() + 3600000;
 
                     users.saveUser(user)
-                    .then(function(){
+                    .then(function(us){
                         done(null, token, user);
                     })
                     .catch(function(err){
