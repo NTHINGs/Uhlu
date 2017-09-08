@@ -45,7 +45,7 @@ app.use(flash());
 app.use(function(req, res, next){
     res.locals.message = req.flash('message');
     res.locals.success = req.flash('success');
-    req.flash();
+    console.log(res.locals);
     next();
 });
 
