@@ -88,7 +88,7 @@ module.exports = function(app, passport, models, port) {
                     });
                 })
                 .catch(function(error){
-                    done(error, token, user);
+                    done(error, token, null);
                 });
             },
             function(token, user, done){
