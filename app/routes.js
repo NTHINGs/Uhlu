@@ -14,7 +14,7 @@ module.exports = function(app, passport, models, port) {
 //-------Render main AngularJS apps----------------------------------------------------------------------------
     app.get("/", inicioSesion, function(req, res) {
         models.sequelize
-          .authenticate()
+          .authenticate( )
           .then(function () {
             console.log('Connection successful');
             // users.findById(1).then(function(user) {
@@ -30,30 +30,34 @@ module.exports = function(app, passport, models, port) {
     });
 
     app.get("/entrar", function(req, res){
-        res.render(path.join(__dirname, '../public' ,'login.ejs'), { message: req.flash('loginMessage') });
+        res.render(path.join(__dirname, '../public' ,'login.ejs'));
     });
 
     app.post('/entrar', passport.authenticate('local-login', {
         successRedirect : '/',
-        failureRedirect : '/entrar',
+        failureRedirect : '/login',
         failureFlash : true
     }));
 
-    app.get("/registrarse", function(req, res) {
-        res.render(path.join(__dirname, '../public' ,'registrar.ejs'),{ message: req.flash('signupMessage') });
+    app.get("/signup", inicioSesion, function(req, res) {
+        res.render(path.join(__dirname, '../public' ,'registrar.ejs'));
     });
 
-    app.post('/registrarse', passport.authenticate('local-signup', {
+    app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/',
-        failureRedirect : '/registrarse',
+        failureRedirect : '/signup',
         failureFlash : true
     }));
+
+    app.get('/olvide', function(req, res){
+
+    });
 
     app.get('/logout', function(req, res) {
         req.logout();
-	    res.redirect('/entrar');
-	});
-
+	    res.render(path.join(__dirname, '../public' ,'bye.ejs'));
+    });
+    
     //For database deploy at Heroku
     app.get("/database", inicioSesion, function(req,res){
         res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
