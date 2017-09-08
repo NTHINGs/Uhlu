@@ -74,9 +74,9 @@ module.exports = function(app, passport, models, port) {
                     user.passwordToken = token;
                     user.passwordExpires = Date.now() + 3600000;
 
-                    User.update(req.body, {
+                    User.update(user, {
                         where: {
-                          id: req.body.id
+                          id: user.id
                         }
                     })
                     .then(function (user) {
@@ -149,9 +149,9 @@ module.exports = function(app, passport, models, port) {
                     user.passwordToken = undefined;
                     user.passwordExpires = undefined;
 
-                    User.update(req.body, {
+                    User.update(user, {
                         where: {
-                          id: req.body.id
+                          id: user.id
                         }
                     })
                     .then(function (user) {
