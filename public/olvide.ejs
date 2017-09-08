@@ -41,30 +41,7 @@
     <!-- App -->
     <script type="text/javascript">
     	var app = angular.module('changePasswordUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
-    	app.controller('changePasswordCtrl', function($scope, $rootScope, SweetAlert){
-			<%if(locals.message){%>
-				SweetAlert.swal({
-					title: "Ooops..",
-					text: '<%=message%>',
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok",
-					closeOnConfirm: true,
-					type: "error",
-					html: true
-				});
-			<%}%>
-
-			$scope.existing = function(){
-				SweetAlert.swal({
-					title: "Ya tenías cuenta?",
-					text: 'Si ya tenias una cuenta en Uhlu, puedes generar una contraseña aqui. Te llegará un correo a la dirección de Facebook que teníamos dada de alta. <a href="/olvide">Generar contraseña</a>',
-					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok",
-					closeOnConfirm: true,
-					html: true
-				});
-			}
-    	});
+    	app.controller('changePasswordCtrl', function($scope, $rootScope, SweetAlert){});
 
     	app.config(function($mdThemingProvider) {
 			$mdThemingProvider.theme('default').primaryPalette('purple').dark(); 
@@ -122,9 +99,9 @@
 			<h1>
 				Generar Nueva Contraseña
 			</h1>
-	        <form name='changePasswordForm' id='changePasswordForm' novalidate ng-submit="changePasswordForm.$valid" action="/entrar" method="POST">
+	        <form name='changePasswordForm' id='changePasswordForm' novalidate ng-submit="changePasswordForm.$valid" action="/olvide/<%=token%>" method="POST">
 	        	<md-input-container class="md-block" flex-gt-xs>
-	        	    <label>Contraseña</label>
+	        	    <label>Nueva Contraseña</label>
 	        	    <input name='password' type='password' ng-model="user.password" required>
 	        	    <div ng-messages="changePasswordForm.password.$error">
 	        	        <div ng-message="required">La contraseña es requerida.</div>
