@@ -80,6 +80,12 @@
 					html: true
 				}, 
 				function(email){ 
+					if (email === false) return false;
+  
+					if (email === "") {
+						swal.showInputError("Necesitas escribir un correo!");
+						return false
+					}
 					$http.post('/mandarEmailRecuperacion', {email: email})
 					.then(function(message){
 						SweetAlert.swal({
