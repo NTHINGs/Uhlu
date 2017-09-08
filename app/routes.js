@@ -11,7 +11,7 @@ var users       = require('../app/controllers/users');
 var patrullas   = require('../app/controllers/patrullas');
 var fichas      = require('../app/controllers/fichas');
 
-var User        = require('../app/models/user');
+var User        = require('../app/models/').User;
 
 // Config
 var config      = require('../app/config/config');
