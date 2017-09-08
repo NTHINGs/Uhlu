@@ -108,7 +108,7 @@ module.exports = function(app, passport, models, port) {
                     from: '',
                     subject: 'Reinicio de contraseña Uhlu',
                     text: 'Estas recibiendo esto debido a que solicitaste un reinicio de tu contraseña'+
-                    'Da click al siguiente link, o pégalo en tu navegador para completar el reinicio'+
+                    'Da click al siguiente link, o pégalo en tu navegador para completar el reinicio '+
                     'http://' + req.headers.host + '/olvide/' + token + '\n\n' +
                     'SI NO SOLICITASTE UN REINICIO DE CONTRASEÑA, SIMPLEMENTE IGNORA ESTE CORREO.'
                 };
@@ -128,7 +128,8 @@ module.exports = function(app, passport, models, port) {
 
     app.get('/olvide/:token', function(req, res){
         users.findByToken(req.params.token)
-        .then(function(user){
+        .then(function(result){
+            var user = result[0].dataValues;
             if(!user){
                 req.flash('message', 'Este link es inválido o ya expiró');
                 return res.redirect('/entrar');
@@ -146,7 +147,8 @@ module.exports = function(app, passport, models, port) {
         async.waterfall([
             function(done){
                 users.findByToken(req.params.token)
-                .then(function(user){
+                .then(function(result){
+                    var user = result[0].dataValues;
                     if(!user){
                         req.flash('message', 'Este link es inválido o ya expiró');
                         return res.redirect('/entrar');
@@ -161,7 +163,7 @@ module.exports = function(app, passport, models, port) {
                           id: user.id
                         }
                     })
-                    .then(function (user) {
+                    .then(function (updatedRecords) {
                         done(null, user);
                     })
                     .catch(function (error){
@@ -171,8 +173,10 @@ module.exports = function(app, passport, models, port) {
                 });
             },
             function(user, done){
-                var smtp = nodemailer.createTransport('SMTP', {
-                    service: 'Gmail',
+                var smtp = nodemailer.createTransport({
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true, // use SSL
                     auth: {
                         user: 'uhluscout@gmail.com',
                         pass: '3838134223'
