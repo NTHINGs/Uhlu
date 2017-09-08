@@ -67,6 +67,7 @@ module.exports = function(app, passport, models, port) {
             function(token, done){
                 users.findByEmail(req.body.email)
                 .then(function(user){
+                    console.log(user);
                     if(!user){
                         done('No tenemos registrada una cuenta con ese email', token, user);
                     }
