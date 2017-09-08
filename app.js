@@ -8,13 +8,13 @@ var models = require('./app/models/');
 
 var app      = express();
 var port     = process.env.PORT || 8080;
+var env      = process.env.NODE_ENV || 'development';
 
 var passport = require('passport');
 var flash    = require('connect-flash');
 
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
+app.use(morgan('dev')); // log
+app.use(cookieParser()); // cookies
 app.use(bodyParser.urlencoded({
 	limit: '50mb',
     extended: true
@@ -30,21 +30,26 @@ app.use(function(req, res, next) {
 });
 app.set('view engine', 'ejs');
 
-// required for passport
+// passport
 app.use(session({
     secret: 'siemprelistos',
     resave: true,
     saveUninitialized: true,
     store: new MemoryStore(),
- } )); // session secret
-require('./app/config/passport')(passport, port);
+ } )); // secret
+require('./app/config/passport')(passport, env);
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session()); // sessions
+app.use(flash());
 
+app.use(function(req, res, next){
+    res.locals.message = req.flash('message');
+    res.locals.success = req.flash('success');
+    next();
+});
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport, models, port); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport, models, port);
 
 // launch ======================================================================
 app.listen(port);
