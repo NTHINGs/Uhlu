@@ -66,8 +66,8 @@ module.exports = function(app, passport, models, port) {
             },
             function(token, done){
                 users.findByEmail(req.body.email)
-                .then(function(user){
-                    user = JSON.stringify(user);
+                .then(function(userS){
+                    var user = JSON.stringify(userS);
                     if(!user){
                         done('No tenemos registrada una cuenta con ese email', token, user);
                     }
@@ -114,7 +114,10 @@ module.exports = function(app, passport, models, port) {
                 })
             }
         ], function(err, message){
-            if(err) return res.status(500).send('Ocurrió un error '+ err);
+            if(err){
+                console.log(err);
+                return res.status(500).send('Ocurrió un error '+ err);
+            }
             //Todo salio bien
             res.status(200).send(message);
         })
