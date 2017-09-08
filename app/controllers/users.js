@@ -29,6 +29,31 @@ module.exports= {
     return User.findById(id);
   },
 
+  findByEmail(email){
+    return User.findAll({
+      where: {
+        email: email
+      }
+    })
+  },
+
+  findByToken(token){
+    return User.findAll({
+      where: {
+        passwordToken: token,
+        passwordExpires: {$gt: Date.now()}
+      }
+    })
+  },
+
+  saveUser(user){
+    return User.update(user, {
+      where: {
+        id: user.id
+      }
+    })
+  },
+
   create(req, res) {
     // res.status(200).json(req.body);
     User.create(req.body)
