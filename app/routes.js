@@ -1,5 +1,10 @@
 // app/routes.js
 var path        = require('path');  
+var nodemailer  = require('nodemailer');
+var bcrypt      = require('bcrypt-nodejs');
+var async       = require('async');
+var crypto      = require('crypto');
+
 // Controlers
 var scouts      = require('../app/controllers/scouts');
 var users       = require('../app/controllers/users');
@@ -49,9 +54,132 @@ module.exports = function(app, passport, models, port) {
         failureFlash : true
     }));
 
-    app.get('/olvide', function(req, res){
+    app.post('/mandarEmailRecuperacion',function(req, res){
+        async.waterfall([
+            function(done){
+                crypto.randomBytes(20, function(err, buf){
+                    var token = buf.toString('hex');
+                    done(err, token);
+                });
+            },
+            function(token, done){
+                users.findByEmail(req.body.email)
+                .then(function(user){
+                    if(!user){
+                        return res.status(500).send('No tenemos registrada una cuenta con ese email');
+                    }
+                    
+                    user.passwordToken = token;
+                    user.passwordExpires = Date.now() + 3600000;
 
+                    users.saveUser(user)
+                    .then(function(){
+                        done(null, token, user);
+                    })
+                    .catch(function(err){
+                        done(err, token, user);
+                    });
+                })
+                .catch(function(error){
+                    return res.status(500).send('Ocurrió un error '+ error);
+                });
+            },
+            function(token, user, done){
+                var smtp = nodemailer.createTransport('SMTP', {
+                    service: 'Gmail',
+                    auth: {
+                        user: 'uhluscout@gmail.com',
+                        pass: '3838134223'
+                    }
+                });
+                var mailOptions = {
+                    to: user.email,
+                    from: '',
+                    subject: 'Reinicio de contraseña Uhlu',
+                    text: 'Estas recibiendo esto debido a que solicitaste un reinicio de tu contraseña'+
+                    'Da click al siguiente link, o pégalo en tu navegador para completar el reinicio'+
+                    'http://' + req.headers.host + '/olvide/' + token + '\n\n' +
+                    'SI NO SOLICITASTE UN REINICIO DE CONTRASEÑA, SIMPLEMENTE IGNORA ESTE CORREO.'
+                };
+                smtp.sendMail(mailOptions, function(err){
+                    done(err, 'Envíamos correctamente un correo con instrucciones al correo: '+user.email);
+                })
+            }
+        ], function(err, message){
+            if(err) return res.status(500).send('Ocurrió un error '+ error);
+            //Todo salio bien
+            res.status(200).send(message);
+        })
     });
+
+    app.get('/olvide/:token', function(req, res){
+        users.findByToken(req.params.token)
+        .then(function(user){
+            if(!user){
+                req.flash('message', 'Este link es inválido o ya expiró');
+                return res.redirect('/entrar');
+            }
+
+            res.render(path.join(__dirname, '../public' ,'olvide.ejs'), {token: req.params.token});
+        })
+        .catch(function(error){
+            req.flash('message', 'Algo salió mal: '+error);
+            return res.redirect('/entrar');
+        })
+    });
+
+    app.post('/olvide/:token', function(req, res){
+        async.waterfall([
+            function(done){
+                users.findByToken(req.params.token)
+                .then(function(user){
+                    if(!user){
+                        req.flash('message', 'Este link es inválido o ya expiró');
+                        return res.redirect('/entrar');
+                    }
+                    
+                    user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
+                    user.passwordToken = undefined;
+                    user.passwordExpires = undefined;
+
+                    users.saveUser(user)
+                    .then(function(){
+                        done(null, user);
+                    })
+                    .catch(function(err){
+                        done(err, user);
+                    });
+                });
+            },
+            function(user, done){
+                var smtp = nodemailer.createTransport('SMTP', {
+                    service: 'Gmail',
+                    auth: {
+                        user: 'uhluscout@gmail.com',
+                        pass: '3838134223'
+                    }
+                });
+                var mailOptions = {
+                    to: user.email,
+                    from: '',
+                    subject: 'Tu contraseña en Uhlu ha cambiado',
+                    text: 'Estas recibiendo esto debido a que solicitaste un reinicio de tu contraseña'+
+                    'La contraseña en la cuenta '+user.email+' ha sido cambiada correctamente.'
+                };
+                smtp.sendMail(mailOptions, function(err){
+                    done(err, 'Tu contraseña ha sido reiniciada correctamente');
+                });
+            }
+        ], function(err, message){
+            if(err){
+                req.flash('message', 'Ocurrió un error '+err);
+                return res.redirect('/entrar');
+            }
+            //Todo salio bien
+            req.flash('success', message);
+            return res.redirect('/entrar');
+        })
+    })
 
     app.get('/logout', function(req, res) {
         req.logout();
