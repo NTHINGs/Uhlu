@@ -43,8 +43,8 @@ app.use(passport.session()); // sessions
 app.use(flash());
 
 app.use(function(req, res, next){
-    res.locals.message = req.flash('message');
-    res.locals.success = req.flash('success');
+    res.locals.message = req.flash('message')[0];
+    res.locals.success = req.flash('success')[0];
     console.log(res.locals);
     next();
 });
