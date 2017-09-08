@@ -66,7 +66,7 @@ module.exports = function(app, passport, models, port) {
                 users.findByEmail(req.body.email)
                 .then(function(user){
                     if(!user){
-                        return res.status(500).send('No tenemos registrada una cuenta con ese email');
+                        res.status(500).send('No tenemos registrada una cuenta con ese email');
                     }
                     
                     user.passwordToken = token;
@@ -81,7 +81,7 @@ module.exports = function(app, passport, models, port) {
                     });
                 })
                 .catch(function(error){
-                    return res.status(500).send('Ocurrió un error '+ error);
+                    res.status(500).send('Ocurrió un error '+ error);
                 });
             },
             function(token, user, done){
@@ -106,7 +106,7 @@ module.exports = function(app, passport, models, port) {
                 })
             }
         ], function(err, message){
-            if(err) return res.status(500).send('Ocurrió un error '+ err);
+            if(err) res.status(500).send('Ocurrió un error '+ err);
             //Todo salio bien
             res.status(200).send(message);
         })
