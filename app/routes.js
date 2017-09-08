@@ -74,12 +74,17 @@ module.exports = function(app, passport, models, port) {
                     user.passwordToken = token;
                     user.passwordExpires = Date.now() + 3600000;
 
-                    users.saveUser(user)
-                    .then(function(us){
-                        done(null, token, user);
+                    User.update(req.body, {
+                        where: {
+                          id: req.body.id
+                        }
                     })
-                    .catch(function(err){
-                        done(err, token, user);
+                    .then(function (user) {
+                        done(null, user);
+                    })
+                    .catch(function (error){
+                        console.log(error);
+                        done(error, user);
                     });
                 })
                 .catch(function(error){
