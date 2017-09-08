@@ -90,7 +90,7 @@
 							type: "success"
 						});
 					})
-					.catch(error){
+					.catch(function(error){
 						SweetAlert.swal({
 							title: "Ooops..",
 							text: error,
@@ -99,7 +99,7 @@
 							closeOnConfirm: true,
 							type: "error"
 						});
-					}
+					});
 					// $window.location.href = '/mandarEmailRecuperacion?email=' + mail;
 				});
 			}
