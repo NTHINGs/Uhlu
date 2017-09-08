@@ -131,6 +131,7 @@ module.exports = function(app, passport, models, port) {
         .then(function(result){
             var user = result[0].dataValues;
             if(!user){
+                console.log("token "+req.params.token+" inválido")
                 req.flash('message', 'Este link es inválido o ya expiró');
                 return res.redirect('/entrar');
             }
