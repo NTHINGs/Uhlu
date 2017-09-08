@@ -49,7 +49,8 @@
     		if('<%=message%>'.length > 0){
 				SweetAlert.swal({
 					title: "Ooops..",
-					text: '<%=message%> si no tienes o no recuerdas tu contraseña da click aqui <a href="/olvide">Olvidé mi contraseña</a>',
+					text: '<%=message%> si no tienes o no recuerdas tu contraseña da click aqui'+
+					+'<md-button ng-click="generar()" class="md-raised md-primary" aria-label="Obtener contraseña">Obtener contraseña</md-button></a>',
 					confirmButtonColor: "#692B8D",
 					confirmButtonText: "Ok",
 					closeOnConfirm: true,
