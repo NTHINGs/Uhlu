@@ -54,14 +54,22 @@
 				});
 			}
 
-			$scope.existing = function(){
+			$scope.olvide = function(olvide){
+				var title = "¿Olvidaste tu contraseña?";
+				if(olvide == "generar"){
+					title = "Generar nueva contraseña";
+				}
 				SweetAlert.swal({
-					title: "Ya tenías cuenta?",
-					text: 'Si ya tenias una cuenta en Uhlu, puedes generar una contraseña aqui. Te llegará un correo a la dirección de Facebook que teníamos dada de alta. <a href="/olvide">Generar contraseña</a>',
+					title: title,
+					text: "Ingresa el correo que usas en Uhlu",
+					type: "input",
 					confirmButtonColor: "#692B8D",
 					confirmButtonText: "Ok",
 					closeOnConfirm: true,
 					html: true
+				}, 
+				function(mail){ 
+					console.log(mail);
 				});
 			}
     	});
@@ -117,10 +125,14 @@
 	        	    <div ng-messages="loginForm.password.$error">
 	        	        <div ng-message="required">La Contraseña es requerida.</div>
 	        	    </div>
-	        	</md-input-container>
-				<a id='olvide' href="/olvide">Olvidé mi contraseña</a>
+				</md-input-container>
 				<div layout="row">
-					<md-button ng-click='existing()' class="md-raised md-primary" aria-label="Login">
+					<md-button ng-click='olvide()' class="md-raised md-primary" aria-label="Olvidé mi contraseña">
+	        	        Olvidé mi contraseña
+	        	    </md-button>
+				</div>
+				<div layout="row">
+					<md-button ng-click='olvide("generar")' class="md-raised md-primary" aria-label="Login">
 	        	        Generar Contraseña a Cuenta Existente
 	        	    </md-button>
 				</div>
