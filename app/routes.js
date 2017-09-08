@@ -11,6 +11,8 @@ var users       = require('../app/controllers/users');
 var patrullas   = require('../app/controllers/patrullas');
 var fichas      = require('../app/controllers/fichas');
 
+var User        = require('../app/models/user');
+
 // Config
 var config      = require('../app/config/config');
 
@@ -142,12 +144,17 @@ module.exports = function(app, passport, models, port) {
                     user.passwordToken = undefined;
                     user.passwordExpires = undefined;
 
-                    users.saveUser(user)
-                    .then(function(){
+                    User.update(req.body, {
+                        where: {
+                          id: req.body.id
+                        }
+                    })
+                    .then(function (user) {
                         done(null, user);
                     })
-                    .catch(function(err){
-                        done(err, user);
+                    .catch(function (error){
+                        console.log(error);
+                        done(error, user);
                     });
                 });
             },
