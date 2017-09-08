@@ -42,7 +42,8 @@
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
     	app.controller('loginCtrl', function($scope, $rootScope, $http, SweetAlert){
-			<%console.log(locals.message)%>
+			console.log(<%=locals.message%>)
+			console.log(<%=message%>)
 			<%if(locals.message){%>
 				SweetAlert.swal({
 					title: "Ooops..",
