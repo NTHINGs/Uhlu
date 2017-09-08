@@ -41,7 +41,7 @@
     <!-- App -->
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
-    	app.controller('loginCtrl', function($scope, $rootScope, SweetAlert){
+    	app.controller('loginCtrl', function($scope, $rootScope, $http, SweetAlert){
 			<%if(locals.message){%>
 				SweetAlert.swal({
 					title: "Ooops..",
@@ -51,6 +51,16 @@
 					closeOnConfirm: true,
 					type: "error",
 					html: true
+				});
+			<%}%>
+			<%if(locals.success){%>
+				SweetAlert.swal({
+					title: "Contraseña Cambiada Correctamente",
+					text: '<%=success%>',
+					confirmButtonColor: "#692B8D",
+					confirmButtonText: "Ok",
+					closeOnConfirm: true,
+					type: "success"
 				});
 			<%}%>
 
@@ -68,8 +78,29 @@
 					closeOnConfirm: true,
 					html: true
 				}, 
-				function(mail){ 
-					console.log(mail);
+				function(email){ 
+					$http.post('/mandarEmailRecuperacion', {email: email})
+					.then(function(message){
+						SweetAlert.swal({
+							title: "Correo Enviado!",
+							text: message
+							confirmButtonColor: "#692B8D",
+							confirmButtonText: "Ok",
+							closeOnConfirm: true,
+							type: "success"
+						});
+					})
+					.catch(error){
+						SweetAlert.swal({
+							title: "Ooops..",
+							text: error,
+							confirmButtonColor: "#692B8D",
+							confirmButtonText: "Ok",
+							closeOnConfirm: true,
+							type: "error"
+						});
+					}
+					// $window.location.href = '/mandarEmailRecuperacion?email=' + mail;
 				});
 			}
     	});
