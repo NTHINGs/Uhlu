@@ -23,6 +23,18 @@ app.service('Config', function($http, $q) {
                 deferred.reject(error);
             });
             return deferred.promise;
+        },
+        getHost: function(){
+            var deferred = $q.defer();
+            $http
+            .get('/config/host')
+            .then(function (response) {
+                deferred.resolve(response.data);
+            })
+            .catch(function (error) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
         }
     }
   });

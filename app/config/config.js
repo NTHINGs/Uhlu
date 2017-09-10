@@ -451,5 +451,22 @@ module.exports = {
                 res.status(200).json(provincias);
             }
         })
+    },
+    getHost: function(req, res){
+        var port     = process.env.PORT || 8080;
+        var host     = 'localhost:'+port;
+        var env      = process.env.NODE_ENV || 'development';
+        switch(env){
+            case 'test':
+                host = 'uhlu.herokuapp.com';
+                break;
+            case 'staging':
+                host = 'uhlu.herokuapp.com';
+                break;
+            case 'production':
+                host = 'uhluscout.com';            
+                break;
+        }
+        res.send(host);
     }
 };

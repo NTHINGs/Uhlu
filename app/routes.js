@@ -99,6 +99,7 @@ module.exports = function(app, passport, models, port) {
     });
 
     app.get('/config/provincias', config.provincias);
+    app.get('/config/host', config.getHost);
 
 //-------------------------------------------------------------------------------------------------------------
 

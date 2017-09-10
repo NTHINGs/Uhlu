@@ -17,6 +17,9 @@ app.controller('mainCtrl', function($scope, $rootScope, $http, $location, Config
 			$rootScope.insignias = Object.values(data.insignias);
 			Config.radiosFichaMedica().then(function(data){
 				$rootScope.radios = data;
+				Config.getHost().then(function(data){
+					$rootScope.host = data;
+				});
 			});
 		});
 	}
