@@ -1,9 +1,5 @@
 // app/routes.js
 var path        = require('path');  
-var nodemailer  = require('nodemailer');
-var bcrypt      = require('bcrypt-nodejs');
-var async       = require('async');
-var crypto      = require('crypto');
 
 // Controlers
 var scouts      = require('../app/controllers/scouts');
@@ -11,13 +7,11 @@ var users       = require('../app/controllers/users');
 var patrullas   = require('../app/controllers/patrullas');
 var fichas      = require('../app/controllers/fichas');
 
-var User        = require('../app/models/').User;
-
 // Config
 var config      = require('../app/config/config');
+var login       = require('../app/config/login');
 
 module.exports = function(app, passport, models, port) {
-
 //-------Render main AngularJS apps----------------------------------------------------------------------------
     app.get("/", inicioSesion, function(req, res) {
         models.sequelize
@@ -56,175 +50,16 @@ module.exports = function(app, passport, models, port) {
         failureFlash : true
     }));
 
-    app.post('/mandarEmailRecuperacion',function(req, res){
-        async.waterfall([
-            function(done){
-                crypto.randomBytes(20, function(err, buf){
-                    var token = buf.toString('hex');
-                    done(err, token);
-                });
-            },
-            function(token, done){
-                users.findByEmail(req.body.email)
-                .then(function(result){
-                    var user = result[0].dataValues;
-                    if(!user){
-                        done('No tenemos registrada una cuenta con ese email', token, user);
-                    }
-                    
-                    user.passwordToken = token;
-                    user.passwordExpires = Date.now() + 3600000;
+    app.post('/mandarEmailRecuperacion', login.mandarEmailRecuperacion);
 
-                    User.update(user, {
-                        where: {
-                          id: user.id
-                        }
-                    })
-                    .then(function (updatedRecords) {
-                        done(null, token, user);
-                    })
-                    .catch(function (error){
-                        console.log(error);
-                        done(error, token, user);
-                    });
-                })
-                .catch(function(error){
-                    done(error, token, null);
-                });
-            },
-            function(token, user, done){
-                console.log(user);
-                var smtp = nodemailer.createTransport({
-                    host: 'smtp.gmail.com',
-                    port: 465,
-                    secure: true, // use SSL
-                    auth: {
-                        user: 'uhluscout@gmail.com',
-                        pass: '3838134223'
-                    }
-                });
-                var mailOptions = {
-                    to: user.email,
-                    from: '',
-                    subject: 'Reinicio de contraseña Uhlu',
-                    text: 'Estas recibiendo esto debido a que solicitaste un reinicio de tu contraseña'+
-                    'Da click al siguiente link, o pégalo en tu navegador para completar el reinicio '+
-                    'http://' + req.headers.host + '/olvide/' + token + '\n\n' +
-                    'SI NO SOLICITASTE UN REINICIO DE CONTRASEÑA, SIMPLEMENTE IGNORA ESTE CORREO.'
-                };
-                smtp.sendMail(mailOptions, function(err){
-                    done(err, 'Envíamos correctamente un correo con instrucciones al correo: '+user.email);
-                })
-            }
-        ], function(err, message){
-            if(err){
-                console.log(err);
-                return res.status(500).send('Ocurrió un error '+ err);
-            }
-            //Todo salio bien
-            res.status(200).send(message);
-        })
-    });
+    app.get('/olvide/:token', login.getOlvide);
 
-    app.get('/olvide/:token', function(req, res){
-        users.findByToken(req.params.token)
-        .then(function(result){
-            if(!result[0]){
-                console.log("token "+req.params.token+" inválido")
-                req.flash('message', 'Este link es inválido o ya expiró');
-                return res.redirect('/entrar');
-            }
-            var user = result[0].dataValues;
-
-            res.render(path.join(__dirname, '../public' ,'olvide.ejs'), {token: req.params.token});
-        })
-        .catch(function(error){
-            req.flash('message', 'Algo salió mal: '+error);
-            return res.redirect('/entrar');
-        })
-    });
-
-    app.post('/olvide/:token', function(req, res){
-        async.waterfall([
-            function(done){
-                users.findByToken(req.params.token)
-                .then(function(result){
-                    var user = result[0].dataValues;
-                    if(!user){
-                        req.flash('message', 'Este link es inválido o ya expiró');
-                        return res.redirect('/entrar');
-                    }
-                    
-                    user.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
-                    user.passwordToken = undefined;
-                    user.passwordExpires = undefined;
-
-                    User.update(user, {
-                        where: {
-                          id: user.id
-                        }
-                    })
-                    .then(function (updatedRecords) {
-                        done(null, user);
-                    })
-                    .catch(function (error){
-                        console.log(error);
-                        done(error, user);
-                    });
-                });
-            },
-            function(user, done){
-                var smtp = nodemailer.createTransport({
-                    host: 'smtp.gmail.com',
-                    port: 465,
-                    secure: true, // use SSL
-                    auth: {
-                        user: 'uhluscout@gmail.com',
-                        pass: '3838134223'
-                    }
-                });
-                var mailOptions = {
-                    to: user.email,
-                    from: '',
-                    subject: 'Tu contraseña en Uhlu ha cambiado',
-                    text: 'Estas recibiendo esto debido a que solicitaste un reinicio de tu contraseña'+
-                    'La contraseña en la cuenta '+user.email+' ha sido cambiada correctamente.'
-                };
-                smtp.sendMail(mailOptions, function(err){
-                    done(err, 'Tu contraseña ha sido reiniciada correctamente');
-                });
-            }
-        ], function(err, message){
-            if(err){
-                req.flash('message', 'Ocurrió un error '+err);
-                return res.redirect('/entrar');
-            }
-            //Todo salio bien
-            req.flash('success', message);
-            return res.redirect('/entrar');
-        })
-    })
+    app.post('/olvide/:token', login.postOlvide)
 
     app.get('/logout', function(req, res) {
         req.logout();
 	    res.redirect("/entrar")
     });
-    
-    //For database deploy at Heroku
-    app.get("/database", inicioSesion, function(req,res){
-        res.download(path.join(__dirname, '../' ,'Uhlu.sqlite'), 'Uhlu.sqlite');
-    });
-
-    //-------Facebook Login---------------------------------------------------------------------------------------
-    // app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    
-    // app.get('/auth/facebook/callback',
-    //     passport.authenticate('facebook', {
-    //         successRedirect : '/',
-    //         failureRedirect : '/error'
-    //     })
-    // );
-    
     
     //-------API EndPoints----------------------------------------------------------------------------
     app.get('/users/:id', inicioSesion, users.show);
@@ -269,31 +104,9 @@ module.exports = function(app, passport, models, port) {
 
 };
 // Middlewares
-// route middleware to make sure a user is logged in
 function inicioSesion(req, res, next) {
-    
-    // if user is authenticated in the session, carry on 
-    if (req.isAuthenticated())
+        if (req.isAuthenticated())
         return next();
-    
-    // if they aren't redirect them to the home page
-    // res.redirect('/auth/facebook');
+
     res.redirect('/entrar');
 }
-
-// Si el usuario tiene todos sus campos llenos. Continuar, si no mandarlo a la pagina para que los llene
-// function faltanDatosUsuario(req, res, next) {
-//     users.findById(req.user.id)
-//     .then(function (User) {
-//         if(User.dataValues.cum == ''|| User.dataValues.seccion == '' || User.dataValues.grupo == '' || User.dataValues.provincia == ''){
-//             res.redirect('/registrar');
-//         }else{
-//             return next();
-//         }
-//     })
-//     .catch(function (error){
-//         console.log("ERROR" + error)
-//       return error;
-//     });
-
-// }
