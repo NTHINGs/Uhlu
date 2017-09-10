@@ -6,7 +6,7 @@ app.controller('editarPerfilCtrl', function($scope, $rootScope, SweetAlert, Edit
     });
 
     $scope.save = function(){
-        EditarPerfil.editarPerfil($scope.user).then(function(provincias){
+        EditarPerfil.editarPerfil($scope.user).then(function(){
             SweetAlert.swal({
                 title: "Exito!",
                 text: 'Perfil Editado Correctamente',

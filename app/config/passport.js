@@ -1,11 +1,7 @@
-// var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy   = require('passport-local').Strategy;
 var bcrypt   = require('bcrypt-nodejs');
 // Model
 var User = require('../models/').User;
-
-// Variables
-// var configAuth = require('./auth');
 
 module.exports = function(passport, env) {
 
@@ -35,8 +31,6 @@ module.exports = function(passport, env) {
         passReqToCallback : true
     },
     function(req, email, password, done) {
-        // find a user whose email is the same as the forms email
-        // we are checking to see if the user trying to login already exists
         User.findOne({
             where: {
                 email: email,
@@ -100,48 +94,4 @@ module.exports = function(passport, env) {
         });
 
     }));
-
-    // =========================================================================
-    // FACEBOOK ================================================================
-    // =========================================================================
-    // passport.use(new FacebookStrategy(configAuth[env].facebookAuth,
-    // function(token, refreshToken, profile, done) {
-    //     process.nextTick(function() {
-    //         // Encontrar al usuario en la base de datos
-    //         User.findAll({
-    //             where: {
-    //                 facebookid: profile.id,
-    //                 $and:{ facebookemail: profile.emails[0].value }
-    //              }
-    //         })
-    //         .then(function (user) {
-    //             if (user[0]) {
-    //                 return done(null, user[0]);
-    //             } else {
-    //                 var newUser = {};
-    //                 newUser.cum = "";
-    //                 newUser.seccion = "";
-    //                 newUser.grupo = "";
-    //                 newUser.provincia = "";
-    //                 newUser.facebookid    = profile.id;
-    //                 newUser.facebooktoken = token;
-    //                 newUser.facebookname  = (profile.name.givenName || "") + " " + (profile.name.middleName || "") + " " +  (profile.name.familyName || "");
-    //                 newUser.facebookemail = profile.emails[0].value;
-
-    //                 User.create(newUser)
-    //                 .then(function (newUser) {
-    //                     return done(null, newUser);
-    //                 })
-    //                 .catch(function (error){
-    //                     throw err
-    //                 });
-    //             }
-    //         })
-    //         .catch(function (error){
-    //           return done(error);
-    //         });
-    //     });
-
-    // }));
-
 };

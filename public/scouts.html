@@ -19,7 +19,7 @@
 			<md-card-title>
 				<md-card-title-text>
 					<span class="md-headline">{{scout.nombre}}</span>
-					<span class="md-subhead" ng-hide='user.clan'>{{$root.user.pequenogrupo}}: {{scout.Patrulla.nombre}}</span>
+					<span class="md-subhead" ng-hide='$root.user.clan'>{{$root.user.pequenogrupo}}: {{scout.Patrulla.nombre}}</span>
 					<span class="md-subhead">Progresión:</span>
 					<div class='progress'>
 						<div ng-show='scout.porcentaje > 0' class='progress-bar' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:{{scout.porcentaje}}%;'>

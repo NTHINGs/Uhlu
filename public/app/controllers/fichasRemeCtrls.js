@@ -57,7 +57,7 @@ app.controller('fichasCtrl', function($scope, $rootScope, $route, SweetAlert, $m
 			ficha.seccion = $rootScope.user.seccion;
 			var materiales = "";
 			ficha.materiales.forEach(function(material) {
-				materiales += material.material +'<br>';
+				materiales += material.material +'</br>';
 			});
 			ficha.materiales = materiales;
 			ficha.autor = $rootScope.user.id;
@@ -112,7 +112,7 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 					// body...
 					$scope.ficha = ficha[0];
 					// Parsear materiales string a array
-					var materiales = $scope.ficha.materiales.split("<br>").slice(0,$scope.ficha.materiales.split('<br>').length - 1);
+					var materiales = $scope.ficha.materiales.split("</br>").slice(0,$scope.ficha.materiales.split('</br>').length - 1);
 					var materialesObject =[];
 					materiales.forEach(function(material){
 						materialesObject.push({"material":material});
@@ -153,7 +153,7 @@ app.controller('fichaCtrl',function($scope, $rootScope, $route,$routeParams, $lo
 		.then(function(ficha) {
 			var materiales = "";
 			ficha.materiales.forEach(function(material) {
-				materiales += material.material +'<br>';
+				materiales += material.material +'</br>';
 			});
 			ficha.materiales = materiales;
 

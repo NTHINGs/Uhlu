@@ -1,5 +1,12 @@
 <md-content>
     <form name='userForm' id='userForm' novalidate ng-submit="userForm.$valid && save()">
+    <md-input-container class="md-block" flex-gt-xs>
+	        <label>Email</label>
+	        <input name='email' ng-model="user.email" required>
+	        <div ng-messages="userForm.email.$error">
+	        	<div ng-message="required">El Email es requerido.</div>
+	        </div>
+        </md-input-container>
         <md-input-container class="md-block" flex-gt-xs>
             <label>CUM</label>
             <input name='cum' ng-model="user.cum" required>
@@ -29,7 +36,6 @@
             </div>
         </md-input-container>
 
-        <!-- TODO (POSIBLE) traer todas las provincias y grupos del pais -->
         <md-input-container class="md-block" flex-gt-xs>
             <label>Provincia</label>
             <md-select name="provincia" md-on-close="searchProvincia = ''" ng-model="user.provincia" required>
@@ -45,16 +51,20 @@
         <md-input-container class="md-block" flex-gt-xs>
             <label>Grupo</label>
             <input type="number" name='grupo' ng-model="user.grupo" required>
-            <!-- <md-select name="grupo" md-on-close="searchGrupo = ''" ng-model="user.grupo" required>
-                <md-select-header class="demo-select-header">
-                    <input ng-model="searchGrupo" type="search" placeholder="Buscar Grupo.." class="md-text">
-                </md-select-header>
-                <md-optgroup label="grupos">
-                    <md-option ng-value="grupo" ng-repeat="grupo in grupos | filter:searchGrupo">{{grupo}}</md-option>
-                </md-optgroup>
-            </md-select> -->
             <div ng-messages="userForm.grupo.$error">
                 <div ng-message="required">El grupo es requerido.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Contraseña (Dejar en blanco si no quieres cambiarla)</label>
+            <input name='password' type='password' ng-init="user.password = ''" ng-model="user.password">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-xs>
+            <label>Confirma Tu Contraseña</label>
+            <input name='confirmpassword' type='password' ng-init="user.confirmpassword = ''" ng-model="user.confirmpassword" compare-to="user.password">
+            <div ng-messages="userForm.confirmpassword.$error">
+                <div ng-message="compareTo">Las contraseñas no coinciden.</div>
             </div>
         </md-input-container>
 

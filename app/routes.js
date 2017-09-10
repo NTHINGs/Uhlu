@@ -52,7 +52,7 @@ module.exports = function(app, passport, models, port) {
 
     app.post('/registrarse', passport.authenticate('local-signup', {
         successRedirect : '/',
-        failureRedirect : '/signup',
+        failureRedirect : '/registrarse',
         failureFlash : true
     }));
 
@@ -207,7 +207,7 @@ module.exports = function(app, passport, models, port) {
 
     app.get('/logout', function(req, res) {
         req.logout();
-	    res.render(path.join(__dirname, '../public' ,'bye.ejs'));
+	    res.redirect("/entrar")
     });
     
     //For database deploy at Heroku

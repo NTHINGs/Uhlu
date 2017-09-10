@@ -41,20 +41,65 @@
     <!-- App -->
     <script type="text/javascript">
     	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
-    	app.controller('registerCtrl', function($scope, $rootScope, SweetAlert, Users){
+    	app.controller('registerCtrl', function($scope, $rootScope, $http, SweetAlert, Users){
 			Users.getProvincias().then(function(provincias){
 				$scope.provincias = provincias;
 			});
+
 			<%if(locals.message){%>
 				SweetAlert.swal({
 					title: "Ooops..",
-					text: '<%=message%> si no tienes o no recuerdas tu contraseña da click aqui'+
-					+'<md-button ng-click="generar()" class="md-raised md-primary" aria-label="Obtener contraseña">Obtener contraseña</md-button></a>',
+					text: '<%=message%> si no tienes o no recuerdas tu contraseña da click en el botón de abajo.',
 					confirmButtonColor: "#692B8D",
-					confirmButtonText: "Ok",
-					closeOnConfirm: true,
+					confirmButtonText: "Generar Contraseña",
+					closeOnConfirm: false,
+					showCancelButton: true,
 					type: "error",
 					html: true
+				}, 
+				function(isConfirm){
+					if(isConfirm){
+						SweetAlert.swal({
+							title: "Generar nueva contraseña",
+							text: "Ingresa el correo que usas en Uhlu",
+							type: "input",
+							confirmButtonColor: "#692B8D",
+							confirmButtonText: "Ok",
+							closeOnConfirm: true,
+							showCancelButton: true,
+							html: true
+						}, 
+						function(email){ 
+							if (email === false) return false;
+		
+							if (email === "") {
+								swal.showInputError("Necesitas escribir un correo!");
+								return false
+							}
+							$http.post('/mandarEmailRecuperacion', {email: email})
+							.then(function(message){
+								SweetAlert.swal({
+									title: "Correo Enviado!",
+									text: message.data,
+									confirmButtonColor: "#692B8D",
+									confirmButtonText: "Ok",
+									closeOnConfirm: true,
+									type: "success"
+								});
+							})
+							.catch(function(error){
+								console.log(error);
+								SweetAlert.swal({
+									title: "Ooops..",
+									text: error.data,
+									confirmButtonColor: "#692B8D",
+									confirmButtonText: "Ok",
+									closeOnConfirm: true,
+									type: "error"
+								});
+							});
+						});
+					}
 				});
 			<%}%>
     	});
@@ -81,6 +126,26 @@
 				}
 			};
 		});
+
+		app.directive('loading', ['$http' ,function ($http){  
+			return {  
+				restrict: 'A',  
+				template: '<div class="loading-spiner"><img class="center-block" src="img/loading.gif" /> </div>',  
+				link: function (scope, elm, attrs){  
+					scope.isLoading = function () {  
+						return $http.pendingRequests.length > 0;  
+					};  
+		
+					scope.$watch(scope.isLoading, function (v){  
+						if(v){  
+							jQuery(elm).show();  
+						}else{  
+							jQuery(elm).hide();  
+						}  
+					});  
+				}  
+			};  
+		}]);
 
     	app.service('Users', function($http, $q) {
     		return {

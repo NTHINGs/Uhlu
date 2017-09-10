@@ -1,4 +1,6 @@
 User = require('../models/').User;
+var bcrypt   = require('bcrypt-nodejs');
+
 // CRUD Operations for User Model
 module.exports= {
   index(req, res) {
@@ -66,6 +68,11 @@ module.exports= {
   },
 
   update(req, res) {
+    if(req.body.password.length == 0){
+      delete req.body.password;
+    }else{
+      req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8), null);
+    }
     User.update(req.body, {
       where: {
         id: req.body.id
