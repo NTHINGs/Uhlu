@@ -3,7 +3,6 @@ var nodemailer  = require('nodemailer');
 var bcrypt      = require('bcrypt-nodejs');
 var async       = require('async');
 var crypto      = require('crypto');
-var xoauth2 = require('xoauth2');
 
 var User        = require('../models/').User;
 var users       = require('../controllers/users');
@@ -48,14 +47,12 @@ module.exports = {
             function(token, user, done){
                 console.log(user);
                 var smtp = nodemailer.createTransport({
-                    service: 'gmail',
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true, // use SSL
                     auth: {
-                        xoauth2: xoauth2.createXOAuth2Generator({
-                            user: "uhluscout@gmail.com",
-                            clientId: "370820558505-gbp8ulllcrl9kl60ok08fks0hfojufj9.apps.googleusercontent.com",
-                            clientSecret: process.env.SECRET,
-                            refreshToken: process.env.TOKEN
-                        })
+                        user: 'uhluscout@gmail.com',
+                        pass: process.env.GMAIL_PASSWORD
                     }
                 });
                 var mailOptions = {
@@ -128,14 +125,12 @@ module.exports = {
             },
             function(user, done){
                 var smtp = nodemailer.createTransport({
-                    service: 'gmail',
+                    host: 'smtp.gmail.com',
+                    port: 465,
+                    secure: true, // use SSL
                     auth: {
-                        xoauth2: xoauth2.createXOAuth2Generator({
-                            user: "uhluscout@gmail.com",
-                            clientId: "370820558505-gbp8ulllcrl9kl60ok08fks0hfojufj9.apps.googleusercontent.com",
-                            clientSecret: process.env.SECRET,
-                            refreshToken: process.env.TOKEN
-                        })
+                        user: 'uhluscout@gmail.com',
+                        pass: '3838134223'
                     }
                 });
                 var mailOptions = {
