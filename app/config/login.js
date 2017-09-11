@@ -87,7 +87,7 @@ module.exports = {
             }
             var user = result[0].dataValues;
 
-            res.render(path.join(__dirname, '../public' ,'olvide.ejs'), {token: req.params.token});
+            res.render(path.join(__dirname, '../../public' ,'olvide.ejs'), {token: req.params.token});
         })
         .catch(function(error){
             req.flash('message', 'Algo salió mal: '+error);
