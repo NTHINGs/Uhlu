@@ -48,9 +48,7 @@ module.exports = {
             function(token, user, done){
                 console.log(user);
                 var smtp = nodemailer.createTransport({
-                    host: 'smtp.gmail.com',
-                    port: 465,
-                    secure: true, // use SSL
+                    service: 'gmail',
                     auth: {
                         xoauth2: xoauth2.createXOAuth2Generator({
                             user: "uhluscout@gmail.com",
@@ -130,9 +128,7 @@ module.exports = {
             },
             function(user, done){
                 var smtp = nodemailer.createTransport({
-                    host: 'smtp.gmail.com',
-                    port: 465,
-                    secure: true, // use SSL
+                    service: 'gmail',
                     auth: {
                         xoauth2: xoauth2.createXOAuth2Generator({
                             user: "uhluscout@gmail.com",
