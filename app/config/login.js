@@ -51,12 +51,12 @@ module.exports = {
                     port: 465,
                     secure: true, // use SSL
                     auth: {
-                        XOAuth2: {
+                        xoauth2: xoauth2.createXOAuth2Generator({
                             user: "uhluscout@gmail.com",
                             clientId: "370820558505-gbp8ulllcrl9kl60ok08fks0hfojufj9.apps.googleusercontent.com",
                             clientSecret: process.env.SECRET,
                             refreshToken: process.env.TOKEN
-                        }
+                        })
                     }
                 });
                 var mailOptions = {
@@ -133,12 +133,12 @@ module.exports = {
                     port: 465,
                     secure: true, // use SSL
                     auth: {
-                        XOAuth2: {
+                        xoauth2: xoauth2.createXOAuth2Generator({
                             user: "uhluscout@gmail.com",
                             clientId: "370820558505-gbp8ulllcrl9kl60ok08fks0hfojufj9.apps.googleusercontent.com",
                             clientSecret: process.env.SECRET,
                             refreshToken: process.env.TOKEN
-                        }
+                        })
                     }
                 });
                 var mailOptions = {
