@@ -2,7 +2,8 @@ var path        = require('path');
 var nodemailer  = require('nodemailer');
 var bcrypt      = require('bcrypt-nodejs');
 var async       = require('async');
-var crypto      = require('crypto');
+var crypto      = require('crypto');d
+var xoauth2 = require('xoauth2');
 
 var User        = require('../models/').User;
 var users       = require('../controllers/users');
