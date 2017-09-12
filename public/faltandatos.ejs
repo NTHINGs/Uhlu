@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html ng-app="registerUhlu">
+<head>
+	<meta charset="utf-8">
+    <title>Uhlu - Completar Datos</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no" />
+    <!-- Dependencies CSS -->
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="sweetalert/dist/sweetalert.css" media="screen" title="no title" charset="utf-8">
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- DEPENDENCIES -->
+    <script src="angular/angular.min.js"></script>
+    <script src='angular-i18n/angular-locale_es-mx.js'></script>
+    <script src='sweetalert/dist/sweetalert.min.js'></script>
+    <script src='angular-sweetalert/SweetAlert.min.js'></script>
+	<script src="angular-animate/angular-animate.min.js"></script>
+	<script src="angular-aria/angular-aria.min.js"></script>
+	<script src="angular-messages/angular-messages.min.js"></script>
+	<script src="angular-material/angular-material.min.js"></script>
+	<script src="jquery/dist/jquery.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- App -->
+    <script type="text/javascript">
+    	var app = angular.module('registerUhlu', ['ngMaterial','ngMessages','oitozero.ngSweetAlert']);
+    	app.controller('missingCtrl', function($scope, $rootScope, $http, SweetAlert, Users){
+			Users.getProvincias().then(function(provincias){
+				$scope.provincias = provincias;
+			});
+
+			$scope.user = function(user) {
+				console.log(user);
+				$scope.user = JSON.parse(user);
+			};
+
+			<%if(locals.message){%>
+				SweetAlert.swal({
+					title: "Ooops..",
+					text: '<%=message%>',
+					confirmButtonColor: "#692B8D",
+					confirmButtonText: "Ok",
+					closeOnConfirm: false,
+					showCancelButton: true,
+					type: "error",
+					html: true
+				});
+			<%}%>
+    	});
+
+    	app.config(function($mdThemingProvider) {
+			$mdThemingProvider.theme('default').primaryPalette('purple').dark(); 
+		});
+		
+		app.directive("compareTo", function(){
+			return {
+				require: "ngModel",
+				scope: {
+					otherModelValue: "=compareTo"
+				},
+				link: function(scope, element, attributes, ngModel) {
+					
+					ngModel.$validators.compareTo = function(modelValue) {
+						return modelValue == scope.otherModelValue;
+					};
+		
+					scope.$watch("otherModelValue", function() {
+						ngModel.$validate();
+					});
+				}
+			};
+		});
+
+		app.directive('loading', ['$http' ,function ($http){  
+			return {  
+				restrict: 'A',  
+				template: '<div class="loading-spiner"><img class="center-block" src="img/loading.gif" /> </div>',  
+				link: function (scope, elm, attrs){  
+					scope.isLoading = function () {  
+						return $http.pendingRequests.length > 0;  
+					};  
+		
+					scope.$watch(scope.isLoading, function (v){  
+						if(v){  
+							jQuery(elm).show();  
+						}else{  
+							jQuery(elm).hide();  
+						}  
+					});  
+				}  
+			};  
+		}]);
+
+    	app.service('Users', function($http, $q) {
+    		return {
+				getProvincias: function(){
+					var deferred = $q.defer();
+					$http
+					.get('/config/provincias')
+					.then(function(response){ 
+						deferred.resolve(response.data);
+					})
+					.catch(function (error) {
+						deferred.reject(error);
+					});
+					return deferred.promise;
+				}
+    		}
+    	});
+
+    </script>
+
+	<style type="text/css">
+		md-content{
+			background: url('css/img/bg-1.png') no-repeat center center fixed;
+			background-size: cover;
+		}
+
+		.registerContainer{
+			color: rgb(250,250,250);
+			background-color: #263645;
+			margin:10%;
+		}
+
+		h1{
+			text-align: center;
+		}
+
+	</style>
+</head>
+
+<body ng-controller="missingCtrl" ng-init="user('<%=user%>')">
+	<md-content class="md-padding" layout-padding>
+		<div class="container-fluid registerContainer" >
+			<img class="img-responsive center-block" src="img/logo.png">
+			<h1>
+				Hola!, {{user.nombre}}
+				<br><small>Nos faltan datos para que puedas ingresar a Uhlu</small>
+			</h1>
+	        <form name='scouterForm' id='scouterForm' novalidate ng-submit="scouterForm.$valid" action="/faltandatos" method="POST">
+	        	<md-input-container class="md-block" flex-gt-xs>
+	        	    <label>Email</label>
+	        	    <input name='email' ng-model="user.email" required>
+	        	    <div ng-messages="scouterForm.email.$error">
+	        	        <div ng-message="required">El Email es requerido.</div>
+	        	    </div>
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-xs>
+	        	    <label>CUM</label>
+	        	    <input name='cum' ng-model="user.cum" required>
+	        	    <div ng-messages="scouterForm.cum.$error">
+	        	        <div ng-message="required">El CUM es requerido.</div>
+	        	    </div>
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-xs>
+	        	    <label>Nombre</label>
+	        	    <input name='nombre' ng-model="user.nombre" required>
+	        	    <div ng-messages="scouterForm.nombre.$error">
+	        	        <div ng-message="required">Tu nombre es requerido.</div>
+	        	    </div>
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        	    <label>Seccion</label>
+	        	    <md-select name="seccion" ng-model="user.seccion" required>
+	        	      <md-option value="manada">
+	        	        Manada de Lobatos
+	        	      </md-option>
+	        	      <md-option value="tropa">
+	        	        Tropa de Scouts
+	        	      </md-option>
+	        	      <md-option value="comunidad">
+	        	        Comunidad de Caminantes
+	        	      </md-option>
+	        	      <md-option value="clan">
+	        	        Clan de Rovers
+	        	      </md-option>
+	        	    </md-select>
+	        	    <div ng-messages="scouterForm.seccion.$error">
+	        	        <div ng-message="required">La seccion es requerida.</div>
+	        	    </div>
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-xs>
+	        	    <label>Grupo</label>
+	        	    <input type="number" name='grupo' ng-model="user.grupo" required>
+	        	    <div ng-messages="scouterForm.grupo.$error">
+	        	        <div ng-message="required">El grupo es requerido.</div>
+	        	    </div>
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-xs>
+					<label>Provincia</label>
+					<md-select name="provincia" md-on-close="searchProvincia = ''" ng-model="user.provincia" required>
+						<md-optgroup label="provincias">
+							<md-option ng-value="provincia" ng-repeat="provincia in provincias | filter:searchProvincia">{{provincia}}</md-option>
+						</md-optgroup>
+					</md-select>
+					<div ng-messages="userForm.provincia.$error">
+						<div ng-message="required">La provincia es requerida.</div>
+					</div>
+				</md-input-container>
+	        	<div layout="row">
+	        	    <p class="advertencia" ng-show="!scouterForm.$valid">
+	        	        Los campos con * son requeridos
+	        	    </p>
+	        	    <span flex></span>
+	        	    <md-button type="submit" value="Guardar" class="md-raised md-primary" aria-label="guardar" ng-disabled="!scouterForm.$valid">
+	        	        GUARDAR
+	        	    </md-button>
+	        	</div>
+	        </form>
+		</div>
+    </md-content>
+</body>
+</html>

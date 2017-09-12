@@ -50,9 +50,15 @@ app.use(function(req, res, next){
     next();
 });
 
+
 // routes ======================================================================
 require('./app/routes.js')(app, passport, models, port);
 
+app.use(function(req, res, next){
+    res.status(404);
+
+    res.redirect("/")
+});  
 // launch ======================================================================
 app.listen(port);
 console.log('La magia pasa en el puerto ' + port);

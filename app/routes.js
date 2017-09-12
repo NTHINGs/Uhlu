@@ -54,7 +54,11 @@ module.exports = function(app, passport, models, port) {
 
     app.get('/olvide/:token', login.getOlvide);
 
-    app.post('/olvide/:token', login.postOlvide)
+    app.post('/olvide/:token', login.postOlvide);
+    
+    app.get('/faltandatos', inicioSesion, login.faltanDatos);
+
+    app.post('/faltandatos', inicioSesion, login.postFaltanDatos);
 
     app.get('/logout', function(req, res) {
         req.logout();
@@ -106,8 +110,12 @@ module.exports = function(app, passport, models, port) {
 };
 // Middlewares
 function inicioSesion(req, res, next) {
-        if (req.isAuthenticated())
+    if (req.isAuthenticated()){
+        if((!req.user.cum || !req.user.seccion || !req.user.grupo || !req.user.provincia || !req.user.nombre) && req.route.path != '/faltandatos'){
+            res.redirect('/faltandatos');
+        }
         return next();
+    }
 
     res.redirect('/entrar');
 }

@@ -153,6 +153,23 @@ module.exports = {
             req.flash('success', message);
             return res.redirect('/entrar');
         })
+    },
+    faltanDatos: function(req, res){
+        res.render(path.join(__dirname, '../../public' ,'faltandatos.ejs'), {user: JSON.stringify(req.user)});        
+    },
+    postFaltanDatos: function(req, res){
+        User.update(req.body, {
+            where: {
+              id: req.user.id
+            }
+        })
+        .then(function (updatedRecords) {
+            res.redirect('/')
+        })
+        .catch(function (error){
+            console.log(error);
+            res.status(500);
+        });
     }
 
 }

@@ -1,6 +1,6 @@
 app.controller('patrullasCtrl', function($scope, $rootScope, $route, $location, SweetAlert, $mdDialog, Patrullas){
 	// Inicializar variables utilizadas en todo el codigo y que provienen de la sesion del usuario
-	$rootScope.currentRoute='Tus Patrullas';
+	$rootScope.currentRoute='Tus '+$rootScope.user.pequenogrupo.charAt(0).toUpperCase() + $rootScope.user.pequenogrupo.slice(1);
 	$scope.patrullas = [];
 	Patrullas.all($rootScope.user.id).then(function(patrullas) {
 		$scope.patrullas = patrullas;
