@@ -10,7 +10,14 @@
   z-index: 99;
   text-align: center;
 }
+.card{
+  width:100%!important;
+  height: 290px!important;
+}
 
+.md-headline{
+  font-size: 1.5em!important;
+}
 .loading-spiner img {
   z-index: 100;
 }

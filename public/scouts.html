@@ -15,7 +15,7 @@
 <div class="row fullwidth">
     <!-- <div flex-xs flex-gt-xs="100" flex-gt-sm="50" layout="column" layout-fill ng-repeat='scout in scouts'> -->
     <div class="col-xs-12 col-md-6" layout="column" ng-repeat='scout in scouts'>
-		<md-card md-theme="default">
+		<md-card class="card" md-theme="default">
 			<md-card-title>
 				<md-card-title-text>
 					<span class="md-headline">{{scout.nombre}}</span>
@@ -23,7 +23,7 @@
 					<span class="md-subhead">Progresión:</span>
 					<div class='progress'>
 						<div ng-show='scout.porcentaje > 0' class='progress-bar' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:{{scout.porcentaje}}%;'>
-							<span>{{scout.porcentaje}}%</span>
+							<span>{{scout.porcentaje| number:0}}%</span>
 						</div>
 						<div ng-show='scout.porcentaje == 0' class='progress-bar' role='progressbar' aria-valuenow='{{scout.porcentaje}}' aria-valuemin='0' aria-valuemax='100' style='width:100%; background-color: #263645!important;'>
 							<span class="text">SIN PROGRESIÓN</span> <span>0%</span>
@@ -31,7 +31,7 @@
 					</div>
 				</md-card-title-text>
 				<md-card-title-media>
-					<div class="md-media-lg card-media"><img class='img-responsive' ng-src='{{scout.foto}}' width='150px' /></div>
+					<div class="md-media-md card-media"><img class='img-responsive' ng-src='{{scout.foto}}' width='150px' /></div>
 				</md-card-title-media>
 			</md-card-title>
 			<md-card-actions layout="row" layout-align="start center">

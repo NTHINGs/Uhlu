@@ -67,7 +67,7 @@
                         <md-input-container class="md-block" flex-gt-sm ng-hide='$root.user.clan'>
                             <label>{{$root.user.pequenogrupo}}</label>
                             <md-select ng-model='scout.patrulla_id'>
-                              <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.idpatrulla}}">
+                              <md-option ng-repeat="patrulla in scout.patrullas" value="{{patrulla.id}}">
                                 {{patrulla.nombre}}
                               </md-option>
                             </md-select>
