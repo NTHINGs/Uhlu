@@ -239,7 +239,6 @@ function ScoutProcess($scope, $rootScope, Patrullas) {
 	Patrullas.all($rootScope.user.id).then(function(patrullas) {
 		// body...
 		$scope.scout.patrullas = patrullas;
-		$scope.scout.patrulla_id = $scope.scout.patrullas[0].id;
 	});
 	// ImageCrop
 	$scope.scout.myImage='img/fpo_avatar.png';

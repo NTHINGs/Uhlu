@@ -68,7 +68,9 @@ module.exports = {
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
             },
+            pageSize: 'A3',
             pageOrientation: 'landscape',
+            pageMargins: 10,
             content: [
                 {
                     layout: 'noBorders',
@@ -136,11 +138,11 @@ module.exports = {
                     fontSize: 22,
                     bold: true,
                     alignment: 'right',
-                    margin: [ 0, 0, 0, 25 ],
+                    margin: [ 0, 0, 0, 15 ],
                     color: 'purple'
                 },
                 marginBot:{
-                    margin: [ 0, 0, 0, 25 ]
+                    margin: [ 0, 0, 0, 20 ]
                 },
                 morrarro:{
                     color: 'purple'
@@ -236,9 +238,9 @@ module.exports = {
 
             // Agregar salto de linea si existen mas scouts para formar otra pagina
             if(i != Scouts.length - 1){
-                page.push({ text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'});
+                page.push({ text: 'Ficha elaborada desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer', pageBreak: 'after'});
             }else{
-                page.push({ text: 'Directorio elaborado desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer'});
+                page.push({ text: 'Ficha elaborada desde http://uhluscout.com', link: 'http://uhluscout.com', style: 'footer'});
             }
 
             // Agregar la pagina
