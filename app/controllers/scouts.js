@@ -83,12 +83,11 @@ module.exports= {
     // Cambiar los parametros dependiendo del alcance del reporte.
     console.log(req.query);
     var params = {}
-    // TODO HARDCODED USER ID
     if(req.query.opcion == 'patrulla'){
         params = {
             include: [{
                 model: Patrulla,
-                where: {user_id: '1'}
+                where: {user_id: req.user.id}
             }],
             where: {patrulla_id: req.query.patrulla}
         }
@@ -96,7 +95,7 @@ module.exports= {
         params = {
             include: [{
                 model: Patrulla,
-                where: {user_id: '1'}
+                where: {user_id: req.user.id}
             }]
         }
     }
