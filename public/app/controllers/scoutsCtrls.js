@@ -229,7 +229,7 @@ app.controller('scoutCtrl',function($scope,$rootScope, $route, $location, SweetA
 			});
         })
         .catch(function (error) {
-        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+error.data, "error");
+        	SweetAlert.swal("Ooops..", "Ocurrio un error: "+JSON.stringify(error.data), "error");
         });
 	};
 }); // end scoutCtrl
