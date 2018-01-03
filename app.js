@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 
 // passport
 app.use(session({
-    secret: 'siemprelistos',
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     store: new MemoryStore(),
