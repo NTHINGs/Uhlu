@@ -5,11 +5,7 @@ module.exports = {
 		storage: 'Uhlu.sqlite'
 	},
 	production: {
-		database: process.env.DATABASE,
-		username: process.env.DATABASE_USER,
-		password: process.env.DATABASE_PASSWORD,
-		host: process.env.DATABASE_HOST,
-		port: '3306',
+		url: process.env.CLEARDB_DATABASE_URL,
 		dialect: 'mysql'
 	},
 	staging: {
