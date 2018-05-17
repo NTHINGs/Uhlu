@@ -425,7 +425,7 @@ module.exports = {
         ];
     },
     provincias: function(req, res){
-        url = 'http://www.scouts.org.mx/dirpro.html';
+        url = 'http://scouts.org.mx/presidentes-de-provincia/';
         
         // The structure of our request call
         // The first parameter is our URL
@@ -443,7 +443,7 @@ module.exports = {
                 // Finally, we'll define the variables we're going to capture
     
                 var provincias = [];
-                $('.product h3').filter(function(){
+                $('.h-custom-headline.man span').filter(function(){
                     var data = $(this);
                     provincias.push(data.text());
                 })
