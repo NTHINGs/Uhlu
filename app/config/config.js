@@ -448,6 +448,8 @@ module.exports = {
                     provincias.push(data.text());
                 })
 
+                provincias.splice(0, 2);
+
                 res.status(200).json(provincias);
             }
         })
