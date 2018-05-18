@@ -1,26 +1,26 @@
 sudo: required
 language: node_js
 node_js: 
-    - node
+- node
 services:
-    - docker
+- docker
 env:
     global:
-        - PATH=$PATH:$HOME/google-cloud-sdk/bin
-        - PROJECT_ID="uhlu-179602"
-        - ZONE="us-central1-b"
-        - IMAGE_NAME=uhlu:latest
-        - FULL_IMAGE_NAME=gcr.io/$PROJECT_ID/$IMAGE_NAME
-        - GOOGLE_APPLICATION_CREDENTIALS="${PWD}/client-secret.json"
-        - CLUSTER_NAME=uhlu
+    - PATH=$PATH:$HOME/google-cloud-sdk/bin
+    - PROJECT_ID="uhlu-179602"
+    - ZONE="us-central1-b"
+    - IMAGE_NAME=uhlu:latest
+    - FULL_IMAGE_NAME=gcr.io/$PROJECT_ID/$IMAGE_NAME
+    - GOOGLE_APPLICATION_CREDENTIALS="${PWD}/client-secret.json"
+    - CLUSTER_NAME=uhlu
 before_install:
-    - ./gcloud-sdk-install.sh
-    - source /home/travis/.bashrc
-    - ./gcloud-sdk-configure.sh
-    install: true
+- ./gcloud-sdk-install.sh
+- source /home/travis/.bashrc
+- ./gcloud-sdk-configure.sh
+install: true
 before_script:
-    - ./image-prepare.sh $FULL_IMAGE_NAME
-    - ./image-push.sh $FULL_IMAGE_NAME
+- ./image-prepare.sh $FULL_IMAGE_NAME
+- ./image-push.sh $FULL_IMAGE_NAME
 script:
-    - ./gcloud-select-cluster.sh $CLUSTER_NAME
-    - ./k8s-run.sh ''
+- ./gcloud-select-cluster.sh $CLUSTER_NAME
+- ./k8s-run.sh ''
