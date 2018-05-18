@@ -466,7 +466,7 @@ module.exports = {
                 host = 'uhlu.herokuapp.com';
                 break;
             case 'production':
-                host = 'uhluscout.com';            
+                host = 'www.uhluscout.com';            
                 break;
         }
         res.send(host);
