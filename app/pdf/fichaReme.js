@@ -29,7 +29,7 @@ module.exports = {
         var dd= {
             info: {
                 title: ''+Ficha.nombreactividad+'',
-                author: ''+Ficha.User.facebookname+'',
+                author: ''+Ficha.User.nombre+'',
                 subject: ''+Ficha.nombreactividad+'',
                 keywords: 'scouts',
                 creator: 'http://uhluscout.com'
@@ -125,7 +125,7 @@ module.exports = {
                         
                         body: [
                             [ { text: 'TIEMPOS', style: 'morrarro' }, { text: 'AUTOR', style: 'morrarro' }, { text: 'FECHA', style: 'morrarro' }],
-                            [ ''+Ficha.tiempos+'', ''+Ficha.User.facebookname+'', ''+Ficha.created_at+'']
+                            [ ''+Ficha.tiempos+'', ''+Ficha.User.nombre+'', ''+Ficha.created_at+'']
                         ]
                     },
                     style: 'marginBot'
