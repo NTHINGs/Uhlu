@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  #Service name
+  name: uhlu-svc
+spec:
+  selector:
+    app: uhlu-179602
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer

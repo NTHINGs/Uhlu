@@ -130,7 +130,7 @@ module.exports = {
                     secure: true, // use SSL
                     auth: {
                         user: 'uhluscout@gmail.com',
-                        pass: '3838134223'
+                        pass: process.env.GMAIL_PASSWORD
                     }
                 });
                 var mailOptions = {

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: uhlu
+  labels:
+    #Project ID
+    app: uhlu-179602
+spec:
+  #Run two instances of our application
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: uhlu-179602
+    spec:
+      #Container details
+      containers:
+        - name: uhlu
+          image: gcr.io/uhlu-179602/uhlu:latest
+          imagePullPolicy: Always
+          #Ports to expose
+          ports:
+          - containerPort: 8080
