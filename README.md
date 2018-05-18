@@ -1,4 +1,4 @@
-# Uhlu
+# Uhlu [![Build Status](https://travis-ci.org/NTHINGs/Uhlu.svg?branch=master)](https://travis-ci.org/NTHINGs/Uhlu)
 
 Scouters el siglo XXI
 
