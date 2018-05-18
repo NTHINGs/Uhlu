@@ -14,9 +14,7 @@ env:
     - GOOGLE_APPLICATION_CREDENTIALS="${PWD}/client-secret.json"
     - CLUSTER_NAME=uhlu
 before_install:
-- if [ ! -d ${HOME}/google-cloud-sdk ]; then
-     ./gcloud-sdk-install.sh
-  fi
+- ./gcloud-sdk-install.sh
 - source /home/travis/.bashrc
 - ./gcloud-sdk-configure.sh
 install: true
