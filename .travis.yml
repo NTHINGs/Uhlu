@@ -28,7 +28,7 @@ before_install:
 install: true
 before_script:
 - docker build --no-cache=true -t $FULL_IMAGE_NAME .
-- gcloud docker --push $FULL_IMAGE_NAME
+- gcloud docker -- push $FULL_IMAGE_NAME
 script:
 - gcloud container clusters get-credentials $CLUSTER_NAME
 - kubectl create -f deployment.yml
