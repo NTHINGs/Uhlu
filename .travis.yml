@@ -33,3 +33,4 @@ script:
 - gcloud container clusters get-credentials $CLUSTER_NAME
 - kubectl create -f deployment.yml
 - kubectl create -f service.yml
+- kubectl create -f ingress.yml
