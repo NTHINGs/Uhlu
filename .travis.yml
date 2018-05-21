@@ -31,6 +31,6 @@ before_script:
 - gcloud docker -- push $FULL_IMAGE_NAME
 script:
 - gcloud container clusters get-credentials $CLUSTER_NAME
-- kubectl create -f deployment.yml
-- kubectl create -f service.yml
-- kubectl create -f ingress.yml
+- kubectl apply -f deployment.yml
+- kubectl apply -f service.yml
+- kubectl apply -f ingress.yml
